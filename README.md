@@ -11,3 +11,9 @@ MELIUS_MYSQL_PWD="Melius_dev_pwd123"
 MELIUS_MYSQL_HOST="localhost"
 
 MELIUS_MYSQL_DB="melius_dev_db"
+
+## commands to run:
+
+```bash
+MELIUS_MYSQL_USER="melius_dev" MELIUS_MYSQL_PWD="Melius_dev_pwd123" MELIUS_MYSQL_HOST=localhost MELIUS_MYSQL_DB=melius_dev_db ./file
+```
