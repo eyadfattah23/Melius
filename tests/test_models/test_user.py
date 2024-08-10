@@ -117,6 +117,7 @@ class TestUser(unittest.TestCase):
         self.assertIsInstance(self.user_json['email'], str)
         self.assertIsInstance(self.user_json['username'], str)
         self.assertIsInstance(self.test_user.id, str)
+        self.assertIsInstance(self.test_user.img, bytes)
 
         self.assertTrue(hasattr(self.test_user, "email"))
         self.assertTrue(self.test_user.email == "user@example.com")
@@ -126,12 +127,17 @@ class TestUser(unittest.TestCase):
         self.test_user.id = 'fa5f7cec-e7e1-436f-ba49-35241277adac'
         self.test_user.username = 'last_name'
         self.user_json = self.test_user.to_dict()
+
+        with open('resources/default_male_img.jpg', 'rb') as file:
+            img = file.read()
+
         self.assertDictEqual(self.user_json, {
             '__class__': 'User',
             'email': 'user@example.com',
             'updated_at': self.test_user.updated_at.isoformat(),
             'created_at': self.test_user.created_at.isoformat(),
             'id': self.test_user.id,
+            'img': img,
             'username': 'last_name'
         })
 
@@ -140,3 +146,17 @@ class TestUser(unittest.TestCase):
         up_at1 = self.test_user.updated_at
         self.test_user.save()
         self.assertNotEqual(up_at1, self.test_user.updated_at)
+
+    def test_delete(self):
+        """test the delete method if it deletes the user"""
+        self.test_user2 = User(email='user@example.com',
+                               password='password', username='username')
+        models.storage.new(self.test_user2)
+        models.storage.save()
+
+        self.assertIsNotNone(models.storage.get(User, self.test_user2.id))
+
+        models.storage.delete(self.test_user2)
+        models.storage.save()
+
+        self.assertIsNone(models.storage.get(User, self.test_user2))
