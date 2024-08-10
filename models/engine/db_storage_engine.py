@@ -5,9 +5,10 @@ from sqlalchemy.orm import sessionmaker, scoped_session
 from os import getenv
 from models.base_model import BaseModel, Base
 from models.user import User
+from models.article import Article
 import models
 
-classes = {"User": User}
+classes = {"User": User, 'Article': Article}
 # {"Amenity": Amenity, "City": City,
 #           "Place": Place, "Review": Review, "State": State}
 
