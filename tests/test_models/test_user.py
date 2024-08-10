@@ -76,7 +76,7 @@ class TestUser(unittest.TestCase):
         models.storage.save()
 
     def tearDown(self):
-
+        """tear down method which runs after all the tests"""
         try:
             models.storage.delete(self.test_user)
             models.storage.delete(self.user_with_kwargs)
@@ -90,6 +90,7 @@ class TestUser(unittest.TestCase):
                 pass
 
     def test_test(self):
+        """mock test to test setUp and teardown"""
         self.assertEqual(12, 12)
 
     def test_str(self):
