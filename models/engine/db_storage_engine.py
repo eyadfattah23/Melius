@@ -82,7 +82,7 @@ class DBStorage:
         from the engine by using a sessionmaker
         '''
         from models.user import User
-        # from models.state import State
+        from models.article import Article
         # from models.review import Review
         # from models.place import Place
         # from models.city import City
