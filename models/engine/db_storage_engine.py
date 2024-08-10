@@ -13,7 +13,7 @@ classes = {"User": User}
 
 
 class DBStorage:
-    '''defines a class to manage DB storage for Melius '''
+    '''defines a class to manage DB storage for Melius'''
     __engine = None
     __session = None
 
