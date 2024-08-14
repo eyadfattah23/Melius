@@ -6,9 +6,10 @@ from os import getenv
 from models.base_model import BaseModel, Base
 from models.user import User
 from models.article import Article
+from models.post import Post
 import models
 
-classes = {"User": User, 'Article': Article}
+classes = {"User": User, 'Article': Article, 'Post': Post}
 # {"Amenity": Amenity, "City": City,
 #           "Place": Place, "Review": Review, "State": State}
 
@@ -84,7 +85,7 @@ class DBStorage:
         '''
         from models.user import User
         from models.article import Article
-        # from models.review import Review
+        from models.post import Post
         # from models.place import Place
         # from models.city import City
         # from models.amenity import Amenity
