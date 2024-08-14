@@ -22,6 +22,9 @@ class User(BaseModel, Base):
     username = Column(String(128), nullable=False)
     img = Column(LargeBinary, nullable=True)
 
+    posts = relationship("Post", backref="user",
+                         cascade="all, delete, delete-orphan")
+
     def __init__(self, *args, **kwargs):
         """initializes user"""
 
