@@ -17,10 +17,10 @@ class User(BaseModel, Base):
     """
 
     __tablename__ = 'users'
-    email = Column(String(128), nullable=False)
+    email = Column(String(128), nullable=False, unique=True)
     password = Column(String(128), nullable=False)
     username = Column(String(128), nullable=False)
-    img = Column(LargeBinary, nullable=True)
+    img = Column(LargeBinary, nullable=True)   # ->changed to text
 
     posts = relationship("Post", backref="user",
                          cascade="all, delete, delete-orphan")
