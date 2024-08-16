@@ -20,5 +20,5 @@ class Post(BaseModel, Base):
     text = Column(Text, nullable=True)
 
     def __init__(self, *args, **kwargs):
-        """initializes Place"""
+        """initializes post"""
         super().__init__(*args, **kwargs)
