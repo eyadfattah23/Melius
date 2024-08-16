@@ -11,6 +11,8 @@ from models.base_model import BaseModel
 import pep8
 import unittest
 from models.engine.db_storage_engine import DBStorage
+from hashlib import md5
+from sqlalchemy.exc import DataError, IntegrityError, PendingRollbackError
 
 
 class TestUserDocs(unittest.TestCase):
@@ -161,3 +163,70 @@ class TestUser(unittest.TestCase):
         models.storage.save()
 
         self.assertIsNone(models.storage.get(User, self.test_user2))
+
+    def test_Nones(self):
+        """test if the none attributes gives the expected output"""
+        with self.assertRaises(AttributeError):
+            User(email=None, password=None, username=None)
+
+    def test_user_with_img_none(self):
+        """Test user creation when img is None"""
+        user_with_no_img = User(email='test2@example.com',
+                                password='password2',
+                                username='testuser2', img=None)
+        models.storage.new(user_with_no_img)
+        models.storage.save()
+
+        self.assertIsNotNone(user_with_no_img.img)
+        self.assertIsInstance(user_with_no_img.img, bytes)
+
+        models.storage.delete(user_with_no_img)
+        models.storage.save()
+
+    def test_set_password_encryption(self):
+        """Test that the password is encrypted using MD5"""
+        self.assertEqual(self.test_user.password, md5(
+            'password'.encode()).hexdigest())
+        new_user = User(email='newuser@example.com',
+                        password='newpassword', username='newuser')
+        self.assertEqual(new_user.password, md5(
+            'newpassword'.encode()).hexdigest())
+
+    def test_user_to_dict_contains_no_password(self):
+        """Test that the dictionary representation
+        does not include the password"""
+        user_dict = self.test_user.to_dict()
+        self.assertNotIn('password', user_dict)
+
+    def test_reload_user_from_dict(self):
+        """Test reloading a user object from a dictionary"""
+        self.user_json['created_at'] = datetime.utcnow().isoformat()
+        self.user_json['updated_at'] = datetime.utcnow().isoformat()
+
+        new_user = User(**self.user_json)
+        self.assertEqual(new_user.id, self.user_json['id'])
+        self.assertEqual(new_user.email, self.user_json['email'])
+        self.assertEqual(new_user.username, self.user_json['username'])
+
+        # Check that password was re-encrypted
+        self.assertEqual(new_user.password, md5(
+            'testpassword'.encode()).hexdigest())
+
+
+'''
+
+    # don't know how to test large data yet but working on it
+
+    def test_handling_large_data(self):
+        """Test handling of large data in attributes"""
+        user = User(
+            # Adjust to fit within the column length
+            email="a" * 255 + "@example.com",
+            password="b" * 255,
+            username="c" * 255,
+            # Assuming img is a BLOB, adjust the size accordingly
+            img=b'\xff\xd8\xff\xe0' * 5000
+        )
+        with self.assertRaises(PendingRollbackError):
+            models.storage.new(user)
+            models.storage.save()'''
