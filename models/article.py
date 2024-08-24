@@ -18,10 +18,14 @@ class Article(BaseModel, Base):
     title = Column(String(128), nullable=False)
     content = Column(Text, nullable=False)
     img = Column(LargeBinary, nullable=True)
+    author = Column(String(64), nullable=True)
 
     def __init__(self, *args, **kwargs):
         """initializes article"""
         if 'img' not in kwargs or not kwargs['img']:
             with open('resources/default_article.png', 'rb') as file:
                 kwargs['img'] = file.read()
+
+        if 'author' not in kwargs or not kwargs['author']:
+            kwargs['author'] = 'anonymous'
         super().__init__(*args, **kwargs)

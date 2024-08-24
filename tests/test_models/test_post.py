@@ -170,3 +170,11 @@ class TestPost(unittest.TestCase):
 
         self.assertIsNone(models.storage.get(User, self.test_user2))
         self.assertIsNone(models.storage.get(Post, self.test_post2))
+
+    def test_empty_title(self):
+        """test empty title parameter"""
+        with self.assertRaises(ValueError):
+            Post(title='', user_id=self.test_user.id)
+
+        with self.assertRaises(ValueError):
+            Post(title='    ', user_id=self.test_user.id)

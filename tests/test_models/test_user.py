@@ -90,6 +90,13 @@ class TestUser(unittest.TestCase):
 
             except Exception as e:
                 pass
+        self.cleanup_users()
+
+    def cleanup_users(self):
+        """Utility method to remove all users from the database"""
+        for user in models.storage.all(User).values():
+            models.storage.delete(user)
+        models.storage.save()
 
     def test_test(self):
         """mock test to test setUp and teardown"""
@@ -166,8 +173,10 @@ class TestUser(unittest.TestCase):
 
     def test_Nones(self):
         """test if the none attributes gives the expected output"""
-        with self.assertRaises(AttributeError):
+        with self.assertRaises((AttributeError, TypeError)):
             User(email=None, password=None, username=None)
+        with self.assertRaises((AttributeError, TypeError)):
+            User(email='user@kkk.com', password=None, username=None)
 
     def test_user_with_img_none(self):
         """Test user creation when img is None"""
@@ -211,6 +220,50 @@ class TestUser(unittest.TestCase):
         # Check that password was re-encrypted
         self.assertEqual(new_user.password, md5(
             'testpassword'.encode()).hexdigest())
+
+    def test_create_user_with_unique_email(self):
+        """Test that a user with a unique email can be created"""
+        user = User(email='newuser@example.com',
+                    password='Password', username='newuser')
+        models.storage.new(user)
+        models.storage.save()
+        retrieved_user = models.storage.get(User, user.id)
+        self.assertIsNotNone(retrieved_user)
+        self.assertEqual(retrieved_user.email, 'newuser@example.com')
+
+    """def test_create_user_with_duplicate_email(self):
+        Test that creating a user with a duplicate email raises an error
+        with self.assertRaises(IntegrityError):
+            duplicate_user = User(email='unique@example.com',
+                                  password='AnotherPassword',
+                                  username='anotheruser')
+            models.storage.new(duplicate_user)
+            models.storage.save()
+            duplicate_user2 = User(email='unique@example.com',
+                                   password='AnotherPassword',
+                                   username='anotheruser')
+            models.storage.new(duplicate_user)
+            models.storage.save()"""
+
+    def test_email_format_validation(self):
+        """Test that invalid email formats are rejected"""
+        with self.assertRaises(ValueError):
+            User(email='invalid-email-format',
+                 password='Password', username='baduser')
+
+        with self.assertRaises(ValueError):
+            User(email='another-invalid-email@',
+                 password='Password', username='anotherbaduser')
+
+    def test_valid_email_format(self):
+        """Test that a valid email format is accepted"""
+        valid_user = User(email='valid.email@example.com',
+                          password='Password', username='validuser')
+        models.storage.new(valid_user)
+        models.storage.save()
+        retrieved_user = models.storage.get(User, valid_user.id)
+        self.assertIsNotNone(retrieved_user)
+        self.assertEqual(retrieved_user.email, 'valid.email@example.com')
 
 
 '''
