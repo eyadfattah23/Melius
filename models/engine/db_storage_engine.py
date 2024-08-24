@@ -7,9 +7,11 @@ from models.base_model import BaseModel, Base
 from models.user import User
 from models.article import Article
 from models.post import Post
+from models.timer_history import TimerHistory
 import models
 
-classes = {"User": User, 'Article': Article, 'Post': Post}
+classes = {"User": User, 'Article': Article,
+           'Post': Post, "TimerHistory": TimerHistory}
 # {"Amenity": Amenity, "City": City,
 #           "Place": Place, "Review": Review, "State": State}
 
@@ -41,12 +43,13 @@ class DBStorage:
         objects = {}
         if cls is None:
             from models.user import User
-            # from models.state import State
-            # from models.review import Review
-            # from models.place import Place
+            from models.article import Article
+            from models.post import Post
+            from models.timer_history import TimerHistory
             # from models.city import City
             # from models.amenity import Amenity
-            classes = {'user': User}
+            classes = {'user': User, 'article': Article,
+                       'timer_history': TimerHistory, 'post': Post}
             ''''place': Place,
                        'amenity': Amenity, 'state': State,
                        'review': Review, 'city': City}'''
@@ -86,7 +89,7 @@ class DBStorage:
         from models.user import User
         from models.article import Article
         from models.post import Post
-        # from models.place import Place
+        from models.timer_history import TimerHistory
         # from models.city import City
         # from models.amenity import Amenity
         from models.base_model import Base
