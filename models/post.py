@@ -21,4 +21,6 @@ class Post(BaseModel, Base):
 
     def __init__(self, *args, **kwargs):
         """initializes post"""
+        if 'title' in kwargs and not kwargs['title'].strip():
+            raise ValueError("The title cannot be an empty string.")
         super().__init__(*args, **kwargs)

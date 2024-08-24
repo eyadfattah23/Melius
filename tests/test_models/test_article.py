@@ -128,6 +128,8 @@ class TestArticle(unittest.TestCase):
         """test the to dict method"""
         self.test_article.id = 'fa5f7cec-e7e1-436f-ba49-35241277adac'
         self.test_article.title = 'last_name'
+        self.test_article.author = 'Mohsen'
+
         self.article_json = self.test_article.to_dict()
 
         with open('resources/default_article.png', 'rb') as file:
@@ -140,6 +142,7 @@ class TestArticle(unittest.TestCase):
             'created_at': self.test_article.created_at.isoformat(),
             'id': self.test_article.id,
             'img': img,
+            'author': 'Mohsen',
             'content': 'content'
         })
 
@@ -163,3 +166,20 @@ class TestArticle(unittest.TestCase):
         models.storage.save()
 
         self.assertIsNone(models.storage.get(Article, self.test_article2))
+
+    def test_default_author(self):
+        """Test that the author defaults to 'anonymous' if not provided"""
+        self.assertEqual(self.test_article.author, 'anonymous')
+
+    def test_custom_img_and_author(self):
+        """Test that custom img and author values are saved correctly"""
+        custom_img = b'custom image content'
+        article = Article(title='custom article', content='custom content',
+                          img=custom_img, author='custom author')
+        models.storage.new(article)
+        models.storage.save()
+        self.assertEqual(article.img, custom_img)
+        self.assertEqual(article.author, 'custom author')
+
+        models.storage.delete(article)
+        models.storage.save()

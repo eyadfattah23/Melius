@@ -4,6 +4,7 @@ from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, LargeBinary, Text
 from sqlalchemy.orm import relationship
 from hashlib import md5
+import re
 
 
 class User(BaseModel, Base):
@@ -17,16 +18,20 @@ class User(BaseModel, Base):
     """
 
     __tablename__ = 'users'
-    email = Column(String(128), nullable=False, unique=True)
+    email = Column(String(128), nullable=False)
     password = Column(String(128), nullable=False)
     username = Column(String(128), nullable=False)
-    img = Column(LargeBinary, nullable=True)   # ->changed to text
+    img = Column(LargeBinary, nullable=True)   # ->changed to text (s3 aws)
 
     posts = relationship("Post", backref="user",
                          cascade="all, delete, delete-orphan")
 
     def __init__(self, *args, **kwargs):
         """initializes user"""
+        # Validate email format
+        email_regex = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
+        if not re.match(email_regex, kwargs.get('email', '')):
+            raise ValueError("Invalid email format")
 
         if 'img' not in kwargs or not kwargs['img']:
             with open('resources/default_male_img.jpg', 'rb') as file:
