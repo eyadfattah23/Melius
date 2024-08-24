@@ -26,6 +26,9 @@ class User(BaseModel, Base):
     posts = relationship("Post", backref="user",
                          cascade="all, delete, delete-orphan")
 
+    timer_histories = relationship("TimerHistory", backref="user",
+                                   cascade="all, delete, delete-orphan")
+
     def __init__(self, *args, **kwargs):
         """initializes user"""
         # Validate email format
