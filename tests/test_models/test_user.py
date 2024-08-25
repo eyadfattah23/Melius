@@ -13,6 +13,7 @@ import unittest
 from models.engine.db_storage_engine import DBStorage
 from hashlib import md5
 from sqlalchemy.exc import DataError, IntegrityError, PendingRollbackError
+from passlib.hash import bcrypt
 
 
 class TestUserDocs(unittest.TestCase):
@@ -102,6 +103,13 @@ class TestUser(unittest.TestCase):
         """mock test to test setUp and teardown"""
         self.assertEqual(12, 12)
 
+    def test_password_hashing(self):
+        """Test that the password is hashed and verified correctly"""
+        self.assertTrue(bcrypt.verify(
+            'password', self.test_user.password_hash))
+        self.assertFalse(bcrypt.verify(
+            'wrongpassword', self.test_user.password_hash))
+
     def test_str(self):
         """test string representation"""
         self.assertEqual(self.test_user.username, "username")
@@ -127,7 +135,7 @@ class TestUser(unittest.TestCase):
         self.assertIsInstance(self.user_json['email'], str)
         self.assertIsInstance(self.user_json['username'], str)
         self.assertIsInstance(self.test_user.id, str)
-        self.assertIsInstance(self.test_user.img, bytes)
+        self.assertIsInstance(self.test_user.img, str)
 
         self.assertTrue(hasattr(self.test_user, "email"))
         self.assertTrue(self.test_user.email == "user@example.com")
@@ -138,8 +146,7 @@ class TestUser(unittest.TestCase):
         self.test_user.username = 'last_name'
         self.user_json = self.test_user.to_dict()
 
-        with open('resources/default_male_img.jpg', 'rb') as file:
-            img = file.read()
+        img = 'resources/default_male_img.jpg'
 
         self.assertDictEqual(self.user_json, {
             '__class__': 'User',
@@ -187,19 +194,20 @@ class TestUser(unittest.TestCase):
         models.storage.save()
 
         self.assertIsNotNone(user_with_no_img.img)
-        self.assertIsInstance(user_with_no_img.img, bytes)
+        self.assertIsInstance(user_with_no_img.img, str)
 
         models.storage.delete(user_with_no_img)
         models.storage.save()
 
     def test_set_password_encryption(self):
-        """Test that the password is encrypted using MD5"""
-        self.assertEqual(self.test_user.password, md5(
-            'password'.encode()).hexdigest())
-        new_user = User(email='newuser@example.com',
-                        password='newpassword', username='newuser')
-        self.assertEqual(new_user.password, md5(
-            'newpassword'.encode()).hexdigest())
+        """Test that the password is encrypted using bcrypt"""
+        password = 'password'
+        user = User(email='newuser@example.com',
+                    password=password, username='newuser')
+
+        # Ensure that the password is hashed and not stored as plain text
+        self.assertNotEqual(user.password_hash, password)
+        self.assertTrue(user.verify_password(password))
 
     def test_user_to_dict_contains_no_password(self):
         """Test that the dictionary representation
@@ -218,8 +226,7 @@ class TestUser(unittest.TestCase):
         self.assertEqual(new_user.username, self.user_json['username'])
 
         # Check that password was re-encrypted
-        self.assertEqual(new_user.password, md5(
-            'testpassword'.encode()).hexdigest())
+        self.assertTrue(new_user.verify_password('testpassword'))
 
     def test_create_user_with_unique_email(self):
         """Test that a user with a unique email can be created"""
