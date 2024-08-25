@@ -7,11 +7,14 @@ from models.base_model import BaseModel, Base
 from models.user import User
 from models.article import Article
 from models.post import Post
+from models.post import PostLike
+from models.post import PostComment
 from models.timer_history import TimerHistory
 import models
 
 classes = {"User": User, 'Article': Article,
-           'Post': Post, "TimerHistory": TimerHistory}
+           'Post': Post, 'TimerHistory': TimerHistory,
+           'PostLike': PostLike, 'PostComment': PostComment}
 # {"Amenity": Amenity, "City": City,
 #           "Place": Place, "Review": Review, "State": State}
 
@@ -45,11 +48,14 @@ class DBStorage:
             from models.user import User
             from models.article import Article
             from models.post import Post
+            from models.post import PostLike
+            from models.post import PostComment
             from models.timer_history import TimerHistory
             # from models.city import City
             # from models.amenity import Amenity
             classes = {'user': User, 'article': Article,
-                       'timer_history': TimerHistory, 'post': Post}
+                       'timer_history': TimerHistory, 'post': Post,
+                       'postlike': PostLike, 'postcomment': PostComment}
             ''''place': Place,
                        'amenity': Amenity, 'state': State,
                        'review': Review, 'city': City}'''
@@ -89,6 +95,8 @@ class DBStorage:
         from models.user import User
         from models.article import Article
         from models.post import Post
+        from models.post import PostComment
+        from models.post import PostLike
         from models.timer_history import TimerHistory
         # from models.city import City
         # from models.amenity import Amenity
