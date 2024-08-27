@@ -79,4 +79,6 @@ class PostComment(BaseModel, Base):
 
     def __init__(self, *args, **kwargs):
         """Initializes a PostComment"""
+        if 'text' in kwargs and not kwargs['text'].strip():
+            raise ValueError("The comment cannot be an empty string.")
         super().__init__(*args, **kwargs)
