@@ -67,6 +67,12 @@ class User(BaseModel, Base):
     post_comments = relationship("PostComment", backref="user",
                                  cascade="all, delete, delete-orphan")
 
+    article_likes = relationship("ArticleLike", backref="user",
+                                 cascade="all, delete, delete-orphan")
+
+    article_comments = relationship("ArticleComment", backref="user",
+                                    cascade="all, delete, delete-orphan")
+
     def __init__(self, *args, **kwargs):
         """initializes user"""
         # Validate email format
