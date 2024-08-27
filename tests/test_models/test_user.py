@@ -220,6 +220,17 @@ class TestUser(unittest.TestCase):
                         password='Pass#word1', username='		 ')
             models.storage.new(user)
             models.storage.save()
+        with self.assertRaises((DataError, ValueError)):
+            try:
+                user = User(email='user@kkk.com',
+                            password='Pass#word1', username='f'*1000)
+                models.storage.new(user)
+                models.storage.save()
+            except (DataError, IntegrityError):
+                models.storage.rollback()
+                # Rollback the session to avoid PendingRollbackError
+                raise
+                # Re-raise to ensure the test correctly captures this error
 
     def test_user_with_img_none(self):
         """Test user creation when img is None"""
