@@ -9,10 +9,10 @@ from models import storage
 from models.post import Post, PostLike, PostComment
 from models.user import User
 from models.base_model import BaseModel
-from sqlalchemy.exc import IntegrityError
+from sqlalchemy.exc import IntegrityError, DataError
 
 
-class TestPostLikeAndPostComment(unittest.TestCase):
+class TestPostLikePostComment(unittest.TestCase):
     """Test the PostLike and PostComment classes"""
 
     def setUp(self):
@@ -214,6 +214,8 @@ class TestPostLikeAndPostComment(unittest.TestCase):
 
         likes_count = len(storage.all(PostLike))
         self.assertEqual(likes_count, 11)
+        comments_count = len(storage.all(PostComment))
+        self.assertEqual(comments_count, 5)
 
     def test_duplicate_like(self):
         user_id = self.eyad.id
@@ -235,3 +237,25 @@ class TestPostLikeAndPostComment(unittest.TestCase):
             storage.new(like1)
             storage.new(like2)
             storage.save()
+
+    def test_edge_comments(self):
+        """tests for empty and too long comments"""
+        with self.assertRaises(ValueError):
+            PostComment(text='', user_id=self.eyad.id)
+    # Test too long title
+        with self.assertRaises(DataError):
+            try:
+                storage.new(
+                    PostComment(text='5' * 123456, user_id=self.eyad.id, post_id=self.post1))
+                storage.save()
+            except (DataError, IntegrityError):
+                storage.rollback()
+                # Rollback the session to avoid PendingRollbackError
+                raise
+                # Re-raise to ensure the test correctly captures this error
+
+        with self.assertRaises(AttributeError):
+            PostComment(text=None, user_id=self.eyad.id)
+
+        with self.assertRaises(ValueError):
+            PostComment(text='    ', user_id=self.eyad.id)
