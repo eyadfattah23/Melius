@@ -12,6 +12,7 @@ from models.base_model import BaseModel
 import pep8
 import unittest
 from models.engine.db_storage_engine import DBStorage
+from sqlalchemy.exc import IntegrityError, DataError
 
 
 class TestPostDocs(unittest.TestCase):
@@ -175,6 +176,20 @@ class TestPost(unittest.TestCase):
         """test empty title parameter"""
         with self.assertRaises(ValueError):
             Post(title='', user_id=self.test_user.id)
+    # Test too long title
+        with self.assertRaises(DataError):
+            try:
+                models.storage.new(
+                    Post(title='5' * 123456, user_id=self.test_user.id))
+                models.storage.save()
+            except (DataError, IntegrityError):
+                models.storage.rollback()
+                # Rollback the session to avoid PendingRollbackError
+                raise
+                # Re-raise to ensure the test correctly captures this error
+
+        with self.assertRaises(AttributeError):
+            Post(title=None, user_id=self.test_user.id)
 
         with self.assertRaises(ValueError):
             Post(title='    ', user_id=self.test_user.id)
