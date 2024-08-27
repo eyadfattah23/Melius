@@ -67,13 +67,14 @@ class TestUser(unittest.TestCase):
         """Set up method which runs before all the tests"""
 
         self.test_user = User(email='user@example.com',
-                              password='password', username='username')
+                              password='Pass#word1', username='username')
         models.storage.new(self.test_user)
         models.storage.save()
 
         self.user_json = self.test_user.to_dict()
-        self.user_json['password'] = 'testpassword'
+        self.user_json['password'] = 'Pass#word1'
         self.user_json['id'] = '123-456-789'
+        self.user_json['email'] = '1userjson@example.com'
         self.user_with_kwargs = User(**self.user_json)
         models.storage.new(self.user_with_kwargs)
         models.storage.save()
@@ -106,9 +107,9 @@ class TestUser(unittest.TestCase):
     def test_password_hashing(self):
         """Test that the password is hashed and verified correctly"""
         self.assertTrue(bcrypt.verify(
-            'password', self.test_user.password_hash))
+            'Pass#word1', self.test_user.password_hash))
         self.assertFalse(bcrypt.verify(
-            'wrongpassword', self.test_user.password_hash))
+            'wrongPass#word1', self.test_user.password_hash))
 
     def test_str(self):
         """test string representation"""
@@ -166,8 +167,8 @@ class TestUser(unittest.TestCase):
 
     def test_delete(self):
         """test the delete method if it deletes the user"""
-        self.test_user2 = User(email='user@example.com',
-                               password='password', username='username')
+        self.test_user2 = User(email='user2@example.com',
+                               password='Pass#word1', username='username')
         models.storage.new(self.test_user2)
         models.storage.save()
 
@@ -181,14 +182,49 @@ class TestUser(unittest.TestCase):
     def test_Nones(self):
         """test if the none attributes gives the expected output"""
         with self.assertRaises((AttributeError, TypeError)):
-            User(email=None, password=None, username=None)
+            user = User(email=None, password=None, username=None)
+            models.storage.new(user)
+            models.storage.save()
         with self.assertRaises((AttributeError, TypeError)):
-            User(email='user@kkk.com', password=None, username=None)
+            user = User(email='user@kkk.com', password=None, username=None)
+            models.storage.new(user)
+            models.storage.save()
+        with self.assertRaises(ValueError):
+            user = User(email='', password=None, username=None)
+            models.storage.new(user)
+            models.storage.save()
+        with self.assertRaises(ValueError):
+            user = User(email='      ', password=None, username=None)
+            models.storage.new(user)
+            models.storage.save()
+        with self.assertRaises((ValueError, AttributeError, TypeError)):
+            user = User(email='user@kkk.com', password='', username=None)
+            models.storage.new(user)
+            models.storage.save()
+        with self.assertRaises(ValueError):
+            user = User(email='user@kkk.com', password='     ', username=None)
+            models.storage.new(user)
+            models.storage.save()
+        with self.assertRaises(AttributeError):
+            user = User(email='user@kkk.com',
+                        password='Pass#word1', username=None)
+            models.storage.new(user)
+            models.storage.save()
+        with self.assertRaises(ValueError):
+            user = User(email='user@kkk.com',
+                        password='Pass#word1', username='')
+            models.storage.new(user)
+            models.storage.save()
+        with self.assertRaises(ValueError):
+            user = User(email='user@kkk.com',
+                        password='Pass#word1', username='		 ')
+            models.storage.new(user)
+            models.storage.save()
 
     def test_user_with_img_none(self):
         """Test user creation when img is None"""
         user_with_no_img = User(email='test2@example.com',
-                                password='password2',
+                                password='Pass#word2',
                                 username='testuser2', img=None)
         models.storage.new(user_with_no_img)
         models.storage.save()
@@ -201,7 +237,7 @@ class TestUser(unittest.TestCase):
 
     def test_set_password_encryption(self):
         """Test that the password is encrypted using bcrypt"""
-        password = 'password'
+        password = 'Pass#word1'
         user = User(email='newuser@example.com',
                     password=password, username='newuser')
 
@@ -226,17 +262,17 @@ class TestUser(unittest.TestCase):
         self.assertEqual(new_user.username, self.user_json['username'])
 
         # Check that password was re-encrypted
-        self.assertTrue(new_user.verify_password('testpassword'))
+        self.assertTrue(new_user.verify_password('Pass#word1'))
 
     def test_create_user_with_unique_email(self):
         """Test that a user with a unique email can be created"""
-        user = User(email='newuser@example.com',
-                    password='Password', username='newuser')
+        user = User(email='newuser3@example.com',
+                    password='Pass#word1', username='newuser')
         models.storage.new(user)
         models.storage.save()
         retrieved_user = models.storage.get(User, user.id)
         self.assertIsNotNone(retrieved_user)
-        self.assertEqual(retrieved_user.email, 'newuser@example.com')
+        self.assertEqual(retrieved_user.email, 'newuser3@example.com')
 
     """def test_create_user_with_duplicate_email(self):
         Test that creating a user with a duplicate email raises an error
@@ -256,21 +292,29 @@ class TestUser(unittest.TestCase):
         """Test that invalid email formats are rejected"""
         with self.assertRaises(ValueError):
             User(email='invalid-email-format',
-                 password='Password', username='baduser')
+                 password='Pass#word1', username='baduser')
 
         with self.assertRaises(ValueError):
             User(email='another-invalid-email@',
-                 password='Password', username='anotherbaduser')
+                 password='Pass#word1', username='anotherbaduser')
 
     def test_valid_email_format(self):
         """Test that a valid email format is accepted"""
         valid_user = User(email='valid.email@example.com',
-                          password='Password', username='validuser')
+                          password='Pass#word1', username='validuser')
         models.storage.new(valid_user)
         models.storage.save()
         retrieved_user = models.storage.get(User, valid_user.id)
         self.assertIsNotNone(retrieved_user)
         self.assertEqual(retrieved_user.email, 'valid.email@example.com')
+
+    def test_valid_password_format(self):
+        """Test that a valid email format is accepted"""
+        with self.assertRaises(ValueError, ):
+            user = User(email='user@kkk.com',
+                        password='password', username=None)
+            models.storage.new(user)
+            models.storage.save()
 
 
 '''

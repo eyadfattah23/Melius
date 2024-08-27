@@ -65,7 +65,7 @@ class TestPost(unittest.TestCase):
         """Set up method which runs before all the tests"""
 
         self.test_user = User(email='poststest@example.com',
-                              password='Password', username='username')
+                              password='Pass#word1', username='username')
         models.storage.new(self.test_user)
         models.storage.save()
 
@@ -154,7 +154,7 @@ class TestPost(unittest.TestCase):
     def test_delete(self):
         """test the delete method if it deletes the user"""
         self.test_user2 = User(email='user@example.com',
-                               password='password', username='username')
+                               password='Pass#word1', username='username')
 
         models.storage.new(self.test_user2)
         models.storage.save()
