@@ -7,16 +7,15 @@ from sqlalchemy.exc import IntegrityError
 from os import getenv
 from models.base_model import BaseModel, Base
 from models.user import User
-from models.article import Article
-from models.post import Post
-from models.post import PostLike
-from models.post import PostComment
+from models.article import *
+from models.post import *
 from models.timer_history import TimerHistory
 import models
 
 classes = {"User": User, 'Article': Article,
            'Post': Post, 'TimerHistory': TimerHistory,
-           'PostLike': PostLike, 'PostComment': PostComment}
+           'PostLike': PostLike, 'PostComment': PostComment,
+           'ArticleLike': ArticleLike, 'ArticleComment': ArticleComment}
 # {"Amenity": Amenity, "City": City,
 #           "Place": Place, "Review": Review, "State": State}
 
@@ -49,6 +48,8 @@ class DBStorage:
         if cls is None:
             from models.user import User
             from models.article import Article
+            from models.article import ArticleLike
+            from models.article import ArticleComment
             from models.post import Post
             from models.post import PostLike
             from models.post import PostComment
@@ -57,11 +58,8 @@ class DBStorage:
             # from models.amenity import Amenity
             classes = {'user': User, 'article': Article,
                        'timer_history': TimerHistory, 'post': Post,
-                       'postlike': PostLike, 'postcomment': PostComment}
-            ''''place': Place,
-                       'amenity': Amenity, 'state': State,
-                       'review': Review, 'city': City}'''
-
+                       'postlike': PostLike, 'postcomment': PostComment,
+                       'articlelike': ArticleLike, 'articlecomment': ArticleComment}
             for c in classes.values():
                 records = self.__session.query(c).all()
                 for object in records:
@@ -104,6 +102,8 @@ class DBStorage:
         '''
         from models.user import User
         from models.article import Article
+        from models.article import ArticleLike
+        from models.article import ArticleComment
         from models.post import Post
         from models.post import PostComment
         from models.post import PostLike
