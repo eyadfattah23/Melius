@@ -17,7 +17,8 @@ class TimerHistory(BaseModel, Base):
     """
     __tablename__ = 'timer_histories'
 
-    user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
+    user_id = Column(String(60), ForeignKey(
+        'users.id'), nullable=False, unique=True)
 
     start_date = Column(DateTime, nullable=False)
     reset_date = Column(DateTime, nullable=True)
