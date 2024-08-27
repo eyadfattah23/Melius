@@ -2,6 +2,8 @@
 """This module defines a class to manage DB storage for Melius"""
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
+from sqlalchemy.exc import IntegrityError
+
 from os import getenv
 from models.base_model import BaseModel, Base
 from models.user import User
@@ -80,7 +82,15 @@ class DBStorage:
 
     def save(self):
         '''commit all changes of the current database session'''
-        self.__session.commit()
+        try:
+            self.__session.commit()
+        except IntegrityError:
+            self.__session.rollback()
+            raise  # Re-raise the exception so it can be caught in your application code
+
+    def rollback(self):
+        '''Rollback the current database session'''
+        self.__session.rollback()
 
     def delete(self, obj=None):
         '''delete from the current database session obj if not None'''
