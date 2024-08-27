@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """This module defines a class post, it's likes and comments"""
 from models.base_model import BaseModel, Base
-from sqlalchemy import Column, String, ForeignKey, Text
+from sqlalchemy import Column, String, ForeignKey, Text, UniqueConstraint
 from sqlalchemy.orm import relationship
 
 
@@ -42,6 +42,14 @@ class PostLike(BaseModel, Base):
 
     __tablename__ = 'posts_likes'
 
+    __mapper_args__ = {
+        'confirm_deleted_rows': False
+    }
+
+    __table_args__ = (
+        UniqueConstraint('user_id', 'post_id', name='unique_user_post_like'),
+    )
+
     post_id = Column(String(60), ForeignKey('posts.id'), nullable=False)
     user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
 
@@ -60,6 +68,11 @@ class PostComment(BaseModel, Base):
     3. text"""
 
     __tablename__ = 'posts_comments'
+
+    __mapper_args__ = {
+        'confirm_deleted_rows': False
+    }
+
     post_id = Column(String(60), ForeignKey('posts.id'), nullable=False)
     user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
     text = Column(Text, nullable=False)
