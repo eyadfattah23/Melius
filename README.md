@@ -2,6 +2,10 @@
 
 portfolio project for alx, a web app that will help you beat porn addiction in complete secrecy.
 
+## Packages to install 
+  pip install passlib
+
+
 ## Database credentials
 
 MELIUS_MYSQL_USER="melius_dev"
