@@ -3,7 +3,7 @@
 Test User class for expected behavior and documentation
 """
 
-from datetime import datetime
+from datetime import datetime, timezone
 import inspect
 import models
 from models.user import User
@@ -152,8 +152,10 @@ class TestUser(unittest.TestCase):
         self.assertDictEqual(self.user_json, {
             '__class__': 'User',
             'email': 'user@example.com',
-            'updated_at': self.test_user.updated_at.isoformat(),
-            'created_at': self.test_user.created_at.isoformat(),
+            'updated_at': self.test_user.updated_at.isoformat()
+            .replace('+00:00', ''),
+            'created_at': self.test_user.created_at.isoformat()
+            .replace('+00:00', ''),
             'id': self.test_user.id,
             'img': img,
             'username': 'last_name'
@@ -264,8 +266,10 @@ class TestUser(unittest.TestCase):
 
     def test_reload_user_from_dict(self):
         """Test reloading a user object from a dictionary"""
-        self.user_json['created_at'] = datetime.utcnow().isoformat()
-        self.user_json['updated_at'] = datetime.utcnow().isoformat()
+        self.user_json['created_at'] = datetime.now(
+            timezone.utc).isoformat().replace('+00:00', '')
+        self.user_json['updated_at'] = datetime.now(
+            timezone.utc).isoformat().replace('+00:00', '')
 
         new_user = User(**self.user_json)
         self.assertEqual(new_user.id, self.user_json['id'])
