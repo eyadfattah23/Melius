@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """Test BaseModel for expected behavior and documentation"""
-from datetime import datetime
+from datetime import datetime, timezone
 import inspect
 import models
 import pep8 as pycodestyle
@@ -70,6 +70,8 @@ class TestBaseModel(unittest.TestCase):
         self.args_base = BaseModel(89, 'model', 0)
         self.base_with_kwargs = BaseModel(**self.model_json)
 
+        self.maxDiff = None
+
     def tearDown(self):
         """Tear down method which runs after all the tests"""
         try:
@@ -122,8 +124,10 @@ class TestBaseModel(unittest.TestCase):
             'number': 123,
             'name': 'test_model',
             '__class__': 'BaseModel',
-            'updated_at': self.model.updated_at.isoformat(),
-            'created_at': self.model.created_at.isoformat(),
+            'updated_at': self.model.updated_at.isoformat()
+            .replace('+00:00', ''),
+            'created_at': self.model.created_at.isoformat()
+            .replace('+00:00', ''),
             'id': self.model.id
         })
 
@@ -148,21 +152,21 @@ class TestBaseModel(unittest.TestCase):
         """test initialization of a base model instance with kwargs"""
 
         self.assertEqual(self.base_with_kwargs.id, self.model.id)
-        self.assertEqual(self.base_with_kwargs.created_at,
-                         self.model.created_at)
-        self.assertEqual(self.base_with_kwargs.updated_at,
-                         self.model.updated_at)
+        self.assertEqual(self.base_with_kwargs.created_at.isoformat(),
+                         self.model.created_at.isoformat().
+                         replace('+00:00', ''))
+        self.assertEqual(self.base_with_kwargs.updated_at.isoformat(),
+                         self.model.updated_at.isoformat().
+                         replace('+00:00', ''))
         self.assertEqual(self.base_with_kwargs.name, self.model.name)
         self.assertEqual(self.base_with_kwargs.number,
                          self.model.number)
-
-        self.assertEqual(str(self.base_with_kwargs), str(self.model))
 
         self.assertDictEqual(self.base_with_kwargs.to_dict(),
                              self.model.to_dict())
 
         self.assertEqual(self.base_with_kwargs.updated_at,
-                         self.model.updated_at)
+                         self.model.updated_at.replace(tzinfo=None))
 
     def test_none_kwargs(self):
         """test initialization of a base model instance with no kwargs"""

@@ -82,7 +82,7 @@ class DBStorage:
         '''commit all changes of the current database session'''
         try:
             self.__session.commit()
-        except IntegrityError:
+        except IntegrityError:  # test for Dataerror
             self.__session.rollback()
             raise  # Re-raise the exception so it can be caught in your application code
 

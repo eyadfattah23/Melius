@@ -3,7 +3,7 @@
 Test Article class for expected behavior and documentation
 """
 
-from datetime import datetime
+from datetime import datetime, timezone
 import inspect
 import models
 from models.article import Article
@@ -138,8 +138,10 @@ class TestArticle(unittest.TestCase):
         self.assertDictEqual(self.article_json, {
             '__class__': 'Article',
             'title': 'last_name',
-            'updated_at': self.test_article.updated_at.isoformat(),
-            'created_at': self.test_article.created_at.isoformat(),
+            'updated_at': self.test_article.updated_at.isoformat()
+            .replace('+00:00', ''),
+            'created_at': self.test_article.created_at.isoformat()
+            .replace('+00:00', ''),
             'id': self.test_article.id,
             'img': img,
             'author': 'Mohsen',

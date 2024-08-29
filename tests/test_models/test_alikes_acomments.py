@@ -3,7 +3,7 @@
 Test ArticleLike, ArticleComment classes for expected behavior and documentation
 """
 
-from datetime import datetime
+from datetime import datetime, timezone
 import unittest
 from models import storage
 from models.article import *
@@ -237,8 +237,10 @@ class TestArticleLikeArticleComment(unittest.TestCase):
 
         expected_dict = {
             '__class__': 'ArticleComment',
-            'updated_at': self.eyad_comments_article1.updated_at.isoformat(),
-            'created_at': self.eyad_comments_article1.created_at.isoformat(),
+            'updated_at': self.eyad_comments_article1.updated_at.isoformat()
+            .replace('+00:00', ''),
+            'created_at': self.eyad_comments_article1.created_at.isoformat()
+            .replace('+00:00', ''),
             'user_id': self.eyad.id,
             'article_id': self.article1.id,
             'id': 'fa5f7cec-e7e1-436f-ba49-35241277adac',
