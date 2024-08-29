@@ -3,7 +3,7 @@
 Test Post class for expected behavior and documentation
 """
 
-from datetime import datetime
+from datetime import datetime, timezone
 import inspect
 import models
 from models.post import Post
@@ -139,8 +139,10 @@ class TestPost(unittest.TestCase):
         self.assertDictEqual(self.post_json, {
             '__class__': 'Post',
             'text': 'text',
-            'updated_at': self.test_post.updated_at.isoformat(),
-            'created_at': self.test_post.created_at.isoformat(),
+            'updated_at': self.test_post.updated_at.isoformat()
+            .replace('+00:00', ''),
+            'created_at': self.test_post.created_at.isoformat()
+            .replace('+00:00', ''),
             'user_id': self.test_user.id,
             'id': self.test_post.id,
             'title': 'last_name'

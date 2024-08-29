@@ -3,7 +3,7 @@
 Test PostLike, PostComment, ArticleLike, ArticleComment class for expected behavior and documentation
 """
 
-from datetime import datetime
+from datetime import datetime, timezone
 import unittest
 from models import storage
 from models.post import Post, PostLike, PostComment
@@ -161,8 +161,8 @@ class TestPostLikePostComment(unittest.TestCase):
 
         expected_dict = {
             '__class__': 'PostComment',
-            'updated_at': self.larini_comments_post1.updated_at.isoformat(),
-            'created_at': self.larini_comments_post1.created_at.isoformat(),
+            'updated_at': self.larini_comments_post1.updated_at.isoformat().replace('+00:00', ''),
+            'created_at': self.larini_comments_post1.created_at.isoformat().replace('+00:00', ''),
             'user_id': self.larini.id,
             'post_id': self.post1.id,
             'id': 'fa5f7cec-e7e1-436f-ba49-35241277adac',
