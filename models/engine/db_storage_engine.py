@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """This module defines a class to manage DB storage for Melius"""
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, func
 from sqlalchemy.orm import sessionmaker, scoped_session
 from sqlalchemy.exc import IntegrityError
 
@@ -145,17 +145,29 @@ class DBStorage:
 
         return None'''
 
-    def count(self, cls=None):
-        """
-        count the number of objects in storage
-        """
-        all_class = classes.values()
+def count(self, cls=None, **filters):
+    """
+    Count the number of objects in storage using SQLAlchemy, with optional filters.
 
-        if not cls:
-            count = 0
-            for clas in all_class:
-                count += len(models.storage.all(clas).values())
-        else:
-            count = len(models.storage.all(cls).values())
+    :param cls: The class to count objects of. If None, counts objects of all classes.
+    :param filters: Optional filters to apply to the count query.
+    :return: The count of objects matching the criteria.
+    """
+    session = self.__session
 
-        return count
+    if cls:
+        # Count objects of a specific class with optional filters
+        query = session.query(func.count(cls))
+        
+        # Apply filters if any
+        for attr, value in filters.items():
+            query = query.filter(getattr(cls, attr) == value)
+
+        return query.scalar()
+    else:
+        # Count objects of all classes with optional filters
+        total_count = 0
+        for clas in classes.values():
+            query = session.query(func.count(clas))
+            total_count += query.scalar()
+        return total_count

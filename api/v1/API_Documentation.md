@@ -155,6 +155,14 @@ curl -X DELETE http://127.0.0.1:5050/api/v1/posts/<post_id>/comments/<comment_id
 curl -X GET http://localhost:5050/api/v1/posts/<post_id>/likes
 ```
 
+### Retrieve Likes count for a Post
+
+**Endpoint:** `GET /api/v1/posts/<post_id>/likes/count`
+
+```bash
+curl -X GET http://localhost:5050/api/v1/posts/<post_id>/likes/count
+```
+
 ### Add a like on a Post
 
 **Endpoint:** `POST /api/v1/posts/<post_id>/likes`
