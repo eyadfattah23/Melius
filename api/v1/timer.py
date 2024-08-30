@@ -23,13 +23,17 @@ def reset_or_create_timer():
         elapsed_time = (datetime.now(timezone.utc) - timer.start_date).total_seconds()
 
         # Update max_time if the new elapsed time is greater
-        if elapsed_time > timer.max_time:
+        if timer.max_time is None:
             timer.max_time = elapsed_time
+        else:
+            if elapsed_time > timer.max_time:
+                timer.max_time = elapsed_time
 
         # Reset the timer's start and reset dates, increment the number of tries
         timer.start_date = datetime.now(timezone.utc)
         timer.reset_date = datetime.now(timezone.utc)
         timer.no_tries += 1
+        
     else:
         # Create a new timer entry for the user
         timer = TimerHistory(user_id=user_id)
@@ -39,8 +43,7 @@ def reset_or_create_timer():
 
     return jsonify({
         "message": "Timer reset or created",
-        "start_date": timer.start_date.isoformat() + 'Z',
-        "max_time": timer.max_time
+        "data": timer.to_dict()
     })
 
 
