@@ -10,7 +10,7 @@ def get_users():
     return jsonify([user.to_dict() for user in users])
 
 # Creates a new user
-@users_bp.route('/api/users', methods=['POST'])
+@users_bp.route('/users', methods=['POST'])
 def create_user():
     """
     Creates a user
@@ -29,7 +29,7 @@ def create_user():
     return make_response(jsonify(instance.to_dict()), 201)
 
 # Retrieves specific user details
-@users_bp.route('/api/users/<user_id>', methods=['GET'])
+@users_bp.route('/users/<user_id>', methods=['GET'])
 def get_user(user_id):
     """ Retrieves an user """
     user = storage.get(User, user_id)
@@ -39,7 +39,7 @@ def get_user(user_id):
     return jsonify(user.to_dict())
 
 # Updates user info
-@users_bp.route('/api/users/<user_id>', methods=['PUT'])
+@users_bp.route('/users/<user_id>', methods=['PUT'])
 def update_user(user_id):
     """
     Updates a user
@@ -62,7 +62,7 @@ def update_user(user_id):
     return make_response(jsonify(user.to_dict()), 200)
 
 # Deletes a user and all associated data
-@users_bp.route('/api/users/<user_id>', methods=['DELETE'])
+@users_bp.route('/users/<user_id>', methods=['DELETE'])
 def delete_user(user_id):
     """
     Deletes a user Object
