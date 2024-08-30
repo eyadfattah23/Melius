@@ -121,7 +121,7 @@ curl -X POST http://127.0.0.1:5050/api/v1/posts/<post_id>/comments \
 -H "Content-Type: application/json" \
 -d '{
 "user_id": "user456",
-"text": "This is a comment on the post.",
+"text": "This is a comment on the post."
 }'
 ```
 
