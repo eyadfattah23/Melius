@@ -15,7 +15,7 @@ def get_post_likes(post_id):
 # Retrieves a post likes count 
 @likes_bp.route('/posts/<post_id>/likes/count', methods=['GET'])
 def get_post_likes_count(post_id):
-  count =  storage.count(Post, id=post_id)
+  count =  storage.count(PostLike, id=post_id)
   return jsonify({"count":  count})
 
 
