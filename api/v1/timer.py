@@ -33,13 +33,15 @@ def reset_or_create_timer():
         timer.start_date = datetime.now(timezone.utc)
         timer.reset_date = datetime.now(timezone.utc)
         timer.no_tries += 1
+        # Save the changes to the database
+        storage.save()
         
     else:
         # Create a new timer entry for the user
         timer = TimerHistory(user_id=user_id)
+        timer.save()
     
-    # Save the changes to the database
-    storage.save()
+
 
     return jsonify({
         "message": "Timer reset or created",
