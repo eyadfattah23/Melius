@@ -226,10 +226,81 @@ curl -X DELETE  http://localhost:5050/api/v1/articles/<article_id>
 
 ## **Timer**
 
-### start Timer
+### start or Reset Timer
 
-**Endpoint:** `POST /api/v1/timer/start`
+**Endpoint:** `POST /api/v1/timer/reset_or_create`
+
+**Request Response:**
+
+```json
+{
+  "data": {
+    "__class__": "TimerHistory",
+    "created_at": "2024-08-30T18:20:28.000000",
+    "id": "de1fdca9-e5dd-4674-9f2c-d7bff19e8918",
+    "max_time": 5,
+    "no_tries": 8,
+    "reset_date": "Fri, 30 Aug 2024 18:32:08 GMT",
+    "start_date": "Fri, 30 Aug 2024 18:32:08 GMT",
+    "updated_at": "2024-08-30T18:20:28.000000",
+    "user_id": "<user_id>"
+  }
+}
+```
+
+**Curl Command:**
 
 ```bash
-curl -X POST http://localhost:5050/api/v1/timer/start
+curl -X POST  http://127.0.0.1:5050/api/v1/timer/reset_or_create \
+-H "Content-Type: application/json" \
+-d '{
+"user_id": "<user_id>",
+}'
+```
+
+### Get Timer Status
+
+**Endpoint:** `GET /api/v1/timer/status`
+
+**Request Response:**
+
+```json
+{
+  "data": {
+    "__class__": "TimerHistory",
+    "created_at": "2024-08-30T18:20:28.000000",
+    "id": "de1fdca9-e5dd-4674-9f2c-d7bff19e8918",
+    "max_time": 5,
+    "no_tries": 8,
+    "reset_date": "Fri, 30 Aug 2024 18:32:08 GMT",
+    "start_date": "Fri, 30 Aug 2024 18:32:08 GMT",
+    "updated_at": "2024-08-30T18:20:28.000000",
+    "user_id": "<user_id>"
+  }
+}
+```
+
+**Curl Command:**
+
+```bash
+curl -X GET  http://127.0.0.1:5050/api/v1/timer/status
+```
+
+### Get Top 10 Timers
+
+**Endpoint:** `GET /api/v1/timer/top10`
+
+**Request Response:**
+
+```json
+[
+  { "max_time": "5", "user_id": "2b3c4d5e6f7g" },
+  { "max_time": "1", "user_id": "65sdfghr4drg" }
+]
+```
+
+**Curl Command:**
+
+```bash
+curl -X GET  http://127.0.0.1:5050/api/v1/timer/top10
 ```
