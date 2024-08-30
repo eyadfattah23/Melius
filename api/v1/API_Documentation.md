@@ -109,7 +109,12 @@ curl -X DELETE http://127.0.0.1:5050/api/v1/posts/<post_id>
 **Endpoint:** `GET /api/v1/posts/<post_id>/comments`
 
 ```bash
-
+curl -X POST http://127.0.0.1:5050/api/v1/posts/<post_id>/comments \
+-H "Content-Type: application/json" \
+-d '{
+  "user_id": "<user_id>",
+  "text": "This is a comment on the post.",
+}'
 ```
 
 ### Create a Comment on a Post
@@ -143,4 +148,55 @@ curl -X PUT http://127.0.0.1:5050/api/v1/posts/<post_id>/comments/<comment_id> \
 
 ```bash
 curl -X DELETE http://127.0.0.1:5050/api/v1/posts/<post_id>/comments/<comment_id>
+```
+
+## Articles
+
+### Get All Articles
+
+**Endpoint:** `GET /articles`
+
+**Curl Command:**
+
+```bash
+curl -X GET http://localhost:5050/api/v1/articles
+```
+
+### **Get a Specific Article by ID**
+
+**Endpoint:** `GET /api/v1/articles/<article_id>`
+
+```bash
+curl -X GET http://localhost:5050/api/v1/articles/<article_id>
+```
+
+### **Create a New Article**
+
+**Endpoint:** `POST /api/v1/articles`
+
+```bash
+curl -X POST http://localhost:5050/api/v1/articles -H "Content-Type: application/json" -d '{
+"title": "Sample Article Title",
+"content": "This is the content of the article.",
+"author": "Author Name"
+}'
+```
+
+### **Update an Existing Article**
+
+**Endpoint:** `PUT /api/v1/articles/<article_id>`
+
+```bash
+curl -X PUT  http://localhost:5050/api/v1/articles/<article_id> \
+-H "Content-Type: application/json" \
+-d '{"title": "Updated Title", "content": "Updated Content", "author": "Updated Author"}'
+
+```
+
+### **Delete an Article**
+
+**Endpoint:** `DELETE /api/v1//articles/<article_id>`
+
+```bash
+curl -X DELETE  http://localhost:5050/api/v1/articles/6049a12b-5825-459a-bf50-a598799477a7
 ```
