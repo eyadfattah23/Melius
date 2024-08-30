@@ -19,7 +19,7 @@ def get_post_likes_count(post_id):
   return jsonify({"count":  count})
 
 
-# like a post clicked
+# Handles liking or unliking a post by a specific user
 @likes_bp.route('/posts/<post_id>/likes', methods=['POST'])
 def like_post(post_id):
     # Check if the request has JSON data
@@ -40,11 +40,11 @@ def like_post(post_id):
     if not like:
         # Create a new like if it doesn't exist
         create_post_like(post_id, user_id)
+        return make_response(jsonify({"message": "Post liked"}), 201)
     else:
         # Delete the like if it already exists
-        delete_post_like(post_id, user_id)
-
-    return make_response(jsonify({"message": "Like status updated"}), 200)
+        delete_post_like(like)
+        return make_response(jsonify({"message": "Like removed"}), 200)
 
 
 
@@ -58,45 +58,25 @@ def get_user_like_for_post(post_id, user_id):
     # Query for the like based on post_id and user_id
     like = storage.getSession().query(PostLike).filter_by(post_id=post_id, user_id=user_id).first()
 
-    if not like:
-        return None
-
     return like
 
 
 # Creates a new like
 def create_post_like(post_id, user_id):
-  post =  storage.get(Post, post_id)
+    post = storage.get(Post, post_id)
 
-  if not post:
-    abort(404)
+    if not post:
+        abort(404)
 
-  if not request.get_json():
-    abort(400, description="Not a JSON")
-
-  data = request.get_json()
-
-  instance = PostLike(**data)
-  instance.post_id = post.id
-  instance.user_id = user_id
-  instance.save()
-  return make_response(jsonify(instance.to_dict()), 201)
+    # Create a new PostLike instance
+    new_like = PostLike(post_id=post.id, user_id=user_id)
+    new_like.save()
+    return new_like
 
 
 # Deletes a like
-def delete_post_like(post_id, like_id):
-  post =  storage.get(Post, post_id)
-
-  if not post:
-    abort(404)
-
-  like =  storage.get(PostLike, like_id)
-
-  if not like:
-    abort(404)
-
-  storage.delete(like)
-  storage.save()
-  return make_response(jsonify({"message": "Like deleted"}), 200)
+def delete_post_like(like):
+    storage.delete(like)
+    storage.save()
 
 
