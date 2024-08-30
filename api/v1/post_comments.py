@@ -23,6 +23,7 @@ def create_post_comment(post_id):
 
     data = request.get_json()
     instance = PostComment(**data)
+    instance.post_id = post_id
     instance.save()
     return make_response(jsonify(instance.to_dict()), 201)
 
