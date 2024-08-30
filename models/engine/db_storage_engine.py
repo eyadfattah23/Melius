@@ -129,13 +129,17 @@ class DBStorage:
         """
         if cls not in classes.values():
             return None
+        
+        record = self.__session.get(cls, id)
 
-        all_cls = models.storage.all(cls)
+        return record
+
+        '''all_cls = models.storage.all(cls)
         for value in all_cls.values():
             if (value.id == id):
                 return value
 
-        return None
+        return None'''
 
     def count(self, cls=None):
         """
