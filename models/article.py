@@ -28,10 +28,8 @@ class Article(BaseModel, Base):
                             cascade="all, delete, delete-orphan")
 
     def __init__(self, *args, **kwargs):
-        """initializes article"""
-        if 'img' not in kwargs or not kwargs['img']:
-            with open('resources/default_article.png', 'rb') as file:
-                kwargs['img'] = file.read()
+        """initializes article""" 
+            # TODO: add default image
 
         if 'author' not in kwargs or not kwargs['author']:
             kwargs['author'] = 'anonymous'
