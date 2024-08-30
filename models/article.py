@@ -18,7 +18,7 @@ class Article(BaseModel, Base):
     __tablename__ = 'articles'
     title = Column(String(128), nullable=False)
     content = Column(Text, nullable=False)
-    img = Column(LargeBinary, nullable=True)
+    img = Column(Text, nullable=True)
     author = Column(String(64), nullable=True)
 
     likes = relationship("ArticleLike", backref="article",
