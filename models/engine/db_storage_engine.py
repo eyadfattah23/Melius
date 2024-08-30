@@ -40,6 +40,10 @@ class DBStorage:
                                           MySQL_password,
                                           MySQL_host,
                                           MySQL_database), pool_pre_ping=True)
+        
+    
+    def getSession(self):
+        return self.__session
 
     def all(self, cls=None):
         '''query on the current database session (self.__session) all objects
