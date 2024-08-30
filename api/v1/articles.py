@@ -62,4 +62,4 @@ def delete_article(article_id):
         abort(404, description="Article not found")
     storage.delete(article)
     storage.save()
-    return make_response(jsonify({}), 200)
+    return make_response(jsonify({'message': 'article deleted'}), 200)
