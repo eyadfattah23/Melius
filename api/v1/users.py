@@ -76,4 +76,4 @@ def delete_user(user_id):
     storage.delete(user)
     storage.save()
 
-    return make_response(jsonify({}), 200)
+    return make_response(jsonify({"message": "User deleted"}), 200)
