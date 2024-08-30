@@ -223,3 +223,13 @@ curl -X PUT  http://localhost:5050/api/v1/articles/<article_id> \
 ```bash
 curl -X DELETE  http://localhost:5050/api/v1/articles/<article_id>
 ```
+
+## **Timer**
+
+### start Timer
+
+**Endpoint:** `POST /api/v1/timer/start`
+
+```bash
+curl -X POST http://localhost:5050/api/v1/timer/start
+```
