@@ -3,7 +3,7 @@ from datetime import datetime
 from models.timer_history import  TimerHistory
 from models import storage
 
-timer_bp = Blueprint('postLikes', __name__)
+timer_bp = Blueprint('timer', __name__)
 
 
 # Starts the timer for the user
