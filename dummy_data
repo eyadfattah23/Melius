@@ -1,0 +1,59 @@
+#!/bin/bash
+
+# Database credentials
+DB_USER="melius_test"
+DB_PASS="Melius_test_pwd123"
+DB_NAME="melius_test_db"
+DB_HOST="localhost"
+
+# SQL command to empty (truncate) the tables
+SQL_TRUNCATE="
+TRUNCATE TABLE users;
+TRUNCATE TABLE posts;
+TRUNCATE TABLE articles;
+"
+
+# SQL command to insert dummy data into the 'users' table
+SQL_USERS="
+INSERT INTO users (email, password_hash, username, img, id, created_at, updated_at) VALUES
+('john.doe@example.com', 'hashedpassword1', 'john_doe', NULL, '1a2b3c4d5e6f', NOW(), NOW()),
+('jane.smith@example.com', 'hashedpassword2', 'jane_smith', NULL, '2b3c4d5e6f7g', NOW(), NOW()),
+('alice.jones@example.com', 'hashedpassword3', 'alice_jones', NULL, '3c4d5e6f7g8h', NOW(), NOW()),
+('michael.brown@example.com', 'hashedpassword4', 'michael_brown', NULL, '4d5e6f7g8h9i', NOW(), NOW()),
+('emily.davis@example.com', 'hashedpassword5', 'emily_davis', NULL, '5e6f7g8h9i0j', NOW(), NOW());
+"
+
+# SQL command to insert dummy data into the 'posts' table
+SQL_POSTS="
+INSERT INTO posts (user_id, title, text, id, created_at, updated_at) VALUES
+('1a2b3c4d5e6f', 'The Future of AI', 'Artificial intelligence (AI) is rapidly evolving and becoming more integrated into our daily lives. From autonomous vehicles to healthcare advancements, the potential applications of AI are limitless.', '101112', NOW(), NOW()),
+('2b3c4d5e6f7g', 'Climate Change: What Can We Do?', 'Climate change is one of the most pressing issues of our time. Individuals and governments alike must take action to reduce carbon emissions and protect the environment.', '202122', NOW(), NOW()),
+('3c4d5e6f7g8h', 'The Rise of Remote Work', 'The COVID-19 pandemic has accelerated the trend of remote work, leading to a new normal where employees are working from home more than ever before.', '303132', NOW(), NOW()),
+('4d5e6f7g8h9i', 'Advancements in Quantum Computing', 'Quantum computing promises to revolutionize computing by solving complex problems much faster than classical computers. This could have major implications for fields like cryptography and materials science.', '404142', NOW(), NOW()),
+('5e6f7g8h9i0j', 'Exploring the Universe: The James Webb Telescope', 'The James Webb Space Telescope is set to be the most powerful space telescope ever launched, allowing us to explore distant galaxies and potentially discover new forms of life.', '505152', NOW(), NOW());
+"
+
+# SQL command to insert dummy data into the 'articles' table
+SQL_ARTICLES="
+INSERT INTO articles (title, content, img, author, id, created_at, updated_at) VALUES
+('Breaking News: Major AI Breakthrough', 'Scientists have announced a significant breakthrough in artificial intelligence, with new algorithms that outperform previous models.', NULL, 'john_doe', '601112', NOW(), NOW()),
+('Understanding Climate Change', 'A comprehensive guide to understanding the causes and effects of climate change, and what we can do to mitigate its impact.', NULL, 'jane_smith', '602122', NOW(), NOW()),
+('Remote Work Tips for Success', 'Tips and strategies for staying productive and maintaining work-life balance while working remotely.', NULL, 'alice_jones', '603132', NOW(), NOW()),
+('Quantum Computing for Beginners', 'An introduction to quantum computing, explaining the basic concepts and potential applications.', NULL, 'michael_brown', '604142', NOW(), NOW()),
+('The Universe Through the James Webb Telescope', 'Exploring the universe with the James Webb Telescope and what it means for our understanding of space.', NULL, 'emily_davis', '605152', NOW(), NOW());
+"
+
+# Execute the SQL commands to truncate the tables
+mysql -h "$DB_HOST" -u "$DB_USER" -p"$DB_PASS" "$DB_NAME" -e "$SQL_TRUNCATE"
+
+# Execute the SQL commands to insert the dummy data
+mysql -h "$DB_HOST" -u "$DB_USER" -p"$DB_PASS" "$DB_NAME" -e "$SQL_USERS"
+mysql -h "$DB_HOST" -u "$DB_USER" -p"$DB_PASS" "$DB_NAME" -e "$SQL_POSTS"
+mysql -h "$DB_HOST" -u "$DB_USER" -p"$DB_PASS" "$DB_NAME" -e "$SQL_ARTICLES"
+
+# Check if the commands were successful
+if [ $? -eq 0 ]; then
+  echo "Tables truncated and dummy data inserted successfully into 'users', 'posts', and 'articles' tables."
+else
+  echo "Failed to truncate tables or insert dummy data."
+fi
