@@ -3,7 +3,6 @@
 which is responsible for the clock of each user"""
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, ForeignKey, DateTime, Integer
-from sqlalchemy.orm import relationship
 from hashlib import md5
 from datetime import datetime, timezone
 
