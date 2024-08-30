@@ -8,15 +8,15 @@ likes_bp = Blueprint('postLikes', __name__)
 # Retrieves all likes for a specific post
 @likes_bp.route('/posts/<post_id>/likes', methods=['GET'])
 def get_post_likes(post_id):
-  post =  storage.get(Post, post_id)
-  return jsonify([like.to_dict() for like in post.likes])
+    post =  storage.get(Post, post_id)
+    return jsonify([like.to_dict() for like in post.likes])
 
 
 # Retrieves a post likes count 
 @likes_bp.route('/posts/<post_id>/likes/count', methods=['GET'])
 def get_post_likes_count(post_id):
-  count =  storage.count(PostLike, id=post_id)
-  return jsonify({"count":  count})
+    count =  storage.count(PostLike, id=post_id)
+    return jsonify({"count":  count})
 
 
 # Handles liking or unliking a post by a specific user
