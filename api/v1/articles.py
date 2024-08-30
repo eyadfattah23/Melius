@@ -26,8 +26,8 @@ def create_article():
     if 'title' not in request.get_json():
         abort(400, description="Missing title")
 
-    if 'text' not in request.get_json():
-        abort(400, description="Missing text")
+    if 'content' not in request.get_json():
+        abort(400, description="Missing content")
 
     data = request.get_json()
     instance = Article(**data)
