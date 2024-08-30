@@ -19,15 +19,18 @@ def reset_or_create_timer():
     timer = storage.getSession().query(TimerHistory).filter_by(user_id=user_id).first()
 
     if timer:
-        # Calculate the elapsed time since the start date
-        elapsed_time = (datetime.now(timezone.utc) - timer.start_date).total_seconds()
+        if timer.start_date.tzinfo is None:
+            timer.start_date = timer.start_date.replace(tzinfo=timezone.utc)
+
+        # Calculate the elapsed time in days
+        elapsed_days = (datetime.now(timezone.utc).date() - timer.start_date.date()).days
 
         # Update max_time if the new elapsed time is greater
         if timer.max_time is None:
-            timer.max_time = elapsed_time
+            timer.max_time = elapsed_days
         else:
-            if elapsed_time > timer.max_time:
-                timer.max_time = elapsed_time
+            if elapsed_days > timer.max_time:
+                timer.max_time = elapsed_days
 
         # Reset the timer's start and reset dates, increment the number of tries
         timer.start_date = datetime.now(timezone.utc)
