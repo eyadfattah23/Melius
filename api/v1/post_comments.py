@@ -44,3 +44,12 @@ def update_post_comment(post_id, comment_id):
             setattr(postComment, key, value)
     storage.save()
     return make_response(jsonify(postComment.to_dict()), 200)
+
+
+# Deletes a comment for a specific post
+@comments_bp.route('/posts/<post_id>/comments/<comment_id>', methods=['DELETE'])
+def delete_post_comment(post_id, comment_id):
+    postComment =  storage.get(PostComment, comment_id)
+    storage.delete(postComment)
+    storage.save()
+    return make_response(jsonify({}), 200)
