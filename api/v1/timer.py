@@ -7,7 +7,7 @@ timer_bp = Blueprint('timer', __name__)
 
 
 # Starts the timer for the user
-@timer_bp.route('/api/timer/reset_or_create', methods=['POST'])
+@timer_bp.route('/timer/reset_or_create', methods=['POST'])
 def reset_or_create_timer():
     data = request.get_json()
     user_id = data.get('user_id')
@@ -45,7 +45,7 @@ def reset_or_create_timer():
 
 
 # Returns the current timer status
-@timer_bp.route('/api/timer/status/<user_id>', methods=['GET'])
+@timer_bp.route('/timer/status/<user_id>', methods=['GET'])
 def timer_status(user_id):
     timer = storage.getSession().query(TimerHistory).filter_by(user_id=user_id).first()
 
@@ -59,7 +59,7 @@ def timer_status(user_id):
     })
 
 # Retrieves the top 10 users with the highest max_time
-@timer_bp.route('/api/timer/top10', methods=['GET'])
+@timer_bp.route('/timer/top10', methods=['GET'])
 def top10_timers():
     top_timers = storage.getSession().query(TimerHistory).order_by(TimerHistory.max_time.desc()).limit(10).all()
 
