@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request, make_response, abort 
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from models.timer_history import  TimerHistory
 from models import storage
 
@@ -22,8 +22,11 @@ def reset_or_create_timer():
         if timer.start_date.tzinfo is None:
             timer.start_date = timer.start_date.replace(tzinfo=timezone.utc)
 
+        # Simulate the current date as a few days in the future (e.g., 5 days from now)
+        simulated_now = datetime.now(timezone.utc) + timedelta(days=5)
         # Calculate the elapsed time in days
-        elapsed_days = (datetime.now(timezone.utc).date() - timer.start_date.date()).days
+        #elapsed_days = (datetime.now(timezone.utc).date() - timer.start_date.date()).days
+        elapsed_days = (simulated_now.date() - timer.start_date.date()).days
 
         # Update max_time if the new elapsed time is greater
         if timer.max_time is None:
