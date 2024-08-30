@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, request, make_response, abort
 from models.post import Post, PostComment
 from models import storage
 
-comments_bp = Blueprint('posts', __name__)
+comments_bp = Blueprint('postComments', __name__)
 
 
 # Retrieves all comments for a specific post
