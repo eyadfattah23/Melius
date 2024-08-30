@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request, make_response, abort 
-from datetime import datetime
+from datetime import datetime, timezone
 from models.timer_history import  TimerHistory
 from models import storage
 
@@ -7,32 +7,40 @@ timer_bp = Blueprint('timer', __name__)
 
 
 # Starts the timer for the user
-@timer_bp.route('/api/timer/start', methods=['POST'])
-def start_timer():
+@timer_bp.route('/api/timer/reset_or_create', methods=['POST'])
+def reset_or_create_timer():
     data = request.get_json()
     user_id = data.get('user_id')
 
     if not user_id:
         abort(400, description="User ID is required")
 
+    # Check if a timer already exists for the user
     timer = storage.getSession().query(TimerHistory).filter_by(user_id=user_id).first()
 
     if timer:
-        # Reset the start date if the timer is already running
-        setattr(timer, 'start_date', datetime.now(datetime.UTC))
-        setattr(timer, 'reset_date', datetime.now(datetime.UTC))
-        setattr(timer, 'no_tries', timer.no_tries + 1)
-        storage.save()
+        # Calculate the elapsed time since the start date
+        elapsed_time = (datetime.now(timezone.utc) - timer.start_date).total_seconds()
 
+        # Update max_time if the new elapsed time is greater
+        if elapsed_time > timer.max_time:
+            timer.max_time = elapsed_time
+
+        # Reset the timer's start and reset dates, increment the number of tries
+        timer.start_date = datetime.now(timezone.utc)
+        timer.reset_date = datetime.now(timezone.utc)
+        timer.no_tries += 1
     else:
         # Create a new timer entry for the user
-        timer = TimerHistory(user_id=user_id, start_date=datetime.now(datetime.UTC))
-        timer.save()
-        
+        timer = TimerHistory(user_id=user_id)
+    
+    # Save the changes to the database
+    storage.save()
 
     return jsonify({
-        "message": "Timer started",
-        "start_date": timer.start_date.isoformat() + 'Z'
+        "message": "Timer reset or created",
+        "start_date": timer.start_date.isoformat() + 'Z',
+        "max_time": timer.max_time
     })
 
 
