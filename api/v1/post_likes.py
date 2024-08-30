@@ -20,21 +20,32 @@ def get_post_likes_count(post_id):
 
 
 # like a post clicked
-@likes_bp.route('/posts/<post_id>/likes/<user_id>', methods=['POST'])
-def like_post(post_id, user_id):
+@likes_bp.route('/posts/<post_id>/likes', methods=['POST'])
+def like_post(post_id):
+    # Check if the request has JSON data
+    if not request.get_json():
+        abort(400, description="Not a JSON")
 
-  
-  if not request.get_json():
-    abort(400, description="Not a JSON")
+    # Get the user_id from the request JSON data
+    data = request.get_json()
+    user_id = data.get('user_id')
 
+    # If user_id is not provided, return an error
+    if not user_id:
+        abort(400, description="Missing user_id in request")
 
-  like =  get_user_like_for_post(post_id, user_id)
+    # Retrieve the like by the user for the specified post
+    like = get_user_like_for_post(post_id, user_id)
 
-  if not like:
-    create_post_like(post_id, user_id)
+    if not like:
+        # Create a new like if it doesn't exist
+        create_post_like(post_id, user_id)
+    else:
+        # Delete the like if it already exists
+        delete_post_like(post_id, user_id)
 
-  else:
-    delete_post_like(post_id, user_id) 
+    return make_response(jsonify({"message": "Like status updated"}), 200)
+
 
 
 # Retrieves a user's like for a specific post 
