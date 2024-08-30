@@ -157,7 +157,7 @@ class DBStorage:
     
         if cls:
             # Count objects of a specific class with optional filters
-            query = session.query(func.count(cls))
+            query = session.query(func.count(cls.id))
             
             # Apply filters if any
             for attr, value in filters.items():
@@ -168,7 +168,7 @@ class DBStorage:
             # Count objects of all classes with optional filters
             total_count = 0
             for clas in classes.values():
-                query = session.query(func.count(clas))
+                query = session.query(func.count(clas.id))
                 total_count += query.scalar()
             return total_count
     
