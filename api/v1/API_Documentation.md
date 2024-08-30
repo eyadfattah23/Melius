@@ -163,25 +163,14 @@ curl -X GET http://localhost:5050/api/v1/posts/<post_id>/likes
 curl -X GET http://localhost:5050/api/v1/posts/<post_id>/likes/count
 ```
 
-### Add a like on a Post
+### Handles liking or unliking a post by a specific user
 
-**Endpoint:** `POST /api/v1/posts/<post_id>/likes`
+**Endpoint:** `POST /posts/<post_id>/likes`
 
 ```bash
 curl -X POST http://localhost:5050/api/v1/posts/<post_id>/likes \
 -H "Content-Type: application/json" \
--d '{
-"user_id": "<user_id>",
-"post_id": "<post_id>"
-}'
-```
-
-### Delete a Like
-
-**Endpoint:** `DELETE /api/v1/posts/<post_id>/comments/<like_id>`
-
-```bash
-curl -X DELETE http://localhost:5050/api/v1/posts/<post_id>/likes/<like_id>
+-d '{"user_id": "<user_id>"}'
 ```
 
 ## Articles
