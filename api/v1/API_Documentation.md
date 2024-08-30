@@ -109,12 +109,7 @@ curl -X DELETE http://127.0.0.1:5050/api/v1/posts/<post_id>
 **Endpoint:** `GET /api/v1/posts/<post_id>/comments`
 
 ```bash
-curl -X POST http://127.0.0.1:5050/api/v1/posts/<post_id>/comments \
--H "Content-Type: application/json" \
--d '{
-  "user_id": "<user_id>",
-  "text": "This is a comment on the post.",
-}'
+curl -X GET http://localhost:5050/api/v1/posts/<post_id>/comments
 ```
 
 ### Create a Comment on a Post
@@ -148,6 +143,37 @@ curl -X PUT http://127.0.0.1:5050/api/v1/posts/<post_id>/comments/<comment_id> \
 
 ```bash
 curl -X DELETE http://127.0.0.1:5050/api/v1/posts/<post_id>/comments/<comment_id>
+```
+
+## Posts Likes
+
+### Retrieve Likes for a Post
+
+**Endpoint:** `GET /api/v1/posts/<post_id>/likes`
+
+```bash
+curl -X GET http://localhost:5050/api/v1/posts/<post_id>/likes
+```
+
+### Add a like on a Post
+
+**Endpoint:** `POST /api/v1/posts/<post_id>/likes`
+
+```bash
+curl -X POST http://localhost:5050/api/v1/posts/<post_id>/likes \
+-H "Content-Type: application/json" \
+-d '{
+"user_id": "<user_id>",
+"post_id": "<post_id>"
+}'
+```
+
+### Delete a Like
+
+**Endpoint:** `DELETE /api/v1/posts/<post_id>/comments/<like_id>`
+
+```bash
+curl -X DELETE http://localhost:5050/api/v1/posts/<post_id>/likes/<like_id>
 ```
 
 ## Articles
@@ -198,16 +224,5 @@ curl -X PUT  http://localhost:5050/api/v1/articles/<article_id> \
 **Endpoint:** `DELETE /api/v1//articles/<article_id>`
 
 ```bash
-curl -X DELETE  http://localhost:5050/api/v1/articles/6049a12b-5825-459a-bf50-a598799477a7
+curl -X DELETE  http://localhost:5050/api/v1/articles/<article_id>
 ```
-
-curl -X GET http://localhost:5050/api/v1/posts/<post_id>/likes
-
-curl -X POST http://localhost:5050/api/v1/posts/202122/likes \
--H "Content-Type: application/json" \
--d '{
-"user_id": "2b3c4d5e6f7g",
-"post_id": "202122"
-}'
-
-curl -X DELETE http://localhost:5050/api/v1/posts/<post_id>/likes/<like_id>

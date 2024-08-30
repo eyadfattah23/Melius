@@ -12,6 +12,30 @@ def get_post_likes(post_id):
   return jsonify([like.to_dict() for like in post.likes])
 
 
+# Retrieves a post likes count 
+@likes_bp.route('/posts/<post_id>/likes/count', methods=['GET'])
+def get_post_likes_count(post_id):
+  count =  storage.count(Post, post_id)
+  return jsonify({"count":  count})
+
+
+# Retrieves a user's like for a specific post
+@likes_bp.route('/posts/<post_id>/likes/<user_id>', methods=['GET'])
+def get_user_like_for_post(post_id, user_id):
+    post = storage.get(Post, post_id)
+
+    if not post:
+        abort(404)
+
+    # Query for the like based on post_id and user_id
+    like = storage.__session.query(PostLike).filter_by(post_id=post_id, user_id=user_id).first()
+
+    if not like:
+        abort(404, description="Like not found")
+
+    return jsonify(like.to_dict())
+
+
 # Creates a new like
 @likes_bp.route('/posts/<post_id>/likes', methods=['POST'])
 def create_post_like(post_id):
