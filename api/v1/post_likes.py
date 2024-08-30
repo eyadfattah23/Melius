@@ -28,7 +28,7 @@ def get_user_like_for_post(post_id, user_id):
         abort(404)
 
     # Query for the like based on post_id and user_id
-    like = storage.__session.query(PostLike).filter_by(post_id=post_id, user_id=user_id).first()
+    like = storage.getSession().query(PostLike).filter_by(post_id=post_id, user_id=user_id).first()
 
     if not like:
         abort(404, description="Like not found")
