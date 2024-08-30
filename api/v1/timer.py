@@ -21,12 +21,9 @@ def reset_or_create_timer():
     if timer:
         if timer.start_date.tzinfo is None:
             timer.start_date = timer.start_date.replace(tzinfo=timezone.utc)
-
-        # Simulate the current date as a few days in the future (e.g., 5 days from now)
-        simulated_now = datetime.now(timezone.utc) + timedelta(days=5)
+            
         # Calculate the elapsed time in days
-        #elapsed_days = (datetime.now(timezone.utc).date() - timer.start_date.date()).days
-        elapsed_days = (simulated_now.date() - timer.start_date.date()).days
+        elapsed_days = (datetime.now(timezone.utc).date() - timer.start_date.date()).days 
 
         # Update max_time if the new elapsed time is greater
         if timer.max_time is None:
@@ -64,9 +61,7 @@ def timer_status(user_id):
         abort(404, description="Timer not found or not started")
 
     return jsonify({
-        "start_date": timer.start_date.isoformat() + 'Z',
-        "no_tries": timer.no_tries,
-        "max_time": str(timer.max_time)
+        "data": timer.to_dict()
     })
 
 # Retrieves the top 10 users with the highest max_time
