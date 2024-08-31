@@ -119,7 +119,7 @@ class TestArticle(unittest.TestCase):
         self.assertIsInstance(self.article_json['title'], str)
         self.assertIsInstance(self.article_json['content'], str)
         self.assertIsInstance(self.test_article.id, str)
-        self.assertIsInstance(self.test_article.img, bytes)
+        self.assertIsInstance(self.test_article.img, str)
 
         self.assertTrue(hasattr(self.test_article, "title"))
         self.assertTrue(self.test_article.content == "content")
@@ -132,9 +132,6 @@ class TestArticle(unittest.TestCase):
 
         self.article_json = self.test_article.to_dict()
 
-        with open('resources/default_article.png', 'rb') as file:
-            img = file.read()
-
         self.assertDictEqual(self.article_json, {
             '__class__': 'Article',
             'title': 'last_name',
@@ -143,7 +140,7 @@ class TestArticle(unittest.TestCase):
             'created_at': self.test_article.created_at.isoformat()
             .replace('+00:00', ''),
             'id': self.test_article.id,
-            'img': img,
+            'img': 'resources/default_article.png',
             'author': 'Mohsen',
             'content': 'content'
         })
