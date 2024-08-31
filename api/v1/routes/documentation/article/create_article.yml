@@ -7,19 +7,25 @@ tags:
   - Article
 summary: Create a new article
 description: Add a new article to the system.
-requestBody:
-  required: true
-  content:
-    application/json:
-      schema:
-        type: object
-        properties:
-          title:
-            type: string
-            example: "New Article"
-          content:
-            type: string
-            example: "This is the content of the new article."
+parameters:
+  - in: body
+    name: body
+    description: Article object that needs to be added to the system
+    required: true
+    schema:
+      type: object
+      properties:
+        title:
+          type: string
+          example: "New Article"
+        content:
+          type: string
+          example: "This is the content of the new article."
+        author:
+          type: string
+          example: "John Doe"
+          description: The name of the author of the article
+          required: false
 responses:
   201:
     description: Article created successfully
@@ -41,6 +47,7 @@ responses:
         message:
           type: string
           example: "Internal server error"
+
 definitions:
   Article:
     type: object
@@ -54,6 +61,10 @@ definitions:
       content:
         type: string
         example: "This is the content of the new article."
+      author:
+        type: string
+        example: "John Doe"
+        description: The name of the author of the article
       created_at:
         type: string
         example: "2024-08-30T12:34:56.789Z"
