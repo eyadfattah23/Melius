@@ -1,13 +1,13 @@
-import Badge from "../assets/icons/badge"
+import BadgeFrame from "../assets/icons/badge_frame"
 import userImage from "../assets/images/user.png"
 import "../assets/styles/avatar.css"
-function Avatar (){
+function Avatar ({level}){
     return <>
    {
       <div className="avatar_main">
         <img src={userImage} alt="" />
         <div className="avatar_badge">
-        <Badge level={"3"}/>
+        <BadgeFrame level={level}/>
         </div>
      </div>
    }
