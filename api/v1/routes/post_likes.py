@@ -7,6 +7,7 @@ likes_bp = Blueprint('postLikes', __name__)
 
 
 # Retrieves all likes for a specific post
+@swag_from('documentation/post/likes/get_post_likes.yml')
 @likes_bp.route('/posts/<post_id>/likes', methods=['GET'])
 def get_post_likes(post_id):
     post =  storage.get(Post, post_id)
@@ -14,13 +15,15 @@ def get_post_likes(post_id):
 
 
 # Retrieves a post likes count 
+@swag_from('documentation/post/likes/get_post_likes_count.yml')
 @likes_bp.route('/posts/<post_id>/likes/count', methods=['GET'])
 def get_post_likes_count(post_id):
-    count =  storage.count(PostLike, id=post_id)
+    count =  storage.count(PostLike, post_id=post_id)
     return jsonify({"count":  count})
 
 
 # Handles liking or unliking a post by a specific user
+@swag_from('documentation/post/likes/like_post.yml')
 @likes_bp.route('/posts/<post_id>/likes', methods=['POST'])
 def like_post(post_id):
     # Check if the request has JSON data

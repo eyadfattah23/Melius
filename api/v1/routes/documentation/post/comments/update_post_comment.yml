@@ -1,0 +1,53 @@
+tags:
+  - Post Comments
+summary: Update a post comment
+description: Update a post comment by its ID.
+parameters:
+  - name: comment_id
+    in: path
+    required: true
+    type: string
+    description: The ID of the comment to update.
+  - name: body
+    in: body
+    required: true
+    schema:
+      type: object
+      properties:
+        text:
+          type: string
+          example: "Updated comment text"
+
+responses:
+  200:
+    description: Comment successfully updated.
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            comment:
+              type: object
+              properties:
+                id:
+                  type: string
+                  example: "123"
+                text:
+                  type: string
+                  example: "Updated comment text"
+                user_id:
+                  type: string
+                  example: "123"
+                post_id:
+                  type: string
+                  example: "123"
+                created_at:
+                  type: string
+                  example: "2024-08-30T12:34:56.789Z"
+                updated_at:
+                  type: string
+                  example: "2024-08-30T12:34:56.789Z"
+  400:
+    description: Bad Request (e.g., invalid JSON or missing required fields).
+  404:
+    description: Comment not found.

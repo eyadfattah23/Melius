@@ -1,0 +1,24 @@
+tags:
+  - Article Comments
+summary: get article comments
+description: Get all comments for an article
+parameters:
+  - name: article_id
+    in: path
+    required: true
+    schema:
+      type: string
+    description: The ID of the article to get comments for
+responses:
+  200:
+    description: Article comments retrieved
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            comments:
+              type: array
+              items:
+                type: object
+                properties:
