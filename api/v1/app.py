@@ -28,18 +28,10 @@ def create_flask_app():
     app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
     cors = CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
     app.config['SWAGGER'] = {
-        'title': 'Melius API',
-        'uiversion': 3,
+        'title': 'Melius API', 
         'description': 'API for Melius a web app that will help you beat porn addiction in complete secrecy',
-        'contact': {
-            'responsibleOrganization': "ME",
-            'responsibleDeveloper': "Me",
-            'email': "me@me.com",
-            'url': "http://www.me.com",
-            'name': "Me"
-        },
         'schemes': ['http', 'https'],
-        'version': '0.0.1',
+        'version': '1.0',
         'termsOfService': 'http://www.me.com/terms',
         'specs_route': '/apidocs/',
         'tags': [
