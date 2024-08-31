@@ -1,52 +1,75 @@
+info:
+  title: Swagger Petstore - OpenAPI 3.0
+  description: |-
+    This is a sample server Petstore server.
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.11
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+  - url: https://petstore3.swagger.io/api/v3
+
 tags:
-  - user
-summary: Create a new user
-description: Create a new user in the system.
-requestBody:
-  content:
-    application/json:
-      schema:
-        type: object
-        properties:
-          email:
-            type: string
-            example: "user@example.com"
-          password:
-            type: string
-            example: "Strong@password123"
-          username:
-            type: string
-            example: "john_doe"
-responses:
-  201:
-    description: User successfully created.
-    content:
-      application/json:
-        schema:
-          type: object
-          properties:
-            id:
-              type: string
-              example: "1"
-            email:
-              type: string
-              example: "user@example.com"
-            username:
-              type: string
-              example: "john_doe"
-            created_at:
-              type: string
-              example: "2024-08-30T12:34:56.789Z"
-            updated_at:
-              type: string
-              example: "2024-08-30T12:34:56.789Z"
-  400:
-    description: Bad Request (e.g., missing email or password).
-    content:
-      application/json:
-        schema:
-          type: object
-          properties:
-            message:
-              type: string
-              example: "Not a JSON or missing email/password"
+  - name: user
+    description: Operations about user
+paths:
+  /users:
+    post:
+      tags:
+        - user
+      summary: Create a new user
+      description: Create a new user in the system.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: "user@example.com"
+                password:
+                  type: string
+                  example: "Strong@password123"
+                username:
+                  type: string
+                  example: "john_doe"
+      responses:
+        201:
+          description: User successfully created.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: "1"
+                  email:
+                    type: string
+                    example: "user@example.com"
+                  username:
+                    type: string
+                    example: "john_doe"
+                  created_at:
+                    type: string
+                    example: "2024-08-30T12:34:56.789Z"
+                  updated_at:
+                    type: string
+                    example: "2024-08-30T12:34:56.789Z"
+        400:
+          description: Bad Request (e.g., missing email or password).
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Not a JSON or missing email/password"
