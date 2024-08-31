@@ -37,6 +37,9 @@ def create_article_comment(article_id):
 def update_article_comment(comment_id):
     articleComment =  storage.get(ArticleComment, comment_id)
 
+    if not articleComment:
+        abort(404, description="Comment not found")
+
     if not request.get_json():
         abort(400, description="Not a JSON")
 

@@ -1,0 +1,58 @@
+tags:
+  - Article Comments
+summary: Update an article comment
+description: Update an article comment by its ID.
+parameters:
+  - name: comment_id
+    in: path
+    required: true
+    type: string
+    description: The ID of the comment to update.
+  - name: body
+    in: body
+    required: true
+    schema:
+      type: object
+      properties:
+        text:
+          type: string
+          example: "Updated comment text"
+responses:
+  200:
+    description: Comment successfully updated.
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            comment:
+              type: object
+              properties:
+                text:
+                  type: string
+                  example: "Updated comment text"
+                id:
+                  type: string
+                  example: "123"
+                user_id:
+                  type: string
+                  example: "123"
+                article_id:
+                  type: string
+                  example: "123"
+                created_at:
+                  type: string
+                  example: "2024-08-30T12:34:56.789Z"
+                updated_at:
+                  type: string
+                  example: "2024-08-30T12:34:56.789Z"
+  404:
+    description: Comment not found.
+  400:
+    description: Not a JSON
+    schema:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Not a JSON"
