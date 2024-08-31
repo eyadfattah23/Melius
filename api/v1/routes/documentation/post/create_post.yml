@@ -20,9 +20,11 @@ requestBody:
             example: "1"
 responses:
   201:
-    aplication/json:
-      schema:
-        $ref: "#/components/schemas/Post"
+    description: Post created successfully.
+    content:
+      application/json:
+        schema:
+          $ref: "#/components/schemas/Post"
   400:
     description: Bad Request (e.g., invalid JSON or trying to create a post with an invalid user ID).
     content:
