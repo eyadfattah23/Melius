@@ -21,3 +21,5 @@ sudo ufw allow https
 sudo ufw allow http
 
 echo 'y'| sudo ufw enable
+
+pip3 install -r requirements.txt
