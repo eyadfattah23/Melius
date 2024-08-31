@@ -1,24 +1,5 @@
 summary: Create a new user
 description: Create a new user in the system.
-parameters:
-  - name: email
-    in: body
-    required: true
-    schema:
-      type: string
-    description: The email of the user to create.
-  - name: password
-    in: body
-    required: true
-    schema:
-      type: string
-    description: The password of the user to create.
-  - name: username
-    in: body
-    required: true
-    schema:
-      type: string
-    description: The username of the user to create.
 requestBody:
   required: true
   content:
@@ -28,19 +9,17 @@ requestBody:
         required:
           - email
           - password
+          - username
         properties:
           email:
             type: string
             example: "user@example.com"
           password:
             type: string
-            example: "strongpassword"
-          first_name:
+            example: "Strong@password123"
+          username:
             type: string
-            example: "John"
-          last_name:
-            type: string
-            example: "Doe"
+            example: "john_doe"
 responses:
   201:
     description: User successfully created.
@@ -55,12 +34,9 @@ responses:
             email:
               type: string
               example: "user@example.com"
-            first_name:
+            username:
               type: string
-              example: "John"
-            last_name:
-              type: string
-              example: "Doe"
+              example: "john_doe"
             created_at:
               type: string
               example: "2024-08-30T12:34:56.789Z"
