@@ -26,6 +26,10 @@ def create_user():
     if 'password' not in request.get_json():
         abort(400, description="Missing password")
 
+    val, error = User.password_check(request.get_json()['password']) 
+    if not val:
+        abort(400, description=error)
+
     data = request.get_json()
     instance = User(**data)
     instance.save()
