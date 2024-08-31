@@ -1,15 +1,14 @@
+  /user:
+    post:
+      tags:
+        - user
 summary: Create a new user
 description: Create a new user in the system.
 requestBody:
-  required: true
   content:
     application/json:
       schema:
         type: object
-        required:
-          - email
-          - password
-          - username
         properties:
           email:
             type: string
