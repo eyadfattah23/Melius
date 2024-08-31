@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """This module defines a class User"""
 from models.base_model import BaseModel, Base
-from models import storage
 from sqlalchemy import Column, String, Text
 from sqlalchemy.orm import relationship
 from hashlib import md5
@@ -76,6 +75,7 @@ class User(BaseModel, Base):
 
     def check_email_taken(self, email):
         """Check if email is already taken"""
+        from models import storage  # Import inside the method to avoid circular import
         return storage.getSession().query(User).filter_by(email=email).first()
 
     def verify_password(self, password):
