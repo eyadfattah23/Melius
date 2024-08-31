@@ -21,9 +21,28 @@ def create_flask_app():
             'url': "http://www.me.com",
             'name': "Me"
         },
+        'schemes': ['http', 'https'],
         'version': '0.0.1',
         'termsOfService': 'http://www.me.com/terms',
-        'specs_route': '/apidocs/'
+        'specs_route': '/apidocs/',
+        'tags': [
+            {
+                'name': 'user',
+                'description': 'Operations about user'
+            },
+            {
+                'name': 'post',
+                'description': 'Operations about post'
+            },
+            {
+                'name': 'article',
+                'description': 'Operations about article'
+            },
+            {
+                'name': 'comment',
+                'description': 'Operations about comment'
+            },
+    ],
     }
 
     Swagger(app)
