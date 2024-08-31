@@ -56,6 +56,11 @@ class User(BaseModel, Base):
             with open('resources/default_male_img.jpg', 'rb') as file:
                 kwargs['img'] = 'resources/default_male_img.jpg'
 
+        if 'email' in kwargs:
+            email = kwargs.get('email')
+            if self.check_email_taken(email):
+                raise ValueError("Email already taken")
+
         if 'password' in kwargs:
             password = kwargs.get('password')
             val, error = self.password_check(password)
@@ -68,6 +73,11 @@ class User(BaseModel, Base):
 
         super().__init__(*args, **kwargs)
 
+    def check_email_taken(self, email):
+        """Check if email is already taken"""
+        from models import storage  # Import inside the method to avoid circular import
+        return storage.getSession().query(User).filter_by(email=email).first()
+
     def verify_password(self, password):
         """Verify if the provided password matches the stored password hash"""
         return bcrypt.verify(password, self.password_hash)
@@ -79,7 +89,8 @@ class User(BaseModel, Base):
         else:
             raise ValueError("Password does not meet the required criteria.")
         
-    def password_check(self,passwd):
+    @staticmethod
+    def password_check(passwd):
 
         SpecialSym = ['$', '@', '#', '%']
         val = True
@@ -108,3 +119,13 @@ class User(BaseModel, Base):
             error = 'Password should have at least one of the symbols $%@#'
 
         return [val, error]
+
+    @staticmethod
+    def authenticate(email, password):
+        """Authenticate user with email and password"""
+        from models import storage  # Import inside the method to avoid circular import
+        user = storage.getSession().query(User).filter_by(email=email).first()
+        if user and user.verify_password(password):
+            return user
+        else:
+            return None

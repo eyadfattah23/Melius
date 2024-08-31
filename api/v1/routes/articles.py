@@ -5,12 +5,14 @@ from flasgger.utils import swag_from
 
 articles_bp = Blueprint('articles', __name__)
 
+@swag_from('documentation/article/get_articles.yml')
 @articles_bp.route('/articles', methods=['GET'])
 def get_articles():
     articles = storage.all(Article).values()
     return jsonify([article.to_dict() for article in articles])
 
 
+@swag_from('documentation/article/get_article.yml')
 @articles_bp.route('/articles/<article_id>', methods=['GET'])   
 def get_article(article_id):
     article = storage.get(Article, article_id)
@@ -19,6 +21,7 @@ def get_article(article_id):
     return jsonify(article.to_dict())
 
 
+@swag_from('documentation/article/create_article.yml')
 @articles_bp.route('/articles', methods=['POST'])
 def create_article():
     if not request.get_json():
@@ -36,6 +39,7 @@ def create_article():
     return make_response(jsonify(instance.to_dict()), 201)
 
 
+@swag_from('documentation/article/update_article.yml')
 @articles_bp.route('/articles/<article_id>', methods=['PUT'])
 def update_article(article_id):
     article = storage.get(Article, article_id)
@@ -56,6 +60,7 @@ def update_article(article_id):
     return make_response(jsonify(article.to_dict()), 200)
 
 
+@swag_from('documentation/article/delete_article.yml')
 @articles_bp.route('/articles/<article_id>', methods=['DELETE'])
 def delete_article(article_id):
     article = storage.get(Article, article_id)

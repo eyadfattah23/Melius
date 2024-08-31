@@ -1,31 +1,31 @@
 swagger: "2.0"
 info:
-  title: User Management API
+  title: User Authentication API
   version: "1.0"
 
 tags:
   - user
-summary: Update a user's information
-description: Update the details of a specific user.
+summary: Authenticate a user
+description: Authenticate a user with their email and password.
 parameters:
   - name: body
     in: body
     required: true
     schema:
       type: object
+      required:
+        - email
+        - password
       properties:
-        first_name:
+        email:
           type: string
-          example: "John"
-        last_name:
-          type: string
-          example: "Doe"
+          example: "user@example.com"
         password:
           type: string
-          example: "newpassword"
+          example: "Strong@password123"
 responses:
   200:
-    description: User successfully updated.
+    description: Successful authentication
     schema:
       type: object
       properties:
@@ -35,12 +35,9 @@ responses:
         email:
           type: string
           example: "user@example.com"
-        first_name:
+        username:
           type: string
-          example: "John"
-        last_name:
-          type: string
-          example: "Doe"
+          example: "john_doe"
         created_at:
           type: string
           example: "2024-08-30T12:34:56.789Z"
@@ -48,18 +45,18 @@ responses:
           type: string
           example: "2024-08-30T12:34:56.789Z"
   400:
-    description: Bad Request (e.g., invalid JSON or trying to update immutable fields).
+    description: Bad Request (e.g., missing email or password)
     schema:
       type: object
       properties:
         message:
           type: string
-          example: "Not a JSON or attempting to update immutable fields"
-  404:
-    description: User not found.
+          example: "Not a JSON or missing email/password"
+  401:
+    description: Unauthorized (Invalid credentials)
     schema:
       type: object
       properties:
         message:
           type: string
-          example: "User not found"
+          example: "Invalid credentials"
