@@ -1,0 +1,22 @@
+tags:
+  - Article Likes
+summary: Add/remove like for an article
+description: Add or remove a like for an article.
+parameters:
+  - name: article_id
+    in: path
+    required: true
+    schema:
+      type: string
+    description: The ID of the article to like.
+  - name: user_id
+    in: body
+    required: true
+    schema:
+      type: string
+    description: The ID of the user who liked the article.
+responses:
+  201:
+    description: article liked
+  200:
+    description: Like removed
