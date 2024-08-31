@@ -1,5 +1,24 @@
 summary: Create a new user
 description: Create a new user in the system.
+parameters:
+  - name: email
+    in: body
+    required: true
+    schema:
+      type: string
+    description: The email of the user to create.
+  - name: password
+    in: body
+    required: true
+    schema:
+      type: string
+    description: The password of the user to create.
+  - name: username
+    in: body
+    required: true
+    schema:
+      type: string
+    description: The username of the user to create.
 requestBody:
   required: true
   content:
