@@ -1,12 +1,12 @@
 from flask import Blueprint
-from .users import users_bp
-from .posts import posts_bp
-from .articles import articles_bp
-from .article_comments import article_comments_bp
-from .article_likes import article_likes_bp
-from .post_comments import comments_bp
-from .post_likes import likes_bp
-from .timer import timer_bp
+from routes.users import users_bp
+from routes.posts import posts_bp
+from routes.articles import articles_bp
+from routes.article_comments import article_comments_bp
+from routes.article_likes import article_likes_bp
+from routes.post_comments import comments_bp
+from routes.post_likes import likes_bp
+from routes.timer import timer_bp
 
 def create_app(app):
     # Register Blueprints
