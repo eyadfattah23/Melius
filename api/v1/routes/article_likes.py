@@ -7,6 +7,7 @@ from flasgger.utils import swag_from
 article_likes_bp = Blueprint('articleLikes', __name__)
 
 # Retrieves all likes for a specific article
+@swag_from('documentation/article/likes/get_article_likes.yml')
 @article_likes_bp.route('/article/<article_id>/likes', methods=['GET'])
 def get_article_likes(article_id):
     article =  storage.get(Article, article_id)
@@ -14,6 +15,7 @@ def get_article_likes(article_id):
 
 
 # Retrieves a article likes count 
+@swag_from('documentation/article/likes/get_article_likes_count.yml')
 @article_likes_bp.route('/article/<article_id>/likes/count', methods=['GET'])
 def get_article_likes_count(article_id):
     count =  storage.count(ArticleLike, id=article_id)
@@ -21,6 +23,7 @@ def get_article_likes_count(article_id):
 
 
 # Handles liking or unliking a article by a specific user
+@swag_from('documentation/article/likes/like_article.yml')
 @article_likes_bp.route('/article/<article_id>/likes', methods=['POST'])
 def like_article(article_id):
     # Check if the request has JSON data
