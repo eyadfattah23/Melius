@@ -21,13 +21,12 @@ def create_flask_app():
         "email": "me@me.com",
         "url": "www.me.com",
         "name": "Me"
-    },
-    "termsOfService": "http://me.com/terms",
+    }, 
     "version": "0.0.1"
     },
     'basePath': '/api/v1',
     'schemes': ['http', 'https'],
-    'host': '127.0.0.1:5000',
+    'host': '127.0.0.1:5050',
     'consumes': ['application/json'], 
     'tags': [
         {
