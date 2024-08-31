@@ -1,7 +1,5 @@
-  /user:
-    post:
-      tags:
-        - user
+tags:
+  - user
 summary: Create a new user
 description: Create a new user in the system.
 requestBody:
