@@ -67,6 +67,9 @@ definitions:
       content:
         type: string
         example: "Updated content of the article."
+      author:
+        type: string
+        example: "John Doe"
       created_at:
         type: string
         example: "2024-08-30T12:34:56.789Z"

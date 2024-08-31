@@ -99,9 +99,9 @@ class User(BaseModel, Base):
             val = False
             error = 'length should be at least 8'
 
-        if len(passwd) > 16:
+        if len(passwd) > 30:
             val = False
-            error = 'length should be not be greater than 16'
+            error = 'length should be not be greater than 30'
 
         if not any(char.isdigit() for char in passwd):
             val = False
