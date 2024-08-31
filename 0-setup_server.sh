@@ -32,7 +32,7 @@ sudo apt -y install python3-venv
 
 python -m venv new-venv
 
-# source venv/bin/activate
+# source new-venv/bin/activate
 # pip3 install -r requirements.txt
 
 pip3 install gunicorn
