@@ -1,0 +1,55 @@
+swagger: "2.0"
+info:
+  title: Articles API
+  version: "1.0"
+
+tags:
+  - Article
+summary: Get an article by ID
+description: Retrieve details of a specific article by its ID.
+parameters:
+  - name: article_id
+    in: path
+    required: true
+    type: string
+    description: The ID of the article to retrieve.
+responses:
+  200:
+    description: Article found
+    schema:
+      $ref: "#/definitions/Article"
+  404:
+    description: Article not found
+    schema:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Article not found"
+  500:
+    description: Internal server error
+    schema:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Internal server error"
+definitions:
+  Article:
+    type: object
+    properties:
+      id:
+        type: string
+        example: "123"
+      title:
+        type: string
+        example: "Sample Article"
+      content:
+        type: string
+        example: "This is the content of the article."
+      created_at:
+        type: string
+        example: "2024-08-30T12:34:56.789Z"
+      updated_at:
+        type: string
+        example: "2024-08-30T12:34:56.789Z"

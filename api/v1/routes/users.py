@@ -77,7 +77,7 @@ def update_user(user_id):
     user = storage.get(User, user_id)
 
     if not user:
-        abort(404)
+        abort(404, description="User not found")
 
     if not request.get_json():
         abort(400, description="Not a JSON")
