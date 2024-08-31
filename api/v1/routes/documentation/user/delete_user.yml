@@ -1,6 +1,6 @@
 paths:
   /users:
-    post:
+    delete:
       tags:
         - user
       summary: Delete a user
