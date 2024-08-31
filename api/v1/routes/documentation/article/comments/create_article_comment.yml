@@ -17,14 +17,14 @@ parameters:
       properties:
         text:
           type: string
-          example: "Updated comment text"
+          example: "create comment text"
         user_id:
           type: string
           example: "169a0482-55b9-4d9a-b5c2-19a94ba65ef7"
 
 responses:
-  200:
-    description: Comment successfully updated.
+  201:
+    description: Comment successfully created.
     content:
       application/json:
         schema:
@@ -35,7 +35,7 @@ responses:
               properties:
                 text:
                   type: string
-                  example: "Updated comment text"
+                  example: "create comment text"
                 id:
                   type: string
                   example: "123"
