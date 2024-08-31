@@ -9,7 +9,41 @@ def create_flask_app():
     app = Flask(__name__)
     app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
     app.config['SWAGGER'] = {
-    'title': 'Melius API'
+    'title': 'Melius API',
+    'uiversion': 3,
+    'specs_route': '/api/v1/specs/',
+    'openapi': '3.0.2',
+    'version': '1.0.0',
+    'description': 'Melius API',
+    'info': {
+        'title': 'Melius API',
+        'description': 'Melius API',
+        'version': '1.0.0',
+    },
+    'basePath': '/api/v1',
+    'schemes': ['https', 'http'],
+    'host': '127.0.0.1:5000',
+    'consumes': ['application/json'],
+    'produces': ['application/json'],
+    'tags': [
+        {
+            'name': 'user',
+            'description': 'Operations about user'
+        },
+        {
+            'name': 'post',
+            'description': 'Operations about post'
+        },
+        {
+            'name': 'article',
+            'description': 'Operations about article'
+        },
+        {
+            'name': 'comment',
+            'description': 'Operations about comment'
+        },
+    ],
+        
     }
 
     Swagger(app)
