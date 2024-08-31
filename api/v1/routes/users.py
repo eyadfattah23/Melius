@@ -24,16 +24,37 @@ def create_user():
     if 'email' not in request.get_json():
         abort(400, description="Missing email")
     if 'password' not in request.get_json():
+        abort(400, description="Missing password") 
+
+    try:
+        data = request.get_json()
+        instance = User(**data)
+        instance.save()
+    except Exception as e:
+        abort(400, description=str(e))
+    return make_response(jsonify(instance.to_dict()), 201)
+
+# Authenticates user
+@swag_from('documentation/user/authenticate_user.yml')
+@users_bp.route('/users/authenticate', methods=['POST'])
+def authenticate_user():
+    if not request.get_json():
+        abort(400, description="Not a JSON")
+
+    if 'email' not in request.get_json():
+        abort(400, description="Missing email")
+
+    if 'password' not in request.get_json():
         abort(400, description="Missing password")
 
-    val, error = User.password_check(request.get_json()['password']) 
-    if not val:
-        abort(400, description=error)
-
     data = request.get_json()
-    instance = User(**data)
-    instance.save()
-    return make_response(jsonify(instance.to_dict()), 201)
+
+    user = User.authenticate(data['email'], data['password'])
+
+    if not user:
+        abort(401, description="Invalid credentials")
+
+    return make_response(jsonify(user.to_dict()), 200)
 
 # Retrieves specific user details
 @swag_from('documentation/user/get_user.yml')
@@ -56,7 +77,7 @@ def update_user(user_id):
     user = storage.get(User, user_id)
 
     if not user:
-        abort(404)
+        abort(404, description="User not found")
 
     if not request.get_json():
         abort(400, description="Not a JSON")

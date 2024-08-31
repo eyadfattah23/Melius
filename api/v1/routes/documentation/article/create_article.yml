@@ -1,0 +1,62 @@
+swagger: "2.0"
+info:
+  title: Articles API
+  version: "1.0"
+
+tags:
+  - Article
+summary: Create a new article
+description: Add a new article to the system.
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          title:
+            type: string
+            example: "New Article"
+          content:
+            type: string
+            example: "This is the content of the new article."
+responses:
+  201:
+    description: Article created successfully
+    schema:
+      $ref: "#/definitions/Article"
+  400:
+    description: Bad Request (e.g., missing fields)
+    schema:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Missing title or content"
+  500:
+    description: Internal server error
+    schema:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Internal server error"
+definitions:
+  Article:
+    type: object
+    properties:
+      id:
+        type: string
+        example: "123"
+      title:
+        type: string
+        example: "New Article"
+      content:
+        type: string
+        example: "This is the content of the new article."
+      created_at:
+        type: string
+        example: "2024-08-30T12:34:56.789Z"
+      updated_at:
+        type: string
+        example: "2024-08-30T12:34:56.789Z"
