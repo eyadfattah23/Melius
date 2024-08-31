@@ -26,6 +26,19 @@ responses:
   201:
     description: User successfully created.
     schema:
+      $ref: "#/components/schemas/User"
+  400:
+    description: Bad Request (e.g., missing email or password).
+    schema:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Not a JSON or missing email/password"
+
+components:
+  schemas:
+    User:
       type: object
       properties:
         id:
@@ -37,17 +50,12 @@ responses:
         username:
           type: string
           example: "john_doe"
+        password:
+          type: string
+          example: "Strong@password123"
         created_at:
           type: string
           example: "2024-08-30T12:34:56.789Z"
         updated_at:
           type: string
           example: "2024-08-30T12:34:56.789Z"
-  400:
-    description: Bad Request (e.g., missing email or password).
-    schema:
-      type: object
-      properties:
-        message:
-          type: string
-          example: "Not a JSON or missing email/password"
