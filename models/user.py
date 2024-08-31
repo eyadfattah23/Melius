@@ -79,7 +79,8 @@ class User(BaseModel, Base):
         else:
             raise ValueError("Password does not meet the required criteria.")
         
-    def password_check(self,passwd):
+    @staticmethod
+    def password_check(passwd):
 
         SpecialSym = ['$', '@', '#', '%']
         val = True
