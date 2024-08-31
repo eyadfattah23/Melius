@@ -79,7 +79,7 @@ class User(BaseModel, Base):
         else:
             raise ValueError("Password does not meet the required criteria.")
         
-    def password_check(passwd):
+    def password_check(self,passwd):
 
         SpecialSym = ['$', '@', '#', '%']
         val = True
