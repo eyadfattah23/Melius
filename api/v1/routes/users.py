@@ -30,9 +30,12 @@ def create_user():
     if not val:
         abort(400, description=error)
 
-    data = request.get_json()
-    instance = User(**data)
-    instance.save()
+    try:
+        data = request.get_json()
+        instance = User(**data)
+        instance.save()
+    except Exception as e:
+        abort(400, description=str(e))
     return make_response(jsonify(instance.to_dict()), 201)
 
 # Retrieves specific user details
