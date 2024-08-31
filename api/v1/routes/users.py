@@ -1,15 +1,18 @@
 from flask import Blueprint, jsonify, request, make_response, abort
 from models.user import User
 from models import storage
+from flasgger.utils import swag_from
 
 users_bp = Blueprint('users', __name__)
 
+@swag_from('documentation/user/get_users.yml')
 @users_bp.route('/users', methods=['GET'])
 def get_users():
     users = storage.all(User).values()
     return jsonify([user.to_dict() for user in users])
 
 # Creates a new user
+@swag_from('documentation/user/create_user.yml')
 @users_bp.route('/users', methods=['POST'])
 def create_user():
     """
@@ -29,6 +32,7 @@ def create_user():
     return make_response(jsonify(instance.to_dict()), 201)
 
 # Retrieves specific user details
+@swag_from('documentation/user/get_user.yml')
 @users_bp.route('/users/<user_id>', methods=['GET'])
 def get_user(user_id):
     """ Retrieves an user """
@@ -39,6 +43,7 @@ def get_user(user_id):
     return jsonify(user.to_dict())
 
 # Updates user info
+@swag_from('documentation/user/update_user.yml')
 @users_bp.route('/users/<user_id>', methods=['PUT'])
 def update_user(user_id):
     """
@@ -62,6 +67,7 @@ def update_user(user_id):
     return make_response(jsonify(user.to_dict()), 200)
 
 # Deletes a user and all associated data
+@swag_from('documentation/user/delete_user.yml')
 @users_bp.route('/users/<user_id>', methods=['DELETE'])
 def delete_user(user_id):
     """

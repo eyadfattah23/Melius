@@ -3,11 +3,18 @@ from models import storage
 from flask import Flask,make_response, jsonify
 from os import environ
 from api.v1 import create_app
-
+from flasgger import Swagger
 
 def create_flask_app():
     app = Flask(__name__)
     app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
+    app.config['SWAGGER'] = {
+    'title': 'Melius API',
+    'uiversion': 3
+    }
+
+    Swagger(app)
+
 
     create_app(app)  # Register routes
     @app.teardown_appcontext
