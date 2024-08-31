@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request, make_response, abort
 from models.post import Post, PostComment
 from models import storage
+from flasgger.utils import swag_from
 
 comments_bp = Blueprint('postComments', __name__)
 

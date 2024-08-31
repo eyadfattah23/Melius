@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request, make_response, abort
 from models.post import Post, PostLike
 from models import storage
+from flasgger.utils import swag_from
 
 likes_bp = Blueprint('postLikes', __name__)
 

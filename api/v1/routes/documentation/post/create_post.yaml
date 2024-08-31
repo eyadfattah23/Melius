@@ -1,0 +1,59 @@
+tags:
+  - post
+summary: Create a new post
+description: Create a new post in the system.
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          title:
+            type: string
+            example: "My Post"
+          text:
+            type: string
+            example: "This is my post content."
+          user_id:
+            type: string
+            example: "1"
+responses:
+  201:
+    aplication/json:
+      schema:
+        $ref: "#/components/schemas/Post"
+  400:
+    description: Bad Request (e.g., invalid JSON or trying to create a post with an invalid user ID).
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            message:
+              type: string
+              example: "Invalid user ID"
+
+components:
+  schemas:
+    Post:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "123-456-789"
+        title:
+          type: string
+          example: "My Post"
+        text:
+          type: string
+          example: "This is my post content."
+        user_id:
+          type: string
+          example: "1"
+        created_at:
+          type: string
+          example: "2024-08-30T12:34:56.789Z"
+        updated_at:
+          type: string
+          example: "2024-08-30T12:34:56.789Z"
