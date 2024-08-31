@@ -9,11 +9,16 @@ parameters:
     schema:
       type: string
     description: The ID of the article to like.
-  - name: user_id
+  - name: body
     in: body
     required: true
     schema:
-      type: string
+      type: object
+      properties:
+        user_id:
+          type: string
+          example: "169a0482-55b9-4d9a-b5c2-19a94ba65ef7"
+
     description: The ID of the user who liked the article.
 responses:
   201:
