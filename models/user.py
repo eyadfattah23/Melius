@@ -56,6 +56,11 @@ class User(BaseModel, Base):
             with open('resources/default_male_img.jpg', 'rb') as file:
                 kwargs['img'] = 'resources/default_male_img.jpg'
 
+        if 'email' in kwargs:
+            email = kwargs.get('email')
+            if self.check_email_taken(email):
+                raise ValueError("Email already taken")
+
         if 'password' in kwargs:
             password = kwargs.get('password')
             val, error = self.password_check(password)
@@ -67,6 +72,10 @@ class User(BaseModel, Base):
             raise ValueError("Username cannot be empty")
 
         super().__init__(*args, **kwargs)
+
+    def check_email_taken(self, email):
+        """Check if email is already taken"""
+        return User.query.filter_by(email=email).first()
 
     def verify_password(self, password):
         """Verify if the provided password matches the stored password hash"""
