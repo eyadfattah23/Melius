@@ -1,0 +1,57 @@
+.btn{
+    display: flex;
+    padding: 8px 12px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    border-radius: 8px;
+    font-size: var(--body_S);
+ width: 100%;   
+}
+.primary{
+    background-color: var(--primary);
+    color: var(--on-primary);
+}
+.outline_primary{
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    background-color: var(--on-primary);
+}
+.outline_primary:hover{
+    color: var(--primary_700);
+    border: 1px solid var(--primary_700);
+    background-color: var(--on-primary_700);
+}
+.outline_primary:disabled{
+    opacity: 0.6;
+    border: 1px solid var(--primary, #2C3E50);
+}
+.daily_relapsing_check_fail{
+background-color: #493B3B;
+color: #fff;
+}
+.daily_relapsing_check_success{
+    background-color: #069A3F;
+    color: #ffffff;
+}
+.login_btn{
+    background-color: #FC39B7;
+    height: 100%;
+    color: white;
+}
+
+.signup_btn_link div{
+    border-bottom: 1px solid #FC59C3;
+    color: #FC59C3 ;
+    
+}
+.singup_btn{
+    background: #8A045B;
+    color: white;
+    height: 100%;
+}
+.login_btn_link div{
+    border-bottom: 1px solid #B20575;
+    color: #B20575 ;
+    
+}
