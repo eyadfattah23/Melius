@@ -1,0 +1,89 @@
+.signup_section{
+    display: flex;
+    padding: 0 72px;
+    justify-content: space-between;
+    align-items: center;
+    height: calc(100vh - 71px);
+    background: conic-gradient(from 180deg at 50% 50%, #96B7D8 72.0000010728836deg, #B8CFE5 144.0000021457672deg, #C6D2E0 216.00000858306885deg, #6696C6 288.0000042915344deg, #6696C6 360deg);
+
+}
+.left_container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    align-self: stretch;
+}
+.right_container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 32px;
+    width: 50vw;
+}
+.left_container .user{
+    padding: 16px;   
+    border-radius: 50%;
+    border: 5px solid black;
+}
+.left_container .signup{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 8px;
+    align-self: stretch;
+}
+.left_container .alternative{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+}
+.left_container .signup .form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    align-self: stretch;
+
+}
+.left_container .signup p{
+    color: black;
+    font-size: var(--body_S);
+    font-weight: 400;
+}
+.left_container .signup .form .field{
+    display: flex;
+    padding: 8px 12px;
+    align-items: center;
+    gap: 16px;
+    border-radius: 6px;
+    border: 1px solid black;
+    width: 100%;
+}
+.left_container .signup .form .submit{
+    height: 44px;
+    width: 100%;
+}
+.left_container .alternative p{
+    color: black;
+    font-size: var(--body_S);
+    font-weight: 400;
+}
+.right_container .title{
+color: black;
+font-size: var(--h1);
+font-weight: 700;
+}
+.right_container .description{
+    color: black;
+    font-size: var(--h4);
+    font-weight: 700;
+}
+input::placeholder{
+    color: red;
+}
