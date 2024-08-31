@@ -18,7 +18,7 @@ def get_article_likes(article_id):
 @swag_from('documentation/article/likes/get_article_likes_count.yml')
 @article_likes_bp.route('/article/<article_id>/likes/count', methods=['GET'])
 def get_article_likes_count(article_id):
-    count =  storage.count(ArticleLike, id=article_id)
+    count =  storage.count(ArticleLike, article_id=article_id)
     return jsonify({"count":  count})
 
 
