@@ -9,8 +9,7 @@ def create_flask_app():
     app = Flask(__name__)
     app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
     app.config['SWAGGER'] = {
-    'title': 'Melius API',
-    'uiversion': 3
+    'title': 'Melius API'
     }
 
     Swagger(app)
