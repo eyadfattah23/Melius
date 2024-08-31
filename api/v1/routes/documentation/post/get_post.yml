@@ -1,3 +1,7 @@
+swagger: "2.0"
+info:
+  title: Post Management API
+  version: "1.0"
 tags:
   - post
 summary: Retrieve a specific post
