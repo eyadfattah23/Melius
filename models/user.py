@@ -119,3 +119,13 @@ class User(BaseModel, Base):
             error = 'Password should have at least one of the symbols $%@#'
 
         return [val, error]
+
+    @staticmethod
+    def authenticate(email, password):
+        """Authenticate user with email and password"""
+        from models import storage  # Import inside the method to avoid circular import
+        user = storage.getSession().query(User).filter_by(email=email).first()
+        if user and user.verify_password(password):
+            return user
+        else:
+            return None
