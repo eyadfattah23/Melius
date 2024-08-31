@@ -28,42 +28,19 @@ def create_flask_app():
     app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
     cors = CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
     app.config['SWAGGER'] = {
-    "swagger": "2.0",
-    "info": {
-    "title": "Melius API",
-    "description": "API for Melius a web app that will help you beat porn addiction in complete secrecy", 
-    "contact": {
-        "responsibleOrganization": "ME",
-        "responsibleDeveloper": "Me",
-        "email": "me@me.com",
-        "url": "www.me.com",
-        "name": "Me"
-    }, 
-    "version": "0.0.1"
-    },
-    'basePath': '/api/v1',
-    'schemes': ['http', 'https'],
-    'host': '127.0.0.1:5050',
-    'consumes': ['application/json'], 
-    'tags': [
-        {
-            'name': 'user',
-            'description': 'Operations about user'
+        'title': 'Melius API',
+        'uiversion': 3,
+        'description': 'API for Melius a web app that will help you beat porn addiction in complete secrecy',
+        'contact': {
+            'responsibleOrganization': "ME",
+            'responsibleDeveloper': "Me",
+            'email': "me@me.com",
+            'url': "http://www.me.com",
+            'name': "Me"
         },
-        {
-            'name': 'post',
-            'description': 'Operations about post'
-        },
-        {
-            'name': 'article',
-            'description': 'Operations about article'
-        },
-        {
-            'name': 'comment',
-            'description': 'Operations about comment'
-        },
-    ],
-        
+        'version': '0.0.1',
+        'termsOfService': 'http://www.me.com/terms',
+        'specs_route': '/apidocs/'
     }
 
     Swagger(app)
