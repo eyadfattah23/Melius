@@ -41,10 +41,9 @@ def create_flask_app():
     "version": "0.0.1"
     },
     'basePath': '/api/v1',
-    'schemes': ['https', 'http'],
+    'schemes': ['http', 'https'],
     'host': '127.0.0.1:5000',
-    'consumes': ['application/json'],
-    'produces': ['application/json'],
+    'consumes': ['application/json'], 
     'tags': [
         {
             'name': 'user',
