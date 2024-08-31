@@ -61,3 +61,26 @@ responses:
         message:
           type: string
           example: "Not a JSON"
+
+definitions:
+  ArticleComment:
+    type: object
+    properties:
+      id:
+        type: string
+        example: "123"
+      text:
+        type: string
+        example: "create comment text"
+      user_id:
+        type: string
+        example: "169a0482-55b9-4d9a-b5c2-19a94ba65ef7"
+      article_id:
+        type: string
+        example: "123"
+      created_at:
+        type: string
+        example: "2024-08-30T12:34:56.789Z"
+      updated_at:
+        type: string
+        example: "2024-08-30T12:34:56.789Z"
