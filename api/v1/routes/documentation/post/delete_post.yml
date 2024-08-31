@@ -4,32 +4,32 @@ tags:
 summary: Delete a post
 description: Delete a post from the system.
 
-parameters
+parameters:
   - name: post_id
     in: path
     required: true
-    schema
+    schema:
       type: string
     description: The ID of the post to delete.
 
-responses
-  200
+responses:
+  200:
     description: Post successfully deleted.
-    content
-      application/json
-        schema
+    content:
+      application/json:
+        schema:
           type: object
-          properties
-            message
+          properties:
+            message:
               type: string
               example: "Post deleted"
-  404
+  404:
     description: Post not found.
-    content
-      application/json
-        schema
+    content:
+      application/json:
+        schema:
           type: object
-          properties
-            message
+          properties:
+            message:
               type: string
               example: "Not found"
