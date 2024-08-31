@@ -1,0 +1,47 @@
+tags:
+  - Post Comments
+summary: Create a new post comment
+description: Create a new post comment.
+parameters:
+  - name: post_id
+    in: path
+    required: true
+    schema:
+      type: string
+    description: The ID of the post to comment on.
+
+  - name: body
+    in: body
+    required: true
+    schema:
+      type: object
+      properties:
+        text:
+          type: string
+          example: "This is my comment."
+        user_id:
+          type: string
+          example: "1"
+
+responses:
+  201:
+    description: Comment created
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            id:
+              type: string
+              example: "1"
+            text:
+              type: string
+              example: "This is my comment."
+            user_id:
+              type: string
+              example: "1"
+            post_id:
+              type: string
+              example: "1"
+  400:
+    description: Bad request
