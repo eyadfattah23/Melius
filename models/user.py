@@ -1,42 +1,14 @@
 #!/usr/bin/python3
 """This module defines a class User"""
 from models.base_model import BaseModel, Base
-from sqlalchemy import Column, String, LargeBinary, Text
+from sqlalchemy import Column, String, Text
 from sqlalchemy.orm import relationship
 from hashlib import md5
 import re
 from passlib.hash import bcrypt
 
 
-def password_check(passwd):
 
-    SpecialSym = ['$', '@', '#', '%']
-    val = True
-    error = None
-    if len(passwd) < 8:
-        val = False
-        error = 'length should be at least 8'
-
-    if len(passwd) > 16:
-        val = False
-        error = 'length should be not be greater than 16'
-
-    if not any(char.isdigit() for char in passwd):
-        val = False
-        error = 'Password should have at least one numeral'
-    if not any(char.isupper() for char in passwd):
-        val = False
-        error = 'Password should have at least one uppercase letter'
-
-    if not any(char.islower() for char in passwd):
-        val = False
-        error = 'Password should have at least one lowercase letter'
-
-    if not any(char in SpecialSym for char in passwd):
-        val = False
-        error = 'Password should have at least one of the symbols $%@#'
-
-    return [val, error]
 
 
 class User(BaseModel, Base):
@@ -86,7 +58,7 @@ class User(BaseModel, Base):
 
         if 'password' in kwargs:
             password = kwargs.get('password')
-            val, error = password_check(password)
+            val, error = self.password_check(password)
             if not val:
                 raise ValueError(error)
             kwargs['password_hash'] = bcrypt.hash(kwargs.pop('password'))
@@ -102,7 +74,37 @@ class User(BaseModel, Base):
 
     def set_password(self, password):
         """Hash the password and set it after validation"""
-        if password_check(password):
+        if self.password_check(password):
             self.password_hash = bcrypt.hash(password)
         else:
             raise ValueError("Password does not meet the required criteria.")
+        
+    def password_check(passwd):
+
+        SpecialSym = ['$', '@', '#', '%']
+        val = True
+        error = None
+        if len(passwd) < 8:
+            val = False
+            error = 'length should be at least 8'
+
+        if len(passwd) > 16:
+            val = False
+            error = 'length should be not be greater than 16'
+
+        if not any(char.isdigit() for char in passwd):
+            val = False
+            error = 'Password should have at least one numeral'
+        if not any(char.isupper() for char in passwd):
+            val = False
+            error = 'Password should have at least one uppercase letter'
+
+        if not any(char.islower() for char in passwd):
+            val = False
+            error = 'Password should have at least one lowercase letter'
+
+        if not any(char in SpecialSym for char in passwd):
+            val = False
+            error = 'Password should have at least one of the symbols $%@#'
+
+        return [val, error]
