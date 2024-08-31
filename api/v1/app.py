@@ -26,16 +26,19 @@ def create_flask_app():
     app = Flask(__name__)
     app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
     app.config['SWAGGER'] = {
-    'title': 'Melius API',
-    'uiversion': 3,
-    'specs_route': '/api/v1/specs/',
-    'openapi': '3.0.2',
-    'version': '1.0.0',
-    'description': 'Melius API',
-    'info': {
-        'title': 'Melius API',
-        'description': 'Melius API',
-        'version': '1.0.0',
+    "swagger": "2.0",
+    "info": {
+    "title": "Melius API",
+    "description": "API for Melius a web app that will help you beat porn addiction in complete secrecy", 
+    "contact": {
+        "responsibleOrganization": "ME",
+        "responsibleDeveloper": "Me",
+        "email": "me@me.com",
+        "url": "www.me.com",
+        "name": "Me"
+    },
+    "termsOfService": "http://me.com/terms",
+    "version": "0.0.1"
     },
     'basePath': '/api/v1',
     'schemes': ['https', 'http'],
