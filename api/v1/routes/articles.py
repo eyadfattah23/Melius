@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, abort, request, make_response
 from models.article import Article
 from models import storage
+from flasgger.utils import swag_from
 
 articles_bp = Blueprint('articles', __name__)
 
