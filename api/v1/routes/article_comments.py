@@ -7,15 +7,17 @@ article_comments_bp = Blueprint('articleComments', __name__)
 
 
 # Retrieves all comments for a specific post
+@swag_from('documentation/article/comments/get_article_comments.yml')
 @article_comments_bp.route('/article/<article_id>/comments', methods=['GET'])
-def get_post_comments(article_id):
+def get_article_comments(article_id):
     article =  storage.get(Article, article_id)
     return jsonify([comment.to_dict() for comment in article.comments])
 
 
 # Creates a new comment for a specific post
+@swag_from('documentation/article/comments/create_article_comment.yml')
 @article_comments_bp.route('/article/<article_id>/comments', methods=['POST'])
-def create_post_comment(article_id):
+def create_article_comment(article_id):
     if not request.get_json():
         abort(400, description="Not a JSON")
 
@@ -30,9 +32,13 @@ def create_post_comment(article_id):
 
 
 # Updates a comment for a specific post
+@swag_from('documentation/article/comments/update_article_comment.yml')
 @article_comments_bp.route('/article/comments/<comment_id>', methods=['PUT'])
-def update_post_comment(comment_id):
+def update_article_comment(comment_id):
     articleComment =  storage.get(ArticleComment, comment_id)
+
+    if not articleComment:
+        abort(404, description="Comment not found")
 
     if not request.get_json():
         abort(400, description="Not a JSON")
@@ -48,8 +54,9 @@ def update_post_comment(comment_id):
 
 
 # Deletes a comment for a specific post
+@swag_from('documentation/article/comments/delete_article_comment.yml')
 @article_comments_bp.route('/article/comments/<comment_id>', methods=['DELETE'])
-def delete_post_comment(comment_id):
+def delete_article_comment(comment_id):
     postComment =  storage.get(ArticleComment, comment_id)
     storage.delete(postComment)
     storage.save()
