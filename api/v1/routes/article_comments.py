@@ -29,9 +29,9 @@ def create_post_comment(article_id):
 
 
 # Updates a comment for a specific post
-@article_comments_bp.route('/article/<article_id>/comments/<comment_id>', methods=['PUT'])
-def update_post_comment(article_id, comment_id):
-    postComment =  storage.get(ArticleComment, comment_id)
+@article_comments_bp.route('/article/comments/<comment_id>', methods=['PUT'])
+def update_post_comment(comment_id):
+    articleComment =  storage.get(ArticleComment, comment_id)
 
     if not request.get_json():
         abort(400, description="Not a JSON")
@@ -41,9 +41,9 @@ def update_post_comment(article_id, comment_id):
     data = request.get_json()
     for key, value in data.items():
         if key not in ignore:
-            setattr(postComment, key, value)
+            setattr(articleComment, key, value)
     storage.save()
-    return make_response(jsonify(postComment.to_dict()), 200)
+    return make_response(jsonify(articleComment.to_dict()), 200)
 
 
 # Deletes a comment for a specific post
