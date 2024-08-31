@@ -1,0 +1,71 @@
+summary: Update a user's information
+description: Update the details of a specific user.
+parameters:
+  - name: user_id
+    in: path
+    required: true
+    schema:
+      type: string
+    description: The ID of the user to update.
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          first_name:
+            type: string
+            example: "John"
+          last_name:
+            type: string
+            example: "Doe"
+          password:
+            type: string
+            example: "newpassword"
+responses:
+  200:
+    description: User successfully updated.
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            id:
+              type: string
+              example: "1"
+            email:
+              type: string
+              example: "user@example.com"
+            first_name:
+              type: string
+              example: "John"
+            last_name:
+              type: string
+              example: "Doe"
+            created_at:
+              type: string
+              example: "2024-08-30T12:34:56.789Z"
+            updated_at:
+              type: string
+              example: "2024-08-30T12:34:56.789Z"
+  400:
+    description: Bad Request (e.g., invalid JSON or trying to update immutable fields).
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            message:
+              type: string
+              example: "Not a JSON or attempting to update immutable fields"
+  404:
+    description: User not found.
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            message:
+              type: string
+              example: "User not found"
