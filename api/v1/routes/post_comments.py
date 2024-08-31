@@ -7,6 +7,7 @@ comments_bp = Blueprint('postComments', __name__)
 
 
 # Retrieves all comments for a specific post
+@swag_from('documentation/post/comments/get_post_comments.yml')
 @comments_bp.route('/posts/<post_id>/comments', methods=['GET'])
 def get_post_comments(post_id):
     post =  storage.get(Post, post_id)
@@ -14,6 +15,7 @@ def get_post_comments(post_id):
 
 
 # Creates a new comment for a specific post
+@swag_from('documentation/post/comments/create_post_comment.yml')
 @comments_bp.route('/posts/<post_id>/comments', methods=['POST'])
 def create_post_comment(post_id):
     if not request.get_json():
@@ -30,6 +32,7 @@ def create_post_comment(post_id):
 
 
 # Updates a comment for a specific post
+@swag_from('documentation/post/comments/update_post_comment.yml')
 @comments_bp.route('/posts/<post_id>/comments/<comment_id>', methods=['PUT'])
 def update_post_comment(post_id, comment_id):
     postComment =  storage.get(PostComment, comment_id)
@@ -48,6 +51,7 @@ def update_post_comment(post_id, comment_id):
 
 
 # Deletes a comment for a specific post
+@swag_from('documentation/post/comments/delete_post_comment.yml')
 @comments_bp.route('/posts/<post_id>/comments/<comment_id>', methods=['DELETE'])
 def delete_post_comment(post_id, comment_id):
     postComment =  storage.get(PostComment, comment_id)
