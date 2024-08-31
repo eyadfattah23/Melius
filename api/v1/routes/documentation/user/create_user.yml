@@ -1,58 +1,52 @@
 tags:
-  - name: user
-    description: Operations about user
-paths:
-  /users:
-    post:
-      tags:
-        - user
-      summary: Create a new user
-      description: Create a new user in the system.
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                email:
-                  type: string
-                  example: "user@example.com"
-                password:
-                  type: string
-                  example: "Strong@password123"
-                username:
-                  type: string
-                  example: "john_doe"
-      responses:
-        201:
-          description: User successfully created.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  id:
-                    type: string
-                    example: "1"
-                  email:
-                    type: string
-                    example: "user@example.com"
-                  username:
-                    type: string
-                    example: "john_doe"
-                  created_at:
-                    type: string
-                    example: "2024-08-30T12:34:56.789Z"
-                  updated_at:
-                    type: string
-                    example: "2024-08-30T12:34:56.789Z"
-        400:
-          description: Bad Request (e.g., missing email or password).
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: "Not a JSON or missing email/password"
+  - user
+summary: Create a new user
+description: Create a new user in the system.
+requestBody:
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          email:
+            type: string
+            example: "user@example.com"
+          password:
+            type: string
+            example: "Strong@password123"
+          username:
+            type: string
+            example: "john_doe"
+responses:
+  201:
+    description: User successfully created.
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            id:
+              type: string
+              example: "1"
+            email:
+              type: string
+              example: "user@example.com"
+            username:
+              type: string
+              example: "john_doe"
+            created_at:
+              type: string
+              example: "2024-08-30T12:34:56.789Z"
+            updated_at:
+              type: string
+              example: "2024-08-30T12:34:56.789Z"
+  400:
+    description: Bad Request (e.g., missing email or password).
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            message:
+              type: string
+              example: "Not a JSON or missing email/password"
