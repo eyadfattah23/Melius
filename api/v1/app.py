@@ -58,6 +58,7 @@ def create_flask_app():
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     create_app(app)  # Register routes
 =======
     @app.errorhandler(400)
@@ -67,6 +68,8 @@ def create_flask_app():
         return response
 
 >>>>>>> baf9030... fix scoping error
+=======
+>>>>>>> 331f2e5... handle error 400
     @app.teardown_appcontext
     def close_db(error):
         """ Close Storage """
@@ -83,6 +86,11 @@ def create_flask_app():
         """
         return make_response(jsonify({'error': "Not found"}), 404)
 
+    @app.errorhandler(400)
+    def custom400(error):
+        response = make_response(
+            jsonify({'error': error.description}), 400)
+        return response
     return app
 
 
