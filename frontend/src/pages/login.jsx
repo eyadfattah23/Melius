@@ -3,7 +3,56 @@ import Navbar from "../components/navbar"
 import "../assets/styles/login.css"
 import Icon from "../assets/icons/icon"
 import Field from "../components/field"
+import { useState } from "react"
+import { Link } from "react-router-dom"
+import axios from "axios"
 function Login(){
+    const [email, setEmail] = useState("")
+    const [loading, setLoading] = useState(false);
+    const [password, setPassword] = useState("");
+    const [errorEmail, setErrorEmail] = useState("");
+    const [errorPassword, setErrorPassword] = useState("");
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        setLoading(true);
+        setErrorEmail("");
+        setErrorPassword("");
+
+        let hasError = false;
+
+        if (!email) {
+            setErrorEmail("Email is required");
+            hasError = true;
+        } else {
+            const emailRegex = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+            if (!emailRegex.test(email)) {
+                setErrorEmail("Invalid email format");
+                hasError = true;
+            }
+        }
+        if (!password) {
+            setErrorPassword("Password is required");
+            hasError = true;
+        }
+        try {
+            const response = await axios.post("http://127.0.0.1:5050/api/v1/users/authenticate", {
+                email,
+                password,
+            });
+
+            console.log(response);
+            const user = response.data.username
+            const img = response.data.img
+            localStorage.setItem("user", JSON.stringify(user));
+            localStorage.setItem("loggedin", JSON.stringify(true));
+            navigate("/home");
+        } catch (error) {
+            console.error(error);
+            setErrorPassword(error.response?.data?.error || "An error occurred. Please try again.");
+        } finally {
+            setLoading(false);
+        }
+    };
     return<>
     <Navbar/>
     <section className="login_section">
@@ -14,15 +63,26 @@ function Login(){
             <div className="login">
                 <div className="form">
                     <div className="field">
-                       <Icon name={"user_fill"} size={24} color={"white"}/> 
-                       <Field placeholder={"Username"} type={"text"}/>
+                       <Icon name={"email_fill"} size={24} color={"white"}/> 
+                       <Field 
+                        placeholder="Email"
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                       />
                     </div>
                     <div className="field">
                     <Icon name={"lock"} size={24} color={"white"}/> 
-                    <Field placeholder={"********"} type={"password"}/>
+                    <Field 
+                    placeholder="********"
+                    type="password"
+                    value={password}
+                    required
+                    onChange={(e) => setPassword(e.target.value)}/>
                     </div>
                     <div className="submit">
-                        <Button text={"LOGIN"} type={"login_btn"}/>
+                        <Button text={"LOGIN"} type={"login_btn"} onClick={handleSubmit}/>
                     </div>
                 </div>
                 <p>Forgot your password ?</p>
@@ -30,7 +90,9 @@ function Login(){
             <div className="alternative">
             <p>New here ?</p>
             <div>
-            <Button text={"Create an account"} type={"signup_btn_link"}/>
+                <Link to={"/signup"}>
+                <Button text={"Create an account"} type={"signup_btn_link"}/>
+                </Link>
             </div>
         </div>
         </div>

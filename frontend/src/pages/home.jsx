@@ -6,22 +6,35 @@ import Button from "../components/button"
 import Avatar from "../components/avatar"
 import Leader_card from "../components/leader_card"
 import Articles_Carousel from "../components/articles_carousel"
-function Home() {       
+function Home() {   
+  const user = JSON.parse(localStorage.getItem("user"));
+  const loggedin = JSON.parse(localStorage.getItem("loggedin"));
+  const participated_in_challenge = JSON.parse(localStorage.getItem("challenge"))
     return (
       <>
-      <Navbar loggedin={true}/>
+      <Navbar loggedin={loggedin}/>
       <section className="counter">
         <div className="container">
-            <h3>Welcome, random_name</h3>
-            <div className="stats">
-                <h4>
-                  You're on
-                </h4>
-                <Counter2 achieved_days={"22"} unit={"Days"}/>
-                <h4>
-                    of your journey to freedom
-                </h4>
-            </div>
+            <h3>Welcome, {user}</h3>
+           {
+            participated_in_challenge ?  <div className="stats">
+            <h4>
+              You're on
+            </h4>
+            <Counter2 achieved_days={"22"} unit={"Days"}/>
+            <h4>
+                of your journey to freedom
+            </h4>
+        </div> : <div className="stats">
+          <h4>
+          Ready for a Change?
+          </h4>
+          <p>
+          Join our challenge today and start your journey towards a better you!
+          </p>
+          <Button text={"Join the Challenge"} type={"primary"}/>
+        </div>
+           }
         </div>
       </section>
       <section className="relapsing-check">

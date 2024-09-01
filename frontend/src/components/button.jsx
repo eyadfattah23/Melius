@@ -1,7 +1,7 @@
 import "../assets/styles/button.css"
-function Button({icon, text, type}) {
+function Button({icon, text, type, onClick}) {
     return (
-      <button className={`btn ${type}`}>
+      <button className={`btn ${type}`} onClick={onClick}>
         {icon}
         <div>
             {text}
