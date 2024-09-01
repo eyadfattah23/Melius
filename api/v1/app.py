@@ -67,6 +67,16 @@ def create_flask_app():
         '''
         return make_response(jsonify({'error': error.description}), 400)
 
+    @app.errorhandler(401)
+    def custom401(error):
+        ''' 401 Error
+        ---
+        responses:
+            401:
+            description: Invalid credentials
+        '''
+        return make_response(jsonify({'error': error.description}), 401)
+
     return app
 
 
