@@ -1,0 +1,78 @@
+swagger: "2.0"
+info:
+  title: Articles API
+  version: "1.0"
+
+tags:
+  - Article
+summary: Update an existing article
+description: Update the details of a specific article by its ID.
+parameters:
+  - name: article_id
+    in: path
+    required: true
+    type: string
+    description: The ID of the article to update.
+  - name: body
+    in: body
+    required: true
+    schema:
+      type: object
+      properties:
+        title:
+          type: string
+          example: "Updated Title"
+        content:
+          type: string
+          example: "Updated content of the article."
+responses:
+  200:
+    description: Article successfully updated
+    schema:
+      $ref: "#/definitions/Article"
+  400:
+    description: Bad Request (e.g., invalid JSON)
+    schema:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Invalid request data"
+  404:
+    description: Article not found
+    schema:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Article not found"
+  500:
+    description: Internal server error
+    schema:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Internal server error"
+definitions:
+  Article:
+    type: object
+    properties:
+      id:
+        type: string
+        example: "123"
+      title:
+        type: string
+        example: "Updated Title"
+      content:
+        type: string
+        example: "Updated content of the article."
+      author:
+        type: string
+        example: "John Doe"
+      created_at:
+        type: string
+        example: "2024-08-30T12:34:56.789Z"
+      updated_at:
+        type: string
+        example: "2024-09-01T10:15:30.789Z"

@@ -1,15 +1,21 @@
 #!/usr/bin/python3
 """This module defines a class to manage DB storage for Melius"""
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, func
 from sqlalchemy.orm import sessionmaker, scoped_session
+from sqlalchemy.exc import IntegrityError
+
 from os import getenv
 from models.base_model import BaseModel, Base
 from models.user import User
-from models.article import Article
-from models.post import Post
+from models.article import *
+from models.post import *
+from models.timer_history import TimerHistory
 import models
 
-classes = {"User": User, 'Article': Article, 'Post': Post}
+classes = {"User": User, 'Article': Article,
+           'Post': Post, 'TimerHistory': TimerHistory,
+           'PostLike': PostLike, 'PostComment': PostComment,
+           'ArticleLike': ArticleLike, 'ArticleComment': ArticleComment}
 # {"Amenity": Amenity, "City": City,
 #           "Place": Place, "Review": Review, "State": State}
 
@@ -34,6 +40,10 @@ class DBStorage:
                                           MySQL_password,
                                           MySQL_host,
                                           MySQL_database), pool_pre_ping=True)
+        
+    
+    def getSession(self):
+        return self.__session
 
     def all(self, cls=None):
         '''query on the current database session (self.__session) all objects
@@ -41,16 +51,19 @@ class DBStorage:
         objects = {}
         if cls is None:
             from models.user import User
-            # from models.state import State
-            # from models.review import Review
-            # from models.place import Place
+            from models.article import Article
+            from models.article import ArticleLike
+            from models.article import ArticleComment
+            from models.post import Post
+            from models.post import PostLike
+            from models.post import PostComment
+            from models.timer_history import TimerHistory
             # from models.city import City
             # from models.amenity import Amenity
-            classes = {'user': User}
-            ''''place': Place,
-                       'amenity': Amenity, 'state': State,
-                       'review': Review, 'city': City}'''
-
+            classes = {'user': User, 'article': Article,
+                       'timer_history': TimerHistory, 'post': Post,
+                       'postlike': PostLike, 'postcomment': PostComment,
+                       'articlelike': ArticleLike, 'articlecomment': ArticleComment}
             for c in classes.values():
                 records = self.__session.query(c).all()
                 for object in records:
@@ -71,7 +84,15 @@ class DBStorage:
 
     def save(self):
         '''commit all changes of the current database session'''
-        self.__session.commit()
+        try:
+            self.__session.commit()
+        except IntegrityError:  # test for Dataerror
+            self.__session.rollback()
+            raise  # Re-raise the exception so it can be caught in your application code
+
+    def rollback(self):
+        '''Rollback the current database session'''
+        self.__session.rollback()
 
     def delete(self, obj=None):
         '''delete from the current database session obj if not None'''
@@ -85,8 +106,12 @@ class DBStorage:
         '''
         from models.user import User
         from models.article import Article
+        from models.article import ArticleLike
+        from models.article import ArticleComment
         from models.post import Post
-        # from models.place import Place
+        from models.post import PostComment
+        from models.post import PostLike
+        from models.timer_history import TimerHistory
         # from models.city import City
         # from models.amenity import Amenity
         from models.base_model import Base
@@ -108,25 +133,42 @@ class DBStorage:
         """
         if cls not in classes.values():
             return None
+        
+        record = self.__session.get(cls, id)
 
-        all_cls = models.storage.all(cls)
+        return record
+
+        '''all_cls = models.storage.all(cls)
         for value in all_cls.values():
             if (value.id == id):
                 return value
 
-        return None
+        return None'''
 
-    def count(self, cls=None):
+    def count(self, cls=None, **filters):
         """
-        count the number of objects in storage
+        Count the number of objects in storage using SQLAlchemy, with optional filters.
+    
+        :param cls: The class to count objects of. If None, counts objects of all classes.
+        :param filters: Optional filters to apply to the count query.
+        :return: The count of objects matching the criteria.
         """
-        all_class = classes.values()
-
-        if not cls:
-            count = 0
-            for clas in all_class:
-                count += len(models.storage.all(clas).values())
+        session = self.__session
+    
+        if cls:
+            # Count objects of a specific class with optional filters
+            query = session.query(func.count(cls.id))
+            
+            # Apply filters if any
+            for attr, value in filters.items():
+                query = query.filter(getattr(cls, attr) == value)
+    
+            return query.scalar()
         else:
-            count = len(models.storage.all(cls).values())
-
-        return count
+            # Count objects of all classes with optional filters
+            total_count = 0
+            for clas in classes.values():
+                query = session.query(func.count(clas.id))
+                total_count += query.scalar()
+            return total_count
+    

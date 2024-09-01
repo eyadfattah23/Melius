@@ -1,0 +1,44 @@
+swagger: "2.0"
+info:
+  title: Post Management API
+  version: "1.0"
+tags:
+  - post
+summary: Retrieve all posts
+description: Retrieve a list of all posts in the system.
+responses:
+  "200":
+    description: A list of post objects.
+    content:
+      application/json:
+        schema:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                example: "1"
+              title:
+                type: string
+                example: "My Post"
+              text:
+                type: string
+                example: "This is my post"
+              user_id:
+                type: string
+                example: "1"
+              created_at:
+                type: string
+                example: "2024-08-30T12:34:56.789Z"
+              updated_at:
+                type: string
+                example: "2024-08-30T12:34:56.789Z"
+  "400":
+    description: Bad request (e.g., invalid JSON).
+  "401":
+    description: Unauthorized access.
+  "404":
+    description: Resource not found.
+  "500":
+    description: Internal server error.

@@ -3,7 +3,7 @@
 Test Article class for expected behavior and documentation
 """
 
-from datetime import datetime
+from datetime import datetime, timezone
 import inspect
 import models
 from models.article import Article
@@ -119,7 +119,7 @@ class TestArticle(unittest.TestCase):
         self.assertIsInstance(self.article_json['title'], str)
         self.assertIsInstance(self.article_json['content'], str)
         self.assertIsInstance(self.test_article.id, str)
-        self.assertIsInstance(self.test_article.img, bytes)
+        self.assertIsInstance(self.test_article.img, str)
 
         self.assertTrue(hasattr(self.test_article, "title"))
         self.assertTrue(self.test_article.content == "content")
@@ -128,18 +128,20 @@ class TestArticle(unittest.TestCase):
         """test the to dict method"""
         self.test_article.id = 'fa5f7cec-e7e1-436f-ba49-35241277adac'
         self.test_article.title = 'last_name'
-        self.article_json = self.test_article.to_dict()
+        self.test_article.author = 'Mohsen'
 
-        with open('resources/default_article.png', 'rb') as file:
-            img = file.read()
+        self.article_json = self.test_article.to_dict()
 
         self.assertDictEqual(self.article_json, {
             '__class__': 'Article',
             'title': 'last_name',
-            'updated_at': self.test_article.updated_at.isoformat(),
-            'created_at': self.test_article.created_at.isoformat(),
+            'updated_at': self.test_article.updated_at.isoformat()
+            .replace('+00:00', ''),
+            'created_at': self.test_article.created_at.isoformat()
+            .replace('+00:00', ''),
             'id': self.test_article.id,
-            'img': img,
+            'img': 'resources/default_article.png',
+            'author': 'Mohsen',
             'content': 'content'
         })
 
@@ -163,3 +165,20 @@ class TestArticle(unittest.TestCase):
         models.storage.save()
 
         self.assertIsNone(models.storage.get(Article, self.test_article2))
+
+    def test_default_author(self):
+        """Test that the author defaults to 'anonymous' if not provided"""
+        self.assertEqual(self.test_article.author, 'anonymous')
+
+    def test_custom_img_and_author(self):
+        """Test that custom img and author values are saved correctly"""
+        custom_img = b'custom image content'
+        article = Article(title='custom article', content='custom content',
+                          img=custom_img, author='custom author')
+        models.storage.new(article)
+        models.storage.save()
+        self.assertEqual(article.img, custom_img)
+        self.assertEqual(article.author, 'custom author')
+
+        models.storage.delete(article)
+        models.storage.save()
