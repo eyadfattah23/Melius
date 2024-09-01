@@ -88,9 +88,14 @@ def create_flask_app():
 
     @app.errorhandler(400)
     def custom400(error):
-        response = make_response(
-            jsonify({'error': error.description}), 400)
-        return response
+        ''' 400 Error
+        ---
+        responses:
+            400:
+            description: action couldn't be made
+        '''
+        return make_response(jsonify({'error': error.description}), 400)
+
     return app
 
 
