@@ -42,6 +42,12 @@ def create_flask_app():
 
     create_app(app)  # Register routes
 
+    @app.errorhandler(400)
+    def custom400(error):
+        response = make_response(
+            jsonify({'error': error.description}), 400)
+        return response
+
     @app.teardown_appcontext
     def close_db(error):
         """ Close Storage """
@@ -58,12 +64,6 @@ def create_flask_app():
         return make_response(jsonify({'error': "Not found"}), 404)
 
     return app
-
-
-@app.errorhandler(400)
-def custom400(error):
-    response = make_response(jsonify({'error': error.description}), 400)
-    return response
 
 
 if __name__ == '__main__':
