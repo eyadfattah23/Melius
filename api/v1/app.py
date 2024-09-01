@@ -57,7 +57,16 @@ def create_flask_app():
     Swagger(app)
 
 
+<<<<<<< HEAD
     create_app(app)  # Register routes
+=======
+    @app.errorhandler(400)
+    def custom400(error):
+        response = make_response(
+            jsonify({'error': error.description}), 400)
+        return response
+
+>>>>>>> baf9030... fix scoping error
     @app.teardown_appcontext
     def close_db(error):
         """ Close Storage """
@@ -77,9 +86,12 @@ def create_flask_app():
     return app
 
 
+<<<<<<< HEAD
 
 
 >>>>>>> d4ea94c... modified the app api
+=======
+>>>>>>> baf9030... fix scoping error
 if __name__ == '__main__':
     """ Main Function """
     app = create_flask_app()
