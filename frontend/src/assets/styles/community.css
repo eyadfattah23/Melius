@@ -1,0 +1,105 @@
+.posts_section .container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 32px;
+    padding: 32px 72px;
+}
+.posts_section .container .header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.posts_section .container .content{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    
+}
+.post_main{
+    width: 100%;
+    padding: 0 8px;
+    border-radius: 4px;
+    border: 1px solid var(--outline);
+    background: #FFF;
+    min-height: 250px;
+}
+.post_main .header{
+    display: flex;
+padding: 4px 0px;
+justify-content: space-between;
+align-items: center;
+    border-bottom: 0.5px solid var(--outline);
+}
+.post_main .header .profile{
+    display: flex;
+justify-content: center;
+align-items: center;
+gap: 8px;
+}
+.post_main .header .profile .username{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+}
+.post_main .header .profile .username .name{
+    color: #3C3C3B;
+    font-size: var(--body_L);
+    font-weight: 700;
+}
+.post_main .header .profile .username .post_time{
+    color: #9E9D9D;
+    font-size: var(--body_XS);
+    font-weight: 400;
+}
+.post_main .content{
+    display: flex;
+padding: 8px;
+flex-direction: column;
+align-items: flex-start;
+gap: 4px;
+}
+.post_main .content .title{
+    color: black;
+    font-size: var(--body_L);
+    font-weight: 700;
+}
+.post_main .content .description{
+    color: rgba(0, 0, 0, 0.80);
+    font-size: var(--body_N);
+    font-weight: 400;
+}
+.post_main .statistics{
+    display: flex;
+    padding: 4px 0px;
+    justify-content: flex-end;
+    align-items: center;
+}
+.post_main .statistics .stat{
+    padding: 4px 12px;
+}
+.post_main .statistics .stat p{
+    color: #9E9D9D;
+    font-size: var(--body_XS);
+    font-weight: 400;
+}
+.post_main .footer{
+    display: flex;
+    padding: 4px 0;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 0.5px solid var(--outline);
+}
+.post_main .footer .sec{
+    display: flex;
+padding: 4px 12px;
+justify-content: center;
+align-items: center;
+gap: 4px;
+}
+.post_main .footer .sec p{
+    color: #9E9D9D;
+    font-size: var(--body_S);
+    font-weight: 400;
+}

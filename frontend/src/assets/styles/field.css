@@ -1,0 +1,17 @@
+input{
+    width: 100%;
+    padding: 8px 0px;
+    color: var(--on-surface_high_emphasis);;
+    font-size: var(--body_N);
+    font-weight: 400;
+    background-color: transparent;
+}
+input:focus{
+    color: var(--on-surface_high_emphasis);
+}
+input::placeholder{
+    color: var(--on-surface_medium_emphasis);
+}
+.dark::placeholder{
+    color: var(--on-surface_high_emphasis);
+}
