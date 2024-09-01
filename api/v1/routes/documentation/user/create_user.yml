@@ -1,0 +1,60 @@
+swagger: "2.0"
+info:
+  title: User API
+  version: "1.0"
+tags:
+  - user
+summary: Create a new user
+description: Create a new user in the system.
+parameters:
+  - name: body
+    in: body
+    required: true
+    schema:
+      type: object
+      properties:
+        email:
+          type: string
+          example: "user@example.com"
+        password:
+          type: string
+          example: "Strong@password123"
+        username:
+          type: string
+          example: "john_doe"
+responses:
+  201:
+    description: User successfully created.
+    schema:
+      $ref: "#/definitions/User"
+  400:
+    description: Bad Request (e.g., missing email or password).
+    schema:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Not a JSON or missing email/password"
+
+definitions:
+  User:
+    type: object
+    properties:
+      id:
+        type: string
+        example: "1"
+      email:
+        type: string
+        example: "user@example.com"
+      username:
+        type: string
+        example: "john_doe"
+      password:
+        type: string
+        example: "Strong@password123"
+      created_at:
+        type: string
+        example: "2024-08-30T12:34:56.789Z"
+      updated_at:
+        type: string
+        example: "2024-08-30T12:34:56.789Z"

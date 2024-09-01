@@ -1,0 +1,39 @@
+swagger: "2.0"
+info:
+  title: Post Management API
+  version: "1.0"
+tags:
+  - post
+
+summary: Delete a post
+description: Delete a post from the system.
+
+parameters:
+  - name: post_id
+    in: path
+    required: true
+    schema:
+      type: string
+    description: The ID of the post to delete.
+
+responses:
+  200:
+    description: Post successfully deleted.
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            message:
+              type: string
+              example: "Post deleted"
+  404:
+    description: Post not found.
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            message:
+              type: string
+              example: "Not found"

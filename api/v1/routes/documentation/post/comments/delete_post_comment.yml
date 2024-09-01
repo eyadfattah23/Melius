@@ -1,0 +1,23 @@
+tags:
+  - Post Comments
+summary: Delete a post comment
+description: Delete a post comment by its ID.
+parameters:
+  - name: comment_id
+    in: path
+    required: true
+    type: string
+    description: The ID of the comment to delete.
+responses:
+  200:
+    description: Comment successfully deleted.
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            message:
+              type: string
+              example: "Comment deleted"
+  404:
+    description: Comment not found.

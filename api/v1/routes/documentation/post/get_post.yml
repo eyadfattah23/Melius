@@ -1,0 +1,45 @@
+swagger: "2.0"
+info:
+  title: Post Management API
+  version: "1.0"
+tags:
+  - post
+summary: Retrieve a specific post
+description: Retrieve details of a specific post by its ID.
+parameters:
+  - in: path
+    name: post_id
+    schema:
+      type: string
+    required: true
+    description: The ID of the post to retrieve.
+responses:
+  "200":
+    description: Request successful
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            data:
+              type: object
+              properties:
+                id:
+                  type: string
+                  example: "1"
+                title:
+                  type: string
+                  example: "My Post"
+                text:
+                  type: string
+                  example: "This is my post."
+  "404":
+    description: Post not found
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            message:
+              type: string
+              example: "Post not found"

@@ -1,0 +1,32 @@
+tags:
+  - Post Likes
+summary: Retrieve the number of likes for an post
+description: Retrieve the number of likes for an post
+parameters:
+  - name: post_id
+    in: path
+    required: true
+    type: string
+    description: The ID of the post
+responses:
+  200:
+    description: The number of likes for the post
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            count:
+              type: number
+              example: 10
+
+  500:
+    description: Internal server error
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            message:
+              type: string
+              example: "Internal server error"
