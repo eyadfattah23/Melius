@@ -6,12 +6,14 @@ import Field from "../components/field"
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import axios from "axios"
+import { useNavigate } from "react-router-dom"
 function Login(){
     const [email, setEmail] = useState("")
     const [loading, setLoading] = useState(false);
     const [password, setPassword] = useState("");
     const [errorEmail, setErrorEmail] = useState("");
     const [errorPassword, setErrorPassword] = useState("");
+    const navigate = useNavigate()
     const handleSubmit = async (event) => {
         event.preventDefault();
         setLoading(true);

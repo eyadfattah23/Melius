@@ -77,8 +77,10 @@ function Signup() {
             console.log(response);
             const user = response.data.username
             const img = response.data.img
+            const id = response.data.id
             localStorage.setItem("user", JSON.stringify(user));
             localStorage.setItem("loggedin", JSON.stringify(true));
+            localStorage.setItem("user_id", JSON.stringify(id))
             navigate("/home");
         } catch (error) {
             console.error(error);
