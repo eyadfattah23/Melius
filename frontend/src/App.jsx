@@ -6,7 +6,7 @@ import Challenge from './pages/chellenge'
 import Community from './pages/community'
 import Articles from './pages/articles'
 import Error_404 from './pages/404'
-import LandingPage from './pages/landing_page'
+// import LandingPage from './pages/landing_page'
 import Login from './pages/login'
 import Singup from './pages/signup'
 function App() {
@@ -32,10 +32,10 @@ function App() {
       path: "/articles",
       element: <Articles/>
     },
-    {
-      path: "/landing_page",
-      element: <LandingPage/>
-    },
+    // {
+    //   path: "/landing_page",
+    //   element: <LandingPage/>
+    // },
     {
       path: "/login",
       element: <Login/>
