@@ -4,7 +4,7 @@ import "../assets/styles/articles.css"
 import Articles_list from "../components/articles_tab"
 function Articles(){
     return <>
-    <Navbar/>
+    <Navbar loggedin/>
     <section className="main_article_section">
         <div className="container">
         <h1> Article of The Week</h1>
