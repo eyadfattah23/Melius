@@ -1,5 +1,6 @@
 from flask import Blueprint, jsonify, request, make_response, abort
 from models.user import User
+from models.timer_history import TimerHistory
 from models import storage
 from flasgger.utils import swag_from
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
@@ -59,12 +60,20 @@ def authenticate_user():
     data = request.get_json()
 
     user = User.authenticate(data['email'], data['password'])
-
     if not user:
         abort(401, description="Invalid credentials")
+    user_dict = user.to_dict()
+    # get the reset date from this timer
+    user_timer = storage.getSession().query(
+        TimerHistory).filter_by(user_id=user.id).first()
+    if not user_timer:
+        user_dict['timer_reset_date'] = None
+
+    else:
+        user_dict['timer_reset_date'] = user_timer.reset_date
 
     access_token = create_access_token(identity=user.id)
-    return make_response(jsonify({"token": access_token, "user": user.to_dict()}), 200)
+    return make_response(jsonify({"token": access_token, "user": user_dict}), 200)
 
 # Retrieves specific user details
 
