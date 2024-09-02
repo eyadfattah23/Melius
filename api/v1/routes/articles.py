@@ -1,19 +1,29 @@
 from flask import Blueprint, jsonify, abort, request, make_response
 from models.article import Article
+from models.article import ArticleLike
 from models import storage
 from flasgger.utils import swag_from
 
 articles_bp = Blueprint('articles', __name__)
 
+
 @swag_from('documentation/article/get_articles.yml')
 @articles_bp.route('/articles', methods=['GET'])
 def get_articles():
     articles = storage.all(Article).values()
-    return jsonify([article.to_dict() for article in articles])
+    articles_list = []
+    for article in articles:
+        article_dict = article.to_dict().copy()
+        likes_count = storage.count(ArticleLike, article_id=article.id)
+        del article_dict['content']
+        article_dict['likes_count'] = likes_count
+        articles_list.append(article_dict)
+
+    return jsonify(articles_list)
 
 
 @swag_from('documentation/article/get_article.yml')
-@articles_bp.route('/articles/<article_id>', methods=['GET'])   
+@articles_bp.route('/articles/<article_id>', methods=['GET'])
 def get_article(article_id):
     article = storage.get(Article, article_id)
     if article is None:
