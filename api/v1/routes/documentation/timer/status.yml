@@ -1,7 +1,4 @@
-tags:
-  timer:
-    name: Timer
-    description: Timer management
+tags: -timer
 
 summary: Get timer status
 description: Get the status of a timer.
