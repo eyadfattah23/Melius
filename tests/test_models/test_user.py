@@ -268,8 +268,11 @@ class TestUser(unittest.TestCase):
         """Test reloading a user object from a dictionary"""
         self.user_json['created_at'] = datetime.now(
             timezone.utc).isoformat().replace('+00:00', '')
+
         self.user_json['updated_at'] = datetime.now(
             timezone.utc).isoformat().replace('+00:00', '')
+
+        self.user_json['email'] = "newuser2@example.com"
 
         new_user = User(**self.user_json)
         self.assertEqual(new_user.id, self.user_json['id'])
