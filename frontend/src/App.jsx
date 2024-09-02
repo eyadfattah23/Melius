@@ -8,6 +8,8 @@ import Error_404 from './pages/404'
 // import LandingPage from './pages/landing_page'
 import Login from './pages/login'
 import Singup from './pages/signup'
+import Contact from './pages/contact'
+import One_Article from './pages/one_article'
 function App() {
   const router = createBrowserRouter([
     {
@@ -30,6 +32,14 @@ function App() {
     {
       path: "/articles",
       element: <Articles/>
+    },
+    {
+      path: "/one_article",
+      element: <One_Article/>
+    },
+    {
+      path: "/contact",
+      element: <Contact/>
     },
     // {
     //   path: "/landing_page",

@@ -1,7 +1,8 @@
-from flask import Blueprint, jsonify, request, make_response, abort 
+from flask import Blueprint, jsonify, request, make_response, abort
 from datetime import datetime, timezone, timedelta
-from models.timer_history import  TimerHistory
+from models.timer_history import TimerHistory
 from models import storage
+from models.user import User
 from flasgger.utils import swag_from
 
 timer_bp = Blueprint('timer', __name__)
@@ -19,12 +20,14 @@ def reset_or_create_timer():
     # Check if a timer already exists for the user
     timer = storage.getSession().query(TimerHistory).filter_by(user_id=user_id).first()
 
+    message = ""
     if timer:
         if timer.start_date.tzinfo is None:
             timer.start_date = timer.start_date.replace(tzinfo=timezone.utc)
-            
+
         # Calculate the elapsed time in days
-        elapsed_days = (datetime.now(timezone.utc).date() - timer.start_date.date()).days 
+        elapsed_days = (datetime.now(timezone.utc).date() -
+                        timer.reset_date.date()).days
 
         # Update max_time if the new elapsed time is greater
         if timer.max_time is None:
@@ -33,22 +36,21 @@ def reset_or_create_timer():
             if elapsed_days > timer.max_time:
                 timer.max_time = elapsed_days
 
-        # Reset the timer's start and reset dates, increment the number of tries
-        timer.start_date = datetime.now(timezone.utc)
+        # Reset the timer's reset dates, increment the number of tries
         timer.reset_date = datetime.now(timezone.utc)
         timer.no_tries += 1
         # Save the changes to the database
         storage.save()
-        
+        message = "Timer is reset, Don't give up you can do it\n"
+
     else:
         # Create a new timer entry for the user
         timer = TimerHistory(user_id=user_id)
         timer.save()
-    
-
+        message = "Timer created successfully!"
 
     return jsonify({
-        "message": "Timer reset or created",
+        "message": message,
         "data": timer.to_dict()
     })
 
@@ -66,14 +68,17 @@ def timer_status(user_id):
     })
 
 # Retrieves the top 10 users with the highest max_time
+
+
 @timer_bp.route('/timer/top10', methods=['GET'])
 def top10_timers():
-    top_timers = storage.getSession().query(TimerHistory).order_by(TimerHistory.max_time.desc()).limit(10).all()
+    top_timers = storage.getSession().query(TimerHistory).order_by(
+        TimerHistory.max_time.desc()).limit(10).all()
 
     result = []
     for timer in top_timers:
         result.append({
-            "user_id": timer.user_id,
+            "username": storage.get(User, timer.user_id).username,
             "max_time": str(timer.max_time)
         })
 
