@@ -1,0 +1,24 @@
+tags:
+  timer:
+    name: Timer
+    description: Timer management
+
+summary: Get top 10 users with the highest max_time
+description: Get the top 10 users with the highest max_time.
+
+responses:
+  200:
+    description: Top 10 users with the highest max_time
+    content:
+      application/json:
+        schema:
+          type: array
+          items:
+            type: object
+            properties:
+              username:
+                type: string
+                description: The username of the user
+              max_time:
+                type: integer
+                description: The max_time of the user
