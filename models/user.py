@@ -8,9 +8,6 @@ import re
 from passlib.hash import bcrypt
 
 
-
-
-
 class User(BaseModel, Base):
     """Class representation of the users table
     in the database using sqlalchemy orm
@@ -75,7 +72,7 @@ class User(BaseModel, Base):
 
     def check_email_taken(self, email):
         """Check if email is already taken"""
-        from models import storage  # Import inside the method to avoid circular import
+        from models import storage  # avoid circular import
         return storage.getSession().query(User).filter_by(email=email).first()
 
     def verify_password(self, password):
@@ -88,10 +85,10 @@ class User(BaseModel, Base):
             self.password_hash = bcrypt.hash(password)
         else:
             raise ValueError("Password does not meet the required criteria.")
-        
+
     @staticmethod
     def password_check(passwd):
-
+        """checks the password format """
         SpecialSym = ['$', '@', '#', '%']
         val = True
         error = None
@@ -123,7 +120,7 @@ class User(BaseModel, Base):
     @staticmethod
     def authenticate(email, password):
         """Authenticate user with email and password"""
-        from models import storage  # Import inside the method to avoid circular import
+        from models import storage  # Import inside method bec circular import
         user = storage.getSession().query(User).filter_by(email=email).first()
         if user and user.verify_password(password):
             return user
