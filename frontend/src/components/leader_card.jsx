@@ -1,4 +1,5 @@
 function Leader_card({name, badge}){
+    
     return <div className="leader_card">
         <div className="card">
         {
