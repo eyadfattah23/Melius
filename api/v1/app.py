@@ -5,12 +5,17 @@ from os import environ
 from flask_cors import CORS
 from api.v1 import create_app
 from flasgger import Swagger
+from flask_jwt_extended import JWTManager
 
 
 def create_flask_app():
     app = Flask(__name__)
     app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
     cors = CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
+
+    # Change this to a strong secret key
+    app.config['JWT_SECRET_KEY'] = 'change_this_on_server_and_save_it_in_env'
+    jwt = JWTManager(app)
     app.config['SWAGGER'] = {
         'title': 'Melius API',
         'description': 'API for Melius a web app that will help you beat porn addiction in complete secrecy',
