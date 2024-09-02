@@ -20,6 +20,7 @@ def reset_or_create_timer():
     # Check if a timer already exists for the user
     timer = storage.getSession().query(TimerHistory).filter_by(user_id=user_id).first()
 
+    message = ""
     if timer:
         if timer.start_date.tzinfo is None:
             timer.start_date = timer.start_date.replace(tzinfo=timezone.utc)
@@ -35,19 +36,21 @@ def reset_or_create_timer():
             if elapsed_days > timer.max_time:
                 timer.max_time = elapsed_days
 
-        # Reset the timer's start and reset dates, increment the number of tries
+        # Reset the timer's reset dates, increment the number of tries
         timer.reset_date = datetime.now(timezone.utc)
         timer.no_tries += 1
         # Save the changes to the database
         storage.save()
+        message = "Timer is reset successfully"
 
     else:
         # Create a new timer entry for the user
         timer = TimerHistory(user_id=user_id)
         timer.save()
+        message = "Timer created successfully!"
 
     return jsonify({
-        "message": "Timer reset or created",
+        "message": message,
         "data": timer.to_dict()
     })
 
