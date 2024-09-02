@@ -1,7 +1,4 @@
-tags:
-  timer:
-    name: Timer
-    description: Timer management
+tags: -timer
 
 summary: Get top 10 users with the highest max_time
 description: Get the top 10 users with the highest max_time.
