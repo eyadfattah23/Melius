@@ -41,7 +41,7 @@ def reset_or_create_timer():
         timer.no_tries += 1
         # Save the changes to the database
         storage.save()
-        message = "Timer is reset successfully"
+        message = "Timer is reset, Don't give up you can do it\n"
 
     else:
         # Create a new timer entry for the user
