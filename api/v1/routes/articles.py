@@ -103,7 +103,7 @@ def create_article():
     data = request.get_json()
     instance = Article(**data)
     instance.save()
-    return make_response(jsonify(instance.to_dict()), 201)
+    return make_response( {}, 201)
 
 
 @swag_from('documentation/article/update_article.yml')
