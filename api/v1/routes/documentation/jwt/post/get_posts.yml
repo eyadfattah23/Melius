@@ -7,6 +7,12 @@ tags:
 summary: Retrieve all posts with pagination
 description: Retrieve a list of all posts in the system.
 parameters:
+  - in: header
+    name: Authorization
+    schema:
+      type: string
+    required: true
+    description: The JWT token
   - in: query
     name: page
     schema:
