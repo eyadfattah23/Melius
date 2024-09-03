@@ -1,0 +1,55 @@
+tags:
+  - Post Comments
+summary: Get post comments
+description: Get all comments for a post
+parameters:
+  - name: post_id
+    in: path
+    required: true
+    schema:
+      type: string
+    description: The ID of the post to get comments for
+responses:
+  200:
+    description: Post comments retrieved
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            comments:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: "123"
+                  text:
+                    type: string
+                    example: "This is a comment"
+                  user_id:
+                    type: string
+                    example: "123"
+                  created_at:
+                    type: string
+                    example: "2022-01-01T00:00:00Z"
+                  updated_at:
+                    type: string
+                    example: "2022-01-01T00:00:00Z"
+  404:
+    description: Post not found
+    schema:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Post not found"
+  500:
+    description: Internal server error
+    schema:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Internal server error"

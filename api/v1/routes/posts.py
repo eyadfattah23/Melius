@@ -50,9 +50,10 @@ def get_posts():
 
     return jsonify(response)
 
-@swag_from('documentation/post/get_posts.yml')
+
 @posts_bp.route('/posts2', methods=['GET'])
 @jwt_required()
+@swag_from('documentation/jwt/post/get_posts.yml')
 def get_posts2():
     """ Retrieves all posts with pagination and user authentication """
     user_id = get_jwt_identity()
