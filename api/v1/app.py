@@ -82,6 +82,16 @@ def create_flask_app():
         '''
         return make_response(jsonify({'error': error.description}), 401)
 
+    @app.errorhandler(500)
+    def custom500(error):
+        ''' 500 Error
+        ---
+        responses:
+            500:
+            description: internal server error (error with the backend code)
+        '''
+        return make_response(jsonify({'error': 'internal server error'}), 500)
+
     return app
 
 
