@@ -14,7 +14,7 @@ def create_flask_app():
     cors = CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 
     # Change this to a strong secret key
-    app.config['JWT_SECRET_KEY'] = 'change_this_on_server_and_save_it_in_env'
+    app.config['JWT_SECRET_KEY'] = environ.get('MELILUS_API_SECRET_KEY', 'change_this_on_server_and_save_it_in_env')
     jwt = JWTManager(app)
     app.config['SWAGGER'] = {
         'title': 'Melius API',
@@ -98,8 +98,8 @@ def create_flask_app():
 if __name__ == '__main__':
     """ Main Function """
     app = create_flask_app()
-    host = environ.get('HBNB_API_HOST')
-    port = environ.get('HBNB_API_PORT')
+    host = environ.get('MELILUS_API_HOST')
+    port = environ.get('MELILUS_API_PORT')
     if not host:
         host = '0.0.0.0'
     if not port:

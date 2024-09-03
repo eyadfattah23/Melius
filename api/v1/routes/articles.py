@@ -15,6 +15,39 @@ def get_articles():
     page = request.args.get('page', 1, type=int)
     per_page = request.args.get('per_page', 10, type=int)
 
+    # Get paginated articles
+    articles = list(storage.all(Article, page=page, page_size=per_page).values())
+
+    # Calculate total number of articles (assuming you have a separate method to count)
+    total_articles = storage.count(Article)
+
+    # Prepare the paginated response
+    articles_list = []
+    for article in articles:
+        article_dict = article.to_dict().copy()
+        likes_count = storage.count(ArticleLike, article_id=article.id)
+        del article_dict['content']
+        article_dict['likes_count'] = likes_count
+        articles_list.append(article_dict)
+
+    # Correct the total_pages calculation
+    total_pages = (total_articles + per_page - 1) // per_page if per_page > 0 else 1
+
+    # Create the response with pagination metadata
+    response = {
+        'total_articles': total_articles,
+        'page': page,
+        'per_page': per_page,
+        'total_pages': total_pages,
+        'articles': articles_list
+    }
+
+    return jsonify(response)
+
+    # Get the page number and page size from query parameters, with defaults
+    page = request.args.get('page', 1, type=int)
+    per_page = request.args.get('per_page', 10, type=int)
+
     # Get all articles
     articles = list(storage.all(Article).values())
 
@@ -71,7 +104,7 @@ def create_article():
     data = request.get_json()
     instance = Article(**data)
     instance.save()
-    return make_response(jsonify(instance.to_dict()), 201)
+    return make_response( {}, 201)
 
 
 @swag_from('documentation/article/update_article.yml')
