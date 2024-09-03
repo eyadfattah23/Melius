@@ -1,0 +1,56 @@
+swagger: "2.0"
+info:
+  title: Post Management API
+  version: "1.0"
+tags:
+  - post
+summary: Retrieve all posts with pagination
+description: Retrieve a list of all posts in the system.
+parameters:
+  - in: query
+    name: page
+    schema:
+      type: integer
+    required: false
+    description: The page number
+  - in: query
+    name: per_page
+    schema:
+      type: integer
+    required: false
+    description: The number of posts per page
+responses:
+  "200":
+    description: A list of post objects.
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            data:
+              type: object
+              properties:
+                posts:
+                  type: array
+                  items:
+                    $ref: "#/definitions/Post"
+                total_posts:
+                  type: integer               
+                page:
+                  type: integer
+                per_page:
+                  type: integer
+                total_pages:
+                  type: integer
+
+          type: array
+          items:
+            $ref: "#/definitions/Post"
+  "400":
+    description: Bad request (e.g., invalid JSON).
+  "401":
+    description: Unauthorized access.
+  "404":
+    description: Resource not found.
+  "500":
+    description: Internal server error.
