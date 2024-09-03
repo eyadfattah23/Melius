@@ -1,0 +1,71 @@
+tags:
+  - timer
+summary: Get timer status
+description: Get the status of a timer.
+
+parameters:
+  - name: user_id
+    in: path
+    required: true
+    schema:
+      type: string
+    description: The ID of the user to get the timer status for
+
+responses:
+  200:
+    description: Timer status
+    content:
+      application/json:
+        schema:
+          $ref: "#/definitions/Timer"
+
+  404:
+    description: TTimer not found or not started
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            message:
+              type: string
+              example: "Timer not found or not started"
+
+  500:
+    description: Internal server error
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            message:
+              type: string
+              example: "Internal server error"
+
+definitions:
+  Timer:
+    type: object
+    properties:
+      id:
+        type: string
+        example: "169a0482-55b9-4d9a-b5c2-19a94ba65ef7"
+      user_id:
+        type: string
+        example: "169a0482-55b9-4d9a-b5c2-19a94ba65ef7"
+      no_tries:
+        type: int
+        example: 0
+      max_time:
+        type: int
+        example: "01:00:00"
+      start_date:
+        type: datetime
+        example: "2024-08-30T12:34:56.789Z"
+      reset_date:
+        type: datetime
+        example: "2024-08-30T12:34:56.789Z"
+      created_at:
+        type: string
+        example: "2024-08-30T12:34:56.789Z"
+      updated_at:
+        type: string
+        example: "2024-08-30T12:34:56.789Z"

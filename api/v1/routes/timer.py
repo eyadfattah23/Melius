@@ -9,6 +9,7 @@ timer_bp = Blueprint('timer', __name__)
 
 
 # Starts the timer for the user
+@swag_from('documentation/timer/reset_or_create.yml')
 @timer_bp.route('/timer/reset_or_create', methods=['POST'])
 def reset_or_create_timer():
     data = request.get_json()
@@ -56,6 +57,7 @@ def reset_or_create_timer():
 
 
 # Returns the current timer status
+@swag_from('documentation/timer/status.yml')
 @timer_bp.route('/timer/status/<user_id>', methods=['GET'])
 def timer_status(user_id):
     timer = storage.getSession().query(TimerHistory).filter_by(user_id=user_id).first()
@@ -71,6 +73,7 @@ def timer_status(user_id):
 
 
 @timer_bp.route('/timer/top10', methods=['GET'])
+@swag_from('documentation/timer/top10.yml')
 def top10_timers():
     top_timers = storage.getSession().query(TimerHistory).order_by(
         TimerHistory.max_time.desc()).limit(10).all()
