@@ -10,6 +10,9 @@
     color: var(--primary_700);
     font-size: var(--body_S) !important;
     gap: 8px;
+    display: flex;
+    padding: 4px 8px;
+    align-items: center;
 }
 .terms_item{
     border-bottom: 0.5px solid var(--outline);

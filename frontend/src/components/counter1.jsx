@@ -2,7 +2,6 @@ import React from 'react';
 import Chart from 'react-apexcharts';
 import "../assets/styles/counter.css"
 function Counter1({number_of_days}) {
-  console.log(number_of_days)
   const achievement_color = (days) => {
     if (days < 4) return "#F68A2C";
     if (days < 8) return "#0298F3";

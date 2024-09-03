@@ -96,6 +96,3 @@ font-weight: 700;
     font-size: var(--h4);
     font-weight: 700;
 }
-input::placeholder{
-    color: red;
-}

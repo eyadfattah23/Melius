@@ -1,7 +1,7 @@
 import './App.css'
 import Home from './pages/home'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import Challenge from './pages/chellenge'
+import Challenge from './pages/challenge'
 import Community from './pages/community'
 import Articles from './pages/articles'
 import Error_404 from './pages/404'

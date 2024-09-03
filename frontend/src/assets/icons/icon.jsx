@@ -1,4 +1,4 @@
-import { RiBookLine, RiChat1Line, RiChat2Line, RiChat3Line, RiGroupLine, RiHandHeartLine, RiHeart3Line, RiHeartFill, RiLockFill, RiMailFill, RiShareLine, RiUserFill, RiUserLine } from "@remixicon/react";
+import { RiBookLine, RiChat1Line, RiChat2Line, RiChat3Line, RiGroupLine, RiHandHeartLine, RiHeart3Line, RiHeartFill, RiLockFill, RiMailFill, RiSendPlane2Line, RiShareLine, RiUserFill, RiUserLine } from "@remixicon/react";
 import { RiAddLine } from "@remixicon/react";
 import { RiArrowRightSLine } from "@remixicon/react";
 import { RiArrowLeftSLine } from "@remixicon/react";
@@ -45,6 +45,8 @@ function Icon({ name, size, color }) {
             return <RiMailFill size={size} className={color}/>
         case "heart_fill":
             return <RiHeartFill size={size} className={color}/>
+        case "send":
+            return <RiSendPlane2Line size={size} className={color}/>
         default:
             return <RiAddLine size={size} className={color} />;
     }

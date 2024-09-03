@@ -5,11 +5,13 @@ input{
     font-size: var(--body_N);
     font-weight: 400;
     background-color: transparent;
+    height: 100%;
 }
 input:focus{
     color: var(--on-surface_high_emphasis);
 }
 input::placeholder{
+    
     color: var(--on-surface_medium_emphasis);
 }
 .dark::placeholder{

@@ -7,6 +7,8 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
+import countNumberOfDays from "../functions/count_number_of_days"
+import countLevel from "../functions/count_level"
 function Login(){
     const [email, setEmail] = useState("")
     const [loading, setLoading] = useState(false);
@@ -43,10 +45,12 @@ function Login(){
             });
 
             console.log(response);
-            const user = response.data.username
-            const img = response.data.img
-            localStorage.setItem("user", JSON.stringify(user));
-            localStorage.setItem("loggedin", JSON.stringify(true));
+            const img = response.data.user.img
+            localStorage.setItem("username", JSON.stringify(response.data.user.username));
+            localStorage.setItem("user_id", JSON.stringify(response.data.user.id));
+            console.log(response.data.user.timer_reset_date)
+            localStorage.setItem("number_of_days", JSON.stringify(countNumberOfDays(response.data.user.timer_reset_date)));
+            localStorage.setItem("level", JSON.stringify(countLevel(countNumberOfDays(response.data.user.timer_reset_date))));
             navigate("/home");
         } catch (error) {
             console.error(error);
@@ -65,6 +69,7 @@ function Login(){
             <div className="login">
                 <div className="form">
                     <div className="field">
+                       <div className="container">
                        <Icon name={"email_fill"} size={24} color={"white"}/> 
                        <Field 
                         placeholder="Email"
@@ -73,18 +78,24 @@ function Login(){
                         onChange={(e) => setEmail(e.target.value)}
                         required
                        />
+                       </div>
+                    {errorEmail && <p className="error">{errorEmail}</p>}
                     </div>
                     <div className="field">
-                    <Icon name={"lock"} size={24} color={"white"}/> 
+                        <div className="container">
+                        <Icon name={"lock"} size={24} color={"white"}/> 
                     <Field 
                     placeholder="********"
                     type="password"
                     value={password}
                     required
                     onChange={(e) => setPassword(e.target.value)}/>
+                        </div>
+                    {errorPassword && <p className="error">{errorPassword}</p>}
                     </div>
+
                     <div className="submit">
-                        <Button text={"LOGIN"} type={"login_btn"} onClick={handleSubmit}/>
+                        <Button text={loading ? "Loging In..." : "LOGIN"} type={"login_btn"} onClick={handleSubmit}/>
                     </div>
                 </div>
                 <p>Forgot your password ?</p>
