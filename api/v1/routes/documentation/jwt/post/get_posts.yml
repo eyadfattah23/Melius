@@ -12,7 +12,7 @@ parameters:
     schema:
       type: string
     required: true
-    description: The JWT token to authorize API requests. Format: "Bearer {token}"
+    description: The JWT token to authorize API requests. Format "Bearer {token}"
   - in: query
     name: page
     schema:
