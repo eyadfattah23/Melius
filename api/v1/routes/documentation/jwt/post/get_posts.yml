@@ -2,8 +2,7 @@ swagger: "2.0"
 info:
   title: Post Management API
   version: "1.0"
-tags:
-  - post
+
 securityDefinitions:
   Bearer:
     type: apiKey
@@ -12,7 +11,9 @@ securityDefinitions:
     description: |
       JWT Authorization header using the Bearer scheme.
       Example: "Authorization: Bearer {token}"
-      
+
+tags:
+  - post      
 summary: Retrieve all posts with pagination
 description: Retrieve a list of all posts in the system.
 parameters:
