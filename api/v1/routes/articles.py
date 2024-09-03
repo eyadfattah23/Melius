@@ -10,6 +10,7 @@ articles_bp = Blueprint('articles', __name__)
 @swag_from('documentation/article/get_articles.yml')
 @articles_bp.route('/articles', methods=['GET'])
 def get_articles():
+    """get all articles paginated """
     # Get the page number and page size from query parameters, with defaults
     page = request.args.get('page', 1, type=int)
     per_page = request.args.get('per_page', 10, type=int)
