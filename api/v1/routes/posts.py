@@ -17,14 +17,10 @@ def get_posts():
     posts = list(storage.all(Post, page=page, page_size=per_page).values())
 
     total_posts = storage.count(Post)
-    # Paginate the posts
-    start = (page - 1) * per_page
-    end = start + per_page
-    paginated_posts = posts[start:end]
+    total_pages = (total_posts + per_page - 1) // per_page
 
-    # Prepare the paginated response
     posts_list = []
-    for post in paginated_posts:
+    for post in posts:
         post_dict = post.to_dict().copy()
 
         likes_count = storage.count(PostLike, post_id=post.id)
@@ -36,10 +32,7 @@ def get_posts():
         if user_id:
             like = storage.getSession().query(PostLike).filter_by(
                 post_id=post.id, user_id=user_id).first()
-            if like:
-                post_dict['liked'] = True
-            else:
-                post_dict['liked'] = False
+            post_dict['liked'] = like is not None
 
         posts_list.append(post_dict)
 
@@ -47,7 +40,7 @@ def get_posts():
         'total_posts': total_posts,
         'page': page,
         'per_page': per_page,
-        'total_pages': (total_posts + per_page - 1) // per_page,
+        'total_pages': total_pages,
         'posts': posts_list
     }
     return jsonify(response)
