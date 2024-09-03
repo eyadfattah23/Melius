@@ -59,7 +59,7 @@ def create_post():
     data = request.get_json()
     instance = Post(**data)
     instance.save()
-    return make_response(jsonify(instance.to_dict()), 201)
+    return make_response( {}, 201) 
 
 # Retrieves specific post info
 @swag_from('documentation/post/get_post.yml')
