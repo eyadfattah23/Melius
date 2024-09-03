@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request, make_response, abort
-from models.post import Post
+from models.post import Post, PostLike
 from models import storage
 from flasgger.utils import swag_from
 
@@ -8,8 +8,36 @@ posts_bp = Blueprint('posts', __name__)
 @swag_from('documentation/post/get_posts.yml')
 @posts_bp.route('/posts', methods=['GET'])
 def get_posts():
-    posts = storage.all(Post).values()
-    return jsonify([post.to_dict() for post in posts])
+    """ Retrieves all posts with pagination """
+    page = request.args.get('page', 1, type=int)
+    per_page = request.args.get('per_page', 10, type=int)
+
+    posts = storage.all(Post, page=page, page_size=per_page).values()
+
+    # Calculate total number of posts  
+    total_posts = storage.count(Post)
+
+    # Prepare the paginated response
+    posts_list = []
+    for post in posts:
+        post_dict = post.to_dict().copy()
+        likes_count = storage.count(PostLike, post_id=post.id) 
+        post_dict['likes_count'] = likes_count
+        posts_list.append(post_dict)
+
+    # Correct the total_pages calculation
+    total_pages = (total_posts + per_page - 1) // per_page if per_page > 0 else 1
+
+    # Create the response with pagination metadata
+    response = {
+        'total_posts': posts_list,
+        'page': page,
+        'per_page': per_page,
+        'total_pages': total_pages,
+        'posts': posts_list
+    }
+
+    return jsonify(response)
 
 # Creates a new post
 @swag_from('documentation/post/create_post.yml')
