@@ -8,63 +8,22 @@ import Button from "../components/button"
 import { useState } from "react"
 import axios from "axios"
 import { useEffect } from "react"
+import formatDate from "../functions/format_date"
+import RelapsingCheck from "../components/relapsing_check"
+import countNumberOfDays from "../functions/count_number_of_days"
+import createOrResetTimer from "../functions/create_or_reset_timer"
+import { useNavigate } from "react-router-dom"
 function Challenge(){
-
+    const level = localStorage.getItem("level")
+    const user_id = JSON.parse(localStorage.getItem("user_id"));
+    const [number_of_days, setNumberOfDays] = useState(localStorage.getItem("number_of_days"))
+    const navigate = useNavigate()
     const [loading, setLoading] = useState(false);
     const [starting_date, setStartingDate] = useState("")
-    const user_id = JSON.parse(localStorage.getItem("user_id"));
     const [tries, setTries] = useState()
     const [maxDays, setMaxDays] = useState()
-    const [number_of_days, setNumberOfDays] = useState()
-    const [level, setLevel] = useState()
-    const participated_in_challenge = JSON.parse(localStorage.getItem("challenge"))
- const joinChallenge = async () => {
-    setLoading(true);
-    try {
-        const response = await axios.post("http://127.0.0.1:5050/api/v1/timer/reset_or_create",
-          {
-            user_id: JSON.parse(localStorage.getItem("user_id"))
-          }
-        );
-        console.log(response);
-        localStorage.setItem("challenge", JSON.stringify(true));
-        navigate("/challenge");
-    } catch (error) {
-        console.error(error);
-    } finally {
-        setLoading(false);
-    }
-};
-    const countLevel = (days) => {
-        if (days >= 365) return 6;
-        if (days > 90) return 5;
-        if (days > 60) return 4;
-        if (days > 30) return 3;
-        if (days > 15) return 2;
-        if (days > 7) return 1;
-        if (days > 3) return 0;
-    }
     
-    function formatDate(timestamp) {
-        const date = new Date(timestamp);
-        
-        const day = String(date.getDate()).padStart(2, '0');
-        const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
-        const year = date.getFullYear();
-        
-        return `${day}/${month}/${year}`;
-    }
-    function countNumberOfDays(date) {
-        const givenDate = new Date(date);
-        const currentDate = new Date();
-    
-        const timeDifference = currentDate - givenDate;
-    
-        const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24)) + 1;
-    
-        return daysDifference;
-    }
-    useEffect(() => {
+    useEffect(()=>{
         const fetchTimerStatus = async () => {
             setLoading(true);
             try {
@@ -72,7 +31,8 @@ function Challenge(){
                 console.log(response);
                 setStartingDate(response.data.data.reset_date)
                 setTries(response.data.data.no_tries)
-                setMaxDays(response.data.data.max_time + 1)
+                setMaxDays(response.data.data.max_time)
+                localStorage.setItem("number_of_days", JSON.stringify(countNumberOfDays(starting_date)))
             } catch (error) {
                 console.error(error);
             } finally {
@@ -80,14 +40,16 @@ function Challenge(){
             }
             
         };
-        fetchTimerStatus();
-        setNumberOfDays(countNumberOfDays(starting_date))
-        setLevel(countLevel(number_of_days))
-    }, [user_id, maxDays, tries, starting_date, number_of_days, level]); 
+        if (number_of_days !== null){
+            fetchTimerStatus()
+            setNumberOfDays(countNumberOfDays(starting_date))
+        }
+       }, [starting_date,tries,maxDays, number_of_days])
+  
     return <>
-    <Navbar loggedin/>
+    <Navbar/>
     {
-        participated_in_challenge ? <>
+        number_of_days != null ? <>
          <section className="counter_section">
         <div className="container">
          <h2> Starting date: {formatDate(starting_date)}</h2>   
@@ -135,26 +97,13 @@ function Challenge(){
             </div>
         </div>
     </section>
-    <section className="relapsing-check">
-        <div className="container">
-          <h2>How was your day ?</h2>
-          <div className="check-btns">
-            <div>
-            <Button type={"daily_relapsing_check_fail"} text={"I couldn't make it"} onClick={joinChallenge}/>
-            </div>
-            <div>
-            <Button type={"daily_relapsing_check_success"} text={"I passed the day successfuly"}/>
-
-            </div>
-          </div>
-        </div>
-      </section>
+   <RelapsingCheck/>
         </>:
         <div className="join_challenge">
              <h4>
           Join our challenge today and start your journey towards a better you!
           </h4>
-          <div>          <Button text={"Join the Challenge"} type={"primary"} onClick={joinChallenge}/>
+          <div>          <Button text={"Join the Challenge"} type={"primary"} onClick={()=>createOrResetTimer(setLoading, navigate)}/>
           </div>
         </div>
     }

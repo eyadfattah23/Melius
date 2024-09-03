@@ -4,8 +4,8 @@ import Button from "./button"
 import Menubar from "./menubar"
 import Sidebar from "./sidebar"
 import "../assets/styles/navbar.css"
-function Navbar({loggedin}) {
-  
+function Navbar() {
+  const loggedin = localStorage.getItem("user_id")
     return (
       <div className="navbar">
       <div className="nav-left">
@@ -25,7 +25,7 @@ function Navbar({loggedin}) {
        }
        </div>
         {
-          loggedin && <Sidebar/>
+          loggedin && <Sidebar loggedin={loggedin}/>
         }
         </div>
       </div>

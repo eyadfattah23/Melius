@@ -78,10 +78,15 @@ gap: 4px;
 }
 .post_main .statistics .stat{
     padding: 4px 12px;
+    cursor: pointer;
+}
+.post_main .statistics .stat p .active{
+color: var(--primary);
+text-decoration: underline;
 }
 .post_main .statistics .stat p{
     color: #9E9D9D;
-    font-size: var(--body_XS);
+    font-size: var(--body_S);
     font-weight: 400;
 }
 .post_main .footer{
@@ -102,4 +107,50 @@ gap: 4px;
     color: #9E9D9D;
     font-size: var(--body_S);
     font-weight: 400;
+}
+.post_main .footer .sec .isLiked{
+    color: #F91616;
+    font-weight: 700;
+}
+.no_posts{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.no_posts h2{
+font-size: var(--h2);
+font-weight: 700; 
+}
+.no_posts p{
+font-size: var(--body_N);
+font-weight: 400;
+color: var(--on-surface_medium_emphasis);
+}
+.post_comments_section{
+
+}
+.post_comments_section .post_comment_field{
+    display: flex;
+    padding: 4px;
+    align-items: center;
+    gap: 8px; 
+}
+.post_comment_field .profile{
+    width: 32px;
+}
+.post_comment_field .input{
+    display: flex;
+    gap: 8px;
+    padding: 4px 8px;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1 0 0;
+    border-radius: 8px;
+border: 1px solid var(--outline, rgba(0, 0, 0, 0.12));
+background: var(--background, rgba(255, 255, 255, 0.87));
+}
+.post_comment_field .input .send_btn{
+    cursor: pointer;
 }

@@ -75,12 +75,11 @@ function Signup() {
             });
 
             console.log(response);
-            const user = response.data.username
             const img = response.data.img
-            const id = response.data.id
-            localStorage.setItem("user", JSON.stringify(user));
-            localStorage.setItem("loggedin", JSON.stringify(true));
-            localStorage.setItem("user_id", JSON.stringify(id))
+            localStorage.setItem("username", JSON.stringify(response.data.username));
+            localStorage.setItem("user_id", JSON.stringify(response.data.id));
+            localStorage.setItem("number_of_days", JSON.stringify(null));
+            localStorage.setItem("level", JSON.stringify(null));
             navigate("/home");
         } catch (error) {
             console.error(error);
