@@ -45,38 +45,52 @@ class DBStorage:
     def getSession(self):
         return self.__session
 
-    def all(self, cls=None):
-        '''query on the current database session (self.__session) all objects
-        depending of the class name (argument cls)'''
-        objects = {}
-        if cls is None:
-            from models.user import User
-            from models.article import Article
-            from models.article import ArticleLike
-            from models.article import ArticleComment
-            from models.post import Post
-            from models.post import PostLike
-            from models.post import PostComment
-            from models.timer_history import TimerHistory
-            # from models.city import City
-            # from models.amenity import Amenity
-            classes = {'user': User, 'article': Article,
-                       'timer_history': TimerHistory, 'post': Post,
-                       'postlike': PostLike, 'postcomment': PostComment,
-                       'articlelike': ArticleLike, 'articlecomment': ArticleComment}
-            for c in classes.values():
-                records = self.__session.query(c).all()
-                for object in records:
-                    objects.update(
-                        {object.__class__.__name__ + '.' + object.id: object})
+def all(self, cls=None, page=None, page_size=None):
+    '''Query on the current database session (self.__session) all objects
+    depending on the class name (argument cls), with optional pagination.'''
 
-        else:
-            records = self.__session.query(cls).all()
+    objects = {}
+    if cls is None:
+        from models.user import User
+        from models.article import Article
+        from models.article import ArticleLike
+        from models.article import ArticleComment
+        from models.post import Post
+        from models.post import PostLike
+        from models.post import PostComment
+        from models.timer_history import TimerHistory
 
-            for object in records:
+        classes = {'user': User, 'article': Article,
+                   'timer_history': TimerHistory, 'post': Post,
+                   'postlike': PostLike, 'postcomment': PostComment,
+                   'articlelike': ArticleLike, 'articlecomment': ArticleComment}
+
+        for c in classes.values():
+            query = self.__session.query(c)
+
+            # Apply pagination if page and page_size are provided
+            if page is not None and page_size is not None:
+                query = query.offset((page - 1) * page_size).limit(page_size)
+
+            records = query.all()
+            for obj in records:
                 objects.update(
-                    {object.__class__.__name__ + '.' + object.id: object})
-        return objects
+                    {obj.__class__.__name__ + '.' + obj.id: obj})
+
+    else:
+        query = self.__session.query(cls)
+
+        # Apply pagination if page and page_size are provided
+        if page is not None and page_size is not None:
+            query = query.offset((page - 1) * page_size).limit(page_size)
+
+        records = query.all()
+        for obj in records:
+            objects.update(
+                {obj.__class__.__name__ + '.' + obj.id: obj})
+
+    return objects
+
 
     def new(self, obj):
         '''add the object to the current database session'''
