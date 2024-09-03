@@ -6,72 +6,29 @@ import Button from "../components/button"
 import Avatar from "../components/avatar"
 import { useState } from "react"
 import axios from "axios"
-import { useNavigate } from "react-router-dom"
-import Leader_card from "../components/leader_card"
+import { useLocation, useNavigate } from "react-router-dom"
 import { useEffect } from "react"
 import Articles_Carousel from "../components/articles_carousel"
+import Leaders_List from "../components/leaders_list"
+import Edit_Profile from "./edit_profile"
+import RelapsingCheck from "../components/relapsing_check"
+import countNumberOfDays from "../functions/count_number_of_days"
+import createOrResetTimer from "../functions/create_or_reset_timer"
 function Home() {   
-  const user = JSON.parse(localStorage.getItem("user"));
+
+  const user = JSON.parse(localStorage.getItem("username"));
   const navigate = useNavigate()
-  const user_id = JSON.parse(localStorage.getItem("user_id"));
   const loggedin = JSON.parse(localStorage.getItem("loggedin"));
   const [loading, setLoading] = useState(false);
-  const [number_of_days, setNumberOfDays] = useState()
-    const [level, setLevel] = useState()
-  const participated_in_challenge = JSON.parse(localStorage.getItem("challenge"))
-  useEffect(() => {
-    const fetchTimerStatus = async () => {
-        setLoading(true);
-        try {
-            const response = await axios.get(`http://127.0.0.1:5050/api/v1/timer/status/${user_id}`);
-            console.log(response);
-            setNumberOfDays(countNumberOfDays(response.data.data.reset_date))
-            setLevel(countLevel(countNumberOfDays(response.data.data.reset_date)))
-        } catch (error) {
-            console.error(error);
-        } finally {
-            setLoading(false);
-        }
-        
-    };
-    fetchTimerStatus();
-    
-}, [user_id, number_of_days, level]); 
-function countNumberOfDays(date) {
-  const givenDate = new Date(date);
-  const currentDate = new Date();
-
-  const timeDifference = currentDate - givenDate;
-
-  const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24)) + 1;
-
-  return daysDifference;
-}
-  const joinChallenge = async () => {
-    setLoading(true);
-    try {
-        const response = await axios.post("http://127.0.0.1:5050/api/v1/timer/reset_or_create",
-          {
-            user_id: JSON.parse(localStorage.getItem("user_id"))
-          }
-        );
-        console.log(response);
-        localStorage.setItem("challenge", JSON.stringify(true));
-        navigate("/challenge");
-    } catch (error) {
-        console.error(error);
-    } finally {
-        setLoading(false);
-    }
-};
+  const number_of_days = JSON.parse(localStorage.getItem("number_of_days"))
     return (
       <>
-      <Navbar loggedin={loggedin}/>
+      <Navbar/>
       <section className="counter">
         <div className="container">
             <h3>Welcome, {user}</h3>
            {
-            participated_in_challenge ?  <div className="stats">
+            number_of_days != null ?  <div className="stats">
             <h4>
               You're on
             </h4>
@@ -86,38 +43,19 @@ function countNumberOfDays(date) {
           <p>
           Join our challenge today and start your journey towards a better you!
           </p>
-          <div>          <Button text={"Join the Challenge"} type={"primary"} onClick={joinChallenge}/>
+          <div>          <Button text={"Join the Challenge"} type={"primary"} onClick={() =>createOrResetTimer(setLoading, navigate)}/>
           </div>
         </div>
            }
         </div>
       </section>
      {
-      participated_in_challenge &&  <section className="relapsing-check">
-      <div className="container">
-        <h2>How was your day ?</h2>
-        <div className="check-btns">
-          <div>
-          <Button type={"daily_relapsing_check_fail"} text={"I couldn't make it"} onClick={joinChallenge}/>
-          </div>
-          <div>
-          <Button type={"daily_relapsing_check_success"} text={"I passed the day successfuly"}/>
-
-          </div>
-        </div>
-      </div>
-    </section> 
+      number_of_days != null &&  <RelapsingCheck/>
      }
       <section className="leaders-board">
         <div className="container">
           <h1>Leaders Board</h1>
-          <div className="leaders_list">
-            <Leader_card name={"random_name"} badge={<Avatar level={"6"}/>}/>
-            <Leader_card name={"random_name"} badge={<Avatar level={"6"}/>}/>
-            <Leader_card name={"random_name"} badge={<Avatar level={"6"}/>}/>
-            <Leader_card name={"random_name"} badge={<Avatar level={"6"}/>}/>
-            <Leader_card name={"random_name"} badge={<Avatar level={"5"}/>}/>
-          </div>
+         <Leaders_List/>
         </div>
       </section>
       <section className="latest-articles">

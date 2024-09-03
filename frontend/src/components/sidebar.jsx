@@ -10,19 +10,24 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
   } from "./shadcn/ui/dropdown-menu"
-  import { DialogTrigger, Dialog } from "@radix-ui/react-dialog"
+  import {    DialogTrigger, Dialog  } from "../components/shadcn/ui/dialog"
 import Icon from "../assets/icons/icon"
-//import Edit_Profile from "../pages/edit_profile"
-  function Sidebar() {
+import Edit_Profile from "../pages/edit_profile.jsx"
+import Button from "./button"
+import countNumberOfDays from "../functions/count_number_of_days"
+  function Sidebar({loggedin}) {
     const navigate = useNavigate();
+    const level = JSON.parse(localStorage.getItem("level"))
     const handleLoggout =() =>{
-      localStorage.removeItem("loggedin")
-      localStorage.removeItem('user')
+      localStorage.removeItem("username");
+      localStorage.removeItem("user_id");
+      localStorage.removeItem("number_of_days");
+      localStorage.removeItem("level");
       navigate("/login")
     }
     return (
         <DropdownMenu> <DropdownMenuTrigger asChild>
-            <button className="avatar"><Avatar/></button>
+            <button className="avatar"><Avatar level={level}/></button>
     </DropdownMenuTrigger>
     <DropdownMenuContent className="w-56">
       <DropdownMenuLabel className={"dropdown_label"}>
@@ -30,16 +35,15 @@ import Icon from "../assets/icons/icon"
         </DropdownMenuLabel>
       <DropdownMenuSeparator />
       <DropdownMenuGroup>
-        <DropdownMenuItem className={"menu_item"}>
-        <Icon name={"user"} size={16} />
         <Dialog>
-      <DialogTrigger asChild>
-      <span>Edit Account</span>
-      </DialogTrigger>
-      {/* <Edit_Profile/> */}
-      </Dialog>
-         
-        </DropdownMenuItem>
+          <DialogTrigger asChild>
+          <div className={"menu_item"}>
+          <Icon name={"user"} size={16} />
+         <span>Edit Account</span>
+         </div>
+          </DialogTrigger>
+          <Edit_Profile/>
+      </Dialog> 
         <DropdownMenuItem className={"menu_item"}>
         <Icon name={"survey"} size={16} />
           <span>Tests</span>
