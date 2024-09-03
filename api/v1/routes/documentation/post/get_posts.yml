@@ -19,7 +19,7 @@ parameters:
       type: integer
     required: false
     description: The number of posts per page
-  -in: query
+  - in: query
     name: user_id
     schema:
       type: string
