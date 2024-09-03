@@ -50,7 +50,7 @@ def get_posts():
 
     return jsonify(response)
 
-
+@swag_from('documentation/jwt/post/get_posts.yml')
 @posts_bp.route('/posts2', methods=['GET'])
 @jwt_required()
 def get_posts2():
