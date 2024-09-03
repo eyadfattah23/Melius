@@ -29,8 +29,6 @@ parameters:
 responses:
   201:
     description: Article created successfully
-    schema:
-      $ref: "#/definitions/Article"
   400:
     description: Bad Request (e.g., missing fields)
     schema:

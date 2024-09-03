@@ -26,8 +26,6 @@ parameters:
 responses:
   201:
     description: Post created successfully.
-    schema:
-      $ref: "#/definitions/Post"
   400:
     description: Bad Request (e.g., invalid JSON or trying to create a post with an invalid user ID).
     schema:
