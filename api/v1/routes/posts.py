@@ -52,8 +52,8 @@ def get_posts():
 
 
 @posts_bp.route('/posts2', methods=['GET'])
-@swag_from('documentation/jwt/post/get_posts.yml')
 @jwt_required()
+@swag_from('documentation/jwt/post/get_posts.yml')
 def get_posts2():
     """ Retrieves all posts with pagination and user authentication """
     user_id = get_jwt_identity()
