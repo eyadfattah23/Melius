@@ -30,7 +30,7 @@ def get_posts():
 
     # Create the response with pagination metadata
     response = {
-        'total_posts': posts_list,
+        'total_posts': total_posts,
         'page': page,
         'per_page': per_page,
         'total_pages': total_pages,
