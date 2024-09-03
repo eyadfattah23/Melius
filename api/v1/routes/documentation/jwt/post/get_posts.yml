@@ -4,15 +4,18 @@ info:
   version: "1.0"
 tags:
   - post
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: |
+      JWT Authorization header using the Bearer scheme.
+      Example: "Authorization: Bearer {token}"
+      
 summary: Retrieve all posts with pagination
 description: Retrieve a list of all posts in the system.
 parameters:
-  - in: header
-    name: Authorization
-    schema:
-      type: string
-    required: true
-    description: The JWT token
   - in: query
     name: page
     schema:
