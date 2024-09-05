@@ -84,7 +84,7 @@ def get_user(user_id):
     """ Retrieves an user """
     user = storage.get(User, user_id)
     if not user:
-        abort(404)
+        abort(404, description="User not found")
 
     return jsonify(user.to_dict())
 
@@ -127,7 +127,7 @@ def delete_user(user_id):
     user = storage.get(User, user_id)
 
     if not user:
-        abort(404)
+        abort(404, description="User not found")
 
     storage.delete(user)
     storage.save()
