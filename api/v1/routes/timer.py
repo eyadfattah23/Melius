@@ -23,7 +23,7 @@ def reset_or_create_timer():
 
     message = ""
     if timer:
-        if timer.start_date.tzinfo is None:
+        if not timer.start_date.tzinfo:
             timer.start_date = timer.start_date.replace(tzinfo=timezone.utc)
 
         # Calculate the elapsed time in days
@@ -31,7 +31,7 @@ def reset_or_create_timer():
                         timer.reset_date.date()).days
 
         # Update max_time if the new elapsed time is greater
-        if timer.max_time is None:
+        if not timer.max_time:
             timer.max_time = elapsed_days
         else:
             if elapsed_days > timer.max_time:
