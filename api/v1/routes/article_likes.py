@@ -6,19 +6,21 @@ from flasgger.utils import swag_from
 
 article_likes_bp = Blueprint('articleLikes', __name__)
 
-# Retrieves all likes for a specific article
+
 @swag_from('documentation/article/likes/get_article_likes.yml')
 @article_likes_bp.route('/article/<article_id>/likes', methods=['GET'])
 def get_article_likes(article_id):
-    article =  storage.get(Article, article_id)
+    """Retrieves all likes for a specific article"""
+    article = storage.get(Article, article_id)
     return jsonify([like.to_dict() for like in article.likes])
 
 
-# Retrieves a article likes count 
+# Retrieves a article likes count
 @swag_from('documentation/article/likes/get_article_likes_count.yml')
 @article_likes_bp.route('/article/<article_id>/likes/count', methods=['GET'])
 def get_article_likes_count(article_id):
-    count =  storage.count(ArticleLike, article_id=article_id)
+    "Retrieves a article likes count"
+    count = storage.count(ArticleLike, article_id=article_id)
     return jsonify({"count":  count})
 
 
@@ -26,6 +28,7 @@ def get_article_likes_count(article_id):
 @swag_from('documentation/article/likes/like_article.yml')
 @article_likes_bp.route('/article/<article_id>/likes', methods=['POST'])
 def like_article(article_id):
+    """Handles liking or unliking an article by a specific user"""
     # Check if the request has JSON data
     if not request.get_json():
         abort(400, description="Not a JSON")
@@ -51,26 +54,28 @@ def like_article(article_id):
         return make_response(jsonify({"message": "Like removed"}), 200)
 
 
-
-# Retrieves a user's like for a specific article 
+# Retrieves a user's like for a specific article
 def get_user_like_for_article(article_id, user_id):
+    """retrieve a user's like for a specific article"""
     article = storage.get(Article, article_id)
 
     if not article:
-        abort(404)
+        abort(404, description="Article not found")
 
     # Query for the like based on article_id and user_id
-    like = storage.getSession().query(ArticleLike).filter_by(article_id=article_id, user_id=user_id).first()
+    like = storage.getSession().query(ArticleLike).filter_by(
+        article_id=article_id, user_id=user_id).first()
 
     return like
 
 
 # Creates a new like
 def create_article_like(article_id, user_id):
+    """create a new like for a specific article by a specific user"""
     article = storage.get(Article, article_id)
 
     if not article:
-        abort(404)
+        abort(404, description="Article not found")
 
     # Create a new articleLike instance
     new_like = ArticleLike(article_id=article.id, user_id=user_id)
@@ -80,7 +85,6 @@ def create_article_like(article_id, user_id):
 
 # Deletes a like
 def delete_article_like(like):
+    """deletes a like"""
     storage.delete(like)
     storage.save()
-
-
