@@ -60,13 +60,33 @@ def reset_or_create_timer():
 @swag_from('documentation/timer/status.yml')
 @timer_bp.route('/timer/status/<user_id>', methods=['GET'])
 def timer_status(user_id):
+    """return the current timer status for the specified user"""
+
     timer = storage.getSession().query(TimerHistory).filter_by(user_id=user_id).first()
 
     if not timer or not timer.start_date:
         abort(404, description="Timer not found or not started")
 
+    if not timer.start_date.tzinfo:
+        timer.start_date = timer.start_date.replace(tzinfo=timezone.utc)
+
+        # Calculate the elapsed time in days, hrs and mins
+    elapsed_days = (datetime.now(timezone.utc).date() -
+                    timer.reset_date.date()).days
+
+    elapsed_hours = (datetime.now(timezone.utc).date() -
+                     timer.reset_date.date()).seconds//3600
+
+    if elapsed_days > timer.max_time:
+        timer.max_time = elapsed_days
+
+    storage.save()
+
+    data = timer.to_dict().copy()
+
+    data['elapsed_hours'] = elapsed_hours
     return jsonify({
-        "data": timer.to_dict()
+        "data": data
     })
 
 # Retrieves the top 10 users with the highest max_time
