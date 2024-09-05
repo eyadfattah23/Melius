@@ -14,7 +14,8 @@ def create_flask_app():
     cors = CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 
     # Change this to a strong secret key
-    app.config['JWT_SECRET_KEY'] = environ.get('MELILUS_API_SECRET_KEY', 'change_this_on_server_and_save_it_in_env')
+    app.config['JWT_SECRET_KEY'] = environ.get(
+        'MELILUS_API_SECRET_KEY', 'change_this_on_server_and_save_it_in_env')
     jwt = JWTManager(app)
     app.config['SWAGGER'] = {
         'title': 'Melius API',
@@ -60,7 +61,7 @@ def create_flask_app():
             404:
             description: a resource was not found
         """
-        return make_response(jsonify({'error': "Not found"}), 404)
+        return make_response(jsonify({'error': error.description}), 404)
 
     @app.errorhandler(400)
     def custom400(error):

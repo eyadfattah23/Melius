@@ -10,15 +10,17 @@ likes_bp = Blueprint('postLikes', __name__)
 @swag_from('documentation/post/likes/get_post_likes.yml')
 @likes_bp.route('/posts/<post_id>/likes', methods=['GET'])
 def get_post_likes(post_id):
-    post =  storage.get(Post, post_id)
+    """get all likes for a specific post"""
+    post = storage.get(Post, post_id)
     return jsonify([like.to_dict() for like in post.likes])
 
 
-# Retrieves a post likes count 
+# Retrieves a post likes count
 @swag_from('documentation/post/likes/get_post_likes_count.yml')
 @likes_bp.route('/posts/<post_id>/likes/count', methods=['GET'])
 def get_post_likes_count(post_id):
-    count =  storage.count(PostLike, post_id=post_id)
+    """retrives a post likes count"""
+    count = storage.count(PostLike, post_id=post_id)
     return jsonify({"count":  count})
 
 
@@ -26,6 +28,7 @@ def get_post_likes_count(post_id):
 @swag_from('documentation/post/likes/like_post.yml')
 @likes_bp.route('/posts/<post_id>/likes', methods=['POST'])
 def like_post(post_id):
+    """create a new like post or remove it from the post likes list"""
     # Check if the request has JSON data
     if not request.get_json():
         abort(400, description="Not a JSON")
@@ -51,26 +54,28 @@ def like_post(post_id):
         return make_response(jsonify({"message": "Like removed"}), 200)
 
 
-
-# Retrieves a user's like for a specific post 
+# Retrieves a user's like for a specific post
 def get_user_like_for_post(post_id, user_id):
+    """retrieve user's like for a specific post"""
     post = storage.get(Post, post_id)
 
     if not post:
-        abort(404)
+        abort(404, description="post not found")
 
     # Query for the like based on post_id and user_id
-    like = storage.getSession().query(PostLike).filter_by(post_id=post_id, user_id=user_id).first()
+    like = storage.getSession().query(PostLike).filter_by(
+        post_id=post_id, user_id=user_id).first()
 
     return like
 
 
 # Creates a new like
 def create_post_like(post_id, user_id):
+    """creates a new like for a specific post by a user"""
     post = storage.get(Post, post_id)
 
     if not post:
-        abort(404)
+        abort(404, description="post not found")
 
     # Create a new PostLike instance
     new_like = PostLike(post_id=post.id, user_id=user_id)
@@ -82,5 +87,3 @@ def create_post_like(post_id, user_id):
 def delete_post_like(like):
     storage.delete(like)
     storage.save()
-
-
