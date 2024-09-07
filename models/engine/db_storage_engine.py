@@ -73,10 +73,7 @@ class DBStorage:
                 query = self.__session.query(c)
     
                 # Apply filters based on the filter type
-                if filter_type == 'most_liked' and c == Article: 
-                    query(Article).outerjoin(ArticleLike, Article.id == ArticleLike.article_id)  # Group by article ID
-
-                elif filter_type == 'newest' and hasattr(c, 'created_at'):
+                if filter_type == 'newest' and hasattr(c, 'created_at'):
                     query = query.order_by(c.created_at.desc())
                 elif filter_type == 'oldest' and hasattr(c, 'created_at'):
                     query = query.order_by(c.created_at.asc())
@@ -96,8 +93,8 @@ class DBStorage:
             query = self.__session.query(cls)
     
             # Apply filters based on the filter type
-            if filter_type == 'most_liked' and hasattr(cls, 'likes'):
-                query = query.order_by(cls.likes.desc())
+            if filter_type == 'most_liked' and hasattr(cls, 'likes') and cls == Article:
+                query = query(Article).outerjoin(ArticleLike, Article.id == ArticleLike.article_id) 
             elif filter_type == 'newest' and hasattr(cls, 'created_at'):
                 query = query.order_by(cls.created_at.desc())
             elif filter_type == 'oldest' and hasattr(cls, 'created_at'):
