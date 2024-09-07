@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """This module defines a class to manage DB storage for Melius"""
 from sqlalchemy import create_engine, func
-from sqlalchemy.orm import sessionmaker, scoped_session
+from sqlalchemy.orm import sessionmaker, scoped_session, aliased
 from sqlalchemy.exc import IntegrityError
 
 from os import getenv
@@ -73,8 +73,9 @@ class DBStorage:
                 query = self.__session.query(c)
     
                 # Apply filters based on the filter type
-                if filter_type == 'most_liked' and hasattr(c, 'likes'):
-                    query = query.order_by(c.likes.desc())
+                if filter_type == 'most_liked' and c == Article:
+                    likes_alias = aliased(ArticleLike)
+                    query = query.outerjoin(likes_alias).group_by(c.id).order_by(func.count(likes_alias.id).desc())
                 elif filter_type == 'newest' and hasattr(c, 'created_at'):
                     query = query.order_by(c.created_at.desc())
                 elif filter_type == 'oldest' and hasattr(c, 'created_at'):
