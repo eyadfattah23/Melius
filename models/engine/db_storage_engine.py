@@ -74,7 +74,8 @@ class DBStorage:
     
                 # Apply filters based on the filter type
                 if filter_type == 'most_liked' and c == Article:
-                    query(Article).outerjoin(Article.likes).group_by(Article.id).order_by(desc(func.count(ArticleLike.id)))
+                    query(Article).outerjoin(Article.likes).group_by(Article.id)
+
                 elif filter_type == 'newest' and hasattr(c, 'created_at'):
                     query = query.order_by(c.created_at.desc())
                 elif filter_type == 'oldest' and hasattr(c, 'created_at'):
