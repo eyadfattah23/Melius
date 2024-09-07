@@ -95,17 +95,17 @@ class DBStorage:
     
             # Apply filters based on the filter type
             if filter_type == 'most_liked' and hasattr(cls, 'likes') and cls == Article:
-                query = query(Article).outerjoin(ArticleLike, Article.id == ArticleLike.article_id) 
+                query(Article).outerjoin(ArticleLike, Article.id == ArticleLike.article_id) 
             elif filter_type == 'newest' and hasattr(cls, 'created_at'):
-                query = query.order_by(cls.created_at.desc())
+                query.order_by(cls.created_at.desc())
             elif filter_type == 'oldest' and hasattr(cls, 'created_at'):
-                query = query.order_by(cls.created_at.asc())
+                query.order_by(cls.created_at.asc())
             elif filter_type == 'by_user' and hasattr(cls, 'user_id') and user_id is not None:
-                query = query.filter(cls.user_id == user_id)
+                query.filter(cls.user_id == user_id)
     
             # Apply pagination if page and page_size are provided
             if page is not None and page_size is not None:
-                query = query.offset((page - 1) * page_size).limit(page_size)
+                query.offset((page - 1) * page_size).limit(page_size)
     
             records = query.all()
             for obj in records:
