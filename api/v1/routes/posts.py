@@ -12,10 +12,12 @@ def get_posts():
     """ Retrieves all posts with pagination """
     page = request.args.get('page', 1, type=int)
     per_page = request.args.get('per_page', 10, type=int)
+    filter_type = request.args.get('filter_type', '', type=str)
     user_id = request.args.get('user_id', '', type=str)
 
+
     # Get the paginated posts directly from storage
-    posts = list(storage.all(Post, page=page, page_size=per_page).values())
+    posts = list(storage.all(Post, page=page, page_size=per_page, filter_type=filter_type, user_id=user_id).values())
 
     # Calculate total number of posts  
     total_posts = storage.count(Post)
