@@ -94,22 +94,40 @@ class DBStorage:
             query = self.__session.query(cls)
     
             # Apply filters based on the filter type
-            if filter_type == 'most_liked' and hasattr(cls, 'likes') and cls == Article:
-                # Create a subquery to count likes for each article
-                like_count_subquery = (
-                    self.__session.query(
-                        ArticleLike.article_id,
-                        func.count(ArticleLike.id).label('like_count')
+            if filter_type == 'most_liked' and hasattr(cls, 'likes'):
+                if cls == Article:
+                    # Create a subquery to count likes for each article
+                    like_count_subquery = (
+                        self.__session.query(
+                            ArticleLike.article_id,
+                            func.count(ArticleLike.id).label('like_count')
+                        )
+                        .group_by(ArticleLike.article_id)
+                        .subquery()
                     )
-                    .group_by(ArticleLike.article_id)
-                    .subquery()
-                )
 
-                # Join the subquery with the Article table
-                query = (
-                    query.outerjoin(like_count_subquery, cls.id == like_count_subquery.c.article_id)
-                    .order_by(like_count_subquery.c.like_count.desc())
-                )
+                    # Join the subquery with the Article table
+                    query = (
+                        query.outerjoin(like_count_subquery, cls.id == like_count_subquery.c.article_id)
+                        .order_by(like_count_subquery.c.like_count.desc())
+                    )
+                elif cls == Post:
+                    # Create a subquery to count likes for each post
+                    like_count_subquery = (
+                        self.__session.query(
+                            PostLike.post_id,
+                            func.count(PostLike.id).label('like_count')
+                        )
+                        .group_by(PostLike.post_id)
+                        .subquery()
+                    )
+
+                    # Join the subquery with the Post table
+                    query = (
+                        query.outerjoin(like_count_subquery, cls.id == like_count_subquery.c.post_id)
+                        .order_by(like_count_subquery.c.like_count.desc())
+                    )
+
             elif filter_type == 'newest' and hasattr(cls, 'created_at'):
                 query.order_by(cls.created_at.desc())
             elif filter_type == 'oldest' and hasattr(cls, 'created_at'):
