@@ -20,10 +20,6 @@ def get_articles():
     # Get paginated articles
     articles = list(storage.all(Article, page=page, page_size=per_page, filter_type=filter_type, user_id=user_id).values())
 
-    for article in articles:
-        article_dict = article.to_dict().copy()
-        print(article_dict)
-
     # Calculate total number of articles (assuming you have a separate method to count)
     total_articles = storage.count(Article)
 
