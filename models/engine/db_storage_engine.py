@@ -95,7 +95,7 @@ class DBStorage:
     
             # Apply filters based on the filter type
             if filter_type == 'most_liked' and hasattr(cls, 'likes') and cls == Article:
-                query(Article).outerjoin(ArticleLike, Article.id == ArticleLike.article_id) 
+                query.outerjoin(ArticleLike, Article.id == ArticleLike.article_id) 
             elif filter_type == 'newest' and hasattr(cls, 'created_at'):
                 query.order_by(cls.created_at.desc())
             elif filter_type == 'oldest' and hasattr(cls, 'created_at'):
