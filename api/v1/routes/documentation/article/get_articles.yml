@@ -19,6 +19,16 @@ parameters:
     required: false
     type: integer
     description: The number of articles per page
+  - name: filter_type
+    in: query
+    required: false
+    type: string
+    description: The filter type for the articles (most_liked, newest, oldest)
+  - name: user_id
+    in: query
+    required: false
+    type: string
+    description: The ID of the user
 responses:
   200:
     description: A list of articles
