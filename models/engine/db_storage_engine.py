@@ -145,14 +145,8 @@ class DBStorage:
     
             records = query.all()
             for obj in records:
-                obj_data = {
-                    'id': obj.id
-                }
-                # Include the username if it exists in the result
-                if hasattr(obj, 'username'):
-                    obj_data['username'] = obj.username
-                # Add other fields from obj as needed
-                objects[obj.__class__.__name__ + '.' + str(obj.id)] = obj_data
+                objects.update(
+                    {obj.__class__.__name__ + '.' + str(obj.id): obj})
     
         return objects
 
