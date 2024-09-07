@@ -137,7 +137,7 @@ class DBStorage:
     
             # Apply pagination if page and page_size are provided
             if page is not None and page_size is not None:
-                query.offset((page - 1) * page_size).limit(page_size)
+                 query = query.offset((page - 1) * page_size).limit(page_size)
     
             records = query.all()
             for obj in records:
