@@ -19,12 +19,6 @@ parameters:
       type: integer
     required: false
     description: The number of posts per page
-  - in: query
-    name: user_id
-    schema:
-      type: string
-    required: false
-    description: The ID of the user
   - name: filter_type
     in: query
     required: false
