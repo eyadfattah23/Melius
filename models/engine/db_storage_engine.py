@@ -54,15 +54,16 @@ class DBStorage:
         objects = {}
     
         # If no specific class is provided, query all classes
+        from models.user import User
+        from models.article import Article
+        from models.article import ArticleLike
+        from models.article import ArticleComment
+        from models.post import Post
+        from models.post import PostLike
+        from models.post import PostComment
+        from models.timer_history import TimerHistory
         if cls is None:
-            from models.user import User
-            from models.article import Article
-            from models.article import ArticleLike
-            from models.article import ArticleComment
-            from models.post import Post
-            from models.post import PostLike
-            from models.post import PostComment
-            from models.timer_history import TimerHistory
+           
     
             classes = {'user': User, 'article': Article,
                        'timer_history': TimerHistory, 'post': Post,
