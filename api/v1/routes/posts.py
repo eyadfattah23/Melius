@@ -31,6 +31,7 @@ def get_posts():
         # Adding like and comment counts
         likes_count = storage.count(PostLike, post_id=post.id)
         comments_count = storage.count(PostComment, post_id=post.id)
+        post_dict['username'] = post.user.username
         
         post_dict['likes_count'] = likes_count
         post_dict['comments_count'] = comments_count

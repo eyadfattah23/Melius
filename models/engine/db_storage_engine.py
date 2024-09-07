@@ -134,14 +134,7 @@ class DBStorage:
                 query = query.order_by(cls.created_at.asc())
             elif filter_type == 'by_user' and hasattr(cls, 'user_id') and user_id is not None:
                 query = query.filter(cls.user_id == user_id)
-
-            # Add the username to the User model
-            if hasattr(cls, 'user'):
-                query = (
-                    self.__session.query(cls, User.username)
-                    .join(User, cls.user_id == User.id)  # Ensure correct join condition
-                    .add_columns(cls.id, User.username)
-                )
+            
     
             # Apply pagination if page and page_size are provided
             if page is not None and page_size is not None:
