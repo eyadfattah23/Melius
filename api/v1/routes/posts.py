@@ -12,10 +12,12 @@ def get_posts():
     """ Retrieves all posts with pagination """
     page = request.args.get('page', 1, type=int)
     per_page = request.args.get('per_page', 10, type=int)
+    filter_type = request.args.get('filter_type', '', type=str)
     user_id = request.args.get('user_id', '', type=str)
 
+
     # Get the paginated posts directly from storage
-    posts = list(storage.all(Post, page=page, page_size=per_page).values())
+    posts = list(storage.all(Post, page=page, page_size=per_page, filter_type=filter_type, user_id=user_id).values())
 
     # Calculate total number of posts  
     total_posts = storage.count(Post)
@@ -29,7 +31,11 @@ def get_posts():
         # Adding like and comment counts
         likes_count = storage.count(PostLike, post_id=post.id)
         comments_count = storage.count(PostComment, post_id=post.id)
-        
+        post_dict['username'] = post.user.username
+        # Accessing the single TimerHistory record for the user
+        timer_history = post.user.timer_histories[0] if post.user.timer_histories else None
+        post_dict['max_time'] = timer_history.max_time if timer_history else 0
+
         post_dict['likes_count'] = likes_count
         post_dict['comments_count'] = comments_count
 
