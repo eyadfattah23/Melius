@@ -136,8 +136,8 @@ class DBStorage:
                 query = query.filter(cls.user_id == user_id)
 
             # Add the username to the User model
-            if hasattr(cls, 'user'):
-                query = query.join(User).add_columns(User.username)
+            #if hasattr(cls, 'user'):
+                #query = query.join(User).add_columns(User.username)
     
             # Apply pagination if page and page_size are provided
             if page is not None and page_size is not None:
