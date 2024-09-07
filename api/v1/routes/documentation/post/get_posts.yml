@@ -25,6 +25,17 @@ parameters:
       type: string
     required: false
     description: The ID of the user
+  - name: filter_type
+    in: query
+    required: false
+    type: string
+    description: The filter type for the articles (most_liked, newest, oldest, by_user)
+  - in: query
+    name: user_id
+    schema:
+      type: string
+    required: false
+    description: The ID of the user used to show if a post is liked by the user and to filter posts by user
 responses:
   "200":
     description: A list of post objects.
