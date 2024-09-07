@@ -32,7 +32,10 @@ def get_posts():
         likes_count = storage.count(PostLike, post_id=post.id)
         comments_count = storage.count(PostComment, post_id=post.id)
         post_dict['username'] = post.user.username
-        
+        # Accessing the single TimerHistory record for the user
+        timer_history = post.user.timer_histories[0] if post.user.timer_histories else None
+        post_dict['max_time'] = timer_history.max_time if timer_history else 0
+
         post_dict['likes_count'] = likes_count
         post_dict['comments_count'] = comments_count
 
