@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """This module defines a class to manage DB storage for Melius"""
 from sqlalchemy import create_engine, func
-from sqlalchemy.orm import sessionmaker, scoped_session
+from sqlalchemy.orm import sessionmaker, scoped_session, aliased
 from sqlalchemy.exc import IntegrityError
 
 from os import getenv
@@ -45,20 +45,25 @@ class DBStorage:
     def getSession(self):
         return self.__session
 
-    def all(self, cls=None, page=None, page_size=None):
-        '''Query on the current database session (self.__session) all objects
-        depending on the class name (argument cls), with optional pagination.'''
+    def all(self, cls=None, page=None, page_size=None, filter_type=None, user_id=None):
+        """
+        Query on the current database session (self.__session) all objects
+        depending on the class name (argument cls), with optional pagination, filtering, and ordering.
+        """
     
         objects = {}
+    
+        # If no specific class is provided, query all classes
+        from models.user import User
+        from models.article import Article
+        from models.article import ArticleLike
+        from models.article import ArticleComment
+        from models.post import Post
+        from models.post import PostLike
+        from models.post import PostComment
+        from models.timer_history import TimerHistory
         if cls is None:
-            from models.user import User
-            from models.article import Article
-            from models.article import ArticleLike
-            from models.article import ArticleComment
-            from models.post import Post
-            from models.post import PostLike
-            from models.post import PostComment
-            from models.timer_history import TimerHistory
+           
     
             classes = {'user': User, 'article': Article,
                        'timer_history': TimerHistory, 'post': Post,
@@ -68,6 +73,14 @@ class DBStorage:
             for c in classes.values():
                 query = self.__session.query(c)
     
+                # Apply filters based on the filter type
+                if filter_type == 'newest' and hasattr(c, 'created_at'):
+                    query = query.order_by(c.created_at.desc())
+                elif filter_type == 'oldest' and hasattr(c, 'created_at'):
+                    query = query.order_by(c.created_at.asc())
+                elif filter_type == 'by_user' and hasattr(c, 'user_id') and user_id is not None:
+                    query = query.filter(c.user_id == user_id)
+    
                 # Apply pagination if page and page_size are provided
                 if page is not None and page_size is not None:
                     query = query.offset((page - 1) * page_size).limit(page_size)
@@ -75,21 +88,65 @@ class DBStorage:
                 records = query.all()
                 for obj in records:
                     objects.update(
-                        {obj.__class__.__name__ + '.' + obj.id: obj})
+                        {obj.__class__.__name__ + '.' + str(obj.id): obj})
     
         else:
             query = self.__session.query(cls)
     
+            # Apply filters based on the filter type
+            if filter_type == 'most_liked' and hasattr(cls, 'likes'):
+                if cls == Article:
+                    # Create a subquery to count likes for each article
+                    like_count_subquery = (
+                        self.__session.query(
+                            ArticleLike.article_id,
+                            func.count(ArticleLike.id).label('like_count')
+                        )
+                        .group_by(ArticleLike.article_id)
+                        .subquery()
+                    )
+
+                    # Join the subquery with the Article table
+                    query = (
+                        query.outerjoin(like_count_subquery, cls.id == like_count_subquery.c.article_id)
+                        .order_by(like_count_subquery.c.like_count.desc())
+                    )
+                elif cls == Post:
+                    # Create a subquery to count likes for each post
+                    like_count_subquery = (
+                        self.__session.query(
+                            PostLike.post_id,
+                            func.count(PostLike.id).label('like_count')
+                        )
+                        .group_by(PostLike.post_id)
+                        .subquery()
+                    )
+
+                    # Join the subquery with the Post table
+                    query = (
+                        query.outerjoin(like_count_subquery, cls.id == like_count_subquery.c.post_id)
+                        .order_by(like_count_subquery.c.like_count.desc())
+                    )
+
+            elif filter_type == 'newest' and hasattr(cls, 'created_at'):
+                query = query.order_by(cls.created_at.desc())
+            elif filter_type == 'oldest' and hasattr(cls, 'created_at'):
+                query = query.order_by(cls.created_at.asc())
+            elif filter_type == 'by_user' and hasattr(cls, 'user_id') and user_id is not None:
+                query = query.filter(cls.user_id == user_id)
+            
+    
             # Apply pagination if page and page_size are provided
             if page is not None and page_size is not None:
-                query = query.offset((page - 1) * page_size).limit(page_size)
+                 query = query.offset((page - 1) * page_size).limit(page_size)
     
             records = query.all()
             for obj in records:
                 objects.update(
-                    {obj.__class__.__name__ + '.' + obj.id: obj})
+                    {obj.__class__.__name__ + '.' + str(obj.id): obj})
     
         return objects
+
 
 
     def new(self, obj):

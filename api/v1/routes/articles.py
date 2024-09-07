@@ -14,9 +14,10 @@ def get_articles():
     # Get the page number and page size from query parameters, with defaults
     page = request.args.get('page', 1, type=int)
     per_page = request.args.get('per_page', 10, type=int)
+    filter_type = request.args.get('filter_type', '', type=str)
 
     # Get paginated articles
-    articles = list(storage.all(Article, page=page, page_size=per_page).values())
+    articles = list(storage.all(Article, page=page, page_size=per_page, filter_type=filter_type).values())
 
     # Calculate total number of articles (assuming you have a separate method to count)
     total_articles = storage.count(Article)
@@ -28,6 +29,7 @@ def get_articles():
         likes_count = storage.count(ArticleLike, article_id=article.id)
         del article_dict['content']
         article_dict['likes_count'] = likes_count
+        article_dict['username'] = article.user.username
         articles_list.append(article_dict)
 
     # Correct the total_pages calculation
@@ -39,41 +41,6 @@ def get_articles():
         'page': page,
         'per_page': per_page,
         'total_pages': total_pages,
-        'articles': articles_list
-    }
-
-    return jsonify(response)
-
-    # Get the page number and page size from query parameters, with defaults
-    page = request.args.get('page', 1, type=int)
-    per_page = request.args.get('per_page', 10, type=int)
-
-    # Get all articles
-    articles = list(storage.all(Article).values())
-
-    # Calculate total number of articles
-    total_articles = len(articles)
-
-    # Paginate the articles
-    start = (page - 1) * per_page
-    end = start + per_page
-    paginated_articles = articles[start:end]
-
-    # Prepare the paginated response
-    articles_list = []
-    for article in paginated_articles:
-        article_dict = article.to_dict().copy()
-        likes_count = storage.count(ArticleLike, article_id=article.id)
-        del article_dict['content']
-        article_dict['likes_count'] = likes_count
-        articles_list.append(article_dict)
-
-    # Create the response with pagination metadata
-    response = {
-        'total_articles': total_articles,
-        'page': page,
-        'per_page': per_page,
-        'total_pages': (total_articles + per_page - 1) // per_page,
         'articles': articles_list
     }
 
