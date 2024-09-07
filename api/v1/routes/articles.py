@@ -20,7 +20,7 @@ def get_articles():
     # Get paginated articles
     articles = list(storage.all(Article, page=page, page_size=per_page, filter_type=filter_type, user_id=user_id).values())
 
-    print(jsonify(articles))
+    print(jsonify([article.to_dict() for article in articles]))
 
     # Calculate total number of articles (assuming you have a separate method to count)
     total_articles = storage.count(Article)
