@@ -134,6 +134,10 @@ class DBStorage:
                 query = query.order_by(cls.created_at.asc())
             elif filter_type == 'by_user' and hasattr(cls, 'user_id') and user_id is not None:
                 query = query.filter(cls.user_id == user_id)
+
+            # Add the username to the User model
+            if hasattr(cls, 'user'):
+                query = query.join(User).add_columns(User.username)
     
             # Apply pagination if page and page_size are provided
             if page is not None and page_size is not None:
@@ -141,8 +145,14 @@ class DBStorage:
     
             records = query.all()
             for obj in records:
-                objects.update(
-                    {obj.__class__.__name__ + '.' + str(obj.id): obj})
+                obj_data = {
+                    'id': obj.id
+                }
+                # Include the username if it exists in the result
+                if hasattr(obj, 'username'):
+                    obj_data['username'] = obj.username
+                # Add other fields from obj as needed
+                objects[obj.__class__.__name__ + '.' + str(obj.id)] = obj_data
     
         return objects
 
