@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """This module defines a class to manage DB storage for Melius"""
-from sqlalchemy import create_engine, func,desc
+from sqlalchemy import create_engine, func
 from sqlalchemy.orm import sessionmaker, scoped_session, aliased
 from sqlalchemy.exc import IntegrityError
 
@@ -129,11 +129,11 @@ class DBStorage:
                     )
 
             elif filter_type == 'newest' and hasattr(cls, 'created_at'):
-                query.order_by(cls.created_at.desc())
+                query = query.order_by(cls.created_at.desc())
             elif filter_type == 'oldest' and hasattr(cls, 'created_at'):
-                query.order_by(cls.created_at.asc())
+                query = query.order_by(cls.created_at.asc())
             elif filter_type == 'by_user' and hasattr(cls, 'user_id') and user_id is not None:
-                query.filter(cls.user_id == user_id)
+                query = query.filter(cls.user_id == user_id)
     
             # Apply pagination if page and page_size are provided
             if page is not None and page_size is not None:
