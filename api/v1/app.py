@@ -83,6 +83,16 @@ def create_flask_app():
         '''
         return make_response(jsonify({'error': error.description}), 401)
 
+    @app.errorhandler(403)
+    def custom403(error):
+        ''' 403 Error
+        ---
+        responses:
+            403:
+            description: The request is not permitted
+        '''
+        return make_response(jsonify({'error': error.description}), 403)
+
     @app.errorhandler(500)
     def custom500(error):
         ''' 500 Error
