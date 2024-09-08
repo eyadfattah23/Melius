@@ -1,0 +1,36 @@
+.terms-container {
+   padding: 64px 64px;
+   display: flex;
+   flex-direction: column;
+   gap: 32px;
+  }
+  .terms-container .date{
+    text-align: center;
+    color: var(--on-surface);
+    font-size: var(--body_N);
+  }
+.terms-container h1{
+    color: var(--primary);
+    font-size: var(--h1);
+    text-align: center;
+    font-weight: 700;
+}
+.terms-container h2 {
+    color: var(--on-surface);
+    font-size: var(--h2);
+    font-weight: 500;
+  }
+  
+.terms-container  p, li {
+    color: var(--on-surface_medium_emphasis);
+    font-size: var(--body_N);
+    font-weight: 400;
+  }
+  
+  .terms-container li {
+    list-style:circle;
+  }
+  .terms-container ul{
+    padding: 16px 64px;
+  }
+  

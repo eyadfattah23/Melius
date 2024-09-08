@@ -7,20 +7,21 @@ import { useState, useEffect } from "react"
 import Button from "../components/button"
 import { Link } from "react-router-dom"
 import axios from "axios"
+import formatDate from "../functions/format_date"
 import parse from 'html-react-parser';
+import Comments from "../components/comments"
 import { useLocation } from "react-router-dom"
-function One_Article({loggedin}){
-    const [loading, setLoading] = useState(false);
+import likeOrUnlike from "../functions/like_or_unlike"
+function One_Article({}){
     const [article, setArticle] = useState()
+    const user_id = JSON.parse(localStorage.getItem("user_id"))
+    const [comments, setComments] = useState([])
+    const [liked, setLiked] = useState(false)   // to be corrected later 
+    const [loading, setLoading] = useState(false)
+    const [commentField, setCommentField] = useState(false)
+    const [comment, setComment] = useState("")
     let {article_id} = useLocation().state
-    function formatDate(timestamp) {
-        const date = new Date(timestamp);
-        const day = String(date.getDate()).padStart(2, '0');
-        const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
-        const year = date.getFullYear();
-        
-        return `${day}/${month}/${year}`;
-    }
+    let {likes} = useLocation().state
     useEffect(()=>{
         const fetchArticle = async () => {
           setLoading(true);
@@ -38,10 +39,10 @@ function One_Article({loggedin}){
           
       };
       fetchArticle()
-       }, [article])
+       }, [])
     return (
         <>
-        <Navbar loggedin={loggedin}/>
+        <Navbar/>
        <section className="article_section">
            {
             article ?  <div className="container">
@@ -55,7 +56,7 @@ function One_Article({loggedin}){
                 </div>
                 <div className="article_likes">
                     <Icon name={"heart_fill"} size={24} color={"red"}/>
-                    <p>90k</p>
+                    <p>{likes}</p>
                 </div>
             </div>
             <div className="article_image">
@@ -67,19 +68,32 @@ function One_Article({loggedin}){
            }
             </div>
             <div className="article_footer">
-            <div className="sec">
-        <Icon name={"hand_heart"} size={20} color={"grey"}/>
-        <p>Like</p>
-      </div>
-      <div className="sec">
-        <Icon name={"chat"} size={20} color={"grey"}/>
-        <p>Comment</p>
-      </div>
-      <div className="sec">
-      <Icon name={"share"} size={20} color={"grey"}/>
-      <p>Share</p>
-      </div>
-            </div>
+          <div className="sec" onClick={()=> likeOrUnlike(setLoading, setLiked, liked, "article", article_id, user_id)}>
+            <Icon name={"hand_heart"} size={20} color={!liked? "grey": "red"}/>
+            <p className={liked ? "isLiked": ""}>Like</p>
+          </div>
+          <div className="sec" onClick={()=> setCommentField(true)}>
+            <Icon name={"chat"} size={20} color={"grey"}/>
+            <p>Comment</p>
+          </div>
+          <div className="sec">
+          <Icon name={"share"} size={20} color={"grey"}/>
+          <p>Share</p>
+          </div>
+        </div>
+        {
+        (comments  || commentField) && <Comments 
+        comment={comment} 
+        setComment={setComment} 
+        setCommentField={setCommentField} 
+        contentType={"article"} 
+        content_id={article_id} 
+        setComments={setComments} 
+        setLoading={setLoading} 
+        user_id={user_id} 
+        comments={comments}
+    />
+        }
         </div>
         :
         <div className="container no_article">
