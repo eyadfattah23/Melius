@@ -4,6 +4,7 @@ import Button from "./button"
 import Menubar from "./menubar"
 import Sidebar from "./sidebar"
 import "../assets/styles/navbar.css"
+import { Link } from "react-router-dom"
 function Navbar() {
   const loggedin = localStorage.getItem("user_id")
     return (
@@ -15,12 +16,17 @@ function Navbar() {
       <div className="nav-right">
        <div className="btn">
        {
-        loggedin ? 
-        <Button icon={<Icon name={"heart"} size={24}/>} text={"Donate"} type={"outline_primary"}/>
+        loggedin ? <></>
+        // <Button icon={<Icon name={"heart"} size={24}/>} text={"Donate"} type={"outline_primary"}/>
         :
         <>
+         <Link to={"/login"}>
         <Button text={"Login"} type={"primary"}/>
-        <Button text={"Join Us"} type={"outline_primary"}/>
+        </Link>
+        <Link to={"/signup"}>
+        <Button text={"Join Our Community"} type={"outline_primary"}/>
+        </Link>
+
         </>
        }
        </div>
