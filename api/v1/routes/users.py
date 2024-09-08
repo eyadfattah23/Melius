@@ -80,11 +80,17 @@ def authenticate_user():
 
 @swag_from('documentation/user/get_user.yml')
 @users_bp.route('/users/<user_id>', methods=['GET'])
+@jwt_required()
 def get_user(user_id):
     """ Retrieves an user """
     user = storage.get(User, user_id)
+    current_user_id = get_jwt_identity()
+
     if not user:
         abort(404, description="User not found")
+
+    if current_user_id != user_id:
+        abort(403, description="You do not have permission to access this account")
 
     return jsonify(user.to_dict())
 
@@ -93,15 +99,19 @@ def get_user(user_id):
 
 @swag_from('documentation/user/update_user.yml')
 @users_bp.route('/users/<user_id>', methods=['PUT'])
+@jwt_required()
 def update_user(user_id):
     """
     Updates a user
     """
     user = storage.get(User, user_id)
+    current_user_id = get_jwt_identity()
 
     if not user:
         abort(404, description="User not found")
 
+    if current_user_id != user_id:
+        abort(403, description="You do not have permission to update this account")
     if not request.get_json():
         abort(400, description="Not a JSON")
 
@@ -119,15 +129,19 @@ def update_user(user_id):
 
 @swag_from('documentation/user/delete_user.yml')
 @users_bp.route('/users/<user_id>', methods=['DELETE'])
+@jwt_required()
 def delete_user(user_id):
     """
     Deletes a user Object
     """
+    current_user_id = get_jwt_identity()
 
     user = storage.get(User, user_id)
 
     if not user:
         abort(404, description="User not found")
+    if current_user_id != user_id:
+        abort(403, description="You do not have permission to delete this account")
 
     storage.delete(user)
     storage.save()
