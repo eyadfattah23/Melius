@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, abort, request, make_response
 from models.article import ArticleLike, Article
 from models import storage
 from flasgger.utils import swag_from
+from flask_jwt_extended import jwt_required, get_jwt_identity
 
 
 article_likes_bp = Blueprint('articleLikes', __name__)
@@ -9,6 +10,7 @@ article_likes_bp = Blueprint('articleLikes', __name__)
 
 @swag_from('documentation/article/likes/get_article_likes.yml')
 @article_likes_bp.route('/article/<article_id>/likes', methods=['GET'])
+@jwt_required()
 def get_article_likes(article_id):
     """Retrieves all likes for a specific article"""
     article = storage.get(Article, article_id)
@@ -18,6 +20,7 @@ def get_article_likes(article_id):
 # Retrieves a article likes count
 @swag_from('documentation/article/likes/get_article_likes_count.yml')
 @article_likes_bp.route('/article/<article_id>/likes/count', methods=['GET'])
+@jwt_required()
 def get_article_likes_count(article_id):
     "Retrieves a article likes count"
     count = storage.count(ArticleLike, article_id=article_id)
@@ -27,6 +30,7 @@ def get_article_likes_count(article_id):
 # Handles liking or unliking a article by a specific user
 @swag_from('documentation/article/likes/like_article.yml')
 @article_likes_bp.route('/article/<article_id>/likes', methods=['POST'])
+@jwt_required()
 def like_article(article_id):
     """Handles liking or unliking an article by a specific user"""
     # Check if the request has JSON data
@@ -40,6 +44,11 @@ def like_article(article_id):
     # If user_id is not provided, return an error
     if not user_id:
         abort(400, description="Missing user_id in request")
+
+    current_user_id = get_jwt_identity()
+
+    if data['user_id'] != current_user_id:
+        abort(403, "Permission denied, not the current logged in user")
 
     # Retrieve the like by the user for the specified article
     like = get_user_like_for_article(article_id, user_id)
