@@ -4,7 +4,7 @@ import {
   TabsList,
   TabsTrigger,
 } from "../components/shadcn/ui/tabs";
-import Button from "./button";
+import Button from "./common/button";
 import Post from "./post";
 import axios from "axios";
 import { useState, useEffect } from "react";
