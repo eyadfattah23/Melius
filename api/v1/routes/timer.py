@@ -5,6 +5,7 @@ from models.timer_history import TimerHistory
 from models import storage
 from models.user import User
 from flasgger.utils import swag_from
+from flask_jwt_extended import jwt_required, get_jwt_identity
 
 timer_bp = Blueprint('timer', __name__)
 
@@ -12,6 +13,7 @@ timer_bp = Blueprint('timer', __name__)
 # Starts the timer for the user
 @swag_from('documentation/timer/reset_or_create.yml')
 @timer_bp.route('/timer/reset_or_create', methods=['POST'])
+@jwt_required()
 def reset_or_create_timer():
     """creates or resets the timer for the user"""
     data = request.get_json()
@@ -19,6 +21,10 @@ def reset_or_create_timer():
 
     if not user_id:
         abort(400, description="User ID is required")
+
+    jwt_user_id = get_jwt_identity()
+    if jwt_user_id != user_id:
+        abort(403, description="You do not have permission to reset/create this timer")
 
     # Check if a timer already exists for the user
     timer = storage.getSession().query(TimerHistory).filter_by(user_id=user_id).first()
@@ -65,14 +71,20 @@ def reset_or_create_timer():
 
 @swag_from('documentation/timer/status.yml')
 @timer_bp.route('/timer/status/<user_id>', methods=['GET'])
+@jwt_required()
 def timer_status(user_id):
     """Return the current timer status for the specified user."""
+
+    jwt_user_id = get_jwt_identity()
 
     # Get the user's timer history from the database
     timer = storage.getSession().query(TimerHistory).filter_by(user_id=user_id).first()
 
     if not timer or not timer.start_date:
         abort(404, description="Timer not found or not started")
+
+    if jwt_user_id != user_id:
+        abort(403, description="You do not have permission to access this timer")
 
     # Ensure both start_date and reset_date are timezone-aware (UTC if not provided)
     if not timer.start_date.tzinfo:

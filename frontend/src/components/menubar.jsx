@@ -14,11 +14,9 @@ function Menubar({loggedin}) {
   }
   else{
     return <ul className="menubar">
-    <li className="menu_item"><Link to={'/landing_page#features'}>Features</Link></li>
-    <li className="menu_item"><Link to={'/landing_page#about'}>About</Link></li>
-    <li className="menu_item"><Link to={'/landing_page#testimonials'}>Testimonials</Link></li>
-    <li className="menu_item"><Link to={'/landing_page#team'}>Team</Link></li>
-    <li className="menu_item"><Link to={'/landing_page#contact'}>Contact</Link></li>
+    <li className="menu_item"><a href={'/landing_page#features'}>Features</a></li>
+    <li className="menu_item"><a href={'/landing_page#about'}>About</a></li>
+    <li className="menu_item"><a href={'/landing_page#contact'}>Contact</a></li>
     </ul>
   }
   }

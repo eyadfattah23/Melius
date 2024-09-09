@@ -7,3 +7,9 @@
 .red{
     color: #F91616;
 }
+.icon_primary{
+    color: var(--primary);
+}
+.icon_orange{
+    color: #CA8B13;
+}

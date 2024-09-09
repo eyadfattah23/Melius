@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """This module defines a class User"""
 from models.base_model import BaseModel, Base
-from sqlalchemy import Column, String, Text
+from sqlalchemy import Column, String, Text, Boolean
 from sqlalchemy.orm import relationship
 from hashlib import md5
 import re
@@ -23,6 +23,8 @@ class User(BaseModel, Base):
     password_hash = Column(String(128), nullable=False)
     username = Column(String(128), nullable=False)
     img = Column(Text, nullable=True)   # ->changed to text (s3 aws)
+
+    # is_admin = Column(Boolean, default=False)  # New field
 
     posts = relationship("Post", backref="user",
                          cascade="all, delete, delete-orphan")

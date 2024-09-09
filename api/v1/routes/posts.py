@@ -6,6 +6,7 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 
 posts_bp = Blueprint('posts', __name__)
 
+
 @swag_from('documentation/post/get_posts.yml')
 @posts_bp.route('/posts', methods=['GET'])
 def get_posts():
@@ -15,19 +16,20 @@ def get_posts():
     filter_type = request.args.get('filter_type', '', type=str)
     user_id = request.args.get('user_id', '', type=str)
 
-
     # Get the paginated posts directly from storage
-    posts = list(storage.all(Post, page=page, page_size=per_page, filter_type=filter_type, user_id=user_id).values())
+    posts = list(storage.all(Post, page=page, page_size=per_page,
+                 filter_type=filter_type, user_id=user_id).values())
 
-    # Calculate total number of posts  
+    # Calculate total number of posts
     total_posts = storage.count(Post)
-    total_pages = (total_posts + per_page - 1) // per_page if per_page > 0 else 1
+    total_pages = (total_posts + per_page -
+                   1) // per_page if per_page > 0 else 1
 
     # Prepare the paginated response
     posts_list = []
     for post in posts:
         post_dict = post.to_dict().copy()
-        
+
         # Adding like and comment counts
         likes_count = storage.count(PostLike, post_id=post.id)
         comments_count = storage.count(PostComment, post_id=post.id)
@@ -40,7 +42,8 @@ def get_posts():
         post_dict['comments_count'] = comments_count
 
         if user_id:
-            like = storage.getSession().query(PostLike).filter_by(post_id=post.id, user_id=user_id).first()
+            like = storage.getSession().query(PostLike).filter_by(
+                post_id=post.id, user_id=user_id).first()
             post_dict['liked'] = like is not None
 
         posts_list.append(post_dict)
@@ -69,24 +72,26 @@ def get_posts2():
     # Get the paginated posts directly from storage
     posts = list(storage.all(Post, page=page, page_size=per_page).values())
 
-    # Calculate total number of posts  
+    # Calculate total number of posts
     total_posts = storage.count(Post)
-    total_pages = (total_posts + per_page - 1) // per_page if per_page > 0 else 1
+    total_pages = (total_posts + per_page -
+                   1) // per_page if per_page > 0 else 1
 
     # Prepare the paginated response
     posts_list = []
     for post in posts:
         post_dict = post.to_dict().copy()
-        
+
         # Adding like and comment counts
         likes_count = storage.count(PostLike, post_id=post.id)
         comments_count = storage.count(PostComment, post_id=post.id)
-        
+
         post_dict['likes_count'] = likes_count
         post_dict['comments_count'] = comments_count
 
         if user_id:
-            like = storage.getSession().query(PostLike).filter_by(post_id=post.id, user_id=user_id).first()
+            like = storage.getSession().query(PostLike).filter_by(
+                post_id=post.id, user_id=user_id).first()
             post_dict['liked'] = like is not None
 
         posts_list.append(post_dict)
@@ -102,12 +107,15 @@ def get_posts2():
 
     return jsonify(response)
 
+
 @swag_from('documentation/post/create_post.yml')
 @posts_bp.route('/posts', methods=['POST'])
+@jwt_required()
 def create_post():
     """
     Creates a post
     """
+    current_user_id = get_jwt_identity()
     if not request.get_json():
         abort(400, description="Not a JSON")
 
@@ -118,10 +126,14 @@ def create_post():
     if 'user_id' not in request.get_json():
         abort(400, description="Missing user_id")
 
+    if request.get_json()['user_id'] != current_user_id:
+        abort(403, "Permission denied, not the current logged in user")
+
     data = request.get_json()
     instance = Post(**data)
     instance.save()
     return make_response({}, 201)
+
 
 @swag_from('documentation/post/get_post.yml')
 @posts_bp.route('/posts/<post_id>', methods=['GET'])
@@ -133,8 +145,10 @@ def get_post(post_id):
 
     return jsonify(post.to_dict())
 
+
 @swag_from('documentation/post/update_post.yml')
 @posts_bp.route('/posts/<post_id>', methods=['PUT'])
+@jwt_required()
 def update_post(post_id):
     """ Updates a post """
     post = storage.get(Post, post_id)
@@ -144,7 +158,12 @@ def update_post(post_id):
     if not request.get_json():
         abort(400, description="Not a JSON")
 
+    current_user_id = get_jwt_identity()
+
     ignore = ['id', 'user_id', 'created_at', 'updated_at']
+
+    if post.user_id != current_user_id:
+        abort(401, "Permission denied, not the current logged in user")
 
     data = request.get_json()
     for key, value in data.items():
@@ -153,20 +172,29 @@ def update_post(post_id):
     storage.save()
     return make_response(jsonify(post.to_dict()), 200)
 
+
 @swag_from('documentation/post/delete_post.yml')
 @posts_bp.route('/posts/<post_id>', methods=['DELETE'])
+@jwt_required()
 def delete_post(post_id):
     """ Deletes a post and all associated data """
     post = storage.get(Post, post_id)
     if not post:
         abort(404, description="Post not found")
 
+    current_user_id = get_jwt_identity()
+
+    if post.user_id != current_user_id:
+        abort(401, "Permission denied, not the current logged in user")
+
     storage.delete(post)
     storage.save()
 
     return jsonify({"message": "Post deleted"}), 204
 
+
 @posts_bp.route('/posts/<post_id>/comments', methods=['GET'])
+@jwt_required()
 def get_post_comments(post_id):
     """ Retrieves all comments for a specific post """
     post = storage.get(Post, post_id)

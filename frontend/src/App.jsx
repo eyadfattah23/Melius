@@ -1,65 +1,80 @@
 import './App.css'
 import Home from './pages/home'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom'
 import Challenge from './pages/challenge'
 import Community from './pages/community'
 import Articles from './pages/articles'
 import Error_404 from './pages/404'
-// import LandingPage from './pages/landing_page'
 import Login from './pages/login'
-import Singup from './pages/signup'
-import Contact from './pages/contact'
+import Signup from './pages/signup'
 import One_Article from './pages/one_article'
+import LandingPage from './pages/landing_page'
+import AboutPage from './pages/about'
+import HelpSupport from './pages/help_support'
+import TermsConditions from './pages/terms_conditions'
+const PrivateRoute = ({ element }) => {
+  const userId = localStorage.getItem("user_id");
+  return userId ? element : <Navigate to="/login" />;
+};
+
 function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Home/>,
-      errorElement: <Error_404/>
+      element: localStorage.getItem("user_id") ? <Home /> : <LandingPage/>,
+      errorElement: <Error_404 />,
     },
     {
       path: "/home",
-      element: <Home/>,
+      element: <PrivateRoute element={<Home />} />,
     },
     {
       path: "/challenge",
-      element: <Challenge/>
+      element: <PrivateRoute element={<Challenge />} />,
     },
     {
       path: "/community",
-      element: <Community/>
+      element: <PrivateRoute element={<Community />} />,
     },
     {
       path: "/articles",
-      element: <Articles/>
+      element: <PrivateRoute element={<Articles />} />,
     },
     {
       path: "/one_article",
-      element: <One_Article/>
+      element: <PrivateRoute element={<One_Article />} />,
+    },
+    {
+      path: "/about",
+      element: <PrivateRoute element={<AboutPage/>} />,
     },
     {
       path: "/contact",
-      element: <Contact/>
+      element: <PrivateRoute element={<HelpSupport />} />,
     },
-    // {
-    //   path: "/landing_page",
-    //   element: <LandingPage/>
-    // },
+    {
+      path: "/terms_conditions",
+      element: <PrivateRoute element={<TermsConditions />} />,
+    },
+    {
+      path: "/landing_page",
+      element: <LandingPage/>,
+    },
     {
       path: "/login",
-      element: <Login/>
+      element: <Login />,
     },
     {
       path: "/signup",
-      element: <Singup/>
+      element: <Signup />,
     },
+  ]);
 
-  ])
   return (
     <>
-      <RouterProvider router={router}/>
+      <RouterProvider router={router} />
     </>
-  )
+  );
 }
 
 export default App
