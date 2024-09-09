@@ -4,60 +4,36 @@ import Avatar from "./avatar"
 import axios from "axios"
 import { useState, useEffect } from "react"
 import Field from "./field"
-function Post({title, text, key, created_at, post_id, comments_count, likes_count, isLiked}){
+import writeComment from "../functions/write_comment"
+import fetchComments from "../functions/fetch_comments"
+import CommentField from "./comment_field"
+import Comments from "./comments"
+import likeOrUnlike from "../functions/like_or_unlike"
+import PostOptions from "./post_options"
+function Post({title, text, key, created_at, post_id, comments_count, likes_count, isLiked, activeTabName, postUser}){
     const user_id = JSON.parse(localStorage.getItem("user_id"))
     const [comments, setComments] = useState([])
     const [liked, setLiked] = useState(isLiked)
     const [loading, setLoading] = useState(false)
     const [commentField, setCommentField] = useState(false)
     const [comment, setComment] = useState("")
-  const [activeTabName, setActiveTabName] = useState("Most Liked")
-  const fetchComments = async () => {
-    setCommentField(true)
-    try {
-        const response = await axios.get(`http://127.0.0.1:5050/api/v1/posts/${post_id}/comments`);
-        console.log(response.data);
-        setComments(response.data)
-        
-    } catch (error) {
-        console.error(error);
-    } finally {
-        setLoading(false);
-    }
-  }
-  const likeOrUnlike = async () => {
-    setLoading(true);
-    setLiked(!liked)
-    try {
-        const response = await axios.post(`http://127.0.0.1:5050/api/v1/posts/${post_id}/likes`, {
-            user_id
-        });
-        console.log(response);
-        
-    } catch (error) {
-        console.error(error);
-    } finally {
-        setLoading(false);
-    }
-};
-  const writeComment = async () => {
-    setLoading(true);
-    try {
-        const response = await axios.post(`http://127.0.0.1:5050/api/v1/posts/${post_id}/comments`, {
-            user_id,
-            text: comment
-        });
-        console.log(response);
-        setComment("")
-        await fetchComments()
-        
-        
-    } catch (error) {
-        console.error(error);
-    } finally {
-        setLoading(false);
-    }
-};
+    const [postUsername, setPostUsername] = useState("")
+    useEffect(() => {
+        const fetchPostUser = async () => {
+            try {
+                const response = await axios.get(`http://127.0.0.1:5050/api/v1/users/${postUser}`, {
+                  });
+                  setPostUsername(response.data.username)
+               
+            } catch (error) {
+                console.error(error);
+            } finally {
+                
+            }
+        };
+        fetchPostUser()
+    }, []);
+ 
   
     return <>
     <div className="post_main" key={key}>
@@ -67,12 +43,17 @@ function Post({title, text, key, created_at, post_id, comments_count, likes_coun
                 <Avatar level={"2"}/> 
                 </div>
                 <div className="username">
-                    <p className="name">username</p>
+                    <p className="name">{postUsername}</p>
                     <p className="post_time">{formatDate(created_at)}</p>
                 </div>
                 
             </div>
-            <Icon name={"flag"} size={24} color={"grey"}/>
+           {
+            activeTabName != "My Posts" &&  <Icon name={"flag"} size={24} color={"grey"}/>
+           }
+           {
+            activeTabName == "My Posts" && <PostOptions post_id={post_id}/>
+           }
         </div>
         <div className="content">
             <p className="title">{title}</p>
@@ -82,12 +63,12 @@ function Post({title, text, key, created_at, post_id, comments_count, likes_coun
             <div className="stat">
                 <p> {likes_count} likes</p>
             </div>
-            <div className="stat" onClick={fetchComments}>
+            <div className="stat" onClick={()=> fetchComments(setCommentField,"posts", post_id, setComments, setLoading)}>
             <p> {comments_count} comments</p>
             </div>
         </div>
         <div className="footer">
-          <div className="sec" onClick={likeOrUnlike}>
+          <div className="sec" onClick={()=> likeOrUnlike(setLoading, setLiked, liked, "posts", post_id, user_id)}>
             <Icon name={"hand_heart"} size={20} color={!liked? "grey": "red"}/>
             <p className={liked ? "isLiked": ""}>Like</p>
           </div>
@@ -101,39 +82,20 @@ function Post({title, text, key, created_at, post_id, comments_count, likes_coun
           </div>
         </div>
         {
-        (comments && comments.length > 0 || commentField) && <div className="post_comments_section">
-            <div className="post_comment_field">
-               <div className="profile">
-               <Avatar/>
-               </div>
-                <div className="input">
-                    <Field
-                    placeholder="comment..."
-                    type="text"
-                    value={comment}
-                    onChange={(e) => setComment(e.target.value)}
-                    />
-                    
-                    <div className="send_btn" onClick={writeComment}>
-                    <Icon name={"send"} size={20} color={"grey"}/>
-                    </div>
-                </div>
-            </div>
-            {
-                comments && comments.length > 0 && <div className="comments">
-                    {
-                       comments.map((cmnt) =>
-                       {
-                        return <div>{cmnt.text}</div>
-                       
-                       })
-                    }
-                </div>
-            }
-            </div>
+        (comments && comments.length > 0 || commentField) && <Comments 
+        comment={comment} 
+        setComment={setComment} 
+        setCommentField={setCommentField} 
+        contentType={"posts"} 
+        content_id={post_id} 
+        setComments={setComments} 
+        setLoading={setLoading} 
+        user_id={user_id} 
+        comments={comments}
+    />
         }
-    </div>
-   
+        </div>
+        
     </>
 }
 export default Post

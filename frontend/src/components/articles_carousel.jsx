@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import { Card, CardContent } from "../components/shadcn/ui/card"
 import {
   Carousel,
@@ -6,19 +7,20 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "../components/shadcn/ui/carousel"
+import Articles_Card from "./articles_card"
 
 export default function Articles_Carousel() {
+  useEffect(() => {
+    // fetchContent("articles",pageNum, 3, null, setTotalPages, setLoading, setActiveTabName, "most_liked", setArticles, setArticleOfTheWeek);
+
+  }, []);
   return (
     <Carousel className="w-full max-w-xs">
       <CarouselContent>
-        {Array.from({ length: 5 }).map((_, index) => (
+        {Array.from({ length: 10 }).map((_, index) => (
           <CarouselItem key={index}>
             <div className="p-1">
-              <Card>
-                <CardContent className="flex aspect-square items-center justify-center p-6">
-                  <span className="text-4xl font-semibold">{index + 1}</span>
-                </CardContent>
-              </Card>
+            <Articles_Card/>
             </div>
           </CarouselItem>
         ))}

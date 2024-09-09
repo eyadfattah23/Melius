@@ -1,7 +1,6 @@
 import { useState } from "react"
 import { DialogContent, DialogHeader,DialogTitle, DialogFooter } from "../components/shadcn/ui/dialog"
 import Button from "../components/button"
-import Icon from "../assets/icons/icon"
 import Field from "../components/field"
 import axios from "axios"
 import "../assets/styles/create_post.css"

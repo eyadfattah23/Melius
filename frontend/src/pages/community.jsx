@@ -4,7 +4,7 @@ import "../assets/styles/community.css"
 function Community(){
     
     return <>
-    <Navbar loggedin/>
+    <Navbar/>
     <section className="posts_section">
        <Posts_list/>
     </section>

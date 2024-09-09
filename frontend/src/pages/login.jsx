@@ -46,6 +46,7 @@ function Login(){
 
             console.log(response);
             const img = response.data.user.img
+            localStorage.setItem("token",  JSON.stringify(response.data.token))
             localStorage.setItem("username", JSON.stringify(response.data.user.username));
             localStorage.setItem("user_id", JSON.stringify(response.data.user.id));
             console.log(response.data.user.timer_reset_date)
@@ -98,7 +99,6 @@ function Login(){
                         <Button text={loading ? "Loging In..." : "LOGIN"} type={"login_btn"} onClick={handleSubmit}/>
                     </div>
                 </div>
-                <p>Forgot your password ?</p>
             </div>
             <div className="alternative">
             <p>New here ?</p>

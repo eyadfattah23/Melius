@@ -13,8 +13,9 @@ import RelapsingCheck from "../components/relapsing_check"
 import countNumberOfDays from "../functions/count_number_of_days"
 import createOrResetTimer from "../functions/create_or_reset_timer"
 import { useNavigate } from "react-router-dom"
+import countLevel from "../functions/count_level"
 function Challenge(){
-    const level = localStorage.getItem("level")
+    const [level, setLevel] = useState()
     const user_id = JSON.parse(localStorage.getItem("user_id"));
     const [number_of_days, setNumberOfDays] = useState(localStorage.getItem("number_of_days"))
     const navigate = useNavigate()
@@ -32,6 +33,8 @@ function Challenge(){
                 setStartingDate(response.data.data.reset_date)
                 setTries(response.data.data.no_tries)
                 setMaxDays(response.data.data.max_time)
+                setLevel(countLevel(maxDays))
+                console.log(level)
                 localStorage.setItem("number_of_days", JSON.stringify(countNumberOfDays(starting_date)))
             } catch (error) {
                 console.error(error);
@@ -103,7 +106,7 @@ function Challenge(){
              <h4>
           Join our challenge today and start your journey towards a better you!
           </h4>
-          <div>          <Button text={"Join the Challenge"} type={"primary"} onClick={()=>createOrResetTimer(setLoading, navigate)}/>
+          <div>          <Button text={"Join the Challenge"} type={"primary"} onClick={()=>createOrResetTimer(setLoading, navigate, setMaxDays)}/>
           </div>
         </div>
     }

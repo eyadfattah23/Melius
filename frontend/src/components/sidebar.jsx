@@ -1,6 +1,6 @@
 import Avatar from "./avatar"
 import "../assets/styles/sidebar.css"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -44,34 +44,39 @@ import countNumberOfDays from "../functions/count_number_of_days"
           </DialogTrigger>
           <Edit_Profile/>
       </Dialog> 
-        <DropdownMenuItem className={"menu_item"}>
+        {/* <DropdownMenuItem className={"menu_item"}>
         <Icon name={"survey"} size={16} />
           <span>Tests</span>
-        </DropdownMenuItem>
-        <DropdownMenuItem className={"menu_item"}>
+        </DropdownMenuItem> */}
+        {/* <DropdownMenuItem className={"menu_item"}>
         <Icon name={"calendar_todo"} size={16}/>
           <span>Programs</span>
-        </DropdownMenuItem>    
+        </DropdownMenuItem>     */}
       </DropdownMenuGroup>
       <DropdownMenuSeparator />
       <DropdownMenuGroup>
-        <DropdownMenuItem className={"menu_item"}>
+      <Link to={"/about"}>
+      <DropdownMenuItem className={"menu_item"}>
         <Icon name={"info"} size={16}/>
           <span>About us</span>
         </DropdownMenuItem>
-        <DropdownMenuItem className={"menu_item"}>
+      </Link>
+      <Link to={"/contact"}>
+      <DropdownMenuItem className={"menu_item"}>
         <Icon name={"question"} size={16}/>
           <span> Help and Support</span>
         </DropdownMenuItem>
+      </Link>
       </DropdownMenuGroup>
       <DropdownMenuSeparator />
       <DropdownMenuItem className={"menu_item"} onClick={handleLoggout}>
       <Icon name={"question"} size={16}/>
         <span>Log out</span>
       </DropdownMenuItem>
+      <Link to={"/terms_conditions"}>
       <div>
         <span className={"terms_item"}>Terms & conditions</span>
-      </div>
+      </div></Link>
     </DropdownMenuContent>
       </DropdownMenu>
     )

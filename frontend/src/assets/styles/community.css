@@ -128,17 +128,22 @@ font-size: var(--body_N);
 font-weight: 400;
 color: var(--on-surface_medium_emphasis);
 }
-.post_comments_section{
-
-}
-.post_comments_section .post_comment_field{
+.comments_section{
+    width: 100%;
+    padding: 16px 8px;
     display: flex;
-    padding: 4px;
+    flex-direction: column;
+    gap: 16px;
+}
+.comments_section .post_comment_field{
+    display: flex;
+    padding: 4px 0 ;
     align-items: center;
     gap: 8px; 
+    justify-content: space-between;
 }
-.post_comment_field .profile{
-    width: 32px;
+.comments_section .profile{
+    width: 40px;
 }
 .post_comment_field .input{
     display: flex;
@@ -153,4 +158,41 @@ background: var(--background, rgba(255, 255, 255, 0.87));
 }
 .post_comment_field .input .send_btn{
     cursor: pointer;
+}
+.comments_section .comments{
+    gap: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.comments_section .one_comment{
+    display: flex;
+    gap: 8px;
+    padding: 4px 0px;
+    align-items: center;
+    flex: 1 0 0;
+    
+}
+.comments_section .one_comment .text{
+    border-radius: 8px;
+    border: 1px solid var(--outline, rgba(0, 0, 0, 0.12));
+    background: #ececec;
+    width: 100%;
+    padding: 4px 8px;
+
+}
+.comments_section .one_comment .text .username .name{
+    color: #3C3C3B;
+    font-size: var(--body_L);
+    font-weight: 700;
+}
+.comments_section .one_comment .text .username .post_time{
+    color: #9E9D9D;
+    font-size: var(--body_XS);
+    font-weight: 400;
+}
+.comments_section .one_comment .text p{
+    color: var(--on-surface_high_emphasis);
+    font-size: var(--body_N);
+    font-weight: 400;
 }
