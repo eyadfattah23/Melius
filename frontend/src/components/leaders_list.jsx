@@ -3,7 +3,7 @@ import Avatar from "./avatar"
 import { useState } from "react"
 import { useEffect } from "react"
 import axios from "axios"
-import Button from "./button"
+import Button from "./common/button"
 import createOrResetTimer from "../functions/create_or_reset_timer"
 import { Link, useNavigate } from "react-router-dom"
 function Leaders_List(){

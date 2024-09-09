@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
-import Button from "../components/button"
+import Button from "../components/common/button"
 import Footer from "../components/footer"
-import Navbar from "../components/navbar"
+import Navbar from "../components/common/navbar"
 import "../assets/styles/not_found.css"
 function Error_404(){
     const loggedin = localStorage.getItem("user_id")

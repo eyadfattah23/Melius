@@ -6,6 +6,6 @@ const countLevel = (days) => {
     if (days > 15) return 2;
     if (days > 7) return 1;
     if (days > 3) return 0;
-    else return null
+    else return -1
 }
 export default countLevel
