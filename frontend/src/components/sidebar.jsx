@@ -13,7 +13,7 @@ import {
   import {    DialogTrigger, Dialog  } from "../components/shadcn/ui/dialog"
 import Icon from "../assets/icons/icon"
 import Edit_Profile from "../pages/edit_profile.jsx"
-import Button from "./button"
+import Button from "./common/button"
 import countNumberOfDays from "../functions/count_number_of_days"
   function Sidebar({loggedin}) {
     const navigate = useNavigate();

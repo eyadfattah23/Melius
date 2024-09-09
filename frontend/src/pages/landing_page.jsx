@@ -1,5 +1,5 @@
 import Header from "../components/landing_page/header"
-import Navbar from "../components/navbar"
+import Navbar from "../components/common/navbar"
 import "../assets/styles/landing_page.css"
 import Features from "../components/landing_page/features"
 import About from "../components/landing_page/about"

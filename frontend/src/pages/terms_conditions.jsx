@@ -1,5 +1,5 @@
 import Footer from "../components/footer"
-import Navbar from "../components/navbar"
+import Navbar from "../components/common/navbar"
 import "../assets/styles/terms.css"
 function TermsConditions(){
     return <>

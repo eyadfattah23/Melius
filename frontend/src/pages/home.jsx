@@ -1,59 +1,66 @@
 import Footer from "../components/footer"
-import Navbar from "../components/navbar"
+import Navbar from "../components/common/navbar"
 import "../assets/styles/home.css"
-import Counter2 from "../components/counter2"
-import Button from "../components/button"
-import { useState } from "react"
+import Counter2 from "../components/common/counter2"
+import Button from "../components/common/button"
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Articles_Carousel from "../components/articles_carousel"
 import Leaders_List from "../components/leaders_list"
-import RelapsingCheck from "../components/relapsing_check"
+import RelapsingCheck from "../components/common/relapsing_check"
 import createOrResetTimer from "../functions/create_or_reset_timer"
 import { jwtDecode } from "jwt-decode"
+import fetchUser from "../functions/fetch_user"
 function Home() {   
-  // Example token (in a real app, you'd get this from localStorage, cookies, etc.)
-  const token = localStorage.getItem("token");
-  let decodedToken;
-  
-  if (token) {
-    decodedToken = jwtDecode(token);
-  }
-  console.log(decodedToken)
-  const user = JSON.parse(localStorage.getItem("username"));
+  const token = JSON.parse(localStorage.getItem("token"));
+  const user_id = JSON.parse(localStorage.getItem("user_id"));
+  const [username, setUsername] = useState("")
+  const [maxDays, setMaxDays] = useState(0)
+ 
   const navigate = useNavigate()
+  useEffect(()=>{
+    fetchUser(user_id, token, setUsername, setMaxDays)
+  }, [user_id, token])
   const [loading, setLoading] = useState(false);
-  const number_of_days = JSON.parse(localStorage.getItem("number_of_days"))
     return (
       <>
       <Navbar/>
-      <section className="counter">
-        <div className="container">
-            <h3>Welcome, {user}</h3>
+     <main className="main_layout">
+     <section className="full_screen_section" id="hero">
+            <h2>Welcome, {username}</h2>
            {
-            number_of_days != null ?  <div className="stats">
+            maxDays>= 0 ? 
+            <div className="stats">
             <h4>
               You're on
             </h4>
-            <Counter2 achieved_days={number_of_days} unit={number_of_days > 1 ? "Days" : "Day"}/>
+            <Counter2 achieved_days={maxDays} unit={maxDays > 1 ? "Days" : "Day"}/>
             <h4>
                 of your journey to freedom
             </h4>
-        </div> : <div className="stats">
+        </div> 
+        
+            
+        
+        : 
+        <div className="stats">
           <h4>
           Ready for a Change?
           </h4>
           <p>
           Join our challenge today and start your journey towards a better you!
           </p>
-          <div>          <Button text={"Join the Challenge"} type={"primary"} onClick={() =>createOrResetTimer(setLoading, navigate)}/>
+          <div>          <Button text={"Join the Challenge"} type={"cta_filled"} onClick={() =>createOrResetTimer(user_id, token, setLoading, navigate)}/>
           </div>
         </div>
+      
+        
            }
-        </div>
       </section>
-     {
-      number_of_days != null &&  <RelapsingCheck/>
-     }
+      {
+          maxDays >= 0 && <RelapsingCheck user_id={user_id} token={token}/>
+        }
+     {/* 
       <section className="leaders-board">
         <div className="container">
           <h1>Leaders Board</h1>
@@ -68,7 +75,9 @@ function Home() {
           </div>
         </div>
       </section>
-      <Footer/>
+      <Footer/> */}
+     </main>
+     
       </>
     )
   }

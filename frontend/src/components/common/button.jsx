@@ -1,4 +1,4 @@
-import "../assets/styles/button.css"
+import "../../assets/styles/common/button.css"
 function Button({icon, text, type, onClick}) {
     return (
       <button className={`btn ${type}`} onClick={onClick}>
