@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import Icon from "../assets/icons/icon"
 import Logo from "../assets/logo"
 import "../assets/styles/footer.css"
@@ -34,9 +35,15 @@ function Footer() {
             Resources
           </h3>
           <div className="content">
-            <p>Help and Support</p>
-            <p>About us</p>
+           <Link to={"/contact"}>
+           <p>Help and Support</p>
+           </Link>
+           <Link to={"/about"}>
+           <p>About us</p>
+           </Link>
+            <Link to={"/terms_conditions"}>
             <p>Privacy & conditions</p>
+            </Link>
           </div>
         </div>
       </div>

@@ -70,4 +70,12 @@ font-size: var(--body_N);
     border: 1px solid var(--error, #B00020);
 background: var(--on-primary, #FFF);
 color: var(--error);
+
+}
+.btn_404{
+    color: #5656a3;
+}
+.btn_404:hover{
+background-color: #5656a380;
+color: white;
 }
