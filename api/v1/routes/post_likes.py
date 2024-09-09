@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request, make_response, abort
 from models.post import Post, PostLike
 from models import storage
 from flasgger.utils import swag_from
+from flask_jwt_extended import jwt_required, get_jwt_identity
 
 likes_bp = Blueprint('postLikes', __name__)
 
@@ -9,6 +10,7 @@ likes_bp = Blueprint('postLikes', __name__)
 # Retrieves all likes for a specific post
 @swag_from('documentation/post/likes/get_post_likes.yml')
 @likes_bp.route('/posts/<post_id>/likes', methods=['GET'])
+@jwt_required()
 def get_post_likes(post_id):
     """get all likes for a specific post"""
     post = storage.get(Post, post_id)
@@ -18,6 +20,7 @@ def get_post_likes(post_id):
 # Retrieves a post likes count
 @swag_from('documentation/post/likes/get_post_likes_count.yml')
 @likes_bp.route('/posts/<post_id>/likes/count', methods=['GET'])
+@jwt_required()
 def get_post_likes_count(post_id):
     """retrives a post likes count"""
     count = storage.count(PostLike, post_id=post_id)
@@ -27,6 +30,7 @@ def get_post_likes_count(post_id):
 # Handles liking or unliking a post by a specific user
 @swag_from('documentation/post/likes/like_post.yml')
 @likes_bp.route('/posts/<post_id>/likes', methods=['POST'])
+@jwt_required()
 def like_post(post_id):
     """create a new like post or remove it from the post likes list"""
     # Check if the request has JSON data
@@ -36,10 +40,14 @@ def like_post(post_id):
     # Get the user_id from the request JSON data
     data = request.get_json()
     user_id = data.get('user_id')
+    current_user_id = get_jwt_identity()
 
     # If user_id is not provided, return an error
     if not user_id:
         abort(400, description="Missing user_id in request")
+
+    if data['user_id'] != current_user_id:
+        abort(403, "Permission denied, not the current logged in user")
 
     # Retrieve the like by the user for the specified post
     like = get_user_like_for_post(post_id, user_id)
