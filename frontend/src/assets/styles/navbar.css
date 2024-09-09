@@ -4,7 +4,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 8px 70px;
-    
+    height: 12vh;
 }
 .nav-right{
     display: flex;
