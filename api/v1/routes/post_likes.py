@@ -40,11 +40,12 @@ def like_post(post_id):
     # Get the user_id from the request JSON data
     data = request.get_json()
     user_id = data.get('user_id')
-    current_user_id = get_jwt_identity()
 
     # If user_id is not provided, return an error
     if not user_id:
         abort(400, description="Missing user_id in request")
+
+    current_user_id = get_jwt_identity()
 
     if data['user_id'] != current_user_id:
         abort(403, "Permission denied, not the current logged in user")
