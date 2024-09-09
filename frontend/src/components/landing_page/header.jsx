@@ -1,4 +1,4 @@
-import Button from "../button"
+import Button from "../common/button"
 import HeroImg from "../../assets/images/landing_hero.png"
 import { Link } from "react-router-dom"
 function Header(){

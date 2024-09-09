@@ -1,23 +1,20 @@
 import Counter1 from "../components/counter1"
-import Navbar from "../components/navbar"
+import Navbar from "../components/common/navbar"
 import "../assets/styles/challenge.css"
-import Counter2 from "../components/counter2"
-import Achievement_Card from "../components/achievement_card"
-import Badge from "../assets/icons/badge"
-import Button from "../components/button"
+import Counter2 from "../components/common/counter2"
+import Button from "../components/common/button"
 import { useState } from "react"
-import axios from "axios"
 import { useEffect } from "react"
 import formatDate from "../functions/format_date"
-import RelapsingCheck from "../components/relapsing_check"
-import countNumberOfDays from "../functions/count_number_of_days"
+import RelapsingCheck from "../components/common/relapsing_check"
 import createOrResetTimer from "../functions/create_or_reset_timer"
 import { useNavigate } from "react-router-dom"
-import countLevel from "../functions/count_level"
+import fetchTimerStatus from "../functions/fetch_timer_status"
+import AchievementsBoard from "../components/achievements_board"
 function Challenge(){
-    const [level, setLevel] = useState()
     const user_id = JSON.parse(localStorage.getItem("user_id"));
-    const [number_of_days, setNumberOfDays] = useState(localStorage.getItem("number_of_days"))
+    const token = JSON.parse(localStorage.getItem("token"))
+    const [level, setLevel] = useState()
     const navigate = useNavigate()
     const [loading, setLoading] = useState(false);
     const [starting_date, setStartingDate] = useState("")
@@ -25,38 +22,19 @@ function Challenge(){
     const [maxDays, setMaxDays] = useState()
     
     useEffect(()=>{
-        const fetchTimerStatus = async () => {
-            setLoading(true);
-            try {
-                const response = await axios.get(`http://127.0.0.1:5050/api/v1/timer/status/${user_id}`);
-                console.log(response);
-                setStartingDate(response.data.data.reset_date)
-                setTries(response.data.data.no_tries)
-                setMaxDays(response.data.data.max_time)
-                setLevel(countLevel(maxDays))
-                console.log(level)
-                localStorage.setItem("number_of_days", JSON.stringify(countNumberOfDays(starting_date)))
-            } catch (error) {
-                console.error(error);
-            } finally {
-                setLoading(false);
-            }
-            
-        };
-        if (number_of_days !== null){
-            fetchTimerStatus()
-            setNumberOfDays(countNumberOfDays(starting_date))
-        }
-       }, [starting_date,tries,maxDays, number_of_days])
+       fetchTimerStatus(user_id,token, setStartingDate,setTries, setMaxDays, setLevel, setLoading)
+       console.log(level)
+       }, [starting_date,tries,maxDays])
   
     return <>
     <Navbar/>
+    <main className="main_layout">
     {
-        number_of_days != null ? <>
+        maxDays >= 0 ? <>
          <section className="counter_section">
         <div className="container">
          <h2> Starting date: {formatDate(starting_date)}</h2>   
-        <Counter1 number_of_days = {number_of_days}/>
+        <Counter1 number_of_days = {maxDays}/>
         </div>
     </section>
     <section className="stats_section">
@@ -85,22 +63,10 @@ function Challenge(){
             <h1>
                 Achievements
             </h1>
-            <div className="achievements_list">
-                <div className="achievements_row">
-                <Achievement_Card badge={<Badge level={"3"} enabled={level >= 3} />} days={30}/>
-<Achievement_Card badge={<Badge level={"2"} enabled={level >= 2} />} days={15}/>
-<Achievement_Card badge={<Badge level={"1"} enabled={level >= 1} />} days={7}/>
-<Achievement_Card badge={<Badge level={"0"} enabled={level >= 0} />} days={3}/>
-</div>
-<div className="achievements_row">
-<Achievement_Card badge={<Badge level={"6"} enabled={level >= 6} />} days={365}/>
-<Achievement_Card badge={<Badge level={"5"} enabled={level >= 5} />} days={90}/>
-<Achievement_Card badge={<Badge level={"4"} enabled={level >= 4} />} days={60}/>
-                </div>
-            </div>
+           <AchievementsBoard level={level} />
         </div>
     </section>
-   <RelapsingCheck/>
+    <RelapsingCheck user_id={user_id} token={token}/>
         </>:
         <div className="join_challenge">
              <h4>
@@ -110,6 +76,8 @@ function Challenge(){
           </div>
         </div>
     }
+
+    </main>
     </>
 }
 export default Challenge
