@@ -12,7 +12,15 @@ users_bp = Blueprint('users', __name__)
 
 @swag_from('documentation/user/get_users.yml')
 @users_bp.route('/users', methods=['GET'])
+@jwt_required()
 def get_users():
+    """retrieves a list of all users"""
+    current_user_id = get_jwt_identity()
+
+    user = storage.get(User, current_user_id)
+
+    if user.email != 'meliusadmin123@gmail.com':
+        abort(403, description="Permission denied, this is an admin only action")
     users = storage.all(User).values()
     return jsonify([user.to_dict() for user in users])
 
@@ -92,7 +100,12 @@ def get_user(user_id):
     if current_user_id != user_id:
         abort(403, description="You do not have permission to access this account")
 
-    return jsonify(user.to_dict())
+    data = user.to_dict().copy()
+    if user.timer_histories:
+        data['max_days'] = user.timer_histories[0].max_time
+    else:
+        data['max_days'] = "no timer found!"
+    return jsonify(data)
 
 # Updates user info
 
