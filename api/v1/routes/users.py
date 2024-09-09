@@ -47,7 +47,10 @@ def create_user():
         instance.save()
     except Exception as e:
         abort(400, description=str(e))
-    return make_response(jsonify(instance.to_dict()), 201)
+
+    access_token = create_access_token(identity=instance.id)
+
+    return make_response(jsonify({"token": access_token, "user": instance.to_dict()}), 201)
 
 # Authenticates user
 
