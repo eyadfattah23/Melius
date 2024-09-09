@@ -10,7 +10,9 @@ function Navbar() {
     return (
       <div className="navbar">
       <div className="nav-left">
+        <Link to={"/"}>
         <Logo/>
+        </Link>
         <Menubar loggedin={loggedin}/>
       </div>
       <div className="nav-right">
