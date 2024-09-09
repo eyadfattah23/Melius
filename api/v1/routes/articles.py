@@ -3,12 +3,14 @@ from models.article import Article
 from models.article import ArticleLike
 from models import storage
 from flasgger.utils import swag_from
+from flask_jwt_extended import jwt_required, get_jwt_identity
 
 articles_bp = Blueprint('articles', __name__)
 
 
 @swag_from('documentation/article/get_articles.yml')
 @articles_bp.route('/articles', methods=['GET'])
+@jwt_required()
 def get_articles():
     """get all articles paginated """
     # Get the page number and page size from query parameters, with defaults
@@ -17,7 +19,8 @@ def get_articles():
     filter_type = request.args.get('filter_type', '', type=str)
 
     # Get paginated articles
-    articles = list(storage.all(Article, page=page, page_size=per_page, filter_type=filter_type).values())
+    articles = list(storage.all(Article, page=page,
+                    page_size=per_page, filter_type=filter_type).values())
 
     # Calculate total number of articles (assuming you have a separate method to count)
     total_articles = storage.count(Article)
@@ -33,7 +36,8 @@ def get_articles():
         articles_list.append(article_dict)
 
     # Correct the total_pages calculation
-    total_pages = (total_articles + per_page - 1) // per_page if per_page > 0 else 1
+    total_pages = (total_articles + per_page -
+                   1) // per_page if per_page > 0 else 1
 
     # Create the response with pagination metadata
     response = {
@@ -49,7 +53,9 @@ def get_articles():
 
 @swag_from('documentation/article/get_article.yml')
 @articles_bp.route('/articles/<article_id>', methods=['GET'])
+@jwt_required()
 def get_article(article_id):
+    """retrieve a specific article"""
     article = storage.get(Article, article_id)
     if article is None:
         abort(404, description="Article not found")
@@ -71,7 +77,7 @@ def create_article():
     data = request.get_json()
     instance = Article(**data)
     instance.save()
-    return make_response( {}, 201)
+    return make_response({}, 201)
 
 
 @swag_from('documentation/article/update_article.yml')
