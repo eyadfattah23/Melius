@@ -7,6 +7,14 @@ tags:
 summary: Get top 10 users with the highest max_time
 description: Get the top 10 users with the highest max_time.
 
+parameters:
+  - in: header
+    name: Authorization
+    schema:
+      type: string
+    required: true
+    description: The JWT token to authorize API requests. Format "Bearer {token}"
+
 responses:
   200:
     description: Top 10 users with the highest max_time

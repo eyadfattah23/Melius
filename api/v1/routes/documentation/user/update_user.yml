@@ -8,6 +8,12 @@ tags:
 summary: Update a user's information
 description: Update the details of a specific user.
 parameters:
+  - in: header
+    name: Authorization
+    schema:
+      type: string
+    required: true
+    description: The JWT token to authorize API requests. Format "Bearer {token}"
   - name: body
     in: body
     required: true

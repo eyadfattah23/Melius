@@ -3,6 +3,12 @@ tags:
 summary: Delete a user
 description: Delete a user from the system.
 parameters:
+  - in: header
+    name: Authorization
+    schema:
+      type: string
+    required: true
+    description: The JWT token to authorize API requests. Format "Bearer {token}"
   - name: user_id
     in: path
     required: true
