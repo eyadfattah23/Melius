@@ -3,6 +3,12 @@ tags:
 summary: Reset or create a timer
 description: Reset or create a timer.
 parameters:
+  - in: header
+    name: Authorization
+    schema:
+      type: string
+    required: true
+    description: The JWT token to authorize API requests. Format "Bearer {token}"
   - name: body
     in: body
     required: true

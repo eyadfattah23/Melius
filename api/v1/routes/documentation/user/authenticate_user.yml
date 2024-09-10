@@ -8,6 +8,12 @@ tags:
 summary: Authenticate a user
 description: Authenticate a user with their email and password.
 parameters:
+  - in: header
+    name: Authorization
+    schema:
+      type: string
+    required: true
+    description: The JWT token to authorize API requests. Format "Bearer {token}"
   - name: body
     in: body
     required: true
@@ -44,6 +50,9 @@ responses:
         updated_at:
           type: string
           example: "2024-08-30T12:34:56.789Z"
+        token:
+          type: string
+          example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsImlhdCI6MTY4NDYyNjYzMiwiZXhwIjoxNjg0NjI3MjMyfQ.XiN0yZz5L0VnT6Y3B8N9tKj7lXNwYUeL9kR0qH8sKw"
   400:
     description: Bad Request (e.g., missing email or password)
     schema:

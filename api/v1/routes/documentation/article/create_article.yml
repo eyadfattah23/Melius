@@ -8,6 +8,12 @@ tags:
 summary: Create a new article
 description: Add a new article to the system.
 parameters:
+  - in: header
+    name: Authorization
+    schema:
+      type: string
+    required: true
+    description: The JWT token to authorize API requests. Format "Bearer {token}"
   - in: body
     name: body
     description: Article object that needs to be added to the system
