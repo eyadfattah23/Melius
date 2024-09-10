@@ -3,6 +3,12 @@ tags:
 summary: get all the likes for an article
 description: get all the likes for an article
 parameters:
+  - in: header
+    name: Authorization
+    schema:
+      type: string
+    required: true
+    description: The JWT token to authorize API requests. Format "Bearer {token}"
   - name: article_id
     in: path
     required: true

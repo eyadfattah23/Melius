@@ -2,6 +2,13 @@ tags:
   - user
 summary: Retrieve all users
 description: Retrieve a list of all users in the system.
+parameters:
+  - in: header
+    name: Authorization
+    schema:
+      type: string
+    required: true
+    description: The JWT token to authorize API requests. Format "Bearer {token}"
 responses:
   200:
     description: A list of user objects.
