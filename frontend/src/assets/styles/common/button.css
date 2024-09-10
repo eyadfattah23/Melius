@@ -5,34 +5,53 @@
     align-items: center;
     gap: 8px;
     border-radius: 8px;
-    font-size: var(--body_S);
+    font-size: var(--body_N);
  width: 100%;   
 }
-.primary{
-    background-color: var(--primary);
-    color: var(--on-primary);
+.cta_filled{
+    background-color: var(--accent);
+    color: var(--white);
 }
-.outline_primary{
-    color: var(--primary);
-    border: 1px solid var(--primary);
-    background-color: var(--on-primary);
+.cta_filled:hover{
+opacity: 0.8;
 }
-.outline_primary:hover{
+.cta_outline{
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    background-color: var(--white);
+}
+.cta_outline:hover{
+    opacity: 0.8;
+}
+
+/* .outline_primary:hover{
     color: var(--primary_700);
     border: 1px solid var(--primary_700);
     background-color: var(--on-primary_700);
-}
-.outline_primary:disabled{
+} */
+/* .outline_primary:disabled{
     opacity: 0.6;
     border: 1px solid var(--primary, #2C3E50);
-}
+} */
 .daily_relapsing_check_fail{
 background-color: #493B3B;
-color: #fff;
+color: var(--black);
+border: 1px solid var(--black);
+background: var(--white, #FFF);
+width: 350px;
+
+}
+.daily_relapsing_check_fail:hover{
+    opacity: 0.8;
+}
+.daily_relapsing_check_success:hover{
+    opacity: 0.8;
 }
 .daily_relapsing_check_success{
-    background-color: #069A3F;
-    color: #ffffff;
+    background-color: var(--secondary);
+    color: var(--white);
+    width: 350px;
+
 }
 .login_btn{
     background-color: #FC39B7;
@@ -70,4 +89,12 @@ font-size: var(--body_N);
     border: 1px solid var(--error, #B00020);
 background: var(--on-primary, #FFF);
 color: var(--error);
+
+}
+.btn_404{
+    color: #5656a3;
+}
+.btn_404:hover{
+background-color: #5656a380;
+color: white;
 }

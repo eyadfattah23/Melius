@@ -1,4 +1,4 @@
-import Button from "./button"
+import Button from "./common/button"
 import article_img from "../assets/images/article_image.png"
 import { Link } from "react-router-dom";
 function Articles_Card({orientation, title, id, key, published_date, likes}){

@@ -24,15 +24,14 @@ align-items: center;
 min-height: 160px;
 min-width: 250px;
 border-radius: 40px;
-background: #292929;
-font-style: normal;
+background:  #DFDFDF;
 font-weight: 600;
 font-size:1.25rem;
-color: rgba(255, 255, 255, 0.48);
-width: fit-content;
+color: #676767;
+text-align: center;
 }
 .number{
-    color: #FFF;
+    color: var(--black);
 text-align: center;
 font-size: 4rem;
 line-height: 125%; 
