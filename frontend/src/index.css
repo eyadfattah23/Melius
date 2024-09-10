@@ -52,6 +52,7 @@ gap: 64px;
       justify-content: center;
       align-items: center;
       gap: 32px;
+      width: 100%;
   }
 }
 

@@ -1,109 +1,51 @@
-.counter_section .container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 32px;
-    padding: 32px 72px;
-
-}
-.achievements_section .container{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 32px;
-    padding: 32px 72px;
-}
-.counter_section .container h2{
+#counter_section h2{
     font-size: var(--h2);
     font-weight: 700;
     text-align: center;
     color: var(--primary);
 }
-.stats_section .container{
+#stats_section{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;  
-    padding: 32px 72px;
+    width: 100%;
+    padding: 0 64px;
 }
-.relapsing-check .container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 32px;
-    align-self: stretch;
-    padding: 32px 72px;
-}
-.stats_element{
+#stats_section .stats_element{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 16px;
 }
-.stats_element h1{
-    color: var(--on-surface_medium_emphasis);
+#stats_section .stats_element h1{
+    color: var(--black_medium_emphasis);
     font-size: var(--h1);
     font-weight: 700;
+    line-height: normal;
 }
-.stat_content{
-    min-height: 145px;
+#achievements_section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    padding: 32px 64px;
 }
-.achievements_section .container h1{
+#achievements_section h1{
     color: var(--primary);
     font-size: var(--h1);
     font-weight: 700;
 }
-.achievements_list{
-    display:flex;
-    flex-direction: column;
-    align-items: center;
-    grid-area: 32px;
-    border-radius: 20px;
-    background-color: black;
-    padding: 32px;
-    align-self: stretch;
-}
-.achievements_list .achievements_row{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 64px;
-}
-.achievement_card{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-}
-.achievement_card p{
-    color: white;
-    text-align: center;
-    font-size: var(--body_L);
-    font-weight: 700;
-}
-.achievement_card svg{
-    width: 144px;
-    height: 144px;
-}
-.check-btns{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 32px;
-}
-.check-btns div{
-    width: 350px;
-}
-.join_challenge{
-    height: 100vh;
+#join_challenge{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 16px;
 }
-.join_challenge h4{
+#join_challenge h4{
     font-size: var(--h4);
     font-weight: 500;
+    text-align: center;
 }

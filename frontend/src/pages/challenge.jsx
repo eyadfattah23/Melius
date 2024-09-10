@@ -1,4 +1,4 @@
-import Counter1 from "../components/counter1"
+import Counter1 from "../components/common/counter1"
 import Navbar from "../components/common/navbar"
 import "../assets/styles/challenge.css"
 import Counter2 from "../components/common/counter2"
@@ -19,7 +19,7 @@ function Challenge(){
     const [loading, setLoading] = useState(false);
     const [starting_date, setStartingDate] = useState("")
     const [tries, setTries] = useState()
-    const [maxDays, setMaxDays] = useState()
+    const [maxDays, setMaxDays] = useState(0)
     
     useEffect(()=>{
        fetchTimerStatus(user_id,token, setStartingDate,setTries, setMaxDays, setLevel, setLoading)
@@ -31,14 +31,12 @@ function Challenge(){
     <main className="main_layout">
     {
         maxDays >= 0 ? <>
-         <section className="counter_section">
-        <div className="container">
+         <section className="full_screen_section" id="counter_section">
          <h2> Starting date: {formatDate(starting_date)}</h2>   
         <Counter1 number_of_days = {maxDays}/>
-        </div>
+      
     </section>
-    <section className="stats_section">
-        <div className="container">
+    <section id="stats_section">
             <div className="stats_element">
                 <h1>
                     {tries != 1 ? "Tries" : "Try"}
@@ -55,24 +53,22 @@ function Challenge(){
                <Counter2 achieved_days={maxDays} unit={maxDays > 1 ? "Days": "Day"}/>
                </div>
             </div>
-        </div>
 
     </section>
-    <section className="achievements_section">
-        <div className="container">
+    <section id="achievements_section">
             <h1>
                 Achievements
             </h1>
            <AchievementsBoard level={level} />
-        </div>
+        
     </section>
     <RelapsingCheck user_id={user_id} token={token}/>
         </>:
-        <div className="join_challenge">
+        <div className="full_screen_section" id="join_challenge">
              <h4>
           Join our challenge today and start your journey towards a better you!
           </h4>
-          <div>          <Button text={"Join the Challenge"} type={"primary"} onClick={()=>createOrResetTimer(setLoading, navigate, setMaxDays)}/>
+          <div>          <Button text={"Join the Challenge"} type={"cta_filled"} onClick={()=>createOrResetTimer(setLoading, navigate, setMaxDays)}/>
           </div>
         </div>
     }
