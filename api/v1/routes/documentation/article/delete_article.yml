@@ -8,6 +8,12 @@ tags:
 summary: Delete an article
 description: Remove a specific article from the system by its ID.
 parameters:
+  - in: header
+    name: Authorization
+    schema:
+      type: string
+    required: true
+    description: The JWT token to authorize API requests. Format "Bearer {token}"
   - name: article_id
     in: path
     required: true

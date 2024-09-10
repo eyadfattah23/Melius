@@ -3,6 +3,12 @@ tags:
 summary: Retrieve a specific user
 description: Retrieve details of a specific user by their ID.
 parameters:
+  - in: header
+    name: Authorization
+    schema:
+      type: string
+    required: true
+    description: The JWT token to authorize API requests. Format "Bearer {token}"
   - name: user_id
     in: path
     required: true
