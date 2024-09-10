@@ -7,12 +7,6 @@ tags:
 summary: Create a new user
 description: Create a new user in the system.
 parameters:
-  - in: header
-    name: Authorization
-    schema:
-      type: string
-    required: true
-    description: The JWT token to authorize API requests. Format "Bearer {token}"
   - name: body
     in: body
     required: true
