@@ -1,5 +1,6 @@
 import Achievement_Card from "./achievement_card"
 import Badge from "../assets/icons/badge"
+import "../assets/styles/achievements_board.css"
 function AchievementsBoard({level}){
     return  <div className="achievements_list">
     <div className="achievements_row">
