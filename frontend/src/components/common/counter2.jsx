@@ -1,4 +1,4 @@
-import "../assets/styles/counter.css"
+import "../../assets/styles/common/counter.css"
 const Counter2 = ({achieved_days, unit}) =>{
     return <div className="quit_days">
         <p className="number">{achieved_days}</p>

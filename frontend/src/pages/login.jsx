@@ -1,5 +1,5 @@
-import Button from "../components/button"
-import Navbar from "../components/navbar"
+import Button from "../components/common/button"
+import Navbar from "../components/common/navbar"
 import "../assets/styles/login.css"
 import Icon from "../assets/icons/icon"
 import Field from "../components/field"

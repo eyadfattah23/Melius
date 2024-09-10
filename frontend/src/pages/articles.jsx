@@ -1,4 +1,4 @@
-import Navbar from "../components/navbar";
+import Navbar from "../components/common/navbar";
 import Articles_Card from "../components/articles_card";
 import "../assets/styles/articles.css";
 import Articles_list from "../components/articles_tab";

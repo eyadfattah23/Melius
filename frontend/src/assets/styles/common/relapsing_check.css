@@ -1,0 +1,60 @@
+.relapsing-check {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    align-self: stretch;
+}
+.relapsing-check  h2{
+    font-size: var(--h2);
+    font-weight: 500;
+    color: var(--primary);
+}
+.check-btns{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+}
+
+.passed_container{
+    background-image: url("../../images/congratulation.png");
+    background-position: center;
+    background-size: cover;
+    padding: 128px !important;
+    z-index: 999;
+    border-radius: 16px;
+}
+.passed_container .header{
+    background-color: #F2FDFF;
+}
+.passed_container .header h1{
+    font-size: var(--h1);
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.80);
+    text-align: center;
+    line-height: normal;
+
+   
+}
+.passed_container .header p{
+    color: var(--black);
+    font-size: var(--body_N);
+    font-weight: 600;
+  
+    text-align: center;
+}
+.passed_container .content{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    justify-content: center;
+    font-size: var(--body_S);
+    font-weight: 400;
+    text-align: center;
+    align-items: center;
+    background-color: #F2FDFF;
+}
+.passed_container .content button{
+    width: fit-content;
+}
