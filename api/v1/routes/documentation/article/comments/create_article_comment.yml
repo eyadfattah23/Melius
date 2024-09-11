@@ -3,6 +3,12 @@ tags:
 summary: Create a new article comment
 description: Create a new article comment.
 parameters:
+  - in: header
+    name: Authorization
+    schema:
+      type: string
+    required: true
+    description: The JWT token to authorize API requests. Format "Bearer {token}"
   - name: article_id
     in: path
     required: true

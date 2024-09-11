@@ -8,6 +8,12 @@ tags:
 summary: Update an existing post
 description: Update the details of an existing post by its ID.
 parameters:
+  - in: header
+    name: Authorization
+    schema:
+      type: string
+    required: true
+    description: The JWT token to authorize API requests. Format "Bearer {token}"
   - name: post_id
     in: path
     required: true
