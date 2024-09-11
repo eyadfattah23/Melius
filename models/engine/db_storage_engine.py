@@ -39,9 +39,11 @@ class DBStorage:
                                           MySQL_user,
                                           MySQL_password,
                                           MySQL_host,
-                                          MySQL_database), pool_pre_ping=True)
-        
-    
+                                          MySQL_database),
+                                      pool_pre_ping=True,
+                                      pool_size=10,  # Increase the default pool size to handle more requests
+                                      max_overflow=5)  # Allow up to 5 extra connections)
+
     def getSession(self):
         return self.__session
 
@@ -50,9 +52,9 @@ class DBStorage:
         Query on the current database session (self.__session) all objects
         depending on the class name (argument cls), with optional pagination, filtering, and ordering.
         """
-    
+
         objects = {}
-    
+
         # If no specific class is provided, query all classes
         from models.user import User
         from models.article import Article
@@ -63,16 +65,15 @@ class DBStorage:
         from models.post import PostComment
         from models.timer_history import TimerHistory
         if cls is None:
-           
-    
+
             classes = {'user': User, 'article': Article,
                        'timer_history': TimerHistory, 'post': Post,
                        'postlike': PostLike, 'postcomment': PostComment,
                        'articlelike': ArticleLike, 'articlecomment': ArticleComment}
-    
+
             for c in classes.values():
                 query = self.__session.query(c)
-    
+
                 # Apply filters based on the filter type
                 if filter_type == 'newest' and hasattr(c, 'created_at'):
                     query = query.order_by(c.created_at.desc())
@@ -80,19 +81,20 @@ class DBStorage:
                     query = query.order_by(c.created_at.asc())
                 elif filter_type == 'by_user' and hasattr(c, 'user_id') and user_id is not None:
                     query = query.filter(c.user_id == user_id)
-    
+
                 # Apply pagination if page and page_size are provided
                 if page is not None and page_size is not None:
-                    query = query.offset((page - 1) * page_size).limit(page_size)
-    
+                    query = query.offset(
+                        (page - 1) * page_size).limit(page_size)
+
                 records = query.all()
                 for obj in records:
                     objects.update(
                         {obj.__class__.__name__ + '.' + str(obj.id): obj})
-    
+
         else:
             query = self.__session.query(cls)
-    
+
             # Apply filters based on the filter type
             if filter_type == 'most_liked' and hasattr(cls, 'likes'):
                 if cls == Article:
@@ -108,7 +110,8 @@ class DBStorage:
 
                     # Join the subquery with the Article table
                     query = (
-                        query.outerjoin(like_count_subquery, cls.id == like_count_subquery.c.article_id)
+                        query.outerjoin(like_count_subquery, cls.id ==
+                                        like_count_subquery.c.article_id)
                         .order_by(like_count_subquery.c.like_count.desc())
                     )
                 elif cls == Post:
@@ -124,7 +127,8 @@ class DBStorage:
 
                     # Join the subquery with the Post table
                     query = (
-                        query.outerjoin(like_count_subquery, cls.id == like_count_subquery.c.post_id)
+                        query.outerjoin(like_count_subquery,
+                                        cls.id == like_count_subquery.c.post_id)
                         .order_by(like_count_subquery.c.like_count.desc())
                     )
 
@@ -134,20 +138,17 @@ class DBStorage:
                 query = query.order_by(cls.created_at.asc())
             elif filter_type == 'by_user' and hasattr(cls, 'user_id') and user_id is not None:
                 query = query.filter(cls.user_id == user_id)
-            
-    
+
             # Apply pagination if page and page_size are provided
             if page is not None and page_size is not None:
-                 query = query.offset((page - 1) * page_size).limit(page_size)
-    
+                query = query.offset((page - 1) * page_size).limit(page_size)
+
             records = query.all()
             for obj in records:
                 objects.update(
                     {obj.__class__.__name__ + '.' + str(obj.id): obj})
-    
+
         return objects
-
-
 
     def new(self, obj):
         '''add the object to the current database session'''
@@ -204,7 +205,7 @@ class DBStorage:
         """
         if cls not in classes.values():
             return None
-        
+
         record = self.__session.get(cls, id)
 
         return record
@@ -219,21 +220,21 @@ class DBStorage:
     def count(self, cls=None, **filters):
         """
         Count the number of objects in storage using SQLAlchemy, with optional filters.
-    
+
         :param cls: The class to count objects of. If None, counts objects of all classes.
         :param filters: Optional filters to apply to the count query.
         :return: The count of objects matching the criteria.
         """
         session = self.__session
-    
+
         if cls:
             # Count objects of a specific class with optional filters
             query = session.query(func.count(cls.id))
-            
+
             # Apply filters if any
             for attr, value in filters.items():
                 query = query.filter(getattr(cls, attr) == value)
-    
+
             return query.scalar()
         else:
             # Count objects of all classes with optional filters
@@ -242,4 +243,3 @@ class DBStorage:
                 query = session.query(func.count(clas.id))
                 total_count += query.scalar()
             return total_count
-    
