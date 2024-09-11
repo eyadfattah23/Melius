@@ -41,8 +41,8 @@ class DBStorage:
                                           MySQL_host,
                                           MySQL_database),
                                       pool_pre_ping=True,
-                                      pool_size=10,  # Increase the default pool size to handle more requests
-                                      max_overflow=5)  # Allow up to 5 extra connections)
+                                      pool_size=20,  # Increase the default pool size to handle more requests
+                                      max_overflow=10)  # Allow up to 5 extra connections)
 
     def getSession(self):
         return self.__session
