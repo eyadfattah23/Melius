@@ -7,6 +7,12 @@ tags:
 summary: Retrieve a specific post
 description: Retrieve details of a specific post by its ID.
 parameters:
+  - in: header
+    name: Authorization
+    schema:
+      type: string
+    required: true
+    description: The JWT token to authorize API requests. Format "Bearer {token}"
   - in: path
     name: post_id
     schema:

@@ -8,9 +8,10 @@ article_comments_bp = Blueprint('articleComments', __name__)
 
 
 # Retrieves all comments for a specific post
-@swag_from('documentation/article/comments/get_article_comments.yml')
+
 @article_comments_bp.route('/article/<article_id>/comments', methods=['GET'])
 @jwt_required()
+@swag_from('documentation/article/comments/get_article_comments.yml')
 def get_article_comments(article_id):
     """Retrieves a list all comments for a specific article"""
     article = storage.get(Article, article_id)
@@ -18,9 +19,10 @@ def get_article_comments(article_id):
 
 
 # Creates a new comment for a specific post
-@swag_from('documentation/article/comments/create_article_comment.yml')
+
 @article_comments_bp.route('/article/<article_id>/comments', methods=['POST'])
 @jwt_required()
+@swag_from('documentation/article/comments/create_article_comment.yml')
 def create_article_comment(article_id):
     """creates a new comment for a specific article"""
     if not request.get_json():
@@ -49,9 +51,10 @@ def create_article_comment(article_id):
 
 
 # Updates a comment for a specific post
-@swag_from('documentation/article/comments/update_article_comment.yml')
+
 @article_comments_bp.route('/article/comments/<comment_id>', methods=['PUT'])
 @jwt_required()
+@swag_from('documentation/article/comments/update_article_comment.yml')
 def update_article_comment(comment_id):
     """update a comment"""
     articleComment = storage.get(ArticleComment, comment_id)
@@ -78,9 +81,10 @@ def update_article_comment(comment_id):
 
 
 # Deletes a comment for a specific post
-@swag_from('documentation/article/comments/delete_article_comment.yml')
+
 @article_comments_bp.route('/article/comments/<comment_id>', methods=['DELETE'])
 @jwt_required()
+@swag_from('documentation/article/comments/delete_article_comment.yml')
 def delete_article_comment(comment_id):
     """delete a comment"""
     articleComment = storage.get(ArticleComment, comment_id)

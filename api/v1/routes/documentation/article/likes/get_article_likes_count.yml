@@ -3,6 +3,12 @@ tags:
 summary: Retrieve the number of likes for an article
 description: Retrieve the number of likes for an article
 parameters:
+  - in: header
+    name: Authorization
+    schema:
+      type: string
+    required: true
+    description: The JWT token to authorize API requests. Format "Bearer {token}"
   - name: article_id
     in: path
     required: true

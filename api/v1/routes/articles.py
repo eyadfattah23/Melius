@@ -8,9 +8,10 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 articles_bp = Blueprint('articles', __name__)
 
 
-@swag_from('documentation/article/get_articles.yml')
+
 @articles_bp.route('/articles', methods=['GET'])
 @jwt_required()
+@swag_from('documentation/article/get_articles.yml')
 def get_articles():
     """get all articles paginated """
     # Get the page number and page size from query parameters, with defaults
@@ -51,9 +52,10 @@ def get_articles():
     return jsonify(response)
 
 
-@swag_from('documentation/article/get_article.yml')
+
 @articles_bp.route('/articles/<article_id>', methods=['GET'])
 @jwt_required()
+@swag_from('documentation/article/get_article.yml')
 def get_article(article_id):
     """retrieve a specific article"""
     article = storage.get(Article, article_id)
@@ -62,8 +64,10 @@ def get_article(article_id):
     return jsonify(article.to_dict())
 
 
-@swag_from('documentation/article/create_article.yml')
+
 @articles_bp.route('/articles', methods=['POST'])
+@jwt_required()
+@swag_from('documentation/article/create_article.yml')
 def create_article():
     if not request.get_json():
         abort(400, description="Not a JSON")
@@ -80,8 +84,10 @@ def create_article():
     return make_response({}, 201)
 
 
-@swag_from('documentation/article/update_article.yml')
+
 @articles_bp.route('/articles/<article_id>', methods=['PUT'])
+@jwt_required()
+@swag_from('documentation/article/update_article.yml')
 def update_article(article_id):
     article = storage.get(Article, article_id)
 
@@ -101,8 +107,10 @@ def update_article(article_id):
     return make_response(jsonify(article.to_dict()), 200)
 
 
-@swag_from('documentation/article/delete_article.yml')
+
 @articles_bp.route('/articles/<article_id>', methods=['DELETE'])
+@jwt_required()
+@swag_from('documentation/article/delete_article.yml')
 def delete_article(article_id):
     article = storage.get(Article, article_id)
     if article is None:

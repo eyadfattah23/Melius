@@ -3,6 +3,12 @@ tags:
 summary: Update an article comment
 description: Update an article comment by its ID.
 parameters:
+  - in: header
+    name: Authorization
+    schema:
+      type: string
+    required: true
+    description: The JWT token to authorize API requests. Format "Bearer {token}"
   - name: comment_id
     in: path
     required: true

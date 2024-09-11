@@ -10,9 +10,10 @@ from datetime import datetime, timezone, timedelta
 users_bp = Blueprint('users', __name__)
 
 
-@swag_from('documentation/user/get_users.yml')
+
 @users_bp.route('/users', methods=['GET'])
 @jwt_required()
+@swag_from('documentation/user/get_users.yml')
 def get_users():
     """retrieves a list of all users"""
     current_user_id = get_jwt_identity()
@@ -89,9 +90,10 @@ def authenticate_user():
 # Retrieves specific user details
 
 
-@swag_from('documentation/user/get_user.yml')
+
 @users_bp.route('/users/<user_id>', methods=['GET'])
 @jwt_required()
+@swag_from('documentation/user/get_user.yml')
 def get_user(user_id):
     """ Retrieves an user """
     user = storage.get(User, user_id)
@@ -113,9 +115,10 @@ def get_user(user_id):
 # Updates user info
 
 
-@swag_from('documentation/user/update_user.yml')
+
 @users_bp.route('/users/<user_id>', methods=['PUT'])
 @jwt_required()
+@swag_from('documentation/user/update_user.yml')
 def update_user(user_id):
     """
     Updates a user
@@ -143,9 +146,10 @@ def update_user(user_id):
 # Deletes a user and all associated data
 
 
-@swag_from('documentation/user/delete_user.yml')
+
 @users_bp.route('/users/<user_id>', methods=['DELETE'])
 @jwt_required()
+@swag_from('documentation/user/delete_user.yml')
 def delete_user(user_id):
     """
     Deletes a user Object

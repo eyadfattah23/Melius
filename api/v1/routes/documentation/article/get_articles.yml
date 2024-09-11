@@ -9,6 +9,12 @@ tags:
 summary: Get all articles with pagination
 description: Retrieve a list of all articles .
 parameters:
+  - in: header
+    name: Authorization
+    schema:
+      type: string
+    required: true
+    description: The JWT token to authorize API requests. Format "Bearer {token}"
   - name: page
     in: query
     required: false
