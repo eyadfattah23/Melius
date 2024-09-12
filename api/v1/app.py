@@ -10,19 +10,21 @@ from datetime import datetime, timedelta, timezone
 from flask_jwt_extended import create_access_token, get_jwt, get_jwt_identity, set_access_cookies
 
 
+app = create_flask_app()
+
 def create_flask_app():
-    app = Flask(__name__)
-    app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
-    cors = CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
+    appContext = Flask(__name__)
+    appContext.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
+    cors = CORS(appContext, resources={r"/api/v1/*": {"origins": "*"}})
 
     # Change this to a strong secret key
-    app.config['JWT_SECRET_KEY'] = environ.get(
+    appContext.config['JWT_SECRET_KEY'] = environ.get(
         'MELILUS_API_SECRET_KEY', 'change_this_on_server_and_save_it_in_env')
 
-    app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=1)
+    appContext.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=1)
 
-    jwt = JWTManager(app)
-    app.config['SWAGGER'] = {
+    jwt = JWTManager(appContext)
+    appContext.config['SWAGGER'] = {
         'title': 'Melius API',
         'description': 'API for Melius a web app that will help you beat porn addiction in complete secrecy',
         'schemes': ['http', 'https'],
@@ -49,16 +51,16 @@ def create_flask_app():
         ],
     }
 
-    Swagger(app)
+    Swagger(appContext)
 
-    create_app(app)  # Register routes
+    create_app(appContext)  # Register routes
 
-    @app.teardown_appcontext
+    @appContext.teardown_appcontext
     def close_db(error):
         """ Close Storage """
         storage.close()
 
-    @app.errorhandler(404)
+    @appContext.errorhandler(404)
     def not_found(error):
         """ 404 Error
         ---
@@ -68,7 +70,7 @@ def create_flask_app():
         """
         return make_response(jsonify({'error': error.description}), 404)
 
-    @app.errorhandler(400)
+    @appContext.errorhandler(400)
     def custom400(error):
         ''' 400 Error
         ---
@@ -78,7 +80,7 @@ def create_flask_app():
         '''
         return make_response(jsonify({'error': error.description}), 400)
 
-    @app.errorhandler(401)
+    @appContext.errorhandler(401)
     def custom401(error):
         ''' 401 Error
         ---
@@ -88,7 +90,7 @@ def create_flask_app():
         '''
         return make_response(jsonify({'error': error.description}), 401)
 
-    @app.errorhandler(403)
+    @appContext.errorhandler(403)
     def custom403(error):
         ''' 403 Error
         ---
@@ -98,7 +100,7 @@ def create_flask_app():
         '''
         return make_response(jsonify({'error': error.description}), 403)
 
-    @app.errorhandler(500)
+    @appContext.errorhandler(500)
     def custom500(error):
         ''' 500 Error
         ---
@@ -126,12 +128,11 @@ def create_flask_app():
         except (RuntimeError, KeyError):
             # Case where there is not a valid JWT. Just return the original response
             return response'''
-    return app
+    return appContext
 
 
 if __name__ == '__main__':
-    """ Main Function """
-    app = create_flask_app()
+    """ Main Function """ 
     host = environ.get('MELILUS_API_HOST')
     port = environ.get('MELILUS_API_PORT')
     if not host:
