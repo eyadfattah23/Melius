@@ -12,9 +12,9 @@ function LandingPage(){
  <Header/>
   <Features/>
   <About/>
-  {/* <Contact/>  */}
+  <Contact/> 
  </main>
-  {/* <Footer/> */}
+  <Footer/>
 </div>
 }
 export default LandingPage

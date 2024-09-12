@@ -59,14 +59,9 @@ padding: 0px 8px;
     font-weight: 700;
 }
 .landing_about .team p{
-    color: var(--on-surface);
+    color: var(--black);
     font-size: var(--body_L);
     font-weight: 700;
-}
-
-.landing_about .team .members .team_member{
-height: calc(100vh - 90px);
-
 }
 .landing_about .team .members .team_member .member_card{
     display: flex;
@@ -112,14 +107,7 @@ font-weight: 400;
     font-weight: 400;
 }
 
-.landing_contact{
-    display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-width: 100%;
-gap: 32px;
-}
+
 .landing_contact h1{
     text-align: center;
    color: var(--primary);
@@ -127,22 +115,16 @@ gap: 32px;
    font-weight: 700;
 }
 .landing_contact p{
-    color: var(--on-surface);
+    color: var(--black);
     text-align: center;
     font-size: var(--body_L);
     font-weight: 700;
 }
 .landing_contact .form{
-    display: flex;
-    flex-direction: column;
     align-items: flex-start;
-    gap: 16px;
     width: 50%;
 }
 .landing_contact .form .field{
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
     width: 100%;
 }
 .landing_contact .form .field .container{
@@ -157,6 +139,10 @@ gap: 32px;
 }
 .landing_contact .form .field .content_field{
     height: 98px;
+}
+.landing_contact .contact_submit{
+    width: fit-content;
+    margin: 0 auto;
 }
 
 
@@ -181,5 +167,23 @@ gap: 32px;
 .landing_features .feature_item{
     width: 100%;
 height: 300px;
+}
+.landing_about p{
+    font-size: var(--body_N);
+    text-align: center;
+}
+
+.landing_about .team p{
+    padding-bottom: 0;
+}
+
+.landing_contact{
+    padding: 0 64px;
+}
+.landing_contact p{
+    font-size: var(--body_N);
+}
+.landing_contact .form{
+    width: 100%;
 }
   }

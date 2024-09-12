@@ -1,9 +1,6 @@
 footer{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
     margin-top: 64px;
+    gap: 16px;
 }
 footer .footer_content{
     padding: 0px 128px;
@@ -68,4 +65,28 @@ footer .copyright p{
     font-size: var(--body_L);
     font-weight: 600;
 
+}
+@media only screen and (max-width: 1024px){
+   
+    footer .footer_content{
+        padding: 0px 64px ;
+        flex-direction: column;
+        gap: 32px;
+    }
+    footer .footer_content .logo_socials{
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+    }
+    footer .footer_content .links{
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        
+    }
+   
+    footer .footer_content .links .content{
+     
+        align-items: flex-end;
+    }
 }
