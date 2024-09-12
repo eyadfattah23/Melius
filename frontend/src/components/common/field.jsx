@@ -1,4 +1,4 @@
-import "../assets/styles/field.css"
+import "../../assets/styles/common/field.css"
 function Field({placeholder, type, mode, value, onChange, required
 }){
     return <input type={type} placeholder={placeholder} className={mode} value={value} onChange={onChange} required={required}/>

@@ -1,22 +1,29 @@
-import { Pagination, PaginationContent, PaginationItem, PaginationNext, PaginationPrevious, PaginationLink } from "./shadcn/ui/pagination"
+import { Pagination, PaginationContent, PaginationItem, PaginationNext, PaginationPrevious, PaginationLink } from "../shadcn/ui/pagination"
 function PageNums({totalPages, pageNum, setPageNum}){
-    const handlePrevious = () => {
+    const handlePrevious = (e) => {
         if (pageNum > 1) {
             setPageNum(pageNum - 1);
         }
+        else {
+            e.preventDefault();
+        }
     };
   
-    const handleNext = () => {
+    const handleNext = (e) => {
         if (pageNum < totalPages) {
             setPageNum(pageNum + 1);
         }
+        else {
+            e.preventDefault();
+        }
+        
     };
     const renderPagination = (totalPages, setPageNum, currentPage) => {
         const paginationItems = [];
   
         for (let i = 0; i < totalPages; i++) {
             paginationItems.push(
-                <PaginationItem key={i} active={i + 1 === currentPage}>
+                <PaginationItem key={i}  active={i + 1 === currentPage}  className={i + 1 === currentPage ? "pagination_active" : "pagination_normal"}>
                     <PaginationLink
                         href="#"
                         onClick={() => setPageNum(i + 1)}
@@ -32,11 +39,11 @@ function PageNums({totalPages, pageNum, setPageNum}){
   
     return <Pagination>
     <PaginationContent>
-        <PaginationItem>
-            <PaginationPrevious href="#" onClick={handlePrevious} />
+        <PaginationItem >
+            <PaginationPrevious href="#" onClick={(e)=> handlePrevious(e)}  className={pageNum <= 1 ? "pagination_disabled": ""}/>
         </PaginationItem>
         {renderPagination(totalPages, setPageNum, pageNum)}
-        <PaginationNext href="#" onClick={handleNext} />
+        <PaginationNext href="#" onClick={(e)=> handleNext(e)} className={pageNum == totalPages ? "pagination_disabled": ""}/>
     </PaginationContent>
 </Pagination>
 }

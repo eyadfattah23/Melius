@@ -1,10 +1,10 @@
 import CommentField from "./comment_field"
-import formatDate from "../functions/format_date"
-import Avatar from "./avatar"
-function Comments({comment, setComment, setCommentField, contentType, content_id, setComments, setLoading, user_id, comments}){
+import formatDate from "../../functions/format_date"
+import Avatar from "../avatar"
+function Comments({comment, setComment, setCommentField, contentType, content_id, setComments, setLoading, user_id, comments, setCommentsCount, commentsCount}){
 
     return <div className="comments_section">
-    <CommentField comment={comment} setComment={setComment} setCommentField={setCommentField} contentType={contentType} id={content_id} setComments={setComments} setLoading={setLoading} user_id={user_id}/>
+    <CommentField comment={comment} setComment={setComment} setCommentField={setCommentField} contentType={contentType} id={content_id} setComments={setComments} setLoading={setLoading} user_id={user_id} setCommentsCount={setCommentsCount} commentsCount={commentsCount}/>
     {
         comments && comments.length > 0 && <div className="comments">
             {

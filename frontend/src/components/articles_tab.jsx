@@ -8,7 +8,7 @@ import Articles_Card from "./articles_card";
 import { useState, useEffect } from "react";
 import Button from "./common/button";
 import { Link } from "react-router-dom";
-import PageNums from "./pagination";
+import PageNums from "./common/pagination";
 import fetchContent from "../functions/fetch_content";
 import Tab from "./tab";
 function Articles_list({ }) {

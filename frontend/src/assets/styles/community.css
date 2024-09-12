@@ -1,116 +1,36 @@
-.posts_section .container{
+#posts_section{
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 32px;
-    padding: 32px 72px;
+    padding: 32px 64px;
+    width: 100%;
 }
-.posts_section .container .header{
+#posts_section .header{
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-.posts_section .container .content{
+#posts_section  .content{
     display: flex;
     flex-direction: column;
     gap: 8px;
     
 }
-.post_main{
-    width: 100%;
-    padding: 0 8px;
-    border-radius: 4px;
-    border: 1px solid var(--outline);
-    background: #FFF;
-    min-height: 250px;
+.tab{
+    padding: 8px ;
 }
-.post_main .header{
-    display: flex;
-padding: 4px 0px;
-justify-content: space-between;
-align-items: center;
-    border-bottom: 0.5px solid var(--outline);
+.tab:hover{
+    background-color: var(--black_disabled);
+    color: white;
+    border-radius: 8px !important; 
+    opacity: 68%;
 }
-.post_main .header .profile{
-    display: flex;
-justify-content: center;
-align-items: center;
-gap: 8px;
-}
-.post_main .header .profile .username{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-}
-.post_main .header .profile .username .name{
-    color: #3C3C3B;
-    font-size: var(--body_L);
-    font-weight: 700;
-}
-.post_main .header .profile .username .post_time{
-    color: #9E9D9D;
-    font-size: var(--body_XS);
-    font-weight: 400;
-}
-.post_main .content{
-    display: flex;
-padding: 8px;
-flex-direction: column;
-align-items: flex-start;
-gap: 4px;
-}
-.post_main .content .title{
-    color: black;
-    font-size: var(--body_L);
-    font-weight: 700;
-}
-.post_main .content .description{
-    color: rgba(0, 0, 0, 0.80);
-    font-size: var(--body_N);
-    font-weight: 400;
-}
-.post_main .statistics{
-    display: flex;
-    padding: 4px 0px;
-    justify-content: flex-end;
-    align-items: center;
-}
-.post_main .statistics .stat{
-    padding: 4px 12px;
-    cursor: pointer;
-}
-.post_main .statistics .stat p .active{
-color: var(--primary);
-text-decoration: underline;
-}
-.post_main .statistics .stat p{
-    color: #9E9D9D;
-    font-size: var(--body_S);
-    font-weight: 400;
-}
-.post_main .footer{
-    display: flex;
-    padding: 4px 0;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 0.5px solid var(--outline);
-}
-.post_main .footer .sec{
-    display: flex;
-padding: 4px 12px;
-justify-content: center;
-align-items: center;
-gap: 4px;
-}
-.post_main .footer .sec p{
-    color: #9E9D9D;
-    font-size: var(--body_S);
-    font-weight: 400;
-}
-.post_main .footer .sec .isLiked{
-    color: #F91616;
-    font-weight: 700;
+.tab_active{
+    background-color: var(--black_disabled);
+    color: white;
+    border-radius: 8px !important;
+    padding: 8px;
 }
 .no_posts{
     display: flex;
@@ -126,8 +46,11 @@ font-weight: 700;
 .no_posts p{
 font-size: var(--body_N);
 font-weight: 400;
-color: var(--on-surface_medium_emphasis);
+color: var(--black_medium_emphasis);
 }
+
+
+
 .comments_section{
     width: 100%;
     padding: 16px 8px;
@@ -153,8 +76,8 @@ color: var(--on-surface_medium_emphasis);
     align-items: center;
     flex: 1 0 0;
     border-radius: 8px;
-border: 1px solid var(--outline, rgba(0, 0, 0, 0.12));
-background: var(--background, rgba(255, 255, 255, 0.87));
+border: 1px solid var(--outline, hsla(0, 0%, 0%, 0.12));
+background: rgba(255, 255, 255, 0.87);
 }
 .post_comment_field .input .send_btn{
     cursor: pointer;
@@ -192,7 +115,28 @@ background: var(--background, rgba(255, 255, 255, 0.87));
     font-weight: 400;
 }
 .comments_section .one_comment .text p{
-    color: var(--on-surface_high_emphasis);
+    color: var(--black_high_emphasis);
     font-size: var(--body_N);
     font-weight: 400;
+}
+.post_options_dropdown{
+    margin-right: 100px !important;
+    border-radius: 6px !important;
+    background-color: pink;
+    z-index: 999;
+}
+.pagination_normal:hover{
+    background-color: var(--secondary);
+    opacity: 68%;
+    border-radius: 8px ;
+    color: white;
+}
+.pagination_active{
+    background-color: var(--secondary);
+    border-radius: 8px ;
+    color: white;
+}
+.pagination_disabled, .pagination_disabled:hover {
+    cursor: not-allowed;
+    color: var(--black_disabled) !important;   
 }

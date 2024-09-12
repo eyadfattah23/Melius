@@ -12,17 +12,15 @@ import {
   } from "./shadcn/ui/dropdown-menu"
   import {    DialogTrigger, Dialog  } from "../components/shadcn/ui/dialog"
 import Icon from "../assets/icons/icon"
-import Edit_Profile from "../pages/edit_profile.jsx"
+import Edit_Profile from "../components/common/edit_profile"
 import Button from "./common/button"
 import countNumberOfDays from "../functions/count_number_of_days"
   function Sidebar({loggedin}) {
     const navigate = useNavigate();
     const level = JSON.parse(localStorage.getItem("level"))
     const handleLoggout =() =>{
-      localStorage.removeItem("username");
+      localStorage.removeItem("token");
       localStorage.removeItem("user_id");
-      localStorage.removeItem("number_of_days");
-      localStorage.removeItem("level");
       navigate("/login")
     }
     return (
@@ -44,14 +42,6 @@ import countNumberOfDays from "../functions/count_number_of_days"
           </DialogTrigger>
           <Edit_Profile/>
       </Dialog> 
-        {/* <DropdownMenuItem className={"menu_item"}>
-        <Icon name={"survey"} size={16} />
-          <span>Tests</span>
-        </DropdownMenuItem> */}
-        {/* <DropdownMenuItem className={"menu_item"}>
-        <Icon name={"calendar_todo"} size={16}/>
-          <span>Programs</span>
-        </DropdownMenuItem>     */}
       </DropdownMenuGroup>
       <DropdownMenuSeparator />
       <DropdownMenuGroup>
