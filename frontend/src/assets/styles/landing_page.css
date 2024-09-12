@@ -1,28 +1,4 @@
-.landing_header{
-    display: flex;
-padding: 32px 64px;
-justify-content: center;
-align-items: center;
-gap: 16px;
-align-self: stretch;
-}
-.landing_header .left{
-    display: flex;
-    padding: 64px 0px;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 64px;
-    flex: 1 0 0;
-    width: 50%; 
-}
-.landing_header .left .content{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
 
-}
 .landing_header .left .content h1{
     color: var(--primary);
     font-size: var(--h1);
@@ -34,59 +10,32 @@ align-self: stretch;
     color: var(--black_medium_emphasis);
 }
 .landing_header .right{
-    width: 50%;
     height: 100%;
-    display: flex;
-    justify-content: flex-end;
 }
 .landing_header img{
-    height: 100%;
+    padding: 16px 0;
 }
-.landing_features{
-    display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-gap: 32px;
-}
+
+
 .landing_features h1{
 color: var(--primary);
 text-align: center;
 font-size: var(--h1);
 font-weight: 700;
 }
-.landing_features .features_list{
-    display: flex;
-padding: 0px 64px;
-justify-content: center;
-align-items: center;
-gap: 48px;
-}
+
 .landing_features .feature_item{
-    display: flex;
     width: 300px;
 height: 300px;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-gap: 16px;
 border-radius: 6px;
 border: 1px solid #E2E8F0;
 padding: 24px;
 box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.09);
 }
-.landing_features .feature_item .content{
-    display: flex;
-flex-direction: column;
-align-items: center;
-gap: 16px;
-}
+
 .landing_features .feature_item .content .header{
-    display: flex;
 padding: 0px 8px;
-justify-content: center;
-align-items: center;
-gap: 8px;
+
 }
 .landing_features .feature_item .content .header h4{
     color: var(--secondary);
@@ -99,15 +48,6 @@ gap: 8px;
     font-size: var(--body_N);
     font-weight: 400;
 }
-.landing_about{
-    display: flex;
-    padding: 32px 64px;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 32px;
-    align-self: stretch;
-} 
 .landing_about h1{
     color: var(--primary);
     font-size: var(--h1);
@@ -118,45 +58,26 @@ gap: 8px;
     font-size: var(--body_L);
     font-weight: 700;
 }
-.landing_about .team{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 32px;
-    align-self: stretch;
-}
 .landing_about .team p{
     color: var(--on-surface);
     font-size: var(--body_L);
     font-weight: 700;
 }
-.landing_about .team .members{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 32px;
-    align-self: stretch;
-}
+
 .landing_about .team .members .team_member{
-    display: flex;
-justify-content: center;
-align-items: flex-end;
-gap: 32px;
 height: calc(100vh - 90px);
-align-self: stretch;
+
 }
 .landing_about .team .members .team_member .member_card{
     display: flex;
     width: 370px;
-    height: 420px;
+    min-height: 420px;
     flex-direction: column;
     justify-content: flex-end;
     align-items: flex-start;
-    background: lightgray 50% /cover no-repeat;
 }
 .landing_about .team .members .team_member .member_card .information{
     display: flex;
-width: 70%;
 padding: 4px 12px;
 flex-direction: column;
 align-items: flex-start;
@@ -166,46 +87,31 @@ background: #FFE600;
 .landing_about .team .members .team_member .member_card .information .name{
     font-size: var(--body_L);
     font-weight: 700;
-    color: var(--on-surface);   
+    color: var(--black);   
 }
 .landing_about .team .members .team_member .member_card .information .role{
 font-size: var(--body_S);
 font-weight: 400;
-color: var(--on-surface-medium-emphasis);
+color: var(--black_medium_emphasis);
 }
 .landing_about .team .members .team_member .description{
-    display: flex;
-    flex-direction: column;
     justify-content: flex-end;
     align-items: flex-start;
-    gap: 16px;
-    width: 50%;
     
 }
 .landing_about .team .members .team_member .description>p{
-    display: flex;
-flex-direction: column;
-justify-content: center;
-color: var(--on-surface);
+    
+color: var(--black);
 font-size: var(--body_N);
-    font-weight: 400;
+font-weight: 400;
 }
-.landing_about .team .members .team_member .description .social_media{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-}
+
 .landing_about .team .members .team_member .description .social_media p{
-    color: var(--on-surface);
+    color: var(--black);
     font-size: var(--body_N);
     font-weight: 400;
 }
-.landing_about .team .members .team_member .description .social_media .social_links{
-    display: flex;
-    align-items: flex-start;
-    gap: 32px;
-}
+
 .landing_contact{
     display: flex;
 flex-direction: column;
@@ -252,3 +158,28 @@ gap: 32px;
 .landing_contact .form .field .content_field{
     height: 98px;
 }
+
+
+@media only screen and (max-width: 1024px) {
+.landing_header .left{
+    height: calc(100vh - 90px);
+    gap: 32px;
+}
+.landing_header .left .content h1{
+    text-align: center;
+}
+.landing_header .left .content p{
+
+    text-align: center;
+    
+}
+
+.landing_header .right{
+   display: none;
+}
+
+.landing_features .feature_item{
+    width: 100%;
+height: 300px;
+}
+  }

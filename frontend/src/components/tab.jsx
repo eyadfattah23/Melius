@@ -1,5 +1,3 @@
-import { TabsList, TabsTrigger } from "./shadcn/ui/tabs";
-
 function Tab({
   pageNum,
   user_id,
@@ -42,7 +40,7 @@ function Tab({
         <button
           value="oldest"
           onClick={() => setActiveTabName("oldest")}
-          className={`${activeTabName === "oldest" ? "tab_active" : ""}`}
+          className={`${activeTabName === "oldest" ? "tab_active" : "tab"}`}
         >
           <p>Oldest</p>
         </button>

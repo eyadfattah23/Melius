@@ -51,5 +51,17 @@ gap: 64px;
       
       width: 100%;
   }
+  @media only screen and (max-width: 1024px) {
+    .full_screen_section{
+      
+      height: auto ;
+     
+  }
+  }
+  @media only screen and (max-width: 797px) {
+  .full_screen_section{
+    height: auto;
+  }
+  }
 }
 

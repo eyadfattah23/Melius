@@ -51,22 +51,10 @@ function Login() {
 
       const img = response.data.user.img;
       localStorage.setItem("token", JSON.stringify(response.data.token));
-      localStorage.setItem(
-        "username",
-        JSON.stringify(response.data.user.username)
-      );
+     
       localStorage.setItem("user_id", JSON.stringify(response.data.user.id));
-      console.log(response.data.user.timer_reset_date);
-      localStorage.setItem(
-        "number_of_days",
-        JSON.stringify(countNumberOfDays(response.data.user.timer_reset_date))
-      );
-      localStorage.setItem(
-        "level",
-        JSON.stringify(
-          countLevel(countNumberOfDays(response.data.user.timer_reset_date))
-        )
-      );
+      
+
       navigate("/home");
     } catch (error) {
       console.error(error);

@@ -1,6 +1,7 @@
 import countLevel from "./count_level";
 import countNumberOfDays from "./count_number_of_days";
 import axios from "axios";
+import fetchTimerStatus from "./fetch_timer_status";
 const createOrResetTimer = async (user_id, token, setLoading, navigate, setMaxDays) => {
     setLoading(true);
     try {
@@ -15,12 +16,8 @@ const createOrResetTimer = async (user_id, token, setLoading, navigate, setMaxDa
               },
             }
           );
-        console.log(JSON.stringify(countNumberOfDays(response.data.data.reset_date)));
-        localStorage.setItem("number_of_days", JSON.stringify(countNumberOfDays(response.data.data.reset_date)));
-        localStorage.setItem("level", JSON.stringify(countLevel(countNumberOfDays(response.data.data.reset_date))));
         if (window.location.pathname === "/challenge") {
-            window.location.reload();
-            setMaxDays(response.max_days)
+            window.location.reload()
         } else {
             navigate("/challenge");
         }

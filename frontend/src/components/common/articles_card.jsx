@@ -2,7 +2,7 @@ import Button from "./button"
 import article_img from "../../assets/images/article_image.png"
 import { Link } from "react-router-dom";
 import "../../assets/styles/common/article_card.css"
-function Articles_Card({orientation, title, id, key, published_date, likes}){
+function Articles_Card({orientation, title, id, published_date, likes}){
     function formatDate(timestamp) {
         const date = new Date(timestamp);
         const day = String(date.getDate()).padStart(2, '0');
@@ -13,7 +13,7 @@ function Articles_Card({orientation, title, id, key, published_date, likes}){
     }
     if (orientation === "horizontal")
     {
-        return <div className="article_card">
+        return <div className="article_card" id="article_horizontal">
         <div className="article_description">
             <div className="content">
             <h2>{title}</h2>
@@ -21,7 +21,7 @@ function Articles_Card({orientation, title, id, key, published_date, likes}){
             </div>
             <div className="cta_btn">
             <Link to={"/one_article"} state={{article_id: `${id}`, likes: likes}}>
-                    <Button text={"Read Now"} type={"secondary_filled"}/>
+                    <Button text={"Read Now"} type={"cta_filled"}/>
                     </Link>
             </div>
         </div>
@@ -33,7 +33,7 @@ function Articles_Card({orientation, title, id, key, published_date, likes}){
     }
     else{
         return (
-            <div className=" article_card_vertical" key={key}>
+            <div className="article_card"  id="article_vertical">
                  <img src={article_img}/>
                  <div className="article_description">
                 <div className="content">
@@ -42,7 +42,7 @@ function Articles_Card({orientation, title, id, key, published_date, likes}){
                 </div>
                 <div className="cta_btn">
                     <Link to={"/one_article"} state={{article_id: `${id}`, likes: likes}}>
-                    <Button text={"Read Now"} type={"primary"}/>
+                    <Button text={"Read Now"} type={"cta_filled"}/>
                     </Link>
                 </div>
             </div>

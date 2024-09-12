@@ -21,50 +21,37 @@ gap: 32px;
     font-weight: 700;
 }
 
-.leaders-board .container{
+.leaders-board {
     display: flex;
     flex-direction: column;
     gap: 32px;
     align-items: flex-start;
     justify-content: center;
     align-self: stretch;
-    padding: 32px 72px;
+    padding: 0 64px;
 }
-
-
-
-.latest-articles{
-
-}
-
-
-
-.leader_card{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 32px;
-}
-.leaders-board .container h1{
+.leaders-board  h1{
     font-size: var(--h1);
     font-weight: 700;
     color: var(--primary);
 }
-.leaders_list{
+.carousel{
+    justify-content: flex-start;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
 }
-.leader_card .card{
-    width: 154px;
-    height: 154px;
-}
-.leader_card h4{
-    color: var(--black_medium_emphasis);
-    text-align: center;
-    font-size: var(--h4);
-    font-weight: 700;
+  .carousel-content {
+    display: flex;
+    width: 25%;
+  }
+  
+ 
+  
+
+  
+  
+
+.latest-articles{
+
 }
 .no_leaders{
     display: flex;

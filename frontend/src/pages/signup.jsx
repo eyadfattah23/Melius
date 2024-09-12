@@ -76,10 +76,10 @@ function Signup() {
 
             console.log(response);
             const img = response.data.img
-            localStorage.setItem("username", JSON.stringify(response.data.username));
-            localStorage.setItem("user_id", JSON.stringify(response.data.id));
-            localStorage.setItem("number_of_days", JSON.stringify(null));
-            localStorage.setItem("level", JSON.stringify(null));
+            localStorage.setItem("token", JSON.stringify(response.data.token));
+     
+            localStorage.setItem("user_id", JSON.stringify(response.data.user.id));
+                  
             navigate("/home");
         } catch (error) {
             console.error(error);
