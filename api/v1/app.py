@@ -13,7 +13,7 @@ from flask_jwt_extended import create_access_token, get_jwt, get_jwt_identity, s
 def create_flask_app():
     appContext = Flask(__name__)
     appContext.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
-    cors = CORS(appContext, resources={r"/*": {"origins": "*"}})
+    CORS(appContext, resources={r"/*": {"origins": "*"}})
 
     # Change this to a strong secret key
     appContext.config['JWT_SECRET_KEY'] = environ.get(
