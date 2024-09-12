@@ -10,7 +10,7 @@ from datetime import datetime, timedelta, timezone
 from flask_jwt_extended import create_access_token, get_jwt, get_jwt_identity, set_access_cookies
 
 
-app = create_flask_app()
+
 
 def create_flask_app():
     appContext = Flask(__name__)
@@ -130,6 +130,8 @@ def create_flask_app():
             return response'''
     return appContext
 
+
+app = create_flask_app()
 
 if __name__ == '__main__':
     """ Main Function """ 
