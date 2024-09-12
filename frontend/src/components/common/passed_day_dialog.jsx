@@ -1,6 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import { DialogContent, DialogHeader, DialogTitle, Dialog, DialogTrigger, DialogFooter } from "../shadcn/ui/dialog";
 import Button from "./button";
 function PassedDayDialog(){
+  const navigate = useNavigate()
     return <Dialog>
     <DialogTrigger className="btn daily_relapsing_check_success">
     I passed the day successfully

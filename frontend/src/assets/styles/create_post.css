@@ -1,10 +1,13 @@
 .create_post_main{
     gap: 64px;
     border-radius: 8px;
+    background-color: #f7f7f7 !important;
+
 }
 .create_post_main .title{
 font-size: var(--body_L);
 font-weight: 700;
+text-align: center;
 }
 .create_post_main .form{
     display: flex;

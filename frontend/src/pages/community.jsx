@@ -5,9 +5,10 @@ function Community(){
     
     return <>
     <Navbar/>
-    <section className="posts_section">
-       <Posts_list/>
-    </section>
+    <main className="main_layout">
+    <Posts_list/>
+    </main>
+      
     </>
 }
 export default Community

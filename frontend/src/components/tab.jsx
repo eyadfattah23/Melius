@@ -1,16 +1,54 @@
-import { TabsList, TabsTrigger, TabsContent } from "./shadcn/ui/tabs"
-import fetchContent from "../functions/fetch_content"
-function Tab({pageNum, user_id, contentType, setTotalPages, setLoading, setActiveTabName, setContent }){
+import { TabsList, TabsTrigger } from "./shadcn/ui/tabs";
 
-    return  <TabsList className="grid  grid-cols-3 tab">
-    <TabsTrigger value="most_liked" onClick={() => fetchContent(contentType,pageNum, 3, user_id, setTotalPages, setLoading, setActiveTabName, "most_liked", setContent)}><p>Most Liked</p></TabsTrigger>
-    <TabsTrigger value="newest" onClick={() => fetchContent(contentType,pageNum, 3, user_id, setTotalPages, setLoading, setActiveTabName, "newest", setContent)}><p>Newest</p></TabsTrigger>
-    {
-        contentType === "posts" && <TabsTrigger value="my_posts" onClick={() => fetchContent(contentType,pageNum, 3, user_id, setTotalPages, setLoading, setActiveTabName, "my_posts", setContent)}><p>My Posts</p></TabsTrigger>
-    }
-    {
-        contentType === "articles" && <TabsTrigger value="oldest" onClick={() => fetchContent(contentType,pageNum, 3, user_id, setTotalPages, setLoading, setActiveTabName, "oldest", setContent)}><p>Oldest</p></TabsTrigger>
-    }
-</TabsList>
+function Tab({
+  pageNum,
+  user_id,
+  contentType,
+  setTotalPages,
+  setLoading,
+  setContent,
+  activeTabName, 
+  setActiveTabName, 
+}) {
+  return (
+    <div className="grid grid-cols-3">
+      <button
+        value={activeTabName}
+        onClick={() => setActiveTabName("most_liked")}
+        className={`${activeTabName === "most_liked" ? "tab_active" : "tab"}`}
+      >
+        <p>Most Liked</p>
+      </button>
+
+      <button
+        value={activeTabName}
+        onClick={() => setActiveTabName("newest")}
+        className={`${activeTabName === "newest" ? "tab_active" : "tab"}`}
+      >
+        <p>Newest</p>
+      </button>
+
+      {contentType === "posts" && (
+        <button
+        value={activeTabName}
+          onClick={() => setActiveTabName("by_user")}
+          className={`${activeTabName === "by_user" ? "tab_active" : "tab"}`}
+        >
+          <p>My Posts</p>
+        </button>
+      )}
+
+      {contentType === "articles" && (
+        <button
+          value="oldest"
+          onClick={() => setActiveTabName("oldest")}
+          className={`${activeTabName === "oldest" ? "tab_active" : ""}`}
+        >
+          <p>Oldest</p>
+        </button>
+      )}
+    </div>
+  );
 }
-export default Tab
+
+export default Tab;

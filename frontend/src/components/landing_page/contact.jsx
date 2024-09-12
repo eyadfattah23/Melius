@@ -1,4 +1,4 @@
-import Field from "../field"
+import Field from "../common/field"
 function Contact(){
     return <div className="landing_contact" id="contact">
         <h1>Contact Us</h1>

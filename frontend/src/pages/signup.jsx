@@ -2,7 +2,7 @@ import Button from "../components/common/button";
 import Navbar from "../components/common/navbar";
 import "../assets/styles/signup.css";
 import Icon from "../assets/icons/icon";
-import Field from "../components/field";
+import Field from "../components/common/field";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";

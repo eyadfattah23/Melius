@@ -9,7 +9,7 @@ import { Link } from "react-router-dom"
 import axios from "axios"
 import formatDate from "../functions/format_date"
 import parse from 'html-react-parser';
-import Comments from "../components/comments"
+import Comments from "../components/common/comments"
 import { useLocation } from "react-router-dom"
 import likeOrUnlike from "../functions/like_or_unlike"
 function One_Article({}){

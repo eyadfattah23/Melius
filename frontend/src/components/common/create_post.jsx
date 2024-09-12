@@ -1,11 +1,12 @@
 import { useState } from "react"
-import { DialogContent, DialogHeader,DialogTitle, DialogFooter } from "../components/shadcn/ui/dialog"
-import Button from "../components/common/button"
-import Field from "../components/field"
+import { DialogContent, DialogHeader,DialogTitle, DialogFooter } from "../shadcn/ui/dialog"
+import Button from "./button"
+import Field from "./field"
 import axios from "axios"
-import "../assets/styles/create_post.css"
+import "../../assets/styles/create_post.css"
 function CreatePost(){
     const user_id = JSON.parse(localStorage.getItem("user_id"))
+    const token = JSON.parse(localStorage.getItem("token"))
     const [title, setTitle] = useState("")
     const [ErrorTitle, setErrorTitle] = useState("")
     const [text, setText] = useState("")
@@ -36,7 +37,13 @@ function CreatePost(){
                 user_id,
                 title,
                 text,
-            });
+            },
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                  },
+            }
+        );
 
             console.log(response);
             window.location.reload()
@@ -80,7 +87,7 @@ function CreatePost(){
                         </div>
     </div>
     <DialogFooter>
-    <Button text={loading ? "Loading..." : "Post"} type="primary" onClick={handleSubmit} />
+    <Button text={loading ? "Loading..." : "Post"} type="cta_filled" onClick={handleSubmit} />
     </DialogFooter> 
  </DialogContent>
 }

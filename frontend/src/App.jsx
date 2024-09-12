@@ -33,14 +33,14 @@ function App() {
       path: "/challenge",
       element: <PrivateRoute element={<Challenge />} />,
     },
-    // {
-    //   path: "/community",
-    //   element: <PrivateRoute element={<Community />} />,
-    // },
-    // {
-    //   path: "/articles",
-    //   element: <PrivateRoute element={<Articles />} />,
-    // },
+    {
+      path: "/community",
+      element: <PrivateRoute element={<Community />} />,
+    },
+    {
+      path: "/articles",
+      element: <PrivateRoute element={<Articles />} />,
+    },
     // {
     //   path: "/one_article",
     //   element: <PrivateRoute element={<One_Article />} />,
