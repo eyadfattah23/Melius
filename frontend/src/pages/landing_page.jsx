@@ -8,10 +8,12 @@ import Footer from "../components/footer"
 function LandingPage(){
   return   <div>
   <Navbar/>
-  <Header/>
+ <main className="main_layout">
+ <Header/>
   <Features/>
   <About/>
   <Contact/>
+ </main>
   <Footer/>
 </div>
 }

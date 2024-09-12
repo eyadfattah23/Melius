@@ -1,5 +1,4 @@
 import Button from "../components/common/button";
-import Navbar from "../components/common/navbar";
 import "../assets/styles/signup.css";
 import Icon from "../assets/icons/icon";
 import Field from "../components/common/field";
@@ -7,7 +6,8 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-
+import { Card } from "../components/shadcn/ui/card";
+import Logo from "../components/common/logo";
 function Signup() {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
@@ -90,26 +90,29 @@ function Signup() {
     };
 
     return (
-        <>
-            <Navbar />
-            <section className="signup_section">
-                <div className="right_container">
-                    <p className="title">Join Us in Your Journey to Freedom</p>
-                    <p className="description">Create your account and take the first step towards a healthier, more fulfilling life.</p>
-                </div>
-                <div className="left_container">
-                    <div className="user">
-                        <Icon name={"user"} size={96} />
-                    </div>
-                    <div className="signup">
+        
+           <main className="signup_main">
+            <header className="authenticate_nav">
+        <Link to={"/"}>
+        <Logo/>
+        </Link>
+        <Link to={"/"} className="menu_item">
+        <Icon name={"home"} size={24}/>
+        </Link>
+      </header>
+           <section className="main_section" id="signup_section">
+           <Card className="card"> 
+           <div className="left_container">
+                    
+                    <div className="login">
                         <div className="form">
                             <div className="field">
                                 <div className="container">
-                                    <Icon name={"email_fill"} size={24} />
+                                    <Icon name={"email_fill"} size={24} color={"grey"}/>
                                     <Field
                                         placeholder="Enter your email"
                                         type="email"
-                                        mode="dark"
+                                     
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
                                         required
@@ -119,11 +122,10 @@ function Signup() {
                             </div>
                             <div className="field">
                                 <div className="container">
-                                    <Icon name={"user_fill"} size={24} />
+                                    <Icon name={"user_fill"} size={24} color={"grey"}/>
                                     <Field
                                         placeholder="Enter your username"
                                         type="text"
-                                        mode="dark"
                                         value={username}
                                         required
                                         onChange={(e) => setUsername(e.target.value)}
@@ -133,11 +135,10 @@ function Signup() {
                             </div>
                             <div className="field">
                                 <div className="container">
-                                    <Icon name={"lock"} size={24} />
+                                    <Icon name={"lock"} size={24} color={"grey"}/>
                                     <Field
                                         placeholder="Enter your password"
                                         type="password"
-                                        mode="dark"
                                         value={password}
                                         required
                                         onChange={(e) => setPassword(e.target.value)}
@@ -154,13 +155,20 @@ function Signup() {
                         <p>Already have an account?</p>
                         <div>
                             <Link to={"/login"}>
-                                <Button text={"Login"} type={"signup_btn_link"} />
+                                <Button text={"Login"} type={"login_btn_link"} />
                             </Link>
                         </div>
                     </div>
                 </div>
+           <div className="right_container">
+                    <p className="title">Join Us in Your Journey to Freedom</p>
+                    <p className="description">Create your account and take the first step towards a healthier, more fulfilling life.</p>
+                </div>
+            
+            </Card>   
             </section>
-        </>
+           </main>
+       
     );
 }
 

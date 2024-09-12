@@ -15,6 +15,13 @@
 .cta_filled:hover{
 opacity: 0.8;
 }
+.secondary_filled{
+    background-color: var(--secondary);
+    color: var(--white);
+}
+.secondary_filled:hover{
+opacity: 0.8;
+}
 .cta_outline{
     color: var(--accent);
     border: 1px solid var(--accent);
@@ -54,24 +61,25 @@ width: 350px;
 
 }
 .login_btn{
-    background-color: #FC39B7;
+    background-color: var(--primary);
     height: 100%;
     color: white;
 }
 
 .signup_btn_link div{
-    border-bottom: 1px solid #FC59C3;
-    color: #FC59C3 ;
+    border-bottom: 1px solid var(--primary);
+    color: var(--primary);
+    
     
 }
 .singup_btn{
-    background: #8A045B;
+    background: var(--accent);
     color: white;
     height: 100%;
 }
 .login_btn_link div{
-    border-bottom: 1px solid #B20575;
-    color: #B20575 ;
+    border-bottom: 1px solid var(--accent);
+    color: var(--accent) ;
     
 }
 .landing_cta{

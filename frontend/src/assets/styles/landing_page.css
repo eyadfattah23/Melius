@@ -21,6 +21,7 @@ align-self: stretch;
     flex-direction: column;
     align-items: flex-start;
     gap: 16px;
+
 }
 .landing_header .left .content h1{
     color: var(--primary);
@@ -30,7 +31,16 @@ align-self: stretch;
 .landing_header .left .content p{
     font-size: var(--body_L);
     font-weight: 700;
-    color: var(--on-surface-medium-emphasis);
+    color: var(--black_medium_emphasis);
+}
+.landing_header .right{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+.landing_header img{
+    height: 100%;
 }
 .landing_features{
     display: flex;
@@ -38,7 +48,6 @@ flex-direction: column;
 justify-content: center;
 align-items: center;
 gap: 32px;
-padding: 32px 64px;
 }
 .landing_features h1{
 color: var(--primary);
@@ -80,12 +89,12 @@ align-items: center;
 gap: 8px;
 }
 .landing_features .feature_item .content .header h4{
-    color: var(--primary);
+    color: var(--secondary);
     font-size: var(--h4);
     font-weight: 700;
 }
 .landing_features .feature_item .content p{
-    color: var(--on-surface);
+    color: var(--black);
     text-align: center;
     font-size: var(--body_N);
     font-weight: 400;
@@ -105,7 +114,7 @@ gap: 8px;
     font-weight: 700;
 }
 .landing_about p{
-    color: var(--on-surface);
+    color: var(--black);
     font-size: var(--body_L);
     font-weight: 700;
 }
@@ -133,6 +142,7 @@ gap: 8px;
 justify-content: center;
 align-items: flex-end;
 gap: 32px;
+height: calc(100vh - 90px);
 align-self: stretch;
 }
 .landing_about .team .members .team_member .member_card{
@@ -198,10 +208,10 @@ font-size: var(--body_N);
 }
 .landing_contact{
     display: flex;
-padding: 32px 64px;
 flex-direction: column;
 justify-content: center;
 align-items: center;
+width: 100%;
 gap: 32px;
 }
 .landing_contact h1{
@@ -221,7 +231,7 @@ gap: 32px;
     flex-direction: column;
     align-items: flex-start;
     gap: 16px;
-    width: 80%;
+    width: 50%;
 }
 .landing_contact .form .field{
     display: flex;

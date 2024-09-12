@@ -1,7 +1,7 @@
 import AboutMember from "./about_member"
 import member2_pic from "../../assets/images/team_members/lamia_hamdi.jpg"
 import member1_pic from "../../assets/images/team_members/larini_abdllah.png"
-import member3_pic from "../../assets/images/team_members/eyad_abdelfattah.png"
+import member3_pic from "../../assets/images/team_members/eyad_abdelfattah.jpg"
 function About(){
     return <div className="landing_about" id="about">
        <h1>About Us</h1>
@@ -13,7 +13,7 @@ function About(){
         <AboutMember 
             name={"Eyad Abdelfattah"}  
             role={"Backend Developer"}
-            about={"With a background in data science and machine learning, I'm passionate about solving complex business problems. I developed a metaverse/VR therapy app that connects users with remote life coaches, offering the convenience of virtual sessions. I’ve worked on 40+ EDA projects and various machine learning models. As an ALX software engineering student, I’m building my skills to become a tech leader, having made 2100+ contributions on GitHub in 2023 across multiple software engineering projects."}
+            about={"Eyad, a Muslim, an  Egyptian, an Arab, with a modest knowledge of backend programming and databases, deeply passionate about data and information and  Fond of statistics, especially those that can be used to solve problems. Add this description as the first cause on three other causes. First, going through one of the darkest experiences of my life, if not the darkest, with someone very close to me because of pornography. Second, a need for personal project to build my professional portfolio. Lastly, a profound desire to leave a positive impact that can benefit people, both during my lifetime and after. Those 4 reasons drove me to contribute to the creation of this humble platform. By God's grace."}
             linkedin={"https://www.linkedin.com/in/eyad-fattah/"} 
             gmail={"mailto:eyadabdelfattah4@gmail.com"} 
             github={"https://github.com/eyadfattah23"} 

@@ -10,6 +10,6 @@
 .icon_primary{
     color: var(--primary);
 }
-.icon_orange{
-    color: #CA8B13;
+.icon_secondary{
+    color: var(--secondary);
 }

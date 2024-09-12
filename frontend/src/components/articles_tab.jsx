@@ -4,7 +4,8 @@ import {
   TabsList,
   TabsTrigger,
 } from "../components/shadcn/ui/tabs";
-import Articles_Card from "./articles_card";
+import "../assets/styles/articles_list.css"
+import Articles_Card from "./common/articles_card";
 import { useState, useEffect } from "react";
 import Button from "./common/button";
 import { Link } from "react-router-dom";
@@ -17,26 +18,9 @@ function Articles_list({ }) {
   const [pageNum, setPageNum] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [articles, setArticles] = useState([]);
-  
-  // const getSortedArticles = (filter) => {
-  //   let sortedArticles = [...articles];
-
-  //   if (filter === "Most Liked") {
-  //     sortedArticles.sort((a, b) => b.likes_count - a.likes_count);
-  //   } else if (filter === "Newest") {
-  //     sortedArticles.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-  //   } else if (filter === "Oldest") {
-  //     sortedArticles.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
-  //   }
-
-  //   return sortedArticles;
-  // };
-
-  // const filteredArticles = getSortedArticles(activeTabName).slice((pageNum - 1) * 2, pageNum * 2);
-
-  
+  const token = JSON.parse(localStorage.getItem("token"))
   useEffect(() => {
-    fetchContent("articles",pageNum, 3, null, setTotalPages, setLoading, setActiveTabName, "most_liked", setArticles);
+    fetchContent("articles",token, pageNum, 3, null, setTotalPages, setLoading, setActiveTabName, "most_liked", setArticles);
     console.log(articles)
   }, [pageNum]);
 
@@ -44,7 +28,7 @@ function Articles_list({ }) {
 
  
   return (
-    <>
+    <section className="articles_section">
       {articles && articles.length > 0 ? (
         <Tabs defaultValue="Most Liked" className="container">
           <div className="header">
@@ -55,6 +39,7 @@ function Articles_list({ }) {
             setContent={setArticles}
             setLoading={setLoading}
             contentType={"articles"}
+            activeTabName={activeTabName}
             setActiveTabName={setActiveTabName}
             />
           </div>
@@ -87,7 +72,7 @@ function Articles_list({ }) {
           </Link>
         </div>
       )}
-    </>
+    </section>
   );
 }
 
