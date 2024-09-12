@@ -1,5 +1,8 @@
 import "../../assets/styles/common/field.css";
 function Field({ placeholder, type, mode, value, onChange, required, color }) {
+  const inputStyle = {
+    color: color || "inherit", // Use the provided color, or fallback to default
+  };
   return (
     <input
       type={type}
@@ -8,6 +11,7 @@ function Field({ placeholder, type, mode, value, onChange, required, color }) {
       value={value}
       onChange={onChange}
       required={required}
+      style={inputStyle} // Apply the optional color
     />
   );
 }
