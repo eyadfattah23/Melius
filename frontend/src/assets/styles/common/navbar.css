@@ -40,10 +40,10 @@ gap: 48px;
     cursor: pointer;
 }
 .menubar .menu_item:hover{
-border-bottom: 2px solid var(--accent);
-color: var(--accent);
+border-bottom: 2px solid var(--secondary);
+color: var(--secondary);
 }
 .menubar .active_item{
-    border-bottom: 2px solid var(--accent);
-    color: var(--accent); 
+    border-bottom: 2px solid var(--secondary);
+    color: var(--secondary); 
 }

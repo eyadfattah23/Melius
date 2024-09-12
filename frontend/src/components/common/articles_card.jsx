@@ -1,6 +1,7 @@
-import Button from "./common/button"
-import article_img from "../assets/images/article_image.png"
+import Button from "./button"
+import article_img from "../../assets/images/article_image.png"
 import { Link } from "react-router-dom";
+import "../../assets/styles/common/article_card.css"
 function Articles_Card({orientation, title, id, key, published_date, likes}){
     function formatDate(timestamp) {
         const date = new Date(timestamp);
@@ -13,7 +14,6 @@ function Articles_Card({orientation, title, id, key, published_date, likes}){
     if (orientation === "horizontal")
     {
         return <div className="article_card">
-         <div className="container">
         <div className="article_description">
             <div className="content">
             <h2>{title}</h2>
@@ -21,12 +21,12 @@ function Articles_Card({orientation, title, id, key, published_date, likes}){
             </div>
             <div className="cta_btn">
             <Link to={"/one_article"} state={{article_id: `${id}`, likes: likes}}>
-                    <Button text={"Read Now"} type={"primary"}/>
+                    <Button text={"Read Now"} type={"secondary_filled"}/>
                     </Link>
             </div>
         </div>
         <img src={article_img}/>
-        </div>
+      
        
         
     </div>

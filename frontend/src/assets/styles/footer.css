@@ -3,6 +3,7 @@ footer{
     flex-direction: column;
     align-items: center;
     gap: 16px;
+    margin-top: 64px;
 }
 footer .footer_content{
     padding: 0px 128px;
@@ -37,7 +38,7 @@ footer .footer_content .links{
 }
 footer .footer_content .links h3{
 font-size: var(--h3);
-color: var(--primary);
+color: var(--secondary);
 font-weight: 700;
 }
 footer .footer_content .links .content{
@@ -48,7 +49,7 @@ footer .footer_content .links .content{
 }
 footer .footer_content .links .content p{
     font-size: var(--body_N);
-    color: var(--on-surface-medium-emphasis);
+    color: var(--black_medium_emphasis);
     font-weight: 400;
 }
 footer .copyright{
@@ -58,7 +59,7 @@ footer .copyright{
     padding: 16px;
     align-self: stretch;
     justify-content: center;
-    background-color: var(--primary_700);
+    background-color: var(--primary);
     opacity: 0.8;
 }
 footer .copyright p{

@@ -9,6 +9,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import countNumberOfDays from "../functions/count_number_of_days";
 import countLevel from "../functions/count_level";
+import { Card } from "../components/shadcn/ui/card";
+import Logo from "../components/common/logo";
 function Login() {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
@@ -47,7 +49,6 @@ function Login() {
         }
       );
 
-      console.log(response);
       const img = response.data.user.img;
       localStorage.setItem("token", JSON.stringify(response.data.token));
       localStorage.setItem(
@@ -77,38 +78,42 @@ function Login() {
     }
   };
   return (
-    <>
-      <Navbar />
-      <section className="login_section">
-        <div className="left_container">
-          <div className="user">
-            <Icon name={"user"} size={96} color={"white"} />
-          </div>
+    
+      <main className="login_main">
+      <header className="authenticate_nav">
+        <Link to={"/"}>
+        <Logo/>
+        </Link>
+        <Link to={"/"} className="menu_item">
+        <Icon name={"home"} size={24}/>
+        </Link>
+      </header>
+       <section className="main_section" id="login_section">
+       <Card className={"card"}>
+       <div className="left_container">
           <div className="login">
             <div className="form">
               <div className="field">
                 <div className="container">
-                  <Icon name={"email_fill"} size={24} color={"white"} />
+                  <Icon name={"email_fill"} size={24} color={"grey"} />
                   <Field
                     placeholder="Email"
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    color="white"
                   />
                 </div>
                 {errorEmail && <p className="error">{errorEmail}</p>}
               </div>
               <div className="field">
                 <div className="container">
-                  <Icon name={"lock"} size={24} color={"white"} />
+                  <Icon name={"lock"} size={24} color={"grey"} />
                   <Field
                     placeholder="********"
                     type="password"
                     value={password}
                     required
-                    color="white"
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
@@ -140,8 +145,10 @@ function Login() {
             Log in to continue your healing journey and stay on track
           </p>
         </div>
-      </section>
-    </>
+       </Card>
+       </section>
+      </main>
+    
   );
 }
 export default Login;

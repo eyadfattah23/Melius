@@ -14,13 +14,13 @@ function AboutMember({name, role, about, linkedin, gmail, github, picture, rever
                <p>Follow me for more updates</p>
                <div className="social_links">
                <a href={github} target="_blank" rel="noopener noreferrer">
-      <Icon name={"github"} size={24} color={"icon_orange"}/>
+      <Icon name={"github"} size={24} color={"icon_secondary"}/>
     </a>
     <a  href={gmail} target="_blank" rel="noopener noreferrer">
-    <Icon name={"email"} size={24} color={"icon_orange"}/>
+    <Icon name={"email"} size={24} color={"icon_secondary"}/>
     </a>
     <a href={linkedin} target="_blank" rel="noopener noreferrer">
-    <Icon name={"linkedin"} size={24} color={"icon_orange"}/>
+    <Icon name={"linkedin"} size={24} color={"icon_secondary"}/>
     </a>
                </div>
             </div>

@@ -7,7 +7,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "../components/shadcn/ui/carousel"
-import Articles_Card from "./articles_card"
+import Articles_Card from "./common/articles_card"
 
 export default function Articles_Carousel() {
   useEffect(() => {

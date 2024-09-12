@@ -1,6 +1,6 @@
 import Field from "../common/field"
 function Contact(){
-    return <div className="landing_contact" id="contact">
+    return <section className="full_screen_seciton landing_contact" id="contact">
         <h1>Contact Us</h1>
         <p>Have questions or need support? We're here to help.</p>
         <div className="form">
@@ -30,6 +30,6 @@ function Contact(){
                                 </div>
                             </div>
                         </div>
-        </div>
+        </section>
 }
 export default Contact
