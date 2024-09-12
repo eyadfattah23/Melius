@@ -9,7 +9,7 @@ function About(){
        </p>
        <div className="team">
         <p>We are a team of passionate individuals committed to helping people overcome porn addiction.</p>
-        <div className="members px-16">
+        <div className="members px-16 gap-16 flex flex-col">
         <AboutMember 
             name={"Eyad Abdelfattah"}  
             role={"Backend Developer"}
