@@ -3,13 +3,13 @@ import member2_pic from "../../assets/images/team_members/lamia_hamdi.jpg"
 import member1_pic from "../../assets/images/team_members/larini_abdllah.png"
 import member3_pic from "../../assets/images/team_members/eyad_abdelfattah.jpg"
 function About(){
-    return <div className="landing_about" id="about">
+    return <div className="landing_about flex flex-col justify-center items-center gap-8 px-16 " id="about">
        <h1>About Us</h1>
        <p> We understand the challenges of recovery and have designed Melius to offer not just tools, but a supportive environment. Our mission is to provide guidance through every step of your journey, from relapse to recovery, from struggle to success.
        </p>
        <div className="team">
         <p>We are a team of passionate individuals committed to helping people overcome porn addiction.</p>
-        <div className="members">
+        <div className="members px-16">
         <AboutMember 
             name={"Eyad Abdelfattah"}  
             role={"Backend Developer"}

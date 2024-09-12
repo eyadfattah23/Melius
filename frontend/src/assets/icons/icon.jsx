@@ -1,4 +1,4 @@
-import { RiBookLine, RiBookOpenLine, RiChat1Line, RiChat2Line, RiChat3Line, RiCopyrightLine, RiDeleteBinLine, RiFacebookLine, RiGithubLine, RiGroupLine, RiHandHeartLine, RiHeart3Line, RiHeartFill, RiHome8Line, RiHomeLine, RiLinkedinLine, RiLockFill, RiMailFill, RiMailLine, RiMoreLine, RiPencilLine, RiSendPlane2Line, RiShareLine, RiTwitterLine, RiTwitterXLine, RiUserFill, RiUserLine } from "@remixicon/react";
+import { RiBookLine, RiBookOpenLine, RiChat1Line, RiChat2Line, RiChat3Line, RiCopyrightLine, RiDeleteBinLine, RiFacebookLine, RiGithubLine, RiGroupLine, RiHandHeartLine, RiHeart3Line, RiHeartFill, RiHome8Line, RiHomeLine, RiLinkedinLine, RiLockFill, RiMailFill, RiMailLine, RiMenLine, RiMenuLine, RiMoreLine, RiPencilLine, RiSendPlane2Line, RiShareLine, RiTwitterLine, RiTwitterXLine, RiUserFill, RiUserLine } from "@remixicon/react";
 import { RiAddLine } from "@remixicon/react";
 import { RiArrowRightSLine } from "@remixicon/react";
 import { RiArrowLeftSLine } from "@remixicon/react";
@@ -71,6 +71,8 @@ function Icon({ name, size, color }) {
             return <RiCopyrightLine size={size} className={color}/>
         case "home":
             return <RiHome8Line size={size} className={color}/>
+        case "menu":
+            return <RiMenuLine size={size} className={color}/>
         default:
             return <RiAddLine size={size} className={color} />;
     }

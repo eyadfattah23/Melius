@@ -101,6 +101,7 @@ color: var(--error);
 }
 .btn_404{
     color: #5656a3;
+    border: 1px solid #5656a3;
 }
 .btn_404:hover{
 background-color: #5656a380;

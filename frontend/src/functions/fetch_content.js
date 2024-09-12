@@ -1,9 +1,8 @@
 import axios from "axios";
 
-const fetchContent = async (contentType, token, page, per_page, user_id, setTotalPages, setLoading, setActiveTabName, filter, setContent) => {
+const fetchContent = async (contentType, token, page, per_page, user_id, setTotalPages, setLoading, setActiveTabName, filter, setContent, setArticleOfTheWeek) => {
     setLoading(true);
     setActiveTabName(filter);
-
     try {
         const response = await axios.get(`http://127.0.0.1:5050/api/v1/${contentType}`, {
             params: {
@@ -22,7 +21,14 @@ const fetchContent = async (contentType, token, page, per_page, user_id, setTota
           }
           if (contentType === "articles")
           {
-            setContent(response.data.articles)
+            if (setArticleOfTheWeek){
+              setArticleOfTheWeek(response.data.articles[0])
+              console.log(response.data.articles[0])
+            }
+            else{
+              setContent(response.data.articles)
+
+            }
           }
 
         
