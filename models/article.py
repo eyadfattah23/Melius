@@ -37,7 +37,8 @@ class Article(BaseModel, Base):
             kwargs['author'] = 'anonymous'
 
         if 'content' not in kwargs or not kwargs['content']:
-            with open('resources/articles/default_article', encoding='utf-8') as f:
+            with open('resources/articles/default_article',
+                      encoding='utf-8') as f:
                 kwargs['content'] = f.read()
         super().__init__(*args, **kwargs)
 
