@@ -68,7 +68,7 @@ function Signup() {
         }
 
         try {
-            const response = await axios.post("http://127.0.0.1:5050/api/v1/users", {
+            const response = await axios.post("http://142.93.38.10/api/v1/users", {
                 email,
                 username,
                 password,
