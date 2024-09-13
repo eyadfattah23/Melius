@@ -22,6 +22,7 @@ class User(BaseModel, Base):
     email = Column(String(128), nullable=False, unique=True)
     password_hash = Column(String(128), nullable=False)
     username = Column(String(128), nullable=False)
+    isAdmin = Column(Boolean, default=False)
     img = Column(Text, nullable=True)   # ->changed to text (s3 aws)
 
     # is_admin = Column(Boolean, default=False)  # New field
