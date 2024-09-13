@@ -20,6 +20,10 @@ def get_users():
     if claims.get("is_admin"):
         # User is admin
         users = storage.all(User).values()
+    else:
+        # User is not admin
+        abort(403, description="You do not have permission to access this resource")
+        
     return jsonify([user.to_dict() for user in users])
 
 # Creates a new user
