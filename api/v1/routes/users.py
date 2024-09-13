@@ -23,7 +23,7 @@ def get_users():
     else:
         # User is not admin
         abort(403, description="You do not have permission to access this resource")
-        
+
     return jsonify([user.to_dict() for user in users])
 
 # Creates a new user
@@ -46,6 +46,8 @@ def create_user():
 
     try:
         data = request.get_json()
+        if 'isAdmin' in data:
+            del data['isAdmin']  # Prevent user from setting this field
         instance = User(**data)
         instance.save()
     except Exception as e:
