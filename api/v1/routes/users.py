@@ -29,7 +29,7 @@ def get_users():
 
 
 @swag_from('documentation/user/create_user.yml')
-@users_bp.route('/users', methods=['POST'])
+@users_bp.route('/users', methods=['POST', 'OPTIONS'])
 def create_user():
     """
     Creates a user
@@ -57,7 +57,7 @@ def create_user():
 
 
 @swag_from('documentation/user/authenticate_user.yml')
-@users_bp.route('/users/authenticate', methods=['POST'])
+@users_bp.route('/users/authenticate', methods=['POST', 'OPTIONS'])
 def authenticate_user():
     """ handle the login of a user"""
     if not request.get_json():
