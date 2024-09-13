@@ -1,20 +1,22 @@
-import Button from "../common/button";
 import { useState } from "react";
-import axios from "axios";
-import "../../assets/styles/common/edit_profile.css";
 import {
+    Dialog,
+    DialogTrigger,
   DialogContent,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "../../components/shadcn/ui/dialog";
-import Field from "../common/field";
+  DialogFooter,
+} from "../shadcn/ui/dialog";
+import Button from "./button";
+import Field from "./field";
+import axios from "axios";
+import "../../assets/styles/create_post.css";
 import config from "../../config";
-export default function EditPost({ post_id, title, text }) {
+function Create_Article() {
   const token = JSON.parse(localStorage.getItem("token"));
-  const [postTitle, setTitle] = useState(title);
+  const [title, setTitle] = useState("");
   const [ErrorTitle, setErrorTitle] = useState("");
-  const [postText, setText] = useState(text);
+  const [content, setContent] = useState("");
   const [ErrorText, setErrorText] = useState("");
   const [loading, setLoading] = useState(false);
   const handleSubmit = async (event) => {
@@ -24,17 +26,25 @@ export default function EditPost({ post_id, title, text }) {
     setErrorText("");
 
     let hasError = false;
+    if (!title) {
+      setErrorTitle("Please fill the title field");
+      hasError = true;
+    }
+    if (!content) {
+      setErrorText("Please fill the content field");
+      hasError = true;
+    }
     if (hasError) {
       setLoading(false);
       return;
     }
 
     try {
-      const response = await axios.put(
-        config.API_URL + "posts/" + post_id,
+      const response = await axios.post(
+        config.API_URL + "articles",
         {
-          title: postTitle,
-          text: postText,
+          title,
+          content,
         },
         {
           headers: {
@@ -47,7 +57,7 @@ export default function EditPost({ post_id, title, text }) {
       window.location.reload();
     } catch (error) {
       console.error(error);
-      setErrorText(
+      setErrorPassword(
         error.response?.data?.error || "An error occurred. Please try again."
       );
     } finally {
@@ -55,9 +65,13 @@ export default function EditPost({ post_id, title, text }) {
     }
   };
   return (
+    <Dialog>
+    <DialogTrigger className="btn cta_filled">
+      <span> Create an article </span>
+    </DialogTrigger>
     <DialogContent className="sm:max-w-[726px] create_post_main">
       <DialogHeader>
-        <DialogTitle className={"title"}>New Post</DialogTitle>
+        <DialogTitle className={"title"}>New Article</DialogTitle>
       </DialogHeader>
       <div className="grid gap-4 py-4">
         <div className="form">
@@ -66,7 +80,7 @@ export default function EditPost({ post_id, title, text }) {
               <Field
                 placeholder="Enter a title"
                 type="text"
-                value={postTitle}
+                value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 required
               />
@@ -78,9 +92,9 @@ export default function EditPost({ post_id, title, text }) {
               <Field
                 placeholder="Enter your content"
                 type="text"
-                value={postText}
+                value={content}
                 required
-                onChange={(e) => setText(e.target.value)}
+                onChange={(e) => setContent(e.target.value)}
               />
             </div>
             {ErrorText && <p className="error">{ErrorText}</p>}
@@ -95,5 +109,8 @@ export default function EditPost({ post_id, title, text }) {
         />
       </DialogFooter>
     </DialogContent>
+</Dialog>
+   
   );
 }
+export default Create_Article;
