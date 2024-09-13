@@ -32,10 +32,9 @@ function Challenge(){
     <main className="main_layout">
     {
         maxDays >= 0 ? <>
-         <section className="full_screen_section" id="counter_section">
+         <section className="full_screen_section flex flex-col justify-center items-center gap-4" id="counter_section">
          <h2> Starting date: {formatDate(starting_date)}</h2>   
         <Counter1 number_of_days = {maxDays}/>
-      
     </section>
     <section id="stats_section">
             <div className="stats_element">

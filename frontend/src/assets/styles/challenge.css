@@ -1,10 +1,3 @@
-#counter_section{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
-}
 #counter_section h2{
     font-size: var(--h2);
     font-weight: 700;
@@ -37,7 +30,8 @@
     justify-content: center;
     align-items: center;
     gap: 32px;
-    padding: 32px 64px;
+    padding: 0 128px;
+    width: 100%;
 }
 #achievements_section h1{
     color: var(--primary);
@@ -56,3 +50,32 @@
     font-weight: 500;
     text-align: center;
 }
+
+@media only screen and (max-width: 1024px) {
+    #counter_section{
+        height: calc(100vh - 90px);
+        
+        }
+    #stats_section{
+            justify-content: space-between;     
+        }
+    #stats_section .stats_element h1{
+            font-weight: 600;           
+        }
+        #achievements_section{
+            padding: 0 64px;
+            width: 100%;
+        }
+      }
+@media only screen and (max-width: 797px) {
+    #counter_section{
+        width: 100%;
+        height: auto;
+        padding: 32px 0;
+    }
+    #stats_section{
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+    }
+      }

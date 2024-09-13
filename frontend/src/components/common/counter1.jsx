@@ -44,6 +44,7 @@ function Counter1({number_of_days}) {
     dataLabels: {
       enabled: false,
     },
+
     legend: {
       show: false,
     },
@@ -54,10 +55,10 @@ function Counter1({number_of_days}) {
       enabled: false,
     },
     responsive: [{
-      breakpoint: 480,
+      breakpoint: 797,
       options: {
         chart: {
-          width: 200,
+          width: 400,
         },
       },
     }],
@@ -66,7 +67,7 @@ function Counter1({number_of_days}) {
   return (
   <>
     <div id="chart">
-      <Chart options={options} series={options.series} type="donut" width={options.chart.width} />
+      <Chart className={"donut"} options={options} series={options.series} type="donut" width={options.chart.width}/>
       <div id="chart_days">
     <p>{number_of_days}</p>
     <p>Day{number_of_days > 1 && "s"}</p>

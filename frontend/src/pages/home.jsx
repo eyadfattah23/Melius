@@ -15,7 +15,7 @@ function Home() {
   const token = JSON.parse(localStorage.getItem("token"));
   const user_id = JSON.parse(localStorage.getItem("user_id"));
   const [username, setUsername] = useState("");
-  const [maxDays, setMaxDays] = useState(0);
+  const [maxDays, setMaxDays] = useState(-1);
   const [isUserLoading, setIsUserLoading] = useState(true);
   const [isLeadersLoading, setIsLeadersLoading] = useState(false);
 

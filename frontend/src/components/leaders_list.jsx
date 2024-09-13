@@ -14,7 +14,7 @@ import { Link, useNavigate } from "react-router-dom";
 import createOrResetTimer from "../functions/create_or_reset_timer";
 import config from "../config";
 
-function Leaders_List({ setMaxDays }) {
+function Leaders_List({ setMaxDays}) {
   const user_id = JSON.parse(localStorage.getItem("user_id"));
   const token = JSON.parse(localStorage.getItem("token"));
   const navigate = useNavigate();
@@ -55,7 +55,7 @@ function Leaders_List({ setMaxDays }) {
         <Carousel className="w-full">
           <CarouselContent>
             {leaders.map((leader, key) => (
-              <CarouselItem className="carousel-content basis-1/3">
+              <CarouselItem className="carousel-content md:basis-1/3">
                 <Leader_card
                   name={leader.username}
                   badge={
@@ -69,7 +69,7 @@ function Leaders_List({ setMaxDays }) {
           <CarouselNext />
         </Carousel>
       ) : (
-        <div className="no_leaders">
+        <div className="no_leaders flex flex-col justify-content items-center gap-4">
           <h4>No top achievers yet. Are you ready to take the lead?</h4>
           <Link to={"/challenge"}>
             <Button
