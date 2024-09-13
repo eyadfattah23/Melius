@@ -9,7 +9,7 @@ import {
 import { Dialog, DialogTrigger } from "../shadcn/ui/dialog";
 import axios from "axios";
 import EditPost from "./edit_post";
-import config from "@/config";
+import config from "../../config";
 const PostOptions = ({ post_id, title, text }) => {
   const token = JSON.parse(localStorage.getItem("token"));
   const handleDelete = async () => {
