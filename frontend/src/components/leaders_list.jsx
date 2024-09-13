@@ -12,7 +12,7 @@ import {
 } from "./shadcn/ui/carousel";
 import { Link, useNavigate } from "react-router-dom";
 import createOrResetTimer from "../functions/create_or_reset_timer";
-import config from "@/config";
+import config from "../config";
 
 function Leaders_List({ setMaxDays }) {
   const user_id = JSON.parse(localStorage.getItem("user_id"));

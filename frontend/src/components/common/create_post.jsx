@@ -9,7 +9,7 @@ import Button from "./button";
 import Field from "./field";
 import axios from "axios";
 import "../../assets/styles/create_post.css";
-import config from "@/config";
+import config from "../../config";
 function CreatePost() {
   const user_id = JSON.parse(localStorage.getItem("user_id"));
   const token = JSON.parse(localStorage.getItem("token"));

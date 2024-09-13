@@ -12,7 +12,7 @@ import parse from "html-react-parser";
 import Comments from "../components/common/comments";
 import { useLocation } from "react-router-dom";
 import likeOrUnlike from "../functions/like_or_unlike";
-import config from "@/config";
+import config from "../config";
 function One_Article({}) {
   const [article, setArticle] = useState();
   const user_id = JSON.parse(localStorage.getItem("user_id"));

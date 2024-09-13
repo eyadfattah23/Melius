@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Card } from "../components/shadcn/ui/card";
 import Logo from "../components/common/logo";
-import config from "@/config";
+import config from "../config";
 function Signup() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");

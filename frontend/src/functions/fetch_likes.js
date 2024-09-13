@@ -1,5 +1,5 @@
 import axios from "axios";
-import config from "@/config";
+import config from "../config";
 const fetchLikes = async (setLikesCount, contentType, id, setLoading) => {
   const token = JSON.parse(localStorage.getItem("token"));
   try {

@@ -1,5 +1,5 @@
 import axios from "axios";
-import config from "@/config";
+import config from "../config";
 const fetchUser = async (user_id, token, setUsername, setMaxDays) => {
   try {
     const response = await axios.get(config.API_URL + `users/${user_id}`, {
