@@ -6,13 +6,11 @@ import Articles from './pages/articles'
 import Error_404 from './pages/404'
 import Login from './pages/login'
 import Signup from './pages/signup'
-import One_Article from './pages/one_article'
+import One_Article from './components/common/one_article'
 import LandingPage from './pages/landing_page'
 import AboutPage from './pages/about'
 import HelpSupport from './pages/help_support'
 import TermsConditions from './pages/terms_conditions'
-import Navbar from './components/common/navbar'
-import Footer from './components/footer'
 const PrivateRoute = ({ element }) => {
   const userId = localStorage.getItem("user_id");
   return userId ? element : <Navigate to="/login" />;
