@@ -3,9 +3,10 @@ import Articles_Card from "../components/common/articles_card";
 import "../assets/styles/articles.css";
 import Articles_list from "../components/articles_tab";
 import { useState, useEffect } from "react";
-
 import fetchContent from "../functions/fetch_content";
 import Footer from "../components/footer";
+import Create_Article from "../components/common/create_article";
+
 function Articles() {
   const [loading, setLoading] = useState(false);
   const [articles, setArticles] = useState([]);
@@ -39,6 +40,7 @@ function Articles() {
           )}
       
       </section>
+      <Create_Article/>
         <Articles_list articleOfTheWeek = {articleOfTheWeek}/>
      </main>
      <Footer/>

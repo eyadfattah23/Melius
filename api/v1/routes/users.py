@@ -4,6 +4,7 @@ from models.timer_history import TimerHistory
 from models import storage
 from flasgger.utils import swag_from
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
+from flask_cors import cross_origin
 
 from datetime import datetime, timezone, timedelta
 
@@ -30,6 +31,7 @@ def get_users():
 
 @swag_from('documentation/user/create_user.yml')
 @users_bp.route('/users', methods=['POST'])
+@cross_origin()
 def create_user():
     """
     Creates a user
@@ -58,6 +60,7 @@ def create_user():
 
 @swag_from('documentation/user/authenticate_user.yml')
 @users_bp.route('/users/authenticate', methods=['POST'])
+@cross_origin()
 def authenticate_user():
     """ handle the login of a user"""
     if not request.get_json():
