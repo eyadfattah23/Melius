@@ -10,7 +10,8 @@ const fetchContent = async (
   setLoading,
   setActiveTabName,
   filter,
-  setContent
+  setContent,
+  setArticleOfTheWeek
 ) => {
   setLoading(true);
   setActiveTabName(filter);
@@ -31,30 +32,14 @@ const fetchContent = async (
       setContent(response.data.posts);
     }
     if (contentType === "articles") {
-      setContent(response.data.articles);
+      if (setArticleOfTheWeek)
+      {
+        setArticleOfTheWeek(response.data.articles[0])
+      }
+      else{
+        setContent(response.data.articles);
+      }
     }
-
-    // console.log(response.data.articles)
-    //       if (setArticleOfTheWeek)
-    //       {
-    //           const today = new Date();
-    // const dayOfWeek = today.getDay();
-    // const daysSinceSaturday = (dayOfWeek + 1) % 7; // Calculate days since last Saturday
-    // const lastSaturday = new Date(today);
-    // lastSaturday.setDate(today.getDate() - daysSinceSaturday);
-    // lastSaturday.setHours(0, 0, 0, 0);
-    // // setArticleOfTheWeek(fetchedArticles
-    // //   .filter(article => new Date(article.created_at) >= lastSaturday)
-    // //   .sort((a, b) => {
-    // //     const likesDifference = b.likes_count - a.likes_count;
-    // //     if (likesDifference !== 0) {
-    // //       return likesDifference;
-    // //     }
-    // //     return new Date(b.created_at) - new Date(a.created_at);
-    // //   })[0]
-    // // );
-    //       }
-
     setTotalPages(Math.ceil(response.data.total_pages));
 
     console.log(response);

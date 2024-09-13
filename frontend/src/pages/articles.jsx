@@ -15,9 +15,11 @@ function Articles() {
   const [pageNum, setPageNum] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
  const token = JSON.parse(localStorage.getItem("token"))
+ const isAdmin = JSON.parse(localStorage.getItem("isAdmin"))
 
  useEffect(() => {
   fetchContent("articles", token, 1, 1, null, setTotalPages, setLoading, setActiveTabName, "newest", setArticles, setArticleOfTheWeek);
+  console.log(articleOfTheWeek)
 }, []);
 
   return (
@@ -40,7 +42,12 @@ function Articles() {
           )}
       
       </section>
-      <Create_Article/>
+      
+        {
+          isAdmin && <div style={{position: "absolute", right: "64px", top: "100px"}}>
+<Create_Article/>
+          </div>
+        }
         <Articles_list articleOfTheWeek = {articleOfTheWeek}/>
      </main>
      <Footer/>

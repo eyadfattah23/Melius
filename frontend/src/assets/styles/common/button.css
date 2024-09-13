@@ -31,15 +31,7 @@ opacity: 0.8;
     opacity: 0.8;
 }
 
-/* .outline_primary:hover{
-    color: var(--primary_700);
-    border: 1px solid var(--primary_700);
-    background-color: var(--on-primary_700);
-} */
-/* .outline_primary:disabled{
-    opacity: 0.6;
-    border: 1px solid var(--primary, #2C3E50);
-} */
+
 .daily_relapsing_check_fail{
 background-color: #493B3B;
 color: var(--black);
@@ -65,6 +57,11 @@ width: 350px;
     height: 100%;
     color: white;
 }
+.login_btn:hover{
+    color: var(--primary);
+    background-color: white;
+    border: 1px solid var(--primary);
+}
 
 .signup_btn_link div{
     border-bottom: 1px solid var(--primary);
@@ -72,14 +69,28 @@ width: 350px;
     
     
 }
-.singup_btn{
+.signup_btn_link div:hover{
+    opacity: 0.8;
+    
+}
+.signup_btn{
     background: var(--accent);
     color: white;
+    height: 100%;
+}
+.signup_btn:hover{
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    background-color: white;
     height: 100%;
 }
 .login_btn_link div{
     border-bottom: 1px solid var(--accent);
     color: var(--accent) ;
+    
+}
+.login_btn_link div{
+   opacity: 0.8;
     
 }
 .landing_cta{
