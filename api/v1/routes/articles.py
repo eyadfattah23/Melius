@@ -3,7 +3,7 @@ from models.article import Article
 from models.article import ArticleLike
 from models import storage
 from flasgger.utils import swag_from
-from flask_jwt_extended import jwt_required, get_jwt_identity
+from flask_jwt_extended import jwt_required, get_jwt_identity, get_jwt
 
 articles_bp = Blueprint('articles', __name__)
 
@@ -72,6 +72,7 @@ def get_article(article_id):
 @jwt_required()
 @swag_from('documentation/article/create_article.yml')
 def create_article():
+    """creates a new article"""
     if not request.get_json():
         abort(400, description="Not a JSON")
 
@@ -81,6 +82,12 @@ def create_article():
     if 'content' not in request.get_json():
         abort(400, description="Missing content")
 
+    claims = get_jwt()
+    if not claims.get("is_admin"):
+        # User is not admin
+        abort(403, description="You do not have permission to create an article")
+
+    # User is admin
     data = request.get_json()
     instance = Article(**data)
     instance.save()
@@ -91,6 +98,7 @@ def create_article():
 @jwt_required()
 @swag_from('documentation/article/update_article.yml')
 def update_article(article_id):
+    """updates an article"""
     article = storage.get(Article, article_id)
 
     if not article:
@@ -98,6 +106,11 @@ def update_article(article_id):
 
     if not request.get_json():
         abort(400, description="Not a JSON")
+
+    claims = get_jwt()
+    if not claims.get("is_admin"):
+        # User is not admin
+        abort(403, description="You do not have permission to create an article")
 
     ignore = ['id', 'user_id', 'created_at', 'updated_at']
 
@@ -113,9 +126,16 @@ def update_article(article_id):
 @jwt_required()
 @swag_from('documentation/article/delete_article.yml')
 def delete_article(article_id):
+    """deletes an article"""
     article = storage.get(Article, article_id)
     if article is None:
         abort(404, description="Article not found")
+
+    claims = get_jwt()
+    if not claims.get("is_admin"):
+        # User is not admin
+        abort(403, description="You do not have permission to create an article")
+
     storage.delete(article)
     storage.save()
     return make_response(jsonify({'message': 'article deleted'}), 200)
