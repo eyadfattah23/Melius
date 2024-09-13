@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom"
 export default function Edit_Profile() {
   const navigate = useNavigate()
   const user_id = JSON.parse(localStorage.getItem("user_id"))
+  const token = JSON.parse(localStorage.getItem("token"))
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -21,11 +22,16 @@ export default function Edit_Profile() {
   const [loading, setLoading] = useState(false);
   const handleDelete =async() =>{
     try {
-        const response = await axios.delete(`http://127.0.0.1:5050/api/v1/users/${user_id}`) 
+        const response = await axios.delete(`http://127.0.0.1:5050/api/v1/users/${user_id}`,
+            {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              }
+        ) 
         localStorage.removeItem("username");
       localStorage.removeItem("user_id");
-      localStorage.removeItem("number_of_days");
-      localStorage.removeItem("level");
+     localStorage.removeItem("token")
       navigate("/signup")         
     } catch (error) {
         console.error(error);
@@ -73,14 +79,16 @@ export default function Edit_Profile() {
               email,
               username,
               password,
-          });
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
           console.log(response);
           window.location.reload()
-          // localStorage.setItem("username", JSON.stringify(response.data.username));
-          // localStorage.setItem("user_id", JSON.stringify(response.data.id));
-          // localStorage.setItem("number_of_days", JSON.stringify(null));
-          // localStorage.setItem("level", JSON.stringify(null));
       } catch (error) {
           console.error(error);
           setErrorPassword(error.response?.data?.error || "An error occurred. Please try again.");
@@ -92,10 +100,14 @@ export default function Edit_Profile() {
     const fetchUser = async () => {
         try {
             const response = await axios.get(`http://127.0.0.1:5050/api/v1/users/${user_id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`, 
+                  },
               });
-              setUsername(response.data.username)
-              setEmail(response.data.email)
-           
+        if(response.status == 200){
+            setUsername(response.data.username)
+            setEmail(response.data.email)
+        }
         } catch (error) {
             console.error(error);
         } finally {
@@ -103,11 +115,11 @@ export default function Edit_Profile() {
         }
     };
     fetchUser()
-}, [user_id]);
+}, []);
 
   return (
       <DialogContent className="sm:max-w-[726px] edit_profile">
-        <DialogHeader>
+        <DialogHeader className={"header"}>
           <Leader_card name={username} badge={<Avatar level={"2"}/>}/>
         </DialogHeader>
          
@@ -153,7 +165,7 @@ export default function Edit_Profile() {
         <DialogFooter className={"footer"}>
        <div>
        <Button text={loading ? "Loading..." : "Delete Account"} type="btn_delete"   icon={<Icon size={24} name={"delete"}/>} onClick={handleDelete}/>        
-       <Button text={loading ? "Loading..." : "Save Changes"} type="primary" onClick={handleSubmit}/>        
+       <Button text={loading ? "Loading..." : "Save Changes"} type="cta_filled" onClick={handleSubmit}/>        
        </div>
         </DialogFooter> 
      </DialogContent>

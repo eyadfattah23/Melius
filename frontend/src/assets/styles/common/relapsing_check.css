@@ -22,8 +22,8 @@
     background-position: center;
     background-size: cover;
     padding: 128px !important;
-    z-index: 999;
-    border-radius: 16px;
+    z-index: 999 !important;
+    border-radius: 16px !important;
 }
 .passed_container .header{
     background-color: #F2FDFF;

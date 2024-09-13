@@ -1,6 +1,12 @@
 .edit_profile{
     gap: 64px;
-    border-radius: 8px;
+    border-radius: 8px !important;
+    background-color: white !important;
+    z-index: 999 !important;
+    align-items: center;
+}
+.edit_profile .header{
+    margin: 0 auto;
 }
 .edit_profile .form{
     display: flex;
