@@ -7,7 +7,9 @@ import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext
 import { Link, useNavigate } from "react-router-dom";
 import createOrResetTimer from "../functions/create_or_reset_timer";
 
-function Leaders_List() {
+function Leaders_List({setMaxDays}) {
+  const user_id = JSON.parse(localStorage.getItem("user_id"))
+  const token = JSON.parse(localStorage.getItem("token"))
   const navigate = useNavigate();
   const countLevel = (days) => {
     if (days >= 365) return 6;
@@ -43,10 +45,10 @@ function Leaders_List() {
       {loading ? (
         <div>Loading...</div>
       ) : leaders && leaders.length > 0 ? (
-        <Carousel className="w-full carousel">
-        <CarouselContent className="carousel-content">
+        <Carousel className="w-full">
+        <CarouselContent >
         {leaders.map((leader, key) => (
-            <CarouselItem className="carousel-item">
+            <CarouselItem  className="carousel-content basis-1/3">
             <Leader_card  name={leader.username} badge={<Avatar level={`${countLevel(Number(leader.max_time))}`} />} />
 </CarouselItem>
           ))}
@@ -59,7 +61,7 @@ function Leaders_List() {
         <div className="no_leaders">
           <h4>No top achievers yet. Are you ready to take the lead?</h4>
           <Link to={"/challenge"}>
-            <Button text={"Join the Challenge"} type={"cta_filled"} onClick={() => createOrResetTimer(setLoading, navigate)} />
+            <Button text={"Join the Challenge"} type={"cta_filled"} onClick={() => createOrResetTimer(user_id, token, setLoading, navigate, setMaxDays)} />
           </Link>
         </div>
       )}

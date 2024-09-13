@@ -61,7 +61,7 @@ function Home() {
         {maxDays >= 0 && <RelapsingCheck user_id={user_id} token={token} />}
         <section className="leaders-board">
           <h1>Leaders Board</h1>
-          {!isUserLoading && <Leaders_List />}
+          {!isUserLoading && <Leaders_List  setMaxDays={setMaxDays}/>}
         </section>
         {/* <section className="latest-articles">
           <div className="container">

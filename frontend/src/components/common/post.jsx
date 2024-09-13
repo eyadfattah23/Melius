@@ -1,18 +1,13 @@
 import formatDate from "../../functions/format_date"
 import Icon from "../../assets/icons/icon"
 import Avatar from "../avatar"
-import axios from "axios"
 import { useState, useEffect } from "react"
-import Field from "./field"
-import writeComment from "../../functions/write_comment"
+import countLevel from "../../functions/count_level"
 import fetchComments from "../../functions/fetch_comments"
-import CommentField from "./comment_field"
 import Comments from "./comments"
-import fetchUser from "../../functions/fetch_user"
 import likeOrUnlike from "../../functions/like_or_unlike"
 import PostOptions from "./post_options"
 import "../../assets/styles/common/post.css"
-import fetchLikes from "../../functions/fetch_likes"
 function Post({title, text,likes_count, created_at, post_id, comments_count, isLiked, activeTabName, postUsername, userMaxTime}){
     const user_id = JSON.parse(localStorage.getItem("user_id"))
     const [comments, setComments] = useState([])
@@ -30,7 +25,7 @@ function Post({title, text,likes_count, created_at, post_id, comments_count, isL
         <div className="header">
             <div className="profile">
                 <div className="avatar">
-                <Avatar level={"2"}/> 
+                <Avatar level={`${countLevel(Number(userMaxTime))}`} /> 
                 </div>
                 <div className="username">
                     <p className="name">{postUsername}</p>

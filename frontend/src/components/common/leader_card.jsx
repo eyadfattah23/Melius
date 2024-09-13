@@ -2,7 +2,7 @@ import "../../assets/styles/common/leader_card.css";
 
 function Leader_card({ name, badge }) {
   return (
-    <div>
+    <div className="leader_main">
       <div className="leader_card">
         {badge}
       </div>

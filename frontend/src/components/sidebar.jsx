@@ -28,7 +28,7 @@ function Sidebar({ loggedin }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className="flex items-center">
+        <button className="flex items-center avatar">
           <Avatar  />
         </button>
       </DropdownMenuTrigger>

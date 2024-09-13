@@ -1,23 +1,13 @@
 
   
 
-  .carousel-item {
-    box-sizing: border-box;
-    padding: 0 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-
-  }
   
   .leader_card {
     width: 154px;
     height: 154px;
   }
   
-  .carousel-item h4 {
+  .leader_main h4 {
     color: var(--black_medium_emphasis);
     text-align: center;
     font-size: var(--h4);

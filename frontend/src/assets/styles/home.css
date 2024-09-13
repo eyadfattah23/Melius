@@ -35,13 +35,10 @@ gap: 32px;
     font-weight: 700;
     color: var(--primary);
 }
-.carousel{
-    justify-content: flex-start;
-    display: flex;
-}
+
   .carousel-content {
     display: flex;
-    width: 25%;
+    justify-content: space-around;
   }
   
  
