@@ -2,13 +2,6 @@
 
 portfolio project for alx, a web app that will help you beat porn addiction in complete secrecy.
 
-## Packages to install
-
-```sh
-  pip install passlib
-  pip install pep8
-```
-
 ## Database credentials
 
 MELIUS_MYSQL_USER="melius_dev"
@@ -43,7 +36,7 @@ MELIUS_MYSQL_USER="melius_test" MELIUS_MYSQL_PWD="Melius_test_pwd123" MELIUS_MYS
 ```json
 {
 "email": "meliusadmin123@gmail.com",
-"password": "Melius_Pass1#word",
+"password": "MeliusPass1#word",
 "username": "Admin user"
 }
 
