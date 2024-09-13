@@ -3,7 +3,7 @@ from models.user import User
 from models.timer_history import TimerHistory
 from models import storage
 from flasgger.utils import swag_from
-from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity, get_jwt
 
 from datetime import datetime, timezone, timedelta
 
@@ -15,14 +15,11 @@ users_bp = Blueprint('users', __name__)
 @jwt_required()
 @swag_from('documentation/user/get_users.yml')
 def get_users():
-    """retrieves a list of all users"""
-    current_user_id = get_jwt_identity()
-
-    user = storage.get(User, current_user_id)
-
-    if user.email != 'meliusadmin123@gmail.com':
-        abort(403, description="Permission denied, this is an admin only action")
-    users = storage.all(User).values()
+    """retrieves a list of all users""" 
+    claims = get_jwt()
+    if claims.get("is_admin"):
+        # User is admin
+        users = storage.all(User).values()
     return jsonify([user.to_dict() for user in users])
 
 # Creates a new user
@@ -50,14 +47,11 @@ def create_user():
     except Exception as e:
         abort(400, description=str(e))
 
-    access_token = create_access_token(identity=instance.id)
+    access_token = create_access_token(identity=instance.id, additional_claims={"is_admin": instance.is_admin})
 
     return make_response(jsonify({"token": access_token, "user": instance.to_dict()}), 201)
 
 # Authenticates user
-
-
-
 @users_bp.route('/users/authenticate', methods=['POST'])
 @swag_from('documentation/user/authenticate_user.yml')
 def authenticate_user():
@@ -86,7 +80,7 @@ def authenticate_user():
     else:
         user_dict['timer_reset_date'] = user_timer.reset_date
 
-    access_token = create_access_token(identity=user.id)
+    access_token = create_access_token(identity=user.id, additional_claims={"is_admin": user.is_admin})
     return make_response(jsonify({"token": access_token, "user": user_dict}), 200)
 
 # Retrieves specific user details
