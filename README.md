@@ -1,53 +1,141 @@
 # Melius
 
-portfolio project for alx, a web app that will help you beat porn addiction in complete secrecy.
+Melius is a privacy-focused web application designed to help users overcome porn addiction. Built as part of the ALX portfolio, this platform allows users to track progress, access recovery resources, and manage their journey without compromising anonymity.
 
-## Database credentials
+## Introduction
 
-MELIUS_MYSQL_USER="melius_dev"
+Melius provides a confidential environment for users seeking recovery from porn addiction, offering anonymous accounts and useful tools to aid in the journey. The platform has been developed with care to ensure users' privacy and data security.
 
-MELIUS_MYSQL_PWD="Melius_dev_pwd123"
+- **Deployed site**: [https://meliusapp.com](#) (link placeholder)
+- **Final project blog article**: [Read here](#) (link placeholder)
+- **Author's LinkedIn**: [Eyad Fattah](https://www.linkedin.com/in/eyad-fattah/)
 
-MELIUS_MYSQL_HOST="localhost"
+## Features
 
-MELIUS_MYSQL_DB="melius_dev_db"
+- **Anonymous Account Creation**: Users can sign up without sharing personal information.
+- **Progress Tracking**: Monitor your progress over time.
+- **Resource Hub**: Provides articles, videos, and exercises to support recovery.
+- **Privacy Protection**: Data security is a top priority, ensuring anonymity at all stages.
 
-## commands to run:
+## Technologies Used
+
+- **Backend**: Flask (Python)
+- **Frontend**: HTML, CSS, JavaScript, React
+- **Server**: Nginx
+- **Authentication**: JWT (JSON Web Tokens)
+- **API Documentation**: Swagger
+- **Database**: MySQL
+- **Testing**: Unittest (Python)
+- **Deployment**: Docker, Bash scripts
+
+## Installation
+
+You can either use the provided Bash script or manually install the application as detailed below.
+
+### Install with Bash Script
+
+Run the automated installation with the following commands:
 
 ```bash
-MELIUS_MYSQL_USER="melius_dev" MELIUS_MYSQL_PWD="Melius_dev_pwd123" MELIUS_MYSQL_HOST=localhost MELIUS_MYSQL_DB=melius_dev_db ./file
+cd /var
+chmod u+x melius.sh
+./melius.sh
 ```
 
-````bash
-MELIUS_MYSQL_USER="melius_test" MELIUS_MYSQL_PWD="Melius_test_pwd123" MELIUS_MYSQL_HOST=localhost MELIUS_MYSQL_DB=melius_test_db ./file```
-````
+## Manual Installation
+
+### Prerequisites
+
+- Python 3.x
+- Pip
+- MySQL
+- Nginx
+- Node.js
+- npm
+
+### Clone the Repository
 
 ```bash
-MELIUS_MYSQL_USER="melius_test" MELIUS_MYSQL_PWD="Melius_test_pwd123" MELIUS_MYSQL_HOST=localhost MELIUS_MYSQL_DB=melius_test_db python3 -m unittest discover tests
+git clone https://github.com/eyadfattah23/Melius.git
+cd Melius
+```
+
+### Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### Install frontend dependencies:
+
+```bash
+cd frontend
+npm install
+```
+
+### Set Up MySQL
+
+```bash
+cd /var/Melius
+mysql -u root < setup_mysql_dev.sql
+```
+
+### Set Up Nginx
+
+Update Nginx configuration with the appropriate settings
+
+### Run the Application
+
+```bash
+cd /var/Melius
+python3 -m api.v1.app
 ```
 
 ```bash
-MELIUS_MYSQL_USER="melius_test" MELIUS_MYSQL_PWD="Melius_test_pwd123" MELIUS_MYSQL_HOST=localhost MELIUS_MYSQL_DB=melius_test_db python3 -m api.v1.app
-
+cd frontend
+npm run dev
 ```
 
-### admin credentials:
+## Usage
 
-```json
-{
-"email": "meliusadmin123@gmail.com",
-"password": "MeliusPass1#word",
-"username": "Admin user"
-}
+Once the application is running, access it via your browser:
 
+- Backend: <http://localhost:5000>
+- Frontend: <http://localhost:3000>
 
-{
-"__class__": "User",
-"created_at": "2024-09-08T23:15:58.641253",
-"email": "meliusadmin123@gmail.com",
-"id": "ee7cc318-76f6-4854-a7c5-69838b3541f0", //change or keep
-"img": "resources/default_male_img.jpg",
-"updated_at": "2024-09-08T23:15:58.641329",
-"username": "Admin user"
-}
-```
+Users can create anonymous accounts, track their progress, and access resources.
+
+## Screenshot
+
+![Melius Screenshot](#) (Placeholder for the screenshot)
+
+## Contributing
+
+Contributions are welcome! To contribute:
+
+1.  Fork the repository.
+2.  Create a new branch (`git checkout -b feature-branch`).
+3.  Commit your changes (`git commit -m 'Add some feature'`).
+4.  Push to the branch (`git push origin feature-branch`).
+5.  Open a pull request.
+
+Ensure your code follows PEP8 guidelines, is documented, and includes unit tests for any new features.
+
+## Related Projects
+
+- **NoFap**: A community-driven platform supporting recovery.
+- **Reboot Nation**: Another initiative aimed at overcoming porn addiction.
+
+## License
+
+This project is licensed under the MIT License. See the LICENSE file for more details.
+
+## Future Improvements
+
+- **Mobile App**: Develop a companion mobile app for Melius.
+- **Gamification**: Introduce achievement badges to encourage users.
+- **AI Chatbot**: Provide users with an AI-based support assistant for guidance.
+
+## Author's Story
+
+This project was born from a personal belief that everyone deserves a safe, non-judgmental space to recover. The challenge was balancing complete anonymity with robust functionality, achieved through JWT authentication and encrypted databases. Future iterations will explore mobile platforms and incorporate user feedback to enhance the platform.
