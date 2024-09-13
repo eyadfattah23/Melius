@@ -12,12 +12,10 @@ import parse from "html-react-parser";
 import Comments from "../../components/common/comments";
 import { useLocation } from "react-router-dom";
 import likeOrUnlike from "../../functions/like_or_unlike";
-import fetchComments from "../../functions/fetch_comments";
 import config from "../../config";
 
 function One_Article() {
   const [article, setArticle] = useState();
-  const [liked, setLiked] = useState(false);
   const [likesCount, setLikesCount] = useState(0);
   const [commentsCount, setCommentsCount] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -27,8 +25,8 @@ function One_Article() {
 
   const token = JSON.parse(localStorage.getItem("token"));
   const user_id = JSON.parse(localStorage.getItem("user_id"));
-  const { article_id, likes } = useLocation().state;
-
+  const { article_id, likes, liked } = useLocation().state;
+  const [isLiked, setIsLiked] = useState(liked)
   useEffect(() => {
     const fetchArticle = async () => {
       setLoading(true);
@@ -43,7 +41,8 @@ function One_Article() {
         );
         setArticle(response.data);
         setLikesCount(likes);
-        setCommentsCount(response.data.comments_count); // assuming article response includes comment count
+        setCommentsCount(response.data.comments_count);
+        
       } catch (error) {
         console.error(error);
       } finally {
@@ -77,14 +76,15 @@ function One_Article() {
                 <img src={article_img} alt="Article" />
               </div>
               <div className="article_content">{parse(article.content)}</div>
+              
               <div className="article_footer">
                 <div
                   className="sec"
                   onClick={() =>
                     likeOrUnlike(
                       setLoading,
-                      setLiked,
-                      liked,
+                      setIsLiked,
+                      isLiked,
                       "article",
                       article_id,
                       user_id,
@@ -96,9 +96,9 @@ function One_Article() {
                   <Icon
                     name={"hand_heart"}
                     size={20}
-                    color={!liked ? "grey" : "red"}
+                    color={!isLiked ? "grey" : "red"}
                   />
-                  <p className={liked ? "isLiked" : ""}>Like</p>
+                  <p className={isLiked ? "isLiked" : ""}>Like</p>
                 </div>
                 <div className="sec" onClick={() => setCommentField(true)}>
                   <Icon name={"chat"} size={20} color={"grey"} />

@@ -56,6 +56,7 @@ function Articles_list({articleOfTheWeek}) {
                   title={article.title}
                   published_date={article.created_at}
                   likes={article.likes_count}
+                  liked={article.liked}
                 />
               ))}
             </div>

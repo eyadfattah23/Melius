@@ -91,3 +91,7 @@ color: var(--on-surface_medium_emphasis);
     font-weight: 400;
 
 }
+.article_footer .sec .isLiked{
+    color: #F91616;
+    font-weight: 700;
+}

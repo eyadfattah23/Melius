@@ -18,7 +18,7 @@ function Comments({comment, setComment, setCommentField, contentType, content_id
             </div>
             <div className="text">
             <div className="username">
-                    <p className="name">username</p>
+                    <p className="name">{cmnt.username}</p>
                     <p className="post_time">{formatDate(cmnt.created_at)}</p>
                 </div>
                     <p>{cmnt.text}</p>

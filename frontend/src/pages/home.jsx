@@ -42,24 +42,26 @@ function Home() {
     <>
       <Navbar />
       <main className="main_layout">
-        <section className="full_screen_section" id="hero">
+        <section className="full_screen_section px-16 py-8" id="hero">
           <h2>Welcome, {username}</h2>
           {maxDays >= 0 ? (
-            <div className="stats">
+            <div className="stats flex flex-col justify-center items-center gap-8 py-8">
               <h4>You're on</h4>
               <Counter2 achieved_days={maxDays} unit={maxDays > 1 ? "Days" : "Day"} />
               <h4>of your journey to freedom</h4>
             </div>
           ) : (
-            <div className="stats">
+            <div className="stats flex flex-col justify-center items-center gap-8 py-8">
               <h4>Ready for a Change?</h4>
               <p>Join our challenge today and start your journey towards a better you!</p>
+              <div>
               <Button text={"Join the Challenge"} type={"cta_filled"} onClick={handleJoinChallenge} />
+              </div>
             </div>
           )}
         </section>
         {maxDays >= 0 && <RelapsingCheck user_id={user_id} token={token} />}
-        <section className="leaders-board">
+        <section className="leaders-board flex flex-col gap-8 justify-center px-16">
           <h1>Leaders Board</h1>
           {!isUserLoading && <Leaders_List  setMaxDays={setMaxDays}/>}
         </section>
