@@ -8,7 +8,6 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 articles_bp = Blueprint('articles', __name__)
 
 
-
 @articles_bp.route('/articles', methods=['GET'])
 @jwt_required()
 @swag_from('documentation/article/get_articles.yml')
@@ -18,6 +17,8 @@ def get_articles():
     page = request.args.get('page', 1, type=int)
     per_page = request.args.get('per_page', 10, type=int)
     filter_type = request.args.get('filter_type', '', type=str)
+
+    current_user_id = get_jwt_identity()
 
     # Get paginated articles
     articles = list(storage.all(Article, page=page,
@@ -34,8 +35,12 @@ def get_articles():
         del article_dict['content']
         article_dict['likes_count'] = likes_count
         # article_dict['username'] = article.user.username
-        articles_list.append(article_dict)
 
+        like = storage.getSession().query(ArticleLike).filter_by(
+            article_id=article.id, user_id=current_user_id).first()
+
+        article_dict['liked'] = like is not None
+        articles_list.append(article_dict)
     # Correct the total_pages calculation
     total_pages = (total_articles + per_page -
                    1) // per_page if per_page > 0 else 1
@@ -52,7 +57,6 @@ def get_articles():
     return jsonify(response)
 
 
-
 @articles_bp.route('/articles/<article_id>', methods=['GET'])
 @jwt_required()
 @swag_from('documentation/article/get_article.yml')
@@ -62,7 +66,6 @@ def get_article(article_id):
     if article is None:
         abort(404, description="Article not found")
     return jsonify(article.to_dict())
-
 
 
 @articles_bp.route('/articles', methods=['POST'])
@@ -82,7 +85,6 @@ def create_article():
     instance = Article(**data)
     instance.save()
     return make_response({}, 201)
-
 
 
 @articles_bp.route('/articles/<article_id>', methods=['PUT'])
@@ -105,7 +107,6 @@ def update_article(article_id):
             setattr(article, key, value)
     storage.save()
     return make_response(jsonify(article.to_dict()), 200)
-
 
 
 @articles_bp.route('/articles/<article_id>', methods=['DELETE'])
