@@ -47,7 +47,7 @@ def create_user():
     except Exception as e:
         abort(400, description=str(e))
 
-    access_token = create_access_token(identity=instance.id, additional_claims={"is_admin": instance.is_admin})
+    access_token = create_access_token(identity=instance.id, additional_claims={"is_admin": instance.isAdmin})
 
     return make_response(jsonify({"token": access_token, "user": instance.to_dict()}), 201)
 
@@ -80,7 +80,7 @@ def authenticate_user():
     else:
         user_dict['timer_reset_date'] = user_timer.reset_date
 
-    access_token = create_access_token(identity=user.id, additional_claims={"is_admin": user.is_admin})
+    access_token = create_access_token(identity=user.id, additional_claims={"is_admin": user.isAdmin})
     return make_response(jsonify({"token": access_token, "user": user_dict}), 200)
 
 # Retrieves specific user details
