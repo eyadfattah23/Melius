@@ -1,6 +1,6 @@
 import fetchComments from "./fetch_comments";
 import axios from "axios";
-import config from "@/config";
+import config from "../config";
 const writeComment = async (
   setCommentField,
   contentType,
