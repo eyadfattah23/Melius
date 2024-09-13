@@ -1,9 +1,9 @@
-.article_section .container{
+.article_section{
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 32px;
-    padding: 32px 72px;
+    padding: 32px 64px;
 }
 .article_header{
     display: flex;
@@ -45,6 +45,7 @@ border-top: 0.5px solid var(--outline);
     color: var(--primary);
     font-size: var(--h1);
     font-weight: 700;
+    line-height: normal;
 }
 .article_header .article_info .metadata{
     display: flex;

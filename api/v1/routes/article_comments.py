@@ -15,7 +15,17 @@ article_comments_bp = Blueprint('articleComments', __name__)
 def get_article_comments(article_id):
     """Retrieves a list all comments for a specific article"""
     article = storage.get(Article, article_id)
-    return jsonify([comment.to_dict() for comment in article.comments])
+
+    comments_list = []
+    for comment in article.comments:
+        comment_dict = comment.to_dict().copy()
+        comment_dict['username'] = comment.user.username
+        timer_history = comment.user.timer_histories[0] if comment.user.timer_histories else None
+        comment_dict['max_time'] = timer_history.max_time if timer_history else 0
+
+        comments_list.append(comment_dict)
+
+    return jsonify(comments_list)
 
 
 # Creates a new comment for a specific post

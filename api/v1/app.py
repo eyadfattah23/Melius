@@ -13,10 +13,10 @@ from flask_jwt_extended import create_access_token, get_jwt, get_jwt_identity, s
 def create_flask_app():
     appContext = Flask(__name__)
     appContext.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
-    #CORS(appContext, resources={r"/*": {"origins": "*"}})
+    # CORS(appContext, resources={r"/*": {"origins": "*"}})
     # Change this to a strong secret key
     appContext.config['JWT_SECRET_KEY'] = environ.get(
-        'MELILUS_API_SECRET_KEY', 'change_this_on_server_and_save_it_in_env')
+        'MELIUS_API_SECRET_KEY', 'change_this_on_server_and_save_it_in_env')
 
     appContext.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=1)
 
