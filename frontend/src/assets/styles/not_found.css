@@ -1,13 +1,11 @@
 .not_found_main{
-    height: 88vh;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 32px;
     align-items: center;
     justify-content: center;
-}
-.not_found_main .container{
-    width: fit-content;
+    padding: 0 64px;
+    height: 100vh;
 }
 .not_found_main span{
     font-size: 160px;

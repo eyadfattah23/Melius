@@ -4,49 +4,35 @@ import {
   TabsList,
   TabsTrigger,
 } from "../components/shadcn/ui/tabs";
-import Articles_Card from "./articles_card";
+import "../assets/styles/articles_list.css"
+import Articles_Card from "./common/articles_card";
 import { useState, useEffect } from "react";
 import Button from "./common/button";
 import { Link } from "react-router-dom";
 import PageNums from "./common/pagination";
 import fetchContent from "../functions/fetch_content";
 import Tab from "./tab";
-function Articles_list({ }) {
+function Articles_list({articleOfTheWeek}) {
   const [loading, setLoading] = useState(false);
-  const [activeTabName, setActiveTabName] = useState("Most Liked");
+  const [activeTabName, setActiveTabName] = useState("most_liked");
   const [pageNum, setPageNum] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [articles, setArticles] = useState([]);
-  
-  // const getSortedArticles = (filter) => {
-  //   let sortedArticles = [...articles];
-
-  //   if (filter === "Most Liked") {
-  //     sortedArticles.sort((a, b) => b.likes_count - a.likes_count);
-  //   } else if (filter === "Newest") {
-  //     sortedArticles.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-  //   } else if (filter === "Oldest") {
-  //     sortedArticles.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
-  //   }
-
-  //   return sortedArticles;
-  // };
-
-  // const filteredArticles = getSortedArticles(activeTabName).slice((pageNum - 1) * 2, pageNum * 2);
-
-  
+  const token = JSON.parse(localStorage.getItem("token"))
   useEffect(() => {
-    fetchContent("articles",pageNum, 3, null, setTotalPages, setLoading, setActiveTabName, "most_liked", setArticles);
-    console.log(articles)
-  }, [pageNum]);
+    if(articleOfTheWeek)
+    {
+      fetchContent("articles",token, pageNum, 3, null, setTotalPages, setLoading, setActiveTabName, activeTabName, setArticles);
+    }
+  }, [pageNum, articleOfTheWeek, activeTabName]);
 
  
 
  
   return (
-    <>
-      {articles && articles.length > 0 ? (
-        <Tabs defaultValue="Most Liked" className="container">
+    <section className="articles_section">
+      {articles ? (
+        <div defaultValue="most_liked" id="posts_section">
           <div className="header">
             <h1>Articles</h1>
             <Tab
@@ -55,11 +41,12 @@ function Articles_list({ }) {
             setContent={setArticles}
             setLoading={setLoading}
             contentType={"articles"}
+            activeTabName={activeTabName}
             setActiveTabName={setActiveTabName}
             />
           </div>
 
-          <TabsContent value={activeTabName} className="content">
+          <div value="most_liked" className="content">
             <div className="articles_list grid grid-cols-2">
               {articles.map((article, index) => (
                 <Articles_Card
@@ -73,8 +60,8 @@ function Articles_list({ }) {
               ))}
             </div>
             <PageNums totalPages={totalPages} pageNum={pageNum} setPageNum={setPageNum}/>
-          </TabsContent>
-        </Tabs>
+          </div>
+        </div>
       ) : (
         <div className="no_articles container">
           <h4>We're sorry, but there are currently no articles to display.</h4>
@@ -83,11 +70,11 @@ function Articles_list({ }) {
             <p>If you have any specific topics you're interested in, feel free to contact us. We would love to hear your suggestions!</p>
           </div>
           <Link to="/contact">
-            <Button text="Contact us" type="primary" />
+            <Button text="Contact us" type="cta_filled" />
           </Link>
         </div>
       )}
-    </>
+    </section>
   );
 }
 

@@ -1,0 +1,15 @@
+
+  
+
+  
+  .leader_card {
+    width: 154px;
+    height: 154px;
+  }
+  
+  .leader_main h4 {
+    color: var(--black_medium_emphasis);
+    text-align: center;
+    font-size: var(--h4);
+    font-weight: 700;
+  }

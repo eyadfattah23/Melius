@@ -1,94 +1,134 @@
-.login_section{
+.login_main{
+    background-color: #F5F6FC;
+    padding: 32px 64px;
+    height: calc(100vh) ;
+}
+.authenticate_nav{
     display: flex;
-    padding: 32px 72px;
+    justify-content: space-between;
+}
+.authenticate_nav .menu_item{
+    
+        font-style: var(--body_N);
+        color: var(--black_medium_emphasis);
+        list-style: none;
+        cursor: pointer;
+}
+.authenticate_nav .menu_item:hover{
+    border-bottom: 2px solid var(--secondary);
+    color: var(--secondary);
+    }
+.main_section{
+    height: calc(100% - 32px);
+    gap: 32px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 32px 0;
+}
+
+.card{
+    width: 75%;
+    height: 100%;
+    border-radius: 16px !important;
+    display: flex;
     justify-content: space-between;
     align-items: center;
-    background: conic-gradient(from 180deg at 50% 50%, #0F365E 72.0000010728836deg, #0B2A47 144.0000021457672deg, #195A9B 216.00000858306885deg, #1B63AA 288.0000042915344deg, #134679 360deg);
-}
-.login_section .left_container{
-    display: flex;
-    width: 25vw;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 32px;
-    align-self: stretch;
-}
-.login_section .right_container{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-end;
-    gap: 32px;
-}
-.login_section .left_container .user{
-    padding: 16px;   
-    border-radius: 50%;
-    border: 5px solid white;
-}
-.login_section .left_container .login{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: center;
-    gap: 8px;
-    align-self: stretch;
-}
-.login_section .left_container .login p{
-    color: white;
-    font-size: var(--body_S);
-    font-weight: 400;
-}
-.login_section .left_container .alternative{
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 8px;
-    width: 100%;
-}
-.login_section .left_container .login .form{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 32px;
-    align-self: stretch;
+    gap: 16px;
+    background-color: white !important;
+    box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.09);
 
 }
-.login_section .left_container .login .form .field{
+.main_section .left_container{
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    align-self: stretch;
+    border-radius: 16px 0 0 16px ; 
+    padding: 32px;
+}
+.main_section .left_container .login{
+      width: 75%;
+}
+.main_section .left_container .login .form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    align-self: stretch;
+}
+.main_section .left_container .login .form .field{
     display: flex;
     flex-direction: column;
     gap: 4px;
     width: 100%;
 }
-.login_section .left_container .login .form .field .container{
+.main_section .left_container .login .form .field .container{
     display: flex;
     padding: 8px 12px;
     align-items: center;
     gap: 16px;
     border-radius: 6px;
-    border: 1px solid white;
+    border: 1px solid var(--outline);
     width: 100%;
 }
-.login_section .left_container .login .form .submit{
+.main_section .left_container .login .form .submit{
     height: 44px;
     width: 100%;
 }
-.login_section .left_container .alternative p{
-    color: white;
+
+
+.main_section .left_container .alternative{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+    width: 75%;
+}
+.main_section .left_container .alternative p{
+    color: black;
     font-size: var(--body_S);
     font-weight: 400;
 }
-.login_section .right_container .title{
-color: white;
-font-size: var(--h1);
-font-weight: 700;
+
+.main_section .right_container{
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    align-self: stretch;
+    border-radius: 0px 16px 16px 0px ; 
+    padding: 32px;
+
 }
-.login_section .right_container .description{
-    color: white;
-    font-size: var(--h4);
+#login_section .right_container{
+    background-color:#E8EAF7;
+}
+.main_section .right_container .title{
+    font-size: var(--h2);
     font-weight: 700;
+    width: 75%;
+    text-align: center;
+    }
+#login_section .right_container .title{
+    color: var(--primary);
 }
-.login_section .left_container .login .form .field .error{
+.main_section .right_container .description{
+    opacity: 0.5;
+    font-size: var(--body_L);
+    font-weight: 500;
+    text-align: center;
+}
+#login_section .right_container .description{
+    color: var(--primary);
+
+}
+.main_section .left_container .login .form .field .error{
     color: var(--error);
     font-size: var(--body_S);
     font-weight: 600;

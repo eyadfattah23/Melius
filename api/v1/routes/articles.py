@@ -33,7 +33,7 @@ def get_articles():
         likes_count = storage.count(ArticleLike, article_id=article.id)
         del article_dict['content']
         article_dict['likes_count'] = likes_count
-        article_dict['username'] = article.user.username
+        # article_dict['username'] = article.user.username
         articles_list.append(article_dict)
 
     # Correct the total_pages calculation

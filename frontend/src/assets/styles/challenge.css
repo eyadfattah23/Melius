@@ -1,3 +1,10 @@
+#counter_section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+}
 #counter_section h2{
     font-size: var(--h2);
     font-weight: 700;

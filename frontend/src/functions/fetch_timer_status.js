@@ -13,7 +13,6 @@ const fetchTimerStatus = async (user_id, token, setStartingDate, setTries, setMa
         setTries(response.data.data.no_tries)
         setMaxDays(response.data.data.max_time)
         setLevel(countLevel(response.data.data.max_time))
-        console.log(countLevel(response.data.data.max_time))
     } catch (error) {
         console.error(error);
     } finally {
