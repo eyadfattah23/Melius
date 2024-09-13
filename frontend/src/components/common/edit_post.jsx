@@ -9,7 +9,7 @@ import {
   DialogTitle,
 } from "../../components/shadcn/ui/dialog";
 import Field from "../common/field";
-import config from "@/config";
+import config from "../../config";
 export default function EditPost({ post_id, title, text }) {
   const token = JSON.parse(localStorage.getItem("token"));
   const [postTitle, setTitle] = useState(title);

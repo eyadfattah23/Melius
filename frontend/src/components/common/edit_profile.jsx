@@ -14,7 +14,7 @@ import {
 import Field from "../common/field";
 import Icon from "../../assets/icons/icon";
 import { useNavigate } from "react-router-dom";
-import config from "@/config";
+import config from "../../config";
 export default function Edit_Profile() {
   const navigate = useNavigate();
   const user_id = JSON.parse(localStorage.getItem("user_id"));
