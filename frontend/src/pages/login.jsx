@@ -42,7 +42,7 @@ function Login() {
     }
     try {
       const response = await axios.post(
-        "http://127.0.0.1:5050/api/v1/users/authenticate",
+        "http://142.93.38.10:5050/api/v1/users/authenticate",
         {
           email,
           password,
@@ -51,9 +51,8 @@ function Login() {
 
       const img = response.data.user.img;
       localStorage.setItem("token", JSON.stringify(response.data.token));
-     
+
       localStorage.setItem("user_id", JSON.stringify(response.data.user.id));
-      
 
       navigate("/home");
     } catch (error) {
@@ -66,77 +65,75 @@ function Login() {
     }
   };
   return (
-    
-      <main className="login_main">
+    <main className="login_main">
       <header className="authenticate_nav">
         <Link to={"/"}>
-        <Logo/>
+          <Logo />
         </Link>
         <Link to={"/"} className="menu_item">
-        <Icon name={"home"} size={24}/>
+          <Icon name={"home"} size={24} />
         </Link>
       </header>
-       <section className="main_section" id="login_section">
-       <Card className={"card"}>
-       <div className="left_container">
-          <div className="login">
-            <div className="form">
-              <div className="field">
-                <div className="container">
-                  <Icon name={"email_fill"} size={24} color={"grey"} />
-                  <Field
-                    placeholder="Email"
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                  />
+      <section className="main_section" id="login_section">
+        <Card className={"card"}>
+          <div className="left_container">
+            <div className="login">
+              <div className="form">
+                <div className="field">
+                  <div className="container">
+                    <Icon name={"email_fill"} size={24} color={"grey"} />
+                    <Field
+                      placeholder="Email"
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                    />
+                  </div>
+                  {errorEmail && <p className="error">{errorEmail}</p>}
                 </div>
-                {errorEmail && <p className="error">{errorEmail}</p>}
-              </div>
-              <div className="field">
-                <div className="container">
-                  <Icon name={"lock"} size={24} color={"grey"} />
-                  <Field
-                    placeholder="********"
-                    type="password"
-                    value={password}
-                    required
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
+                <div className="field">
+                  <div className="container">
+                    <Icon name={"lock"} size={24} color={"grey"} />
+                    <Field
+                      placeholder="********"
+                      type="password"
+                      value={password}
+                      required
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                  </div>
+                  {errorPassword && <p className="error">{errorPassword}</p>}
                 </div>
-                {errorPassword && <p className="error">{errorPassword}</p>}
-              </div>
 
-              <div className="submit">
-                <Button
-                  text={loading ? "Loging In..." : "LOGIN"}
-                  type={"login_btn"}
-                  onClick={handleSubmit}
-                />
+                <div className="submit">
+                  <Button
+                    text={loading ? "Loging In..." : "LOGIN"}
+                    type={"login_btn"}
+                    onClick={handleSubmit}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="alternative">
+              <p>New here ?</p>
+              <div>
+                <Link to={"/signup"}>
+                  <Button text={"Create an account"} type={"signup_btn_link"} />
+                </Link>
               </div>
             </div>
           </div>
-          <div className="alternative">
-            <p>New here ?</p>
-            <div>
-              <Link to={"/signup"}>
-                <Button text={"Create an account"} type={"signup_btn_link"} />
-              </Link>
-            </div>
-          </div>
-        </div>
 
-        <div className="right_container">
-          <p className="title">Welcome Back to Your Path</p>
-          <p className="description">
-            Log in to continue your healing journey and stay on track
-          </p>
-        </div>
-       </Card>
-       </section>
-      </main>
-    
+          <div className="right_container">
+            <p className="title">Welcome Back to Your Path</p>
+            <p className="description">
+              Log in to continue your healing journey and stay on track
+            </p>
+          </div>
+        </Card>
+      </section>
+    </main>
   );
 }
 export default Login;
