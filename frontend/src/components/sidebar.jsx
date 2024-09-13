@@ -22,6 +22,7 @@ function Sidebar({ loggedin }) {
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user_id");
+    localStorage.removeItem("isAdmin");
     navigate("/login");
   };
 
