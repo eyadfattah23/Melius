@@ -23,7 +23,7 @@ function PageNums({totalPages, pageNum, setPageNum}){
   
         for (let i = 0; i < totalPages; i++) {
             paginationItems.push(
-                <PaginationItem key={i}  active={i + 1 === currentPage}  className={i + 1 === currentPage ? "pagination_active" : "pagination_normal"}>
+                <PaginationItem key={i}    className={i + 1 === currentPage ? "pagination_active" : "pagination_normal"}>
                     <PaginationLink
                         href="#"
                         onClick={() => setPageNum(i + 1)}

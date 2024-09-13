@@ -5,7 +5,7 @@ import "../assets/styles/footer.css"
 function Footer() {
   
     return (
-      <footer className="footer">
+      <footer className="footer flex flex-col items-center">
       <div className="footer_content">
         <div className="logo_socials">
           <Logo/>

@@ -37,6 +37,8 @@ const fetchContent = async (
       setContent(response.data.articles);
     }
 
+
+
     // console.log(response.data.articles)
     //       if (setArticleOfTheWeek)
     //       {

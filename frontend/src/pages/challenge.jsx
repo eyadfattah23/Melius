@@ -11,6 +11,7 @@ import createOrResetTimer from "../functions/create_or_reset_timer"
 import { useNavigate } from "react-router-dom"
 import fetchTimerStatus from "../functions/fetch_timer_status"
 import AchievementsBoard from "../components/achievements_board"
+import Footer from "../components/footer"
 function Challenge(){
     const user_id = JSON.parse(localStorage.getItem("user_id"));
     const token = JSON.parse(localStorage.getItem("token"))
@@ -19,11 +20,11 @@ function Challenge(){
     const [loading, setLoading] = useState(false);
     const [starting_date, setStartingDate] = useState("")
     const [tries, setTries] = useState()
-    const [maxDays, setMaxDays] = useState(0)
+    const [maxDays, setMaxDays] = useState(-1)
     
     useEffect(()=>{
        fetchTimerStatus(user_id,token, setStartingDate,setTries, setMaxDays, setLevel, setLoading)
-       console.log(level)
+       console.log(maxDays)
        }, [starting_date,tries,maxDays])
   
     return <>
@@ -68,12 +69,13 @@ function Challenge(){
              <h4>
           Join our challenge today and start your journey towards a better you!
           </h4>
-          <div>          <Button text={"Join the Challenge"} type={"cta_filled"} onClick={()=>createOrResetTimer(setLoading, navigate, setMaxDays)}/>
+          <div>          <Button text={"Join the Challenge"} type={"cta_filled"} onClick={()=>createOrResetTimer(user_id, token, setLoading, navigate)}/>
           </div>
         </div>
     }
 
     </main>
+    <Footer/>
     </>
 }
 export default Challenge

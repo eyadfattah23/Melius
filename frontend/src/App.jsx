@@ -41,22 +41,22 @@ function App() {
       path: "/articles",
       element: <PrivateRoute element={<Articles />} />,
     },
-    // {
-    //   path: "/one_article",
-    //   element: <PrivateRoute element={<One_Article />} />,
-    // },
-    // {
-    //   path: "/about",
-    //   element: <PrivateRoute element={<AboutPage/>} />,
-    // },
-    // {
-    //   path: "/contact",
-    //   element: <PrivateRoute element={<HelpSupport />} />,
-    // },
-    // {
-    //   path: "/terms_conditions",
-    //   element: <PrivateRoute element={<TermsConditions />} />,
-    // },
+    {
+      path: "/one_article",
+      element: <PrivateRoute element={<One_Article />} />,
+    },
+    {
+      path: "/about",
+      element: <PrivateRoute element={<AboutPage/>} />,
+    },
+    {
+      path: "/contact",
+      element: <PrivateRoute element={<HelpSupport />} />,
+    },
+    {
+      path: "/terms_conditions",
+      element: <PrivateRoute element={<TermsConditions />} />,
+    },
     {
       path: "/landing_page",
       element: <LandingPage/>,

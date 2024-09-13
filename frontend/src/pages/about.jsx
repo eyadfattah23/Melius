@@ -4,7 +4,9 @@ import Footer from "../components/footer"
 function AboutPage(){
     return <>
     <Navbar/>
-    <About/>
+   <main className="main_layout">
+   <About/>
+   </main>
     <Footer/>
     </>
 }

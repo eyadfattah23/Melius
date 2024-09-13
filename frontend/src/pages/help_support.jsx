@@ -5,7 +5,9 @@ import Navbar from "../components/common/navbar"
 function HelpSupport(){
     return <>
     <Navbar/>
+    <main className="main_layout">
     <Contact/>
+    </main>
     <Footer/>
     </>
 }
