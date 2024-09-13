@@ -98,7 +98,6 @@ def get_post(post_id):
     return jsonify(post.to_dict())
 
 
-
 @posts_bp.route('/posts/<post_id>', methods=['PUT'])
 @jwt_required()
 @swag_from('documentation/post/update_post.yml')
@@ -124,7 +123,6 @@ def update_post(post_id):
             setattr(post, key, value)
     storage.save()
     return make_response(jsonify(post.to_dict()), 200)
-
 
 
 @posts_bp.route('/posts/<post_id>', methods=['DELETE'])
