@@ -14,13 +14,6 @@ def create_flask_app():
     appContext = Flask(__name__)
     appContext.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
     #CORS(appContext, resources={r"/*": {"origins": "*"}})
-    CORS(
-        appContext,
-        origins='http://142.93.38.10:5050',
-        methods=['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-        supports_credentials=True
-    )
-
     # Change this to a strong secret key
     appContext.config['JWT_SECRET_KEY'] = environ.get(
         'MELILUS_API_SECRET_KEY', 'change_this_on_server_and_save_it_in_env')
@@ -136,6 +129,7 @@ def create_flask_app():
 
 
 app = create_flask_app()
+CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 
 if __name__ == '__main__':
     """ Main Function """
