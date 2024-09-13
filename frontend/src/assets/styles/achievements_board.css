@@ -7,6 +7,7 @@
     background-color: black;
     padding: 32px;
     align-self: stretch;
+    width: 100%;
 }
 .achievements_list .achievements_row{
     display: flex;
@@ -30,3 +31,28 @@
     width: 144px;
     height: 144px;
 }
+@media only screen and (max-width: 1024px) {
+    
+    .achievements_list .achievements_row{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 64px;
+    }
+    .achievement_card{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+    }
+    .achievement_card p{
+        color: white;
+        text-align: center;
+        font-size: var(--body_L);
+        font-weight: 700;
+    }
+    .achievement_card svg{
+        width: 144px;
+        height: 144px;
+    }  
+      }

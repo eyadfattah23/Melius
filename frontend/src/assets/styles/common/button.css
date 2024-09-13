@@ -118,3 +118,22 @@ color: var(--error);
 background-color: #5656a380;
 color: white;
 }
+
+
+@media only screen and (max-width: 1024px) {
+    .daily_relapsing_check_fail{
+        width: 240px; 
+    }
+        .daily_relapsing_check_success{
+            width: 240px; 
+        
+        }
+      }
+@media only screen and (max-width: 797px) {
+    .daily_relapsing_check_fail{
+        width: 150px; 
+    }
+        .daily_relapsing_check_success{
+            width: 150px; 
+        }
+      }

@@ -7,13 +7,11 @@ import "../../assets/styles/common/relapsing_check.css"
 function RelapsingCheck({user_id, token}){
     const navigate = useNavigate()
     const [loading, setLoading] = useState(false)
-    const [passed, setPassed] = useState(false)
-    return <section className="relapsing-check">
-   
+    return <section className="relapsing-check flex flex-col items-center gap-8">
     <h2>How was your day ?</h2>
-    <div className="check-btns">
+    <div className="check-btns flex justify-center items-center gap-8">
       <Button type={"daily_relapsing_check_fail"} text={"I couldn't make it"} onClick={() => createOrResetTimer(user_id, token, setLoading, navigate)}/>
-      
+    
       <PassedDayDialog/>
       
     </div>
