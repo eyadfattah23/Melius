@@ -131,8 +131,8 @@ Ensure your code follows PEP8 guidelines, is documented, and includes unit tests
 
 ## Related Projects
 
-- **NoFap**: A community-driven platform supporting recovery.
-- **Reboot Nation**: Another initiative aimed at overcoming porn addiction.
+- **[NoFap](https://nofap.com/)**: A community-driven platform supporting recovery.
+- **[Reboot Nation](https://rebootnation.org/)**: Another initiative aimed at overcoming porn addiction.
 
 ## License
 
