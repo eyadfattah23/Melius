@@ -106,8 +106,10 @@ npm run dev
 
 Once the application is running, access it via your browser:
 
-- Backend: <http://localhost:5000>
+- Backend: <http://localhost:5050>
 - Frontend: <http://localhost:3000>
+- API Documentation : <http://localhost:5050/apidocs/>
+- API Endpoint : <http://localhost:5050/api/v1>
 
 Users can create anonymous accounts, track their progress, and access resources.
 
