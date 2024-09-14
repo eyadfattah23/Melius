@@ -82,15 +82,32 @@ fun calculateOrderTotal(order: List<OrderEntry>): Double {
 
 While building **Project Name**, I faced several obstacles that pushed me to find creative solutions:
 
--   **Challenge 1: Offline Support**\
-    The app needed to function offline due to [mention real-world scenario, like warehouse operations]. I solved this by [explain your solution, e.g., caching data, storing it locally].
+## Challenges and Solutions 🤔
 
--   **Challenge 2: Handling Large Data Sets**\
-    When dealing with large product inventories, the app started slowing down. I optimized this by [describe how you improved performance, e.g., using pagination, lazy loading].
+While building **Melius**, I faced several obstacles that required creative solutions:
 
-Each of these challenges helped me grow in [mention specific technical or soft skills, like debugging, performance tuning, or problem-solving].
+- **Challenge 1: Securing the API (JWT Implementation)**  
+  One of the key challenges was ensuring the security of user data. To address this, We implemented **JWT (JSON Web Tokens)** for authentication, ensuring that user sessions were stateless and secure. This allowed us to protect the API while maintaining a seamless user experience.
 
-* * * * *
+- **Challenge 2: CORS Errors on Deployment**  
+  After deploying the app, we kept encountering **CORS errors**, even though CORS was integrated properly in Flask. The issue stemmed from the frontend pointing to `localhost` instead of the server IP. The solution was to update the frontend API endpoint to point to the server’s IP address and adjust the placement of the CORS handling middleware within the Flask app code.
+
+- **Challenge 3: API Documentation Confusion (OpenAPI Version)**  
+  We initially used **Flasgger** for API documentation, but it was set up with OpenAPI v3 syntax, which Flasgger does not fully support—it only supports OpenAPI v2. This led to confusion and incorrect API documentation. The solution was to refactor the documentation using **OpenAPI v2 syntax**, ensuring it worked properly with Flasgger.
+
+- **Challenge 4: Optimizing Frontend Requests**  
+  Our frontend started slowing down due to large requests for posts, likes, and comments. We solved this by:
+    - Implementing **pagination** for large data sets.
+    - Optimizing the requests by fetching related data (e.g., posts, likes, comments) in a single request, reducing the need for multiple API calls.
+    - These improvements reduced load times and optimized performance.
+
+- **Challenge 5: Deployment Issues (Node and npm Versions)**  
+  During deployment, we kept encountering outdated versions of **Node.js** and **npm**, despite running `apt update`. The fix involved manually installing the latest versions by adding the Node.js PPA repository, which resolved the version mismatch issues.
+
+- **Challenge 6: Non-Technical Challenges (Communication & Deadlines)**  
+  We also faced non-technical issues, such as communication gaps, availability conflicts, and difficulty conveying ideas effectively. Additionally, managing responsibilities outside of the project made it challenging to meet deadlines. However, clear communication and coordination allowed us to overcome these hurdles and deliver the project on time.
+
+Each of these challenges helped me grow in problem-solving, performance optimization, communication, and team coordination.
 
 ##  Future Enhancements 🚀
 
