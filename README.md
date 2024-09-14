@@ -1,7 +1,7 @@
 # Melius 🎯
 
  
-<img src="./images/break-free.png" alt="drawing" width="850"/>
+<img src="./images/break-free.png" alt="drawing" width="1000"/>
 
 ## Introduction 👋
 
