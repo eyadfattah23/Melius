@@ -94,11 +94,12 @@ Each of these challenges helped me grow in [mention specific technical or soft s
 
 ##  Future Enhancements 🚀
 
-Here's what I plan for the next iteration of **Project Name**:
+Here's what I plan for the next iteration of **Melius**:
 
--   **Integrating Payment Gateways:** To allow users to complete purchases seamlessly, I plan to add [describe specific payment APIs or gateways].
--   **Improved UI/UX:** I envision [describe any UX improvements based on feedback or personal ideas].
--   **Enhanced Security:** Implementing [mention additional authentication methods, encryption, etc.].
+- **Mobile Optimization**: Enhance the platform's responsiveness for mobile devices.
+- **Donation Feature**: Allow users to support the platform through donations.
+- **Voice Chat**: Enable voice communication between users for additional support.
+- **Goal Setting**: Add a feature to set monthly or weekly goals. Completing these goals will reward users with points or achievements.
 
 There's always room to refine and evolve this project, and I'm excited about future possibilities.
 
