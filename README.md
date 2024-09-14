@@ -14,7 +14,7 @@ Melius is born out of a desire to provide individuals struggling with porn addic
 - [Challenges and Solutions 🤔](#challenges-and-solutions-)
 - [Future Enhancements 🚀](#future-enhancements-)
 - [Screenshots and Visuals 🖼️](#screenshots-and-visuals-)
-- [Installation 📦](#installation-)
+- [Installation :cd:](#installation-)
 - [Manual Installation](#manual-installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
