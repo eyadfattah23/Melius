@@ -47,15 +47,25 @@ function Home() {
           {maxDays >= 0 ? (
             <div className="stats flex flex-col justify-center items-center gap-8 py-8">
               <h4>You're on</h4>
-              <Counter2 achieved_days={maxDays} unit={maxDays > 1 ? "Days" : "Day"} />
+              <Counter2
+                achieved_days={maxDays}
+                unit={maxDays > 1 ? "Days" : "Day"}
+              />
               <h4>of your journey to freedom</h4>
             </div>
           ) : (
             <div className="stats flex flex-col justify-center items-center gap-8 py-8">
               <h4>Ready for a Change?</h4>
-              <p>Join our challenge today and start your journey towards a better you!</p>
+              <p>
+                Join our challenge today and start your journey towards a better
+                you!
+              </p>
               <div>
-              <Button text={"Join the Challenge"} type={"cta_filled"} onClick={handleJoinChallenge} />
+                <Button
+                  text={"Join the Challenge"}
+                  type={"cta_filled"}
+                  onClick={handleJoinChallenge}
+                />
               </div>
             </div>
           )}
@@ -63,7 +73,7 @@ function Home() {
         {maxDays >= 0 && <RelapsingCheck user_id={user_id} token={token} />}
         <section className="leaders-board flex flex-col gap-8 justify-center px-16">
           <h1>Leaders Board</h1>
-          {!isUserLoading && <Leaders_List  setMaxDays={setMaxDays}/>}
+          {!isUserLoading && <Leaders_List setMaxDays={setMaxDays} />}
         </section>
         {/* <section className="latest-articles">
           <div className="container">
