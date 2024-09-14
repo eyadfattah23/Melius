@@ -1,7 +1,6 @@
 # Project Name 🎯
 
-![Alt text](./images/break-free.png)
-<img src="./images/break-free.png"
+![Alt text](./images/break-free.png) 
 
 ## Introduction 👋
 
