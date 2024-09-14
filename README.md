@@ -2,6 +2,19 @@
 
 Melius is a privacy-focused web application designed to help users overcome porn addiction. Built as part of the ALX portfolio, this platform allows users to track progress, access recovery resources, and manage their journey without compromising anonymity.
 
+## Table of Contents
+1. [Introduction](#introduction)
+2. [Features](#features)
+3. [Technologies Used](#technologies-used)
+4. [Installation](#installation)
+5. [Usage](#usage)
+6. [Contributing](#contributing)
+7. [Related Projects](#related-projects)
+8. [License](#license)
+9. [Future Improvements](#future-improvements)
+10. [Author's Story](#authors-story)
+
+
 ## Introduction
 
 Melius provides a confidential environment for users seeking recovery from porn addiction, offering anonymous accounts and useful tools to aid in the journey. The platform has been developed with care to ensure users' privacy and data security.
