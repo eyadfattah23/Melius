@@ -1,6 +1,6 @@
 # Project Name 🎯
 
-![Project Banner or GIF of the app in action]
+<img src="./images/break-free.png"
 
 ## Introduction 👋
 
