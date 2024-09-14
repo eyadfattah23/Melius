@@ -6,9 +6,15 @@ Melius is a privacy-focused web application designed to help users overcome porn
 
 Melius provides a confidential environment for users seeking recovery from porn addiction, offering anonymous accounts and useful tools to aid in the journey. The platform has been developed with care to ensure users' privacy and data security.
 
-- **Deployed site**: [https://meliusapp.com](#) (link placeholder)
-- **Final project blog article**: [Read here](#) (link placeholder)
-- **Author's LinkedIn**: [Eyad Fattah](https://www.linkedin.com/in/eyad-fattah/)
+- **Deployed site**: [Melius website](https://meliusapp.com)
+- **Final project blog article**: [Read here](#)
+- **Authors**:
+  - Eyad Abdelfattah – Backend Developer  
+    [GitHub](https://github.com/eyadfattah23) | [LinkedIn](https://www.linkedin.com/in/eyad-fattah/)
+  - Lamia Hamdi – Frontend Developer  
+    [GitHub](https://github.com/Lamia1406) | [LinkedIn](https://www.linkedin.com/in/lamia-hamdi/)
+  - Larini Abdllah – Backend Developer  
+    [GitHub](https://github.com/laribox) | [LinkedIn](https://www.linkedin.com/in/larini-abdllah/)
 
 ## Features
 
