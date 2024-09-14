@@ -7,6 +7,16 @@
 
 Melius is born out of a desire to provide individuals struggling with porn addiction a safe, anonymous, and effective platform for recovery. The core mission of Melius is to offer a combination of community support, resource access, and personal tracking—all while ensuring complete privacy.
 
+- **Deployed site**: [Melius website](https://meliusapp.com)
+- **Final project blog article**: [Read here](#)
+- **Authors**:
+  - Eyad Abdelfattah – Backend Developer  
+    [GitHub](https://github.com/eyadfattah23) | [LinkedIn](https://www.linkedin.com/in/eyad-fattah/)
+  - Lamia Hamdi – Frontend Developer  
+    [GitHub](https://github.com/Lamia1406) | [LinkedIn](https://www.linkedin.com/in/lamia-hamdi/)
+  - Larini Abdllah – Backend Developer  
+    [GitHub](https://github.com/laribox) | [LinkedIn](https://www.linkedin.com/in/larini-abdllah/)
+
 ## Table of Contents 📑
 
 - [Motivation & Inspiration 💡](#motivation--inspiration-)
