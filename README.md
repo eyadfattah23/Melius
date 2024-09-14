@@ -2,6 +2,19 @@
 
 Melius is a privacy-focused web application designed to help users overcome porn addiction. Built as part of the ALX portfolio, this platform allows users to track progress, access recovery resources, and manage their journey without compromising anonymity.
 
+## Table of Contents
+1. [Introduction](#introduction)
+2. [Features](#features)
+3. [Technologies Used](#technologies-used)
+4. [Installation](#installation)
+5. [Usage](#usage)
+6. [Contributing](#contributing)
+7. [Related Projects](#related-projects)
+8. [License](#license)
+9. [Future Improvements](#future-improvements)
+10. [Author's Story](#authors-story)
+
+
 ## Introduction
 
 Melius provides a confidential environment for users seeking recovery from porn addiction, offering anonymous accounts and useful tools to aid in the journey. The platform has been developed with care to ensure users' privacy and data security.
@@ -19,9 +32,11 @@ Melius provides a confidential environment for users seeking recovery from porn 
 ## Features
 
 - **Anonymous Account Creation**: Users can sign up without sharing personal information.
-- **Progress Tracking**: Monitor your progress over time.
-- **Resource Hub**: Provides articles, videos, and exercises to support recovery.
+- **Progress Tracking**: Monitor your progress over time and gain achievements the longer you stay on track.
+- **Resource Hub**: Access articles, videos, and exercises to support recovery.
+- **Community Support**: Engage with a like-minded community to share experiences and encourage one another.
 - **Privacy Protection**: Data security is a top priority, ensuring anonymity at all stages.
+
 
 ## Technologies Used
 
@@ -106,8 +121,10 @@ npm run dev
 
 Once the application is running, access it via your browser:
 
-- Backend: <http://localhost:5000>
+- Backend: <http://localhost:5050>
 - Frontend: <http://localhost:3000>
+- API Documentation : <http://localhost:5050/apidocs/>
+- API Endpoint : <http://localhost:5050/api/v1>
 
 Users can create anonymous accounts, track their progress, and access resources.
 
@@ -129,8 +146,8 @@ Ensure your code follows PEP8 guidelines, is documented, and includes unit tests
 
 ## Related Projects
 
-- **NoFap**: A community-driven platform supporting recovery.
-- **Reboot Nation**: Another initiative aimed at overcoming porn addiction.
+- **[NoFap](https://nofap.com/)**: A community-driven platform supporting recovery.
+- **[Reboot Nation](https://rebootnation.org/)**: Another initiative aimed at overcoming porn addiction.
 
 ## License
 
@@ -138,10 +155,11 @@ This project is licensed under the MIT License. See the LICENSE file for more de
 
 ## Future Improvements
 
-- **Mobile App**: Develop a companion mobile app for Melius.
-- **Gamification**: Introduce achievement badges to encourage users.
-- **AI Chatbot**: Provide users with an AI-based support assistant for guidance.
+-   **Mobile Optimization**: Enhance the platform's responsiveness for mobile devices.
+-   **Donation Feature**: Allow users to support the platform through donations.
+-   **Voice Chat**: Enable voice communication between users for additional support.
+-   **Goal Setting**: Add a feature to set monthly or weekly goals. Completing these goals will reward users with points or achievements.
 
 ## Author's Story
 
-This project was born from a personal belief that everyone deserves a safe, non-judgmental space to recover. The challenge was balancing complete anonymity with robust functionality, achieved through JWT authentication and encrypted databases. Future iterations will explore mobile platforms and incorporate user feedback to enhance the platform.
+This project was born from a personal belief that everyone deserves a safe, non-judgmental space to recover. The challenge was balancing complete anonymity with robust functionality, achieved through JWT authentication and encrypted databases. Future iterations will explore Goal Setting and incorporate user feedback to enhance the platform.
