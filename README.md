@@ -162,4 +162,4 @@ This project is licensed under the MIT License. See the LICENSE file for more de
 
 ## Author's Story
 
-This project was born from a personal belief that everyone deserves a safe, non-judgmental space to recover. The challenge was balancing complete anonymity with robust functionality, achieved through JWT authentication and encrypted databases. Future iterations will explore Goal Setting and incorporate user feedback to enhance the platform.
+The idea behind Melius started from a personal experience with a close friend struggling with porn addiction. Watching this friend battle the addiction and trying different solutions without success motivated the team to create something that addresses the root of the problem in a more effective and compassionate way. We believe that privacy, community support, and easily accessible tools are crucial to overcoming this challenge. With this passion, the Melius team is dedicated to helping others take control of their lives.
