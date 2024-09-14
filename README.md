@@ -155,10 +155,11 @@ This project is licensed under the MIT License. See the LICENSE file for more de
 
 ## Future Improvements
 
-- **Mobile App**: Develop a companion mobile app for Melius.
-- **Gamification**: Introduce achievement badges to encourage users.
-- **AI Chatbot**: Provide users with an AI-based support assistant for guidance.
+-   **Mobile Optimization**: Enhance the platform's responsiveness for mobile devices.
+-   **Donation Feature**: Allow users to support the platform through donations.
+-   **Voice Chat**: Enable voice communication between users for additional support.
+-   **Goal Setting**: Add a feature to set monthly or weekly goals. Completing these goals will reward users with points or achievements.
 
 ## Author's Story
 
-This project was born from a personal belief that everyone deserves a safe, non-judgmental space to recover. The challenge was balancing complete anonymity with robust functionality, achieved through JWT authentication and encrypted databases. Future iterations will explore mobile platforms and incorporate user feedback to enhance the platform.
+This project was born from a personal belief that everyone deserves a safe, non-judgmental space to recover. The challenge was balancing complete anonymity with robust functionality, achieved through JWT authentication and encrypted databases. Future iterations will explore Goal Setting and incorporate user feedback to enhance the platform.
