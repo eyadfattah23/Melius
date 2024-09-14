@@ -192,7 +192,7 @@ cd frontend
 npm run dev
 ```
 
-## Usage
+## Usage 📖
 
 Once the application is running, access it via your browser:
 
@@ -203,7 +203,7 @@ Once the application is running, access it via your browser:
 
 Users can create anonymous accounts, track their progress, and access resources.
 
-## Contributing
+## Contributing 🤝
 
 Contributions are welcome! To contribute:
 
@@ -215,7 +215,7 @@ Contributions are welcome! To contribute:
 
 Ensure your code follows PEP8 guidelines, is documented, and includes unit tests for any new features.
 
-## Related Projects
+## Related Projects 🌐
 
 - **[NoFap](https://nofap.com/)**: A community-driven platform supporting recovery.
 - **[Reboot Nation](https://rebootnation.org/)**: Another initiative aimed at overcoming porn addiction.
