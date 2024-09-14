@@ -19,9 +19,11 @@ Melius provides a confidential environment for users seeking recovery from porn 
 ## Features
 
 - **Anonymous Account Creation**: Users can sign up without sharing personal information.
-- **Progress Tracking**: Monitor your progress over time.
-- **Resource Hub**: Provides articles, videos, and exercises to support recovery.
+- **Progress Tracking**: Monitor your progress over time and gain achievements the longer you stay on track.
+- **Resource Hub**: Access articles, videos, and exercises to support recovery.
+- **Community Support**: Engage with a like-minded community to share experiences and encourage one another.
 - **Privacy Protection**: Data security is a top priority, ensuring anonymity at all stages.
+
 
 ## Technologies Used
 
