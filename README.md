@@ -1,7 +1,7 @@
 # Project Name 🎯
 
  
-<img src="./images/break-free.png" alt="drawing" width="200"/>
+<img src="./images/break-free.png" alt="drawing" width="1200"/>
 
 ## Introduction 👋
 
