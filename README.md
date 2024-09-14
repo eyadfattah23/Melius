@@ -8,18 +8,18 @@ Melius is born out of a desire to provide individuals struggling with porn addic
 
 ## Table of Contents 📑
 
-- [Motivation & Inspiration 💡](#Motivation-&-Inspiration-💡)
-- [Technical Overview](#technical-overview)
-- [Features](#features)
-- [Challenges and Solutions](#challenges-and-solutions)
-- [Future Enhancements](#future-enhancements)
-- [Screenshots and Visuals](#screenshots-and-visuals)
-- [Installation](#installation)
+- [Motivation & Inspiration 💡](#motivation--inspiration-)
+- [Technical Overview 🛠️](#technical-overview-)
+- [Features 🛠️](#features-)
+- [Challenges and Solutions 🤔](#challenges-and-solutions-)
+- [Future Enhancements 🚀](#future-enhancements-)
+- [Screenshots and Visuals 🖼️](#screenshots-and-visuals-)
+- [Installation 📦](#installation-)
 - [Manual Installation](#manual-installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
 - [Related Projects](#related-projects)
-- [License](#license)
+- [License ⚖️](#license-)
 
 ---
 
