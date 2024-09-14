@@ -8,7 +8,7 @@ Melius is born out of a desire to provide individuals struggling with porn addic
 
 ## Table of Contents 📑
 
-- [Motivation & Inspiration](#motivation--inspiration)
+- [Motivation & Inspiration 💡](#motivation--inspiration)
 - [Technical Overview](#technical-overview)
 - [Features](#features)
 - [Challenges and Solutions](#challenges-and-solutions)
