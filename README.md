@@ -80,11 +80,7 @@ fun calculateOrderTotal(order: List<OrderEntry>): Double {
 
 ## Challenges and Solutions 🤔
 
-While building **Project Name**, I faced several obstacles that pushed me to find creative solutions:
-
-## Challenges and Solutions 🤔
-
-While building **Melius**, I faced several obstacles that required creative solutions:
+While building **Melius**, We faced several obstacles that required creative solutions:
 
 - **Challenge 1: Securing the API (JWT Implementation)**  
   One of the key challenges was ensuring the security of user data. To address this, We implemented **JWT (JSON Web Tokens)** for authentication, ensuring that user sessions were stateless and secure. This allowed us to protect the API while maintaining a seamless user experience.
