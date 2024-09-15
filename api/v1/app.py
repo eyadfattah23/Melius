@@ -14,22 +14,6 @@ def create_flask_app():
     appContext = Flask(__name__)
     appContext.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
     # CORS(appContext, resources={r"/*": {"origins": "*"}})
-    CORS(appContext, resources={
-         r"/*": {"origins": ["https://meliusrecovery.me",
-                             "https://www.meliusrecovery.me",
-
-                             # Local development on React (if using port 3000)
-                             "http://localhost:3000",
-                             "http://localhost:5050",
-
-                             # Localhost IP variant
-                             "http://127.0.0.1:3000",
-                             "http://127.0.0.1:5050",
-                             "http://0.0.0.0:5050",
-
-                             # Server IP (update with your actual IP)
-                             "http://142.93.38.10",
-                             ]}})
 
     # Change this to a strong secret key
     appContext.config['JWT_SECRET_KEY'] = environ.get(
@@ -146,7 +130,22 @@ def create_flask_app():
 
 
 app = create_flask_app()
-CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
+CORS(app, resources={
+    r"/*": {"origins": ["https://meliusrecovery.me",
+                        "https://www.meliusrecovery.me",
+
+                        # Local development on React (if using port 3000)
+                        "http://localhost:3000",
+                        "http://localhost:5050",
+
+                        # Localhost IP variant
+                        "http://127.0.0.1:3000",
+                        "http://127.0.0.1:5050",
+                        "http://0.0.0.0:5050",
+
+                        # Server IP (update with your actual IP)
+                        "http://142.93.38.10",
+                        ]}})
 
 if __name__ == '__main__':
     """ Main Function """
