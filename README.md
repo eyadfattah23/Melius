@@ -7,7 +7,7 @@
 
 Melius is born out of a desire to provide individuals struggling with porn addiction a safe, anonymous, and effective platform for recovery. The core mission of Melius is to offer a combination of community support, resource access, and personal tracking—all while ensuring complete privacy.
 
-- **Deployed site**: [Melius website](https://meliusapp.com)
+- **Deployed site**: [Melius website](http://meliusrecovery.me/)
 - **Final project blog article**: [Read here](#)
 - **Authors**:
   - Eyad Abdelfattah – Backend Developer  
