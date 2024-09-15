@@ -1,6 +1,7 @@
 import CommentField from "./comment_field"
 import formatDate from "../../functions/format_date"
 import Avatar from "../avatar"
+import countLevel from "../../functions/count_level"
 function Comments({comment, setComment, setCommentField, contentType, content_id, setComments, setLoading, user_id, comments, setCommentsCount, commentsCount}){
     console.log(comments)
     return <div className="comments_section">
@@ -13,7 +14,7 @@ function Comments({comment, setComment, setCommentField, contentType, content_id
                 return <div className="one_comment">
                     <div className="profile">
                 
-                <Avatar level={"2"}/> 
+                <Avatar level={`${countLevel(Number(cmnt.max_time))}`}/> 
                 
             </div>
             <div className="text">

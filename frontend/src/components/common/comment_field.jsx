@@ -5,7 +5,7 @@ import Icon from "../../assets/icons/icon"
 function CommentField({comment, setComment, setCommentField, contentType, id, setComments, setLoading, user_id, setCommentsCount, commentsCount}){
     return <div className="post_comment_field">
     <div className="profile">
-    <Avatar/>
+    <Avatar />
     </div>
      <div className="input">
          <Field
