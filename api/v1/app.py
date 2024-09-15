@@ -130,6 +130,7 @@ def create_flask_app():
 
 
 app = create_flask_app()
+
 CORS(app, resources={
     r"/*": {"origins": ["https://meliusrecovery.me",
                         "https://www.meliusrecovery.me",
@@ -137,16 +138,21 @@ CORS(app, resources={
                         # Local development on React (if using port 3000)
                         "http://localhost:3000",
                         "http://localhost:5050",
+                        "http://localhost:80",
 
                         # Localhost IP variant
                         "http://127.0.0.1:3000",
                         "http://127.0.0.1:5050",
                         "http://0.0.0.0:5050",
+                        "http://0.0.0.0:80",
 
                         # Server IP (update with your actual IP)
                         "http://142.93.38.10",
+                        "http://142.93.38.10:5050",
+                        "http://142.93.38.10:80",
                         ]}})
 
+# CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 if __name__ == '__main__':
     """ Main Function """
     host = environ.get('MELILUS_API_HOST')
