@@ -13,7 +13,21 @@ from flask_jwt_extended import create_access_token, get_jwt, get_jwt_identity, s
 def create_flask_app():
     appContext = Flask(__name__)
     appContext.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
-    CORS(appContext, resources={r"/*": {"origins": "*"}})
+    # CORS(appContext, resources={r"/*": {"origins": "*"}})
+    CORS(appContext, resources={
+         r"/api/v1/*": {"origins": ["https://meliusrecovery.me",
+                                    "https://www.meliusrecovery.me",
+
+                                    # Local development on React (if using port 3000)
+                                    "http://localhost:3000",
+
+                                    # Localhost IP variant
+                                    "http://127.0.0.1:3000",
+
+                                    # Server IP (update with your actual IP)
+                                    "http://142.93.38.10",
+                                    ]}})
+
     # Change this to a strong secret key
     appContext.config['JWT_SECRET_KEY'] = environ.get(
         'MELIUS_API_SECRET_KEY', 'change_this_on_server_and_save_it_in_env')
