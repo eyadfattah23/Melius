@@ -5,7 +5,7 @@ import "../../assets/styles/common/one_article.css";
 import article_img from "../../assets/images/article_image.png";
 import { useState, useEffect } from "react";
 import Button from "../../components/common/button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import formatDate from "../../functions/format_date";
 import parse from "html-react-parser";
@@ -16,6 +16,7 @@ import config from "../../config";
 import Edit_Article from "./edit_article";
 
 function One_Article() {
+  const navigate = useNavigate()
   const [article, setArticle] = useState();
   const [likesCount, setLikesCount] = useState(0);
   const [commentsCount, setCommentsCount] = useState(0);
@@ -43,7 +44,6 @@ const isAdmin = JSON.parse(localStorage.getItem("isAdmin"));
         setArticle(response.data);
         setLikesCount(likes);
         setCommentsCount(response.data.comments_count);
-        
       } catch (error) {
         console.error(error);
       } finally {
@@ -52,7 +52,20 @@ const isAdmin = JSON.parse(localStorage.getItem("isAdmin"));
     };
     fetchArticle();
   }, [article_id, token, likes]);
-
+  const handleDelete = async () => {
+    try {
+      const response = await axios.delete(config.API_URL + `articles/${article_id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      navigate("/articles")
+    } catch (error) {
+      console.error(error);
+    } finally {
+      // setLoading(false);
+    }
+  };
   return (
     <>
       <Navbar />
@@ -61,9 +74,15 @@ const isAdmin = JSON.parse(localStorage.getItem("isAdmin"));
           {article ? (
             <>
             {isAdmin && (
-              <div className="create-article-container" style={{ position: "absolute", top: "200px", right: "64px" }}>
+              <div className="create-article-container flex flex-col gap-4" style={{ position: "absolute", top: "200px", right: "64px" }}>
                <Edit_Article articleId={article_id} initialTitle={article.title} initialContent={article.content} initialImage={article.img}/>
+               <Button
+          text={"Delete Article"}
+          type="cta_filled"
+          onClick={handleDelete}
+        />
               </div>
+            
             )}
               <div className="article_header">
                 <div className="article_info">
