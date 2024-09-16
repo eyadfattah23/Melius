@@ -20,6 +20,7 @@ def get_articles():
 
     current_user_id = get_jwt_identity()
 
+    preview_length = 200  # Length of the content preview in characters
     # Get paginated articles
     articles = list(storage.all(Article, page=page,
                     page_size=per_page, filter_type=filter_type).values())
@@ -32,7 +33,11 @@ def get_articles():
     for article in articles:
         article_dict = article.to_dict().copy()
         likes_count = storage.count(ArticleLike, article_id=article.id)
+
+        article_dict['preview'] = article_dict['content'][:preview_length] 
+
         del article_dict['content']
+
         article_dict['likes_count'] = likes_count
         # article_dict['username'] = article.user.username
 
