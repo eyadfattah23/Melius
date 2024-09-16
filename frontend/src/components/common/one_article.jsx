@@ -22,7 +22,7 @@ function One_Article() {
   const [commentField, setCommentField] = useState(false);
   const [comments, setComments] = useState([]);
   const [comment, setComment] = useState("");
-
+const isAdmin = JSON.parse(localStorage.getItem("isAdmin"));
   const token = JSON.parse(localStorage.getItem("token"));
   const user_id = JSON.parse(localStorage.getItem("user_id"));
   const { article_id, likes, liked } = useLocation().state;
@@ -56,6 +56,11 @@ function One_Article() {
     <>
       <Navbar />
       <main className="main_layout">
+      {isAdmin && (
+              <div className="create-article-container" style={{ position: "absolute", top: "100px", right: "64px" }}>
+                {/* <Update_Article  /> */}
+              </div>
+            )}
         <section className="article_section">
           {article ? (
             <>
@@ -73,7 +78,7 @@ function One_Article() {
                 </div>
               </div>
               <div className="article_image">
-                <img src={article_img} alt="Article" />
+                <img src={article.img ? article.img : article_img} alt="Article" />
               </div>
               <div className="article_content">{parse(article.content)}</div>
               
