@@ -13,6 +13,7 @@ import Comments from "../../components/common/comments";
 import { useLocation } from "react-router-dom";
 import likeOrUnlike from "../../functions/like_or_unlike";
 import config from "../../config";
+import Edit_Article from "./edit_article";
 
 function One_Article() {
   const [article, setArticle] = useState();
@@ -56,14 +57,14 @@ const isAdmin = JSON.parse(localStorage.getItem("isAdmin"));
     <>
       <Navbar />
       <main className="main_layout">
-      {isAdmin && (
-              <div className="create-article-container" style={{ position: "absolute", top: "100px", right: "64px" }}>
-                {/* <Update_Article  /> */}
-              </div>
-            )}
         <section className="article_section">
           {article ? (
             <>
+            {isAdmin && (
+              <div className="create-article-container" style={{ position: "absolute", top: "200px", right: "64px" }}>
+               <Edit_Article articleId={article_id} initialTitle={article.title} initialContent={article.content} initialImage={article.img}/>
+              </div>
+            )}
               <div className="article_header">
                 <div className="article_info">
                   <h1>{article.title}</h1>

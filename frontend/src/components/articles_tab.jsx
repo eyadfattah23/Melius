@@ -17,7 +17,7 @@ function Articles_list({articleOfTheWeek}) {
   useEffect(() => {
     if(articleOfTheWeek)
     {
-      fetchContent("articles",token, pageNum, 3, null, setTotalPages, setLoading, setActiveTabName, activeTabName, setArticles);
+      fetchContent("articles",token, pageNum, 4, null, setTotalPages, setLoading, setActiveTabName, activeTabName, setArticles);
     }
   }, [pageNum, articleOfTheWeek, activeTabName]);
 
