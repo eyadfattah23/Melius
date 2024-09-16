@@ -137,6 +137,7 @@ CORS(app, resources={
 
                         # Local development on React (if using port 3000)
                         "http://localhost:3000",
+                        "http://localhost:5173",
                         "http://localhost:5050",
                         "http://localhost:80",
 
