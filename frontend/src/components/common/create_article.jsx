@@ -16,6 +16,7 @@ function Create_Article() {
   const token = JSON.parse(localStorage.getItem("token"));
   const [title, setTitle] = useState("");
   const [ErrorTitle, setErrorTitle] = useState("");
+  const [img, setImg] = useState("")
   const [content, setContent] = useState("");
   const [ErrorText, setErrorText] = useState("");
   const [loading, setLoading] = useState(false);
@@ -47,7 +48,8 @@ function Create_Article() {
         {
           title,
           content,
-          author
+          author,
+          img
         },
         {
           headers: {
@@ -100,7 +102,17 @@ function Create_Article() {
                 
               />
             </div>
-            {ErrorTitle && <p className="error">{ErrorTitle}</p>}
+          </div>
+          <div className="field">
+            <div className="container title_field">
+              <Field
+                placeholder="Enter the image url if you have one"
+                type="text"
+                value={img}
+                onChange={(e) => setImg(e.target.value)}
+                
+              />
+            </div>
           </div>
           <div className="field">
             <div className="container content_field">

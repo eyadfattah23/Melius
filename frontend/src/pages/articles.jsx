@@ -27,6 +27,7 @@ function Articles() {
   // Retrieve token and admin status from local storage
   const token = JSON.parse(localStorage.getItem("token"));
   const isAdmin = JSON.parse(localStorage.getItem("isAdmin"));
+  console.log(isAdmin)
   const navigate = useNavigate()
   if (!token){
     // if token removed, it logs out the user
@@ -43,6 +44,11 @@ function Articles() {
       <Navbar />
       
       <main className="main_layout">
+      {isAdmin && (
+              <div className="create-article-container" style={{ position: "absolute", top: "100px", right: "64px" }}>
+                <Create_Article />
+              </div>
+            )}
         {loading ? (
           // Display loading message while content is being fetched
           <p>Loading...</p> 
@@ -60,6 +66,7 @@ function Articles() {
                     published_date={articleOfTheWeek.created_at}
                     likes={articleOfTheWeek.likes_count}
                     liked={articleOfTheWeek.liked}
+                    img = {articleOfTheWeek.img}
                   />
                 </section>
 
@@ -79,11 +86,7 @@ function Articles() {
                 </Link>
               </div>
             )}
-            {isAdmin && (
-              <div className="create-article-container" style={{ position: "relative", marginTop: "20px" }}>
-                <Create_Article />
-              </div>
-            )}
+           
           </>
         )}
       </main>
