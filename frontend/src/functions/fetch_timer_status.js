@@ -32,6 +32,9 @@ const fetchTimerStatus = async (
     if (error.status === 401 || error.status === 422){
       handleLogout(navigate)
     }
+    if (error.status === 404){
+      setMaxDays(-1)
+    }
     console.error(error);
   } finally {
     setLoading(false);

@@ -35,6 +35,7 @@ export default function EditPost({ post_id, title, text }) {
         {
           title: postTitle,
           text: postText,
+          
         },
         {
           headers: {

@@ -69,11 +69,11 @@ function Challenge(){
     <RelapsingCheck user_id={user_id} token={token}/>
         </>:
         <div className="full_screen_section" id="join_challenge">
-             {/* <h4>
+             <h4>
           Join our challenge today and start your journey towards a better you!
           </h4>
           <div>          <Button text={"Join the Challenge"} type={"cta_filled"} onClick={()=>createOrResetTimer(user_id, token, setLoading, navigate)}/>
-          </div> */}
+          </div>
         </div>
     }
 

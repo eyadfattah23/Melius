@@ -83,7 +83,9 @@ function Home() {
             )}
           </section>
         )}
-        
+        {
+          maxDays >= 0 && <RelapsingCheck user_id={user_id} token={token}/>
+        }
         {/* Display loading spinner if leaders data is still being fetched */}
         {maxDays >= 0 && (isLeadersLoading ? (
           <section className="leaders-board flex flex-col gap-8 justify-center px-16">

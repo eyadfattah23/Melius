@@ -55,7 +55,7 @@ export default function Edit_Article({ articleId, initialTitle, initialContent, 
         {
           title: articleTitle,
           content: articleContent,
-          image: articleImage,
+          img: articleImage,
         },
         {
           headers: {
@@ -90,12 +90,12 @@ export default function Edit_Article({ articleId, initialTitle, initialContent, 
           {/* Title field */}
           <div className="field">
             <div className="container title_field">
+                
               <Field
                 placeholder="Enter a title"
                 type="text"
                 value={articleTitle}
                 onChange={(e) => setArticleTitle(e.target.value)}
-                required
               />
             </div>
             {errorTitle && <p className="error">{errorTitle}</p>}
@@ -108,7 +108,6 @@ export default function Edit_Article({ articleId, initialTitle, initialContent, 
                 placeholder="Enter your content"
                 type="text"
                 value={articleContent}
-                required
                 onChange={(e) => setArticleContent(e.target.value)}
               />
             </div>
@@ -122,7 +121,6 @@ export default function Edit_Article({ articleId, initialTitle, initialContent, 
                 placeholder="Enter image URL"
                 type="text"
                 value={articleImage}
-                required
                 onChange={(e) => setArticleImage(e.target.value)}
               />
             </div>
