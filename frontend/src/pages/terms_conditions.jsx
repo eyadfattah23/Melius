@@ -2,9 +2,12 @@ import Footer from "../components/footer"
 import Navbar from "../components/common/navbar"
 import "../assets/styles/terms.css"
 function TermsConditions(){
+
+  
     return <>
     <Navbar/>
-    <div className="terms-container">
+   <main className="main_layout">
+   <div className="terms-container">
      <div>
      <h1>Terms and Conditions</h1>
      <p className="date">Effective Date: 08/09/2024</p>
@@ -99,6 +102,7 @@ function TermsConditions(){
 
  
     </div>
+   </main>
     <Footer/>
     </>
 }

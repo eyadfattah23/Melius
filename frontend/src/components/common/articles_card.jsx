@@ -13,11 +13,11 @@ function Articles_Card({orientation, title, id, published_date, likes, liked}){
     }
     if (orientation === "horizontal")
     {
-        return <div className="article_card" id="article_horizontal">
-        <div className="article_description">
-            <div className="content">
-            <h2>{title}</h2>
-            <p>posted on: {formatDate(published_date)}</p>
+        return <div className="article_card flex flex-col-reverse items-center sm:flex-row p-6 gap-4" id="article_horizontal">
+        <div className="article_description flex flex-col items-center gap-8 justify-center lg:w-1/2 h-auto text-center lg:text-left lg:items-start">
+            <div className="content flex px-2 flex-col gap-4">
+            <h2 className="text-center lg:text-left">{title}</h2>
+            <p className="text-center lg:text-right">posted on: {formatDate(published_date)}</p>
             </div>
             <div className="cta_btn">
             <Link to={"/one_article"} state={{article_id: `${id}`, likes: likes, liked: liked}}>
@@ -25,7 +25,8 @@ function Articles_Card({orientation, title, id, published_date, likes, liked}){
                     </Link>
             </div>
         </div>
-        <img src={article_img}/>
+        <img src={article_img} alt={title} className="w-full lg:w-1/2 h-auto" />
+
       
        
         
@@ -33,10 +34,10 @@ function Articles_Card({orientation, title, id, published_date, likes, liked}){
     }
     else{
         return (
-            <div className="article_card"  id="article_vertical">
+            <div className="article_card flex p-6 gap-4 flex-col items-center"  id="article_vertical">
                  <img src={article_img}/>
-                 <div className="article_description">
-                <div className="content">
+                 <div className="article_description flex flex-col gap-8 items-center">
+                <div className="content px-2 flex-col gap-4 ">
                 <h2>{title}</h2>
                 <p>posted on: {formatDate(published_date)}</p>
                 </div>

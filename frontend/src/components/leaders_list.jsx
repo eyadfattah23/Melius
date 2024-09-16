@@ -55,7 +55,7 @@ function Leaders_List({ setMaxDays}) {
         <Carousel className="w-full">
           <CarouselContent>
             {leaders.map((leader, key) => (
-              <CarouselItem className="carousel-content md:basis-1/3">
+              <CarouselItem className="carousel-content md:basis-1/3" key={key}>
                 <Leader_card
                   name={leader.username}
                   badge={

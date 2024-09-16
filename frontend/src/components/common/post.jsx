@@ -77,6 +77,7 @@ function Post({title, text,likes_count, created_at, post_id, comments_count, isL
         setLoading={setLoading} 
         user_id={user_id} 
         comments={comments}
+        userMaxTime = {userMaxTime}
         commentsCount = {commentsCount}
         setCommentsCount = {setCommentsCount}
     />

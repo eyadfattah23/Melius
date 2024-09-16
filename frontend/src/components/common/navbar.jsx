@@ -7,10 +7,9 @@ import "../../assets/styles/common/navbar.css";
 import { Link } from "react-router-dom";
 import Icon from "../../assets/icons/icon";
 
-function Navbar() {
+function Navbar({maxDays}) {
   const [isOpen, setIsOpen] = useState(false);
   const loggedin = localStorage.getItem("token");
-
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
@@ -23,7 +22,7 @@ function Navbar() {
       <div className="ndnd items-center ">
         
         <button
-          className="lg:hidden"
+        className="lg:hidden"
           onClick={toggleMenu}
         >
           <Icon name={"menu"} size={24} color={"grey"}/>
@@ -43,7 +42,7 @@ function Navbar() {
             </Link>
           </>
         ) : (
-          <Sidebar loggedin={loggedin} />
+          <Sidebar loggedin={loggedin}  maxDays={maxDays} />
         )}
       </div>
     </div>

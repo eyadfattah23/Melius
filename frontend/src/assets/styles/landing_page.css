@@ -53,15 +53,20 @@ padding: 0px 8px;
     font-size: var(--h1);
     font-weight: 700;
 }
-.landing_about p{
+.landing_about>p{
     color: var(--black);
     font-size: var(--body_L);
     font-weight: 700;
+    text-align: center;
 }
-.landing_about .team p{
+.landing_about .team>p{
     color: var(--black);
     font-size: var(--body_L);
     font-weight: 700;
+    text-align: center;
+}
+.landing_about .team .members .team_member{
+    justify-content: space-between;
 }
 .landing_about .team .members .team_member .member_card{
     display: flex;
@@ -92,6 +97,7 @@ color: var(--black_medium_emphasis);
 .landing_about .team .members .team_member .description{
     justify-content: flex-end;
     align-items: flex-start;
+    width: 60%;
     
 }
 .landing_about .team .members .team_member .description>p{
@@ -186,4 +192,21 @@ height: 300px;
 .landing_contact .form{
     width: 100%;
 }
+}
+  @media only screen and (max-width: 797px) {
+  .landing_about .team .members{
+padding: 0;
+  }
+   
+    .landing_about .team .members .team_member .member_card{
+        display: flex;
+        width: 100%;
+        min-height: 250px;
+    }
+    .landing_about .team .members .team_member .description{
+        width: 100%;  
+    }
+    
+    
+    
   }

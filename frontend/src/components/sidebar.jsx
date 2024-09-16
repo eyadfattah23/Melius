@@ -13,12 +13,11 @@ import {
 import { DialogTrigger, Dialog } from "../components/shadcn/ui/dialog";
 import Icon from "../assets/icons/icon";
 import Edit_Profile from "../components/common/edit_profile";
-import Button from "./common/button";
-import countNumberOfDays from "../functions/count_number_of_days";
 
-function Sidebar({ loggedin }) {
+function Sidebar({maxDays}) {
   const navigate = useNavigate();
-
+  
+  const level = JSON.parse(localStorage.getItem("level"))
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user_id");
@@ -30,10 +29,10 @@ function Sidebar({ loggedin }) {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button className="flex items-center avatar">
-          <Avatar  />
+          <Avatar  level={level} />
         </button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56 bg-gray-800 text-white">
+      <DropdownMenuContent className="w-56 ">
         <DropdownMenuLabel className="dropdown_label">My Profile</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>

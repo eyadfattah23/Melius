@@ -28,6 +28,7 @@ const writeComment = async (
         },
       }
     );
+   
     console.log(response);
     setComment("");
     setCommentsCount(Number(commentsCount) + 1);

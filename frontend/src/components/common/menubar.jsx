@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import Icon from "../../assets/icons/icon";
+import Edit_Profile from "./edit_profile";
+import { DialogTrigger, Dialog } from "../../components/shadcn/ui/dialog";
 
 function Menubar({ loggedin }) {
   const [activeItem, setActiveItem] = useState(1);
@@ -20,6 +23,28 @@ function Menubar({ loggedin }) {
           <li className={`menu_item ${window.location.pathname === "/articles" ? "active_item" : ""}`} onClick={() => setActiveItem(4)}>
             <Link to={'/articles'}>Articles</Link>
           </li>
+       
+          <li className={`menu_item  lg:hidden ${activeItem === 6 ? "active_item" : ""}`} onClick={() => setActiveItem(6)}>
+            <Link to={"/about"}>
+            About us
+            </Link>
+          </li>
+          <li className={`menu_item  lg:hidden ${activeItem === 6 ? "active_item" : ""}`} onClick={() => setActiveItem(6)}>
+            <Link to={"/contact"}>
+            Help and Support
+            </Link>
+          </li>
+          <li className={`menu_item  lg:hidden ${activeItem === 6 ? "active_item" : ""}`} onClick={() => setActiveItem(6)}>
+            <Link to={"/terms_conditions"}>
+            Terms & Conditions
+            </Link>
+          </li>
+          <li className={`menu_item  lg:hidden ${activeItem === 6 ? "active_item" : ""}`} onClick={() => setActiveItem(6)}>
+            <Link to={"/terms_conditions"}>
+            <Icon name="logout" size={16} />
+            </Link>
+          </li>
+          
         </>
       ) : (
         <>

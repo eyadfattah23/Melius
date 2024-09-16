@@ -5,16 +5,17 @@ import { useEffect } from "react";
 import axios from "axios";
 import Leader_card from "./leader_card";
 import "../../assets/styles/common/edit_profile.css";
+import countLevel from "../../functions/count_level";
 import {
   DialogContent,
   DialogFooter,
   DialogHeader,
-  DialogTitle,
 } from "../../components/shadcn/ui/dialog";
 import Field from "../common/field";
 import Icon from "../../assets/icons/icon";
 import { useNavigate } from "react-router-dom";
 import config from "../../config";
+import fetchUser from "../../functions/fetch_user";
 export default function Edit_Profile() {
   const navigate = useNavigate();
   const user_id = JSON.parse(localStorage.getItem("user_id"));
@@ -25,6 +26,7 @@ export default function Edit_Profile() {
   const [errorEmail, setErrorEmail] = useState("");
   const [errorUsername, setErrorUsername] = useState("");
   const [errorPassword, setErrorPassword] = useState("");
+  const [maxDays, setMaxDays] = useState(-1)
   const [loading, setLoading] = useState(false);
   const handleDelete = async () => {
     try {
@@ -106,29 +108,13 @@ export default function Edit_Profile() {
     }
   };
   useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const response = await axios.get(config.API_URL + `users/${user_id}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        if (response.status == 200) {
-          setUsername(response.data.username);
-          setEmail(response.data.email);
-        }
-      } catch (error) {
-        console.error(error);
-      } finally {
-      }
-    };
-    fetchUser();
+    fetchUser(user_id, token, setUsername, setMaxDays, navigate, setEmail);
   }, []);
 
   return (
     <DialogContent className="sm:max-w-[726px] edit_profile">
       <DialogHeader className={"header"}>
-        <Leader_card name={username} badge={<Avatar level={"2"} />} />
+        <Leader_card name={username} badge={<Avatar level={`${countLevel(Number(maxDays))}`}/>} />
       </DialogHeader>
 
       <div className="grid gap-4 py-4">

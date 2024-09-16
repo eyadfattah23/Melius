@@ -1,6 +1,5 @@
 .relapsing-check {
   align-self: stretch;
-  height: calc(100vh - 90px);
 }
 .relapsing-check h2 {
   font-size: var(--h2);

@@ -7,7 +7,7 @@ function About(){
        <h1>About Us</h1>
        <p> We understand the challenges of recovery and have designed Melius to offer not just tools, but a supportive environment. Our mission is to provide guidance through every step of your journey, from relapse to recovery, from struggle to success.
        </p>
-       <div className="team">
+       <div className="team gap-8 flex flex-col">
         <p>We are a team of passionate individuals committed to helping people overcome porn addiction.</p>
         <div className="members px-16 gap-16 flex flex-col">
         <AboutMember 

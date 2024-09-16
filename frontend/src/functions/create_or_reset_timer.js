@@ -1,7 +1,4 @@
-import countLevel from "./count_level";
-import countNumberOfDays from "./count_number_of_days";
 import axios from "axios";
-import fetchTimerStatus from "./fetch_timer_status";
 import config from "../config";
 const createOrResetTimer = async (
   user_id,
@@ -23,6 +20,7 @@ const createOrResetTimer = async (
         },
       }
     );
+   
     if (window.location.pathname === "/challenge") {
       window.location.reload();
     } else {

@@ -1,9 +1,4 @@
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "../components/shadcn/ui/tabs";
+
 import "../assets/styles/articles_list.css"
 import Articles_Card from "./common/articles_card";
 import { useState, useEffect } from "react";
@@ -30,24 +25,25 @@ function Articles_list({articleOfTheWeek}) {
 
  
   return (
-    <section className="articles_section">
+    <section className="articles_section flex flex-col justify-center items-center  px-16">
       {articles ? (
-        <div defaultValue="most_liked" id="posts_section">
-          <div className="header">
-            <h1>Articles</h1>
-            <Tab
-            pageNum={pageNum}
-            setTotalPages={setTotalPages}
-            setContent={setArticles}
-            setLoading={setLoading}
-            contentType={"articles"}
-            activeTabName={activeTabName}
-            setActiveTabName={setActiveTabName}
-            />
-          </div>
+        <div  className="flex flex-col gap-4">
+          <div className="header flex flex-col gap-4 lg:flex-row lg:items-center">
+  <h1>Articles</h1>
+  <Tab
+    pageNum={pageNum}
+    setTotalPages={setTotalPages}
+    setContent={setArticles}
+    setLoading={setLoading}
+    contentType={"articles"}
+    activeTabName={activeTabName}
+    setActiveTabName={setActiveTabName}
+  />
+</div>
 
-          <div value="most_liked" className="content">
-            <div className="articles_list grid grid-cols-2">
+
+          <div value="most_liked" className="content flex flex-col items-center gap-8">
+            <div className="articles_list grid grid-cols-1 sm:grid-cols-2 gap-8">
               {articles.map((article, index) => (
                 <Articles_Card
                   key={index}
@@ -64,12 +60,13 @@ function Articles_list({articleOfTheWeek}) {
           </div>
         </div>
       ) : (
-        <div className="no_articles container">
+        <div className="no_articles flex flex-col gap-4 items-center">
           <h4>We're sorry, but there are currently no articles to display.</h4>
-          <div className="description">
+          <div className="description gap-2 flex flex-col ">
             <p>Please check back later or explore other sections of our website for more content.</p>
             <p>If you have any specific topics you're interested in, feel free to contact us. We would love to hear your suggestions!</p>
           </div>
+         
           <Link to="/contact">
             <Button text="Contact us" type="cta_filled" />
           </Link>

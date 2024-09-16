@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom"
 import fetchTimerStatus from "../functions/fetch_timer_status"
 import AchievementsBoard from "../components/achievements_board"
 import Footer from "../components/footer"
+import handleLogout from "../functions/loggout"
 function Challenge(){
     const user_id = JSON.parse(localStorage.getItem("user_id"));
     const token = JSON.parse(localStorage.getItem("token"))
@@ -21,9 +22,12 @@ function Challenge(){
     const [starting_date, setStartingDate] = useState("")
     const [tries, setTries] = useState()
     const [maxDays, setMaxDays] = useState(-1)
-    
+    if (!token || !user_id){
+        // if token or user_id removed, it logs out the user
+        handleLogout(navigate)
+      }
     useEffect(()=>{
-       fetchTimerStatus(user_id,token, setStartingDate,setTries, setMaxDays, setLevel, setLoading)
+       fetchTimerStatus(user_id,token, setStartingDate,setTries, setMaxDays, setLevel, setLoading, navigate)
        console.log(maxDays)
        }, [starting_date,tries,maxDays])
   
@@ -32,7 +36,7 @@ function Challenge(){
     <main className="main_layout">
     {
         maxDays >= 0 ? <>
-         <section className="full_screen_section flex flex-col justify-center items-center gap-4" id="counter_section">
+         <section className="full_screen_section flex flex-col justify-center items-center gap-4 py-8" id="counter_section">
          <h2> Starting date: {formatDate(starting_date)}</h2>   
         <Counter1 number_of_days = {maxDays}/>
     </section>
@@ -65,11 +69,11 @@ function Challenge(){
     <RelapsingCheck user_id={user_id} token={token}/>
         </>:
         <div className="full_screen_section" id="join_challenge">
-             <h4>
+             {/* <h4>
           Join our challenge today and start your journey towards a better you!
           </h4>
           <div>          <Button text={"Join the Challenge"} type={"cta_filled"} onClick={()=>createOrResetTimer(user_id, token, setLoading, navigate)}/>
-          </div>
+          </div> */}
         </div>
     }
 

@@ -1,6 +1,7 @@
 import axios from "axios";
 import countLevel from "./count_level";
 import config from "../config";
+import handleLogout from "./loggout";
 const fetchTimerStatus = async (
   user_id,
   token,
@@ -8,7 +9,8 @@ const fetchTimerStatus = async (
   setTries,
   setMaxDays,
   setLevel,
-  setLoading
+  setLoading,
+  navigate
 ) => {
   setLoading(true);
   try {
@@ -20,12 +22,16 @@ const fetchTimerStatus = async (
         },
       }
     );
+   
     console.log(response);
     setStartingDate(response.data.data.start_date);
     setTries(response.data.data.no_tries);
     setMaxDays(response.data.data.max_time);
     setLevel(countLevel(response.data.data.max_time));
   } catch (error) {
+    if (error.status === 401 || error.status === 422){
+      handleLogout(navigate)
+    }
     console.error(error);
   } finally {
     setLoading(false);

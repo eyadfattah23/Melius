@@ -19,6 +19,8 @@ function Create_Article() {
   const [content, setContent] = useState("");
   const [ErrorText, setErrorText] = useState("");
   const [loading, setLoading] = useState(false);
+  const [author, setAuthor] = useState("")
+  const [ErrorAuthor, setErrorAuthor] = useState("")
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
@@ -45,6 +47,7 @@ function Create_Article() {
         {
           title,
           content,
+          author
         },
         {
           headers: {
@@ -57,7 +60,7 @@ function Create_Article() {
       window.location.reload();
     } catch (error) {
       console.error(error);
-      setErrorPassword(
+      setErrorText(
         error.response?.data?.error || "An error occurred. Please try again."
       );
     } finally {
@@ -83,6 +86,18 @@ function Create_Article() {
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 required
+              />
+            </div>
+            {ErrorTitle && <p className="error">{ErrorTitle}</p>}
+          </div>
+          <div className="field">
+            <div className="container title_field">
+              <Field
+                placeholder="Enter the author's name if not anonymous"
+                type="text"
+                value={author}
+                onChange={(e) => setAuthor(e.target.value)}
+                
               />
             </div>
             {ErrorTitle && <p className="error">{ErrorTitle}</p>}

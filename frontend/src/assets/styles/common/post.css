@@ -17,7 +17,7 @@ align-items: center;
     display: flex;
 justify-content: center;
 align-items: center;
-gap: 8px;
+gap: 16px;
 }
 .post_main .header .profile .username{
     display: flex;

@@ -1,19 +1,14 @@
 function Tab({
-  pageNum,
-  user_id,
   contentType,
-  setTotalPages,
-  setLoading,
-  setContent,
   activeTabName, 
   setActiveTabName, 
 }) {
   return (
-    <div className="grid grid-cols-3">
+    <div className="grid grid-cols-3 p-2 gap-2">
       <button
         value={activeTabName}
         onClick={() => setActiveTabName("most_liked")}
-        className={`${activeTabName === "most_liked" ? "tab_active" : "tab"}`}
+        className={`${activeTabName === "most_liked" ? "tab_active p-2" : "tab p-2"}`}
       >
         <p>Most Liked</p>
       </button>

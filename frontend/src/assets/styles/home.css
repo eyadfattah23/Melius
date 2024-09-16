@@ -25,6 +25,7 @@
   .carousel-content {
     display: flex;
     justify-content: space-around;
+    padding: 16px 0;
   }
 .no_leaders{
     width: 100%;

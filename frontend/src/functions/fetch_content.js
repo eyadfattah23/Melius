@@ -1,5 +1,6 @@
 import axios from "axios";
 import config from "../config";
+import handleLogout from "./loggout";
 const fetchContent = async (
   contentType,
   token,
@@ -15,7 +16,6 @@ const fetchContent = async (
 ) => {
   setLoading(true);
   setActiveTabName(filter);
-
   try {
     const response = await axios.get(config.API_URL + contentType, {
       params: {
@@ -28,6 +28,7 @@ const fetchContent = async (
         Authorization: `Bearer ${token}`,
       },
     });
+   
     if (contentType === "posts") {
       setContent(response.data.posts);
     }
@@ -44,6 +45,9 @@ const fetchContent = async (
 
     console.log(response);
   } catch (error) {
+    if (error.status === 401 || error.status === 422){
+      handleLogout(navigate)
+    }
     console.error(error);
   } finally {
     setLoading(false);

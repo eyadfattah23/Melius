@@ -1,11 +1,12 @@
 import Avatar from "../avatar"
 import Field from "./field"
+import countLevel from "../../functions/count_level"
 import writeComment from "../../functions/write_comment"
 import Icon from "../../assets/icons/icon"
-function CommentField({comment, setComment, setCommentField, contentType, id, setComments, setLoading, user_id, setCommentsCount, commentsCount}){
+function CommentField({comment, setComment, setCommentField, contentType, id, setComments, setLoading, user_id, setCommentsCount, commentsCount, userMaxTime}){
     return <div className="post_comment_field">
     <div className="profile">
-    <Avatar />
+    <Avatar level={`${countLevel(Number(userMaxTime))}`}/> 
     </div>
      <div className="input">
          <Field
