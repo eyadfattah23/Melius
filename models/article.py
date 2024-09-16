@@ -29,10 +29,7 @@ class Article(BaseModel, Base):
 
     def __init__(self, *args, **kwargs):
         """initializes article"""
-        # TODO: add default image
 
-        if 'img' not in kwargs or not kwargs['img']:
-            kwargs['img'] = 'resources/default_article.png'
         if 'author' not in kwargs or not kwargs['author']:
             kwargs['author'] = 'anonymous'
 
