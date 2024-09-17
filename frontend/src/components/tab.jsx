@@ -5,6 +5,13 @@ function Tab({
 }) {
   return (
     <div className="grid grid-cols-3 p-2 gap-2">
+        <button
+        value={activeTabName}
+        onClick={() => setActiveTabName("newest")}
+        className={`${activeTabName === "newest" ? "tab_active" : "tab"}`}
+      >
+        <p>Latest</p>
+      </button>
       <button
         value={activeTabName}
         onClick={() => setActiveTabName("most_liked")}
@@ -13,13 +20,7 @@ function Tab({
         <p>Most Liked</p>
       </button>
 
-      <button
-        value={activeTabName}
-        onClick={() => setActiveTabName("newest")}
-        className={`${activeTabName === "newest" ? "tab_active" : "tab"}`}
-      >
-        <p>Latest</p>
-      </button>
+    
 
       {contentType === "posts" && (
         <button

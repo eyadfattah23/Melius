@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 function Posts_list() {
 const [loading, setLoading] = useState(false);
 const [posts, setPosts] = useState([]);
-const [activeTabName, setActiveTabName] = useState("most_liked"); 
+const [activeTabName, setActiveTabName] = useState("newest"); 
 const [pageNum, setPageNum] = useState(1);
 const [totalPages, setTotalPages] = useState(1);
 const user_id = JSON.parse(localStorage.getItem("user_id"));
