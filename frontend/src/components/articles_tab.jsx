@@ -9,7 +9,7 @@ import fetchContent from "../functions/fetch_content";
 import Tab from "./tab";
 function Articles_list({articleOfTheWeek}) {
   const [loading, setLoading] = useState(false);
-  const [activeTabName, setActiveTabName] = useState("most_liked");
+  const [activeTabName, setActiveTabName] = useState("newest");
   const [pageNum, setPageNum] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [articles, setArticles] = useState([]);
@@ -18,8 +18,9 @@ function Articles_list({articleOfTheWeek}) {
   useEffect(() => {
     if(articleOfTheWeek)
     {
-      fetchContent("articles",token, pageNum, 4, null, setTotalPages, setLoading, setActiveTabName, activeTabName, setArticles, navigate);
+      fetchContent("articles",token, pageNum, 4, null, setTotalPages, setLoading, setActiveTabName, activeTabName, setArticles, null, navigate);
     }
+    console.log(articles)
   }, [pageNum, articleOfTheWeek, activeTabName]);
 
  
