@@ -18,18 +18,32 @@ Melius is born out of a desire to provide individuals struggling with porn addic
 
 ## Table of Contents 📑
 
-- [Motivation & Inspiration 💡](#motivation--inspiration-)
-- [Technical Overview 🛠️](#technical-overview-)
-- [Features 🛠️](#features-)
-- [Challenges and Solutions 🤔](#challenges--solutions-)
-- [Future Enhancements 🚀](#future-enhancements-)
-- [Screenshots and Visuals 🖼️](#screenshots-and-visuals-)
-- [Installation :cd:](#installation-)
-- [Manual Installation](#manual-installation)
-- [Usage 📖](#usage)
-- [Contributing 🤝](#contributing)
-- [Related Projects 🌐](#related-projects)
-- [License ⚖️](#license-)
+- [Melius 🎯](#melius-)
+  - [Introduction 👋](#introduction-)
+  - [Table of Contents 📑](#table-of-contents-)
+  - [Motivation \& Inspiration 💡](#motivation--inspiration-)
+  - [Technical Overview 🛠️](#technical-overview-️)
+    - [Frontend](#frontend)
+    - [Backend](#backend)
+    - [Key Algorithms and Solutions 🧠](#key-algorithms-and-solutions-)
+  - [Features 🛠️](#features-️)
+  - [Challenges and Solutions 🤔](#challenges-and-solutions-)
+  - [Future Enhancements 🚀](#future-enhancements-)
+  - [Screenshots and Visuals 🖼️](#screenshots-and-visuals-️)
+  - [Installation :cd:](#installation-cd)
+    - [Install with Bash Script](#install-with-bash-script)
+  - [Manual Installation](#manual-installation)
+    - [Prerequisites](#prerequisites)
+    - [Clone the Repository](#clone-the-repository)
+    - [Install Dependencies](#install-dependencies)
+    - [Install frontend dependencies:](#install-frontend-dependencies)
+    - [Set Up MySQL](#set-up-mysql)
+    - [Set Up Nginx](#set-up-nginx)
+    - [Run the Application](#run-the-application)
+  - [Usage 📖](#usage-)
+  - [Contributing 🤝](#contributing-)
+  - [Related Projects 🌐](#related-projects-)
+  - [License ⚖️](#license-️)
 
 ---
 
@@ -123,6 +137,11 @@ There's always room to refine and evolve this project, and I'm excited about fut
 ## Screenshots and Visuals 🖼️
 
 Here are some screenshots of the app in action:
+| Image | Description |
+|-------|-------------|
+| [![Image 1](image1-url-thumbnail)](./images/Screenshots_1.jpg) | This is the description for image 1. Click the image to enlarge. |
+| [![Image 2](image2-url-thumbnail)](./images/Screenshots_2.jpg) | This is the description for image 2. Click the image to enlarge. |
+| [![Image 3](image3-url-thumbnail)](./images/Screenshots_3.jpg) | This is the description for image 3. Click the image to enlarge. |
 
 ## Installation :cd:
 
