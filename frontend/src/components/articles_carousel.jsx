@@ -11,7 +11,7 @@ import Articles_Card from "./common/articles_card"
 
 export default function Articles_Carousel() {
   useEffect(() => {
-    // fetchContent("articles",pageNum, 3, null, setTotalPages, setLoading, setActiveTabName, "most_liked", setArticles, setArticleOfTheWeek);
+    // fetchContent("articles",pageNum, 3, null, setTotalPages, setLoading, setActiveTabName, "most_liked", setArticles, setArticleOfTheWeek, navigate);
 
   }, []);
   return (

@@ -1,6 +1,13 @@
 import fetchComments from "./fetch_comments";
 import axios from "axios";
 import config from "../config";
+import handleLogout from "./loggout";
+/**
+ * writeComment - Submits a new comment and updates the comments section.
+ *
+ * This function handles the submission of a new comment by sending it to the API, updating the comments count,
+ * and fetching the latest comments to refresh the comments section.
+ */
 const writeComment = async (
   setCommentField,
   contentType,
@@ -11,10 +18,14 @@ const writeComment = async (
   user_id,
   comment,
   setCommentsCount,
-  commentsCount
+  commentsCount,
+  navigate
 ) => {
   setLoading(true);
   const token = JSON.parse(localStorage.getItem("token"));
+  if (!token){
+    handleLogout(navigate)
+  }
   try {
     const response = await axios.post(
       config.API_URL + `${contentType}/${id}/comments`,
@@ -37,10 +48,14 @@ const writeComment = async (
       `${contentType}`,
       id,
       setComments,
-      setLoading
+      setLoading,
+      navigate
     );
   } catch (error) {
     console.error(error);
+    if (error.status === 401 || error.status === 422){
+      handleLogout(navigate)
+    }
   } finally {
     setLoading(false);
   }

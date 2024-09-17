@@ -114,7 +114,8 @@ const isAdmin = JSON.parse(localStorage.getItem("isAdmin"));
                       article_id,
                       user_id,
                       setLikesCount,
-                      likesCount
+                      likesCount,
+                      navigate
                     )
                   }
                 >

@@ -8,6 +8,7 @@ import Comments from "./comments"
 import likeOrUnlike from "../../functions/like_or_unlike"
 import PostOptions from "./post_options"
 import "../../assets/styles/common/post.css"
+import { useNavigate } from "react-router-dom"
 function Post({title, text,likes_count, created_at, post_id, comments_count, isLiked, activeTabName, postUsername, userMaxTime}){
     const user_id = JSON.parse(localStorage.getItem("user_id"))
     const [comments, setComments] = useState([])
@@ -18,7 +19,7 @@ function Post({title, text,likes_count, created_at, post_id, comments_count, isL
     const [likesCount, setLikesCount] = useState(likes_count)
     const [commentsCount, setCommentsCount] = useState(comments_count)
     const token = JSON.parse(localStorage.getItem("token"));
-    
+    const navigate = useNavigate()
   
     return <>
     <div className="post_main">
@@ -48,12 +49,12 @@ function Post({title, text,likes_count, created_at, post_id, comments_count, isL
             <div className="stat">
                 <p> {likesCount} likes</p>
             </div>
-            <div className="stat" onClick={()=> fetchComments(setCommentField,"posts", post_id, setComments, setLoading)}>
+            <div className="stat" onClick={()=> fetchComments(setCommentField,"posts", post_id, setComments, setLoading, navigate)}>
             <p> {commentsCount} comments</p>
             </div>
         </div>
         <div className="footer">
-          <div className="sec" onClick={()=> likeOrUnlike(setLoading, setLiked, liked, "posts", post_id, user_id, setLikesCount, likesCount)}>
+          <div className="sec" onClick={()=> likeOrUnlike(setLoading, setLiked, liked, "posts", post_id, user_id, setLikesCount, likesCount, navigate)}>
             <Icon name={"hand_heart"} size={20} color={!liked? "grey": "red"}/>
             <p className={liked ? "isLiked": ""}>Like</p>
           </div>

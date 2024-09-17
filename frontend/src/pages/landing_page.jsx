@@ -5,6 +5,10 @@ import Features from "../components/landing_page/features"
 import About from "../components/landing_page/about"
 import Contact from "../components/landing_page/contact"
 import Footer from "../components/footer"
+/**
+ * serves as the main entry point of the application, showcasing various sections 
+ * 
+ */
 function LandingPage(){
   return   <div>
   <Navbar/>

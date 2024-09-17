@@ -2,15 +2,9 @@ import Button from "./button"
 import article_img from "../../assets/images/article_image.png"
 import { Link } from "react-router-dom";
 import "../../assets/styles/common/article_card.css"
+import formatDate from "../../functions/format_date";
 function Articles_Card({orientation, title, id, published_date, likes, liked, img}){
-    function formatDate(timestamp) {
-        const date = new Date(timestamp);
-        const day = String(date.getDate()).padStart(2, '0');
-        const month = String(date.getMonth() + 1).padStart(2, '0'); 
-        const year = date.getFullYear();
-        
-        return `${day}/${month}/${year}`;
-    }
+    
     if (orientation === "horizontal")
     {
         return <div className="article_card flex flex-col-reverse items-center sm:flex-row p-6 gap-4" id="article_horizontal">

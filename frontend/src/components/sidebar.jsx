@@ -13,23 +13,18 @@ import {
 import { DialogTrigger, Dialog } from "../components/shadcn/ui/dialog";
 import Icon from "../assets/icons/icon";
 import Edit_Profile from "../components/common/edit_profile";
-
+import { useState } from "react";
+import handleLogout from "../functions/loggout";
 function Sidebar({maxDays}) {
   const navigate = useNavigate();
+  const [level, setLevel] = useState(-1)
   
-  const level = JSON.parse(localStorage.getItem("level"))
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user_id");
-    localStorage.removeItem("isAdmin");
-    navigate("/login");
-  };
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button className="flex items-center avatar">
-          <Avatar  level={level} />
+          <Avatar />
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56 ">
@@ -62,7 +57,7 @@ function Sidebar({maxDays}) {
           </Link>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="menu_item flex items-center p-2" onClick={handleLogout}>
+        <DropdownMenuItem className="menu_item flex items-center p-2" onClick={()=> handleLogout(navigate)}>
           <Icon name="logout" size={16} />
           <span className="ml-2">Log out</span>
         </DropdownMenuItem>

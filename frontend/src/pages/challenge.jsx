@@ -13,32 +13,54 @@ import fetchTimerStatus from "../functions/fetch_timer_status"
 import AchievementsBoard from "../components/achievements_board"
 import Footer from "../components/footer"
 import handleLogout from "../functions/loggout"
+
+/**
+ * The `Challenge` component serves as the main page for users to interact with a challenge feature.
+ * It fetches and displays the user's current challenge progress, including elapsed time, tries, and achievements.
+ * If no challenge is active, it offers an option for users to start or join the challenge.
+ */
 function Challenge(){
+    // Retrieve user_id and token from local storage
     const user_id = JSON.parse(localStorage.getItem("user_id"));
     const token = JSON.parse(localStorage.getItem("token"))
+    
+    // Component state
     const [level, setLevel] = useState()
-    const navigate = useNavigate()
     const [loading, setLoading] = useState(false);
     const [starting_date, setStartingDate] = useState("")
     const [tries, setTries] = useState()
     const [maxDays, setMaxDays] = useState(-1)
+    const [elapsedDays, setElapsedDays] = useState(-1)
+    const navigate = useNavigate()
+    
+    
     if (!token || !user_id){
         // if token or user_id removed, it logs out the user
         handleLogout(navigate)
       }
+    
+    // Fetch timer status on component mount and when relevant state variables change
     useEffect(()=>{
-       fetchTimerStatus(user_id,token, setStartingDate,setTries, setMaxDays, setLevel, setLoading, navigate)
-       console.log(maxDays)
+       fetchTimerStatus(
+        user_id,
+        token, 
+        setStartingDate,
+        setTries, 
+        setMaxDays, 
+        setLevel, 
+        setLoading, 
+        navigate, 
+        setElapsedDays)
        }, [starting_date,tries,maxDays])
   
     return <>
     <Navbar/>
     <main className="main_layout">
     {
-        maxDays >= 0 ? <>
+        elapsedDays >= 0 ? <>
          <section className="full_screen_section flex flex-col justify-center items-center gap-4 py-8" id="counter_section">
          <h2> Starting date: {formatDate(starting_date)}</h2>   
-        <Counter1 number_of_days = {maxDays}/>
+        <Counter1 number_of_days = {elapsedDays}/>
     </section>
     <section id="stats_section">
             <div className="stats_element">

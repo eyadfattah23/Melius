@@ -80,8 +80,7 @@ function Leaders_List({ setMaxDays}) {
                   user_id,
                   token,
                   setLoading,
-                  navigate,
-                  setMaxDays
+                  navigate
                 )
               }
             />

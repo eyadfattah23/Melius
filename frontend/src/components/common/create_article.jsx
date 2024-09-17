@@ -21,7 +21,6 @@ function Create_Article() {
   const [ErrorText, setErrorText] = useState("");
   const [loading, setLoading] = useState(false);
   const [author, setAuthor] = useState("")
-  const [ErrorAuthor, setErrorAuthor] = useState("")
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);

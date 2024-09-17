@@ -1,3 +1,9 @@
+/**
+ * formatDate - Formats a timestamp into a DD/MM/YYYY string.
+ *
+ * This function takes a timestamp, converts it into a JavaScript Date object, 
+ * and returns the date formatted as a string in the format `DD/MM/YYYY`.
+ */
 function formatDate(timestamp) {
     const date = new Date(timestamp);
     

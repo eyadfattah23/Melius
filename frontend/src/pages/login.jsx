@@ -4,61 +4,28 @@ import Icon from "../assets/icons/icon";
 import Field from "../components/common/field";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Logo from "../components/common/logo";
-import config from "../config";
+import login from "../functions/login";
+/**
+ * provides a user authentication interface where users can log in with their email and password.
+ * It includes form validation, error handling, and redirection upon successful login.
+ */
+
 function Login() {
+  // State hooks for managing form input and validation
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [password, setPassword] = useState("");
   const [errorEmail, setErrorEmail] = useState("");
   const [errorPassword, setErrorPassword] = useState("");
+  
+  // Hook for programmatic navigation
   const navigate = useNavigate();
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    setLoading(true);
-    setErrorEmail("");
-    setErrorPassword("");
 
-    let hasError = false;
-
-    if (!email) {
-      setErrorEmail("Email is required");
-      hasError = true;
-    } else {
-      const emailRegex = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
-      if (!emailRegex.test(email)) {
-        setErrorEmail("Invalid email format");
-        hasError = true;
-      }
-    }
-    if (!password) {
-      setErrorPassword("Password is required");
-      hasError = true;
-    }
-    try {
-      const response = await axios.post(
-        config.API_URL + "users/authenticate",
-        {
-          email,
-          password,
-        }
-      );
-
-      localStorage.setItem("token", JSON.stringify(response.data.token));
-      localStorage.setItem("user_id", JSON.stringify(response.data.user.id));
-      localStorage.setItem("isAdmin", JSON.stringify(response.data.user.isAdmin))
-      console.log(response.data)
-      navigate("/home");
-    } catch (error) {
-      console.error(error);
-      setErrorPassword(
-        error.response?.data?.error || "An error occurred. Please try again."
-      );
-    } finally {
-      setLoading(false);
-    }
+  // Handle form submission
+  const handleSubmit = (event) => {
+    login(event, setLoading, setErrorEmail, setErrorPassword, email, password, navigate);
   };
   return (
     <main className="py-8 px-16 login_main">

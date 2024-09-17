@@ -108,7 +108,7 @@ export default function Edit_Profile() {
     }
   };
   useEffect(() => {
-    fetchUser(user_id, token, setUsername, setMaxDays, navigate, setEmail);
+    fetchUser(user_id, token, setUsername, setMaxDays, navigate, setEmail, null);
   }, []);
 
   return (

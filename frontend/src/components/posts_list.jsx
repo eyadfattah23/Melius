@@ -5,6 +5,7 @@ import CreatePost from "./common/create_post";
 import PageNums from "./common/pagination";
 import Tab from "./tab";
 import fetchContent from "../functions/fetch_content";
+import { useNavigate } from "react-router-dom";
 function Posts_list() {
 const [loading, setLoading] = useState(false);
 const [posts, setPosts] = useState([]);
@@ -13,7 +14,7 @@ const [pageNum, setPageNum] = useState(1);
 const [totalPages, setTotalPages] = useState(1);
 const user_id = JSON.parse(localStorage.getItem("user_id"));
 const token = JSON.parse(localStorage.getItem("token"));
-  
+const navigate = useNavigate() 
     useEffect(() => {
       fetchContent(
         "posts",
@@ -25,7 +26,8 @@ const token = JSON.parse(localStorage.getItem("token"));
         setLoading,
         setActiveTabName,
         activeTabName,
-        setPosts
+        setPosts,
+        navigate
       );
       
     }, [activeTabName, pageNum]);

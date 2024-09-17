@@ -3,7 +3,7 @@ import "../assets/styles/articles_list.css"
 import Articles_Card from "./common/articles_card";
 import { useState, useEffect } from "react";
 import Button from "./common/button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PageNums from "./common/pagination";
 import fetchContent from "../functions/fetch_content";
 import Tab from "./tab";
@@ -14,10 +14,11 @@ function Articles_list({articleOfTheWeek}) {
   const [totalPages, setTotalPages] = useState(1);
   const [articles, setArticles] = useState([]);
   const token = JSON.parse(localStorage.getItem("token"))
+  const navigate = useNavigate()
   useEffect(() => {
     if(articleOfTheWeek)
     {
-      fetchContent("articles",token, pageNum, 4, null, setTotalPages, setLoading, setActiveTabName, activeTabName, setArticles);
+      fetchContent("articles",token, pageNum, 4, null, setTotalPages, setLoading, setActiveTabName, activeTabName, setArticles, navigate);
     }
   }, [pageNum, articleOfTheWeek, activeTabName]);
 

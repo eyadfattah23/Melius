@@ -18,7 +18,7 @@ function Tab({
         onClick={() => setActiveTabName("newest")}
         className={`${activeTabName === "newest" ? "tab_active" : "tab"}`}
       >
-        <p>Newest</p>
+        <p>Latest</p>
       </button>
 
       {contentType === "posts" && (

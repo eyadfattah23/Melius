@@ -1,9 +1,11 @@
 import Footer from "../components/footer"
 import Navbar from "../components/common/navbar"
 import "../assets/styles/terms.css"
+/**
+ * Displays the terms and conditions page of the application. It provides important information about the platform's guidelines, eligibility, community rules, and legal disclaimers for users. The content is divided
+ * into various sections, such as eligibility, community guidelines, user-generated content, and limitations of liability.
+ */
 function TermsConditions(){
-
-  
     return <>
     <Navbar/>
    <main className="main_layout">
