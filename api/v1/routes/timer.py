@@ -114,6 +114,7 @@ def timer_status(user_id):
     data = timer.to_dict().copy()
     data['elapsed_hours'] = int(total_elapsed_hours)
     data['elapsed_seconds'] = int(remaining_seconds)
+    data['elapsed_days'] = int(elapsed_days)
 
     return jsonify({"data": data})
 
