@@ -1,6 +1,5 @@
 # Melius 🎯
 
- 
 <img src="./images/break-free.png" alt="drawing" width="1000"/>
 
 ## Introduction 👋
@@ -40,7 +39,6 @@ The idea behind Melius started from a personal experience with a close friend st
 
 Melius has grown into more than just a technical project. It’s a tool built with empathy, a product of deep thought and a desire to make a real difference in people’s lives.
 
-
 ## Technical Overview 🛠️
 
 Here’s a breakdown of the technology stack and architectural decisions:
@@ -52,10 +50,10 @@ Here’s a breakdown of the technology stack and architectural decisions:
 - **shadcn/ui:** A collection of UI components and utilities for building web applications.
 
 ### Backend
+
 - **Flask (Python):** Chosen for its lightweight nature, Flask allowed us to build out APIs quickly while maintaining flexibility.
 - **JWT (JSON Web Tokens):** Authentication is handled with JWT to ensure that user sessions are stateless and secure.
 - **MySQL:** Used for efficient storage of user progress and logs, chosen for its scalability and robustness.
-  
 
 ### Key Algorithms and Solutions 🧠
 
@@ -68,7 +66,6 @@ fun calculateOrderTotal(order: List<OrderEntry>): Double {
 }
 ```
 
-
 ## Features 🛠️
 
 - **Anonymous Account Creation**: Users can sign up without sharing personal information.
@@ -76,7 +73,6 @@ fun calculateOrderTotal(order: List<OrderEntry>): Double {
 - **Resource Hub**: Access articles, videos, and exercises to support recovery.
 - **Community Support**: Engage with a like-minded community to share experiences and encourage one another.
 - **Privacy Protection**: Data security is a top priority, ensuring anonymity at all stages.
-
 
 ## Challenges and Solutions 🤔
 
@@ -93,9 +89,10 @@ While building **Melius**, We faced several obstacles that required creative sol
 
 - **Challenge 4: Optimizing Frontend Requests**  
   Our frontend started slowing down due to large requests for posts, likes, and comments. We solved this by:
-    - Implementing **pagination** for large data sets.
-    - Optimizing the requests by fetching related data (e.g., posts, likes, comments) in a single request, reducing the need for multiple API calls.
-    - These improvements reduced load times and optimized performance.
+
+  - Implementing **pagination** for large data sets.
+  - Optimizing the requests by fetching related data (e.g., posts, likes, comments) in a single request, reducing the need for multiple API calls.
+  - These improvements reduced load times and optimized performance.
 
 - **Challenge 5: Deployment Issues (Node and npm Versions)**  
   During deployment, we kept encountering outdated versions of **Node.js** and **npm**, despite running `apt update`. The fix involved manually installing the latest versions by adding the Node.js PPA repository, which resolved the version mismatch issues.
@@ -103,26 +100,29 @@ While building **Melius**, We faced several obstacles that required creative sol
 - **Challenge 6: Non-Technical Challenges (Communication & Deadlines)**  
   We also faced non-technical issues, such as communication gaps, availability conflicts, and difficulty conveying ideas effectively. Additionally, managing responsibilities outside of the project made it challenging to meet deadlines. However, clear communication and coordination allowed us to overcome these hurdles and deliver the project on time.
 
-Each of these challenges helped me grow in problem-solving, performance optimization, communication, and team coordination.
+Each of these challenges helped us grow in problem-solving, performance optimization, communication, and team coordination.
 
-##  Future Enhancements 🚀
+## Future Enhancements 🚀
 
 Here's what I plan for the next iteration of **Melius**:
 
-- **Mobile Optimization**: Enhance the platform's responsiveness for mobile devices.
 - **Donation Feature**: Allow users to support the platform through donations.
 - **Voice Chat**: Enable voice communication between users for additional support.
 - **Goal Setting**: Add a feature to set monthly or weekly goals. Completing these goals will reward users with points or achievements.
 
+- **Graphs of users progress.**
+
+- **Tests**: Add a feature to make users take small quizzes to measure their addiction levels.
+
+- **AI**: Add an AI engine to manage posts.
+
 There's always room to refine and evolve this project, and I'm excited about future possibilities.
 
-* * * * *
+---
 
 ## Screenshots and Visuals 🖼️
 
 Here are some screenshots of the app in action:
-
-
 
 ## Installation :cd:
 
