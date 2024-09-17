@@ -10,12 +10,11 @@ from datetime import datetime, timezone, timedelta
 users_bp = Blueprint('users', __name__)
 
 
-
 @users_bp.route('/users', methods=['GET'])
 @jwt_required()
 @swag_from('documentation/user/get_users.yml')
 def get_users():
-    """retrieves a list of all users""" 
+    """retrieves a list of all users"""
     claims = get_jwt()
     if claims.get("is_admin"):
         # User is admin
@@ -27,7 +26,6 @@ def get_users():
     return jsonify([user.to_dict() for user in users])
 
 # Creates a new user
-
 
 
 @users_bp.route('/users', methods=['POST'])
@@ -53,11 +51,14 @@ def create_user():
     except Exception as e:
         abort(400, description=str(e))
 
-    access_token = create_access_token(identity=instance.id, additional_claims={"is_admin": instance.isAdmin})
+    access_token = create_access_token(identity=instance.id, additional_claims={
+                                       "is_admin": instance.isAdmin})
 
     return make_response(jsonify({"token": access_token, "user": instance.to_dict()}), 201)
 
 # Authenticates user
+
+
 @users_bp.route('/users/authenticate', methods=['POST'])
 @swag_from('documentation/user/authenticate_user.yml')
 def authenticate_user():
@@ -86,11 +87,11 @@ def authenticate_user():
     else:
         user_dict['timer_reset_date'] = user_timer.reset_date
 
-    access_token = create_access_token(identity=user.id, additional_claims={"is_admin": user.isAdmin})
+    access_token = create_access_token(identity=user.id, additional_claims={
+                                       "is_admin": user.isAdmin})
     return make_response(jsonify({"token": access_token, "user": user_dict}), 200)
 
 # Retrieves specific user details
-
 
 
 @users_bp.route('/users/<user_id>', methods=['GET'])
@@ -110,12 +111,24 @@ def get_user(user_id):
     data = user.to_dict().copy()
     if user.timer_histories:
         data['max_days'] = user.timer_histories[0].max_time
+
+        current_time = datetime.now(timezone.utc)
+
+        if not user.timer_histories[0].reset_date.tzinfo:
+            user.timer_histories[0].reset_date = user.timer_histories[0].reset_date.replace(
+                tzinfo=timezone.utc)
+
+        elapsed_time = current_time - user.timer_histories[0].reset_date
+
+        elapsed_days = elapsed_time.days
+
+        data['elapsed_days'] = elapsed_days
+
     else:
         data['max_days'] = "no timer found!"
     return jsonify(data)
 
 # Updates user info
-
 
 
 @users_bp.route('/users/<user_id>', methods=['PUT'])
@@ -146,7 +159,6 @@ def update_user(user_id):
     return make_response(jsonify(user.to_dict()), 200)
 
 # Deletes a user and all associated data
-
 
 
 @users_bp.route('/users/<user_id>', methods=['DELETE'])
