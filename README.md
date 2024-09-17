@@ -139,9 +139,9 @@ There's always room to refine and evolve this project, and I'm excited about fut
 Here are some screenshots of the app in action:
 | Image | Description |
 |-------|-------------|
-| [![Image 1](image1-url-thumbnail)](./images/Screenshots_1.jpg) | This is the description for image 1. Click the image to enlarge. |
-| [![Image 2](image2-url-thumbnail)](./images/Screenshots_2.jpg) | This is the description for image 2. Click the image to enlarge. |
-| [![Image 3](image3-url-thumbnail)](./images/Screenshots_3.jpg) | This is the description for image 3. Click the image to enlarge. |
+| [![Image 1](image1-url-thumbnail)](./images/Screenshot_1.jpg) | This is the description for image 1. Click the image to enlarge. |
+| [![Image 2](image2-url-thumbnail)](./images/Screenshot_2.jpg) | This is the description for image 2. Click the image to enlarge. |
+| [![Image 3](image3-url-thumbnail)](./images/Screenshot_3.jpg) | This is the description for image 3. Click the image to enlarge. |
 
 ## Installation :cd:
 
