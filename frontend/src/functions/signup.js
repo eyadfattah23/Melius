@@ -1,5 +1,6 @@
 import config from "../config";
 import axios from "axios";
+import countLevel from "./count_level";
 /**
  * signup - Handles user registration by sending user details to the API and managing state.
  *
@@ -69,6 +70,7 @@ const signup = async (event, setLoading, setErrorEmail, setErrorUsername, setErr
       localStorage.setItem("token", JSON.stringify(response.data.token));
       localStorage.setItem("isAdmin", JSON.stringify(response.data.user.isAdmin));
       localStorage.setItem("user_id", JSON.stringify(response.data.user.id));
+      localStorage.setItem("level", JSON.stringify(countLevel(response.data.user.max_days)))
 
       navigate("/home");
     } catch (error) {

@@ -18,6 +18,7 @@ const deleteProfile = async (user_id, token, setLoading, navigate) => {
       localStorage.removeItem("user_id");
       localStorage.removeItem("token");
       localStorage.removeItem("isAdmin")
+      localStorage.removeItem("level")
       navigate("/signup");
     } catch (error) {
     if (error.status === 401 || error.status === 422)

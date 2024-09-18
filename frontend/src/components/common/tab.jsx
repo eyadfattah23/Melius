@@ -1,3 +1,11 @@
+
+/**
+ * Tab - A component for rendering tab buttons to filter content based on selected criteria.
+ * 
+ * This component provides tab buttons that allow users to switch between different views
+ * based on the content type (e.g., latest, most liked, my posts, oldest). It highlights the
+ * active tab and manages tab selection through the `setActiveTabName` function.
+ */
 function Tab({
   contentType,
   activeTabName, 

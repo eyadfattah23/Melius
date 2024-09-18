@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Dialog, DialogTrigger } from "./shadcn/ui/dialog";
 import CreatePost from "./common/create_post";
 import PageNums from "./common/pagination";
-import Tab from "./tab";
+import Tab from "./common/tab";
 import fetchContent from "../functions/fetch_content";
 import { useNavigate } from "react-router-dom";
 function Posts_list() {

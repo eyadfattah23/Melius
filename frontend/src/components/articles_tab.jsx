@@ -6,7 +6,7 @@ import Button from "./common/button";
 import { Link, useNavigate } from "react-router-dom";
 import PageNums from "./common/pagination";
 import fetchContent from "../functions/fetch_content";
-import Tab from "./tab";
+import Tab from "./common/tab";
 function Articles_list({articleOfTheWeek}) {
   const [loading, setLoading] = useState(false);
   const [activeTabName, setActiveTabName] = useState("newest");

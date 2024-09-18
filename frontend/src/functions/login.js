@@ -1,5 +1,6 @@
 import axios from "axios";
 import config from "../config";
+import countLevel from "./count_level";
 /**
  * login - Handles user login by sending credentials to the API and managing state.
  * 
@@ -39,6 +40,7 @@ const login = async (event, setLoading, setErrorEmail, setErrorPassword, email, 
       localStorage.setItem("token", JSON.stringify(response.data.token));
       localStorage.setItem("user_id", JSON.stringify(response.data.user.id));
       localStorage.setItem("isAdmin", JSON.stringify(response.data.user.isAdmin))
+      localStorage.setItem("level", JSON.stringify(countLevel(response.data.user.max_days)))
       console.log(response.data)
       navigate("/home");
     } catch (error) {

@@ -1,5 +1,5 @@
-import Avatar from "./avatar";
-import "../assets/styles/sidebar.css";
+import Avatar from "../avatar";
+import "../../assets/styles/sidebar.css";
 import { Link, useNavigate } from "react-router-dom";
 import {
   DropdownMenu,
@@ -9,25 +9,29 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "./shadcn/ui/dropdown-menu";
-import { DialogTrigger, Dialog } from "../components/shadcn/ui/dialog";
-import Icon from "../assets/icons/icon";
-import Edit_Profile from "../components/common/edit_profile";
-import { useState } from "react";
-import handleLogout from "../functions/loggout";
+} from "../shadcn/ui/dropdown-menu";
+import { DialogTrigger, Dialog } from "../shadcn/ui/dialog";
+import Icon from "../../assets/icons/icon";
+import Edit_Profile from "./edit_profile";
+import handleLogout from "../../functions/loggout";
+/**
+ * Sidebar - A sidebar component for user profile and navigation options.
+ * 
+ * This component displays a sidebar menu that includes options for editing the user profile,
+ * navigating to different pages, and logging out. It utilizes dropdown menus and dialogs for
+ * interactions.
+ */
 function Sidebar({maxDays}) {
   const navigate = useNavigate();
-  const [level, setLevel] = useState(-1)
-  
-
+const level = JSON.parse(localStorage.getItem("level"))  
   return (
-    <DropdownMenu>
+    <DropdownMenu className="sidebar_main">
       <DropdownMenuTrigger asChild>
         <button className="flex items-center avatar">
-          <Avatar />
+          <Avatar level={`${level}`}/>
         </button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56 ">
+      <DropdownMenuContent className="w-56 dropdown_main p-2">
         <DropdownMenuLabel className="dropdown_label">My Profile</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
@@ -63,7 +67,7 @@ function Sidebar({maxDays}) {
         </DropdownMenuItem>
         <Link to={"/terms_conditions"}>
           <div className="p-2">
-            <span className="text-sm text-gray-400">Terms & conditions</span>
+            <span className="terms_item">Terms & conditions</span>
           </div>
         </Link>
       </DropdownMenuContent>

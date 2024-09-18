@@ -2,7 +2,7 @@ import { useState } from "react";
 import Logo from "./logo";
 import Button from "./button";
 import Menubar from "./menubar";
-import Sidebar from "../sidebar";
+import Sidebar from "./sidebar";
 import "../../assets/styles/common/navbar.css";
 import { Link } from "react-router-dom";
 import Icon from "../../assets/icons/icon";
