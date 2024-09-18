@@ -54,7 +54,9 @@ def create_user():
     access_token = create_access_token(identity=instance.id, additional_claims={
                                        "is_admin": instance.isAdmin})
 
-    return make_response(jsonify({"token": access_token, "user": instance.to_dict()}), 201)
+    user_dict = instance.to_dict().copy()
+    user_dict['max_days'] = -1
+    return make_response(jsonify({"token": access_token, "user": user_dict}), 201)
 
 # Authenticates user
 
@@ -82,10 +84,10 @@ def authenticate_user():
     user_timer = storage.getSession().query(
         TimerHistory).filter_by(user_id=user.id).first()
     if not user_timer:
-        user_dict['timer_reset_date'] = None
+        user_dict['max_days'] = -1
 
     else:
-        user_dict['timer_reset_date'] = user_timer.reset_date
+        user_dict['max_days'] = user_timer.max_time
 
     access_token = create_access_token(identity=user.id, additional_claims={
                                        "is_admin": user.isAdmin})

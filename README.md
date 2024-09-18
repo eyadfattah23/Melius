@@ -18,18 +18,31 @@ Melius is born out of a desire to provide individuals struggling with porn addic
 
 ## Table of Contents 📑
 
-- [Motivation & Inspiration 💡](#motivation--inspiration-)
-- [Technical Overview 🛠️](#technical-overview-)
-- [Features 🛠️](#features-)
-- [Challenges and Solutions 🤔](#challenges--solutions-)
-- [Future Enhancements 🚀](#future-enhancements-)
-- [Screenshots and Visuals 🖼️](#screenshots-and-visuals-)
-- [Installation :cd:](#installation-)
-- [Manual Installation](#manual-installation)
-- [Usage 📖](#usage)
-- [Contributing 🤝](#contributing)
-- [Related Projects 🌐](#related-projects)
-- [License ⚖️](#license-)
+- [Melius 🎯](#melius-)
+  - [Introduction 👋](#introduction-)
+  - [Table of Contents 📑](#table-of-contents-)
+  - [Motivation \& Inspiration 💡](#motivation--inspiration-)
+  - [Technical Overview 🛠️](#technical-overview-️)
+    - [Frontend](#frontend)
+    - [Backend](#backend)
+  - [Features 🛠️](#features-️)
+  - [Challenges and Solutions 🤔](#challenges-and-solutions-)
+  - [Future Enhancements 🚀](#future-enhancements-)
+  - [Screenshots and Visuals 🖼️](#screenshots-and-visuals-️)
+  - [Installation :cd:](#installation-cd)
+    - [Install with Bash Script](#install-with-bash-script)
+  - [Manual Installation](#manual-installation)
+    - [Prerequisites](#prerequisites)
+    - [Clone the Repository](#clone-the-repository)
+    - [Install Dependencies](#install-dependencies)
+    - [Install frontend dependencies:](#install-frontend-dependencies)
+    - [Set Up MySQL](#set-up-mysql)
+    - [Set Up Nginx](#set-up-nginx)
+    - [Run the Application](#run-the-application)
+  - [Usage 📖](#usage-)
+  - [Contributing 🤝](#contributing-)
+  - [Related Projects 🌐](#related-projects-)
+  - [License ⚖️](#license-️)
 
 ---
 
@@ -54,17 +67,6 @@ Here’s a breakdown of the technology stack and architectural decisions:
 - **Flask (Python):** Chosen for its lightweight nature, Flask allowed us to build out APIs quickly while maintaining flexibility.
 - **JWT (JSON Web Tokens):** Authentication is handled with JWT to ensure that user sessions are stateless and secure.
 - **MySQL:** Used for efficient storage of user progress and logs, chosen for its scalability and robustness.
-
-### Key Algorithms and Solutions 🧠
-
-One of the core challenges I encountered was [describe a key technical challenge]. After a few iterations, I chose to implement [solution or algorithm]. Here’s a breakdown of how it works:
-
-```kotlin
-// Example of the core algorithm or solution in Kotlin
-fun calculateOrderTotal(order: List<OrderEntry>): Double {
-    return order.sumOf { it.quantity * it.price }
-}
-```
 
 ## Features 🛠️
 
@@ -123,6 +125,18 @@ There's always room to refine and evolve this project, and I'm excited about fut
 ## Screenshots and Visuals 🖼️
 
 Here are some screenshots of the app in action:
+| Image | Description |
+|-------|-------------|
+| ![Image 1](./images/landing_page.jpg) | Landing Page |
+| ![Image 2](./images/features.jpg) | Features |
+| ![Image 3](./images/sign_up.jpg) | Sign Up page |
+| ![Image 3](./images/login.jpg) | Login page |
+| ![Image 3](./images/home.jpg) | Home page |
+| ![Image 3](./images/leaderboard.jpg) | leaderboard for top 10 users |
+| ![Image 3](./images/challenges.jpg) | challenge page |
+| ![Image 3](./images/achievements.jpg) | Achievements section |
+| ![Image 3](./images/posts.jpg) | Community Posts page |
+| ![Image 3](./images/articles.jpg) | Articles page |
 
 ## Installation :cd:
 
