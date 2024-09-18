@@ -25,7 +25,6 @@ Melius is born out of a desire to provide individuals struggling with porn addic
   - [Technical Overview 🛠️](#technical-overview-️)
     - [Frontend](#frontend)
     - [Backend](#backend)
-    - [Key Algorithms and Solutions 🧠](#key-algorithms-and-solutions-)
   - [Features 🛠️](#features-️)
   - [Challenges and Solutions 🤔](#challenges-and-solutions-)
   - [Future Enhancements 🚀](#future-enhancements-)
@@ -68,17 +67,6 @@ Here’s a breakdown of the technology stack and architectural decisions:
 - **Flask (Python):** Chosen for its lightweight nature, Flask allowed us to build out APIs quickly while maintaining flexibility.
 - **JWT (JSON Web Tokens):** Authentication is handled with JWT to ensure that user sessions are stateless and secure.
 - **MySQL:** Used for efficient storage of user progress and logs, chosen for its scalability and robustness.
-
-### Key Algorithms and Solutions 🧠
-
-One of the core challenges I encountered was [describe a key technical challenge]. After a few iterations, I chose to implement [solution or algorithm]. Here’s a breakdown of how it works:
-
-```kotlin
-// Example of the core algorithm or solution in Kotlin
-fun calculateOrderTotal(order: List<OrderEntry>): Double {
-    return order.sumOf { it.quantity * it.price }
-}
-```
 
 ## Features 🛠️
 
@@ -139,9 +127,16 @@ There's always room to refine and evolve this project, and I'm excited about fut
 Here are some screenshots of the app in action:
 | Image | Description |
 |-------|-------------|
-| ![Image 1](./images/Screenshot_1.jpg) | This is the description for image 1. Click the image to enlarge. |
-| ![Image 2](./images/Screenshot_2.jpg) | This is the description for image 2. Click the image to enlarge. |
-| ![Image 3](./images/Screenshot_3.jpg) | This is the description for image 3. Click the image to enlarge. |
+| ![Image 1](./images/landing_page.jpg) | Landing Page |
+| ![Image 2](./images/features.jpg) | Features |
+| ![Image 3](./images/sign_up.jpg) | Sign Up page |
+| ![Image 3](./images/login.jpg) | Login page |
+| ![Image 3](./images/home.jpg) | Home page |
+| ![Image 3](./images/leaderboard.jpg) | leaderboard for top 10 users |
+| ![Image 3](./images/challenges.jpg) | challenge page |
+| ![Image 3](./images/achievements.jpg) | Achievements section |
+| ![Image 3](./images/posts.jpg) | Community Posts page |
+| ![Image 3](./images/articles.jpg) | Articles page |
 
 ## Installation :cd:
 
