@@ -1,7 +1,7 @@
 import formatDate from "../../functions/format_date"
 import Icon from "../../assets/icons/icon"
 import Avatar from "../avatar"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import countLevel from "../../functions/count_level"
 import fetchComments from "../../functions/fetch_comments"
 import Comments from "./comments"
@@ -9,8 +9,24 @@ import likeOrUnlike from "../../functions/like_or_unlike"
 import PostOptions from "./post_options"
 import "../../assets/styles/common/post.css"
 import { useNavigate } from "react-router-dom"
+import handleLogout from "../../functions/loggout"
+/**
+ * Post Component
+ * 
+ * This component represents a single post in a social feed or user interface. 
+ * It displays the post's title, content, like count, and comments, and includes options to interact with the post.
+ */
 function Post({title, text,likes_count, created_at, post_id, comments_count, isLiked, activeTabName, postUsername, userMaxTime}){
+    const navigate = useNavigate()
     const user_id = JSON.parse(localStorage.getItem("user_id"))
+    const token = JSON.parse(localStorage.getItem("token"));
+    
+    // Check for valid token and user ID, otherwise logout
+    if (!user_id || !token){
+        handleLogout(navigate)
+    }
+
+    // State variables for post interactions
     const [comments, setComments] = useState([])
     const [liked, setLiked] = useState(isLiked)
     const [loading, setLoading] = useState(false)
@@ -18,8 +34,6 @@ function Post({title, text,likes_count, created_at, post_id, comments_count, isL
     const [comment, setComment] = useState("")
     const [likesCount, setLikesCount] = useState(likes_count)
     const [commentsCount, setCommentsCount] = useState(comments_count)
-    const token = JSON.parse(localStorage.getItem("token"));
-    const navigate = useNavigate()
   
     return <>
     <div className="post_main">

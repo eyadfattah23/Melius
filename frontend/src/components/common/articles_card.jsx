@@ -18,7 +18,7 @@ function Articles_Card({orientation, title, id, published_date, likes, liked, im
             </div>
             <div className="cta_btn">
             <Link to={"/one_article"} state={{article_id: `${id}`, likes: likes, liked: liked}}>
-                    <Button text={"Read Now"} type={"cta_filled"}/>
+                    <Button text={"Read Now"} type={"secondary_filled"}/>
                     </Link>
             </div>
         </div>
@@ -40,7 +40,7 @@ function Articles_Card({orientation, title, id, published_date, likes, liked, im
                 </div>
                 <div className="cta_btn">
                     <Link to={"/one_article"} state={{article_id: `${id}`, likes: likes}}>
-                    <Button text={"Read Now"} type={"cta_filled"}/>
+                    <Button text={"Read Now"} type={"secondary_filled"}/>
                     </Link>
                 </div>
             </div>

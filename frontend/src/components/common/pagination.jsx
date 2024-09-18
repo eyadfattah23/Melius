@@ -1,5 +1,16 @@
 import { Pagination, PaginationContent, PaginationItem, PaginationNext, PaginationPrevious, PaginationLink } from "../shadcn/ui/pagination"
+
+/**
+ * `PageNums` component provides a pagination control for navigating through pages.
+ * It includes previous and next buttons and dynamically renders page numbers.
+ * Handles page changes and disables buttons as needed based on the current page.
+ */
+
 function PageNums({totalPages, pageNum, setPageNum}){
+    /**
+     * Handles the action when the previous page button is clicked.
+     * Decreases the page number if it is greater than 1, otherwise prevents the default action.
+     */
     const handlePrevious = (e) => {
         if (pageNum > 1) {
             setPageNum(pageNum - 1);
@@ -8,7 +19,10 @@ function PageNums({totalPages, pageNum, setPageNum}){
             e.preventDefault();
         }
     };
-  
+    /**
+     * Handles the action when the next page button is clicked.
+     * Increases the page number if it is less than the total number of pages, otherwise prevents the default action.
+     */
     const handleNext = (e) => {
         if (pageNum < totalPages) {
             setPageNum(pageNum + 1);

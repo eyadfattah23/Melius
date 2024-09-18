@@ -1,6 +1,7 @@
 import Button from "../common/button";
 import { useState } from "react";
 import "../../assets/styles/common/edit_profile.css";
+import Icon from "../../assets/icons/icon";
 import {
   DialogContent,
   DialogFooter,
@@ -42,9 +43,12 @@ export default function Edit_Article({ articleId, initialTitle, initialContent, 
 
   return (
     <Dialog>
-    <DialogTrigger className="btn cta_filled">
-      <span> Edit Article </span>
-    </DialogTrigger>
+    <DialogTrigger asChild>
+              <div className={"menu_item"}>
+                <Icon name={"pencil"} size={16} />
+                <span>Edit Post</span>
+              </div>
+            </DialogTrigger>
     <DialogContent className="sm:max-w-[726px] edit_profile">
       <DialogHeader>
         <DialogTitle className={"title"}>Edit Article</DialogTitle>

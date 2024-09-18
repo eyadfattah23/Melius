@@ -7,6 +7,10 @@ import "../../assets/styles/common/navbar.css";
 import { Link } from "react-router-dom";
 import Icon from "../../assets/icons/icon";
 
+/**
+ * Navbar Component
+ * The Navbar component provides a responsive navigation bar that adapts based on the user's authentication state and screen size. It includes links for both logged-in and non-logged-in users and integrates a sidebar for authenticated users.
+ */
 function Navbar({maxDays}) {
   const [isOpen, setIsOpen] = useState(false);
   const loggedin = localStorage.getItem("token");

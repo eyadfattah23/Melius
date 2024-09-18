@@ -1,6 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import { DialogContent, DialogHeader, DialogTitle, Dialog, DialogTrigger, DialogFooter } from "../shadcn/ui/dialog";
+import { DialogContent, DialogHeader, Dialog, DialogTrigger, DialogFooter } from "../shadcn/ui/dialog";
 import Button from "./button";
+/**
+ * `PassedDayDialog` component displays a dialog to congratulate users on successfully completing the day.
+ * It includes a trigger button to open the dialog, a congratulatory message, and a button to share the achievement with the community.
+ */
 function PassedDayDialog(){
   const navigate = useNavigate()
     return <Dialog>

@@ -44,11 +44,6 @@ function Articles() {
       <Navbar />
       
       <main className="main_layout">
-      {isAdmin && (
-              <div className="create-article-container" style={{ position: "absolute", top: "100px", right: "64px" }}>
-                <Create_Article />
-              </div>
-            )}
         {loading ? (
           // Display loading message while content is being fetched
           <p>Loading...</p> 
@@ -58,7 +53,14 @@ function Articles() {
               <>
                 {/* Display "Article of the Week" section */}
                 <section className="main_article_section flex flex-col justify-center gap-8 px-16 py-8">
-                  <h1>Our Latest Article</h1>
+                 <div className="flex flex-col sm:flex-row justify-between items-center gap-16">
+                 <h1>Our Latest Article</h1>
+                  {isAdmin && (
+              <div className="create-article-container">
+                <Create_Article />
+              </div>
+            )}
+                 </div>
                   <Articles_Card
                     orientation={"horizontal"}
                     id={articleOfTheWeek.id}

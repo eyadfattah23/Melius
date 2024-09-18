@@ -6,17 +6,30 @@ import article_img from "../../assets/images/article_image.png";
 import { useState, useEffect } from "react";
 import Button from "../../components/common/button";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import formatDate from "../../functions/format_date";
 import parse from "html-react-parser";
 import Comments from "../../components/common/comments";
 import { useLocation } from "react-router-dom";
 import likeOrUnlike from "../../functions/like_or_unlike";
-import config from "../../config";
-import Edit_Article from "./edit_article";
-
+import fetchArticle from "../../functions/fetch_article";
+import handleLogout from "../../functions/loggout";
+import ArticleOptions from "./article_options";
+/**
+ * `One_Article` component displays a single article's details including title, author, publication date, 
+ * content, and options to like, comment, and share the article. It also handles loading states and errors.
+ */
 function One_Article() {
+  const isAdmin = JSON.parse(localStorage.getItem("isAdmin"));
+  const token = JSON.parse(localStorage.getItem("token"));
+  const user_id = JSON.parse(localStorage.getItem("user_id"));
   const navigate = useNavigate()
+  
+  // Redirect to logout if user is not authenticated
+  if (!user_id || !token){
+    handleLogout(navigate)
+  }
+
+  // Component state
   const [article, setArticle] = useState();
   const [likesCount, setLikesCount] = useState(0);
   const [commentsCount, setCommentsCount] = useState(0);
@@ -24,48 +37,14 @@ function One_Article() {
   const [commentField, setCommentField] = useState(false);
   const [comments, setComments] = useState([]);
   const [comment, setComment] = useState("");
-const isAdmin = JSON.parse(localStorage.getItem("isAdmin"));
-  const token = JSON.parse(localStorage.getItem("token"));
-  const user_id = JSON.parse(localStorage.getItem("user_id"));
   const { article_id, likes, liked } = useLocation().state;
   const [isLiked, setIsLiked] = useState(liked)
+  
+  // Fetch the article details on component mount or when article_id or token changes
   useEffect(() => {
-    const fetchArticle = async () => {
-      setLoading(true);
-      try {
-        const response = await axios.get(
-          `${config.API_URL}articles/${article_id}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        setArticle(response.data);
-        setLikesCount(likes);
-        setCommentsCount(response.data.comments_count);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchArticle();
+    fetchArticle(article_id, token, setLoading, setArticle, setLikesCount, likes, setCommentsCount, navigate)
   }, [article_id, token, likes]);
-  const handleDelete = async () => {
-    try {
-      const response = await axios.delete(config.API_URL + `articles/${article_id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      navigate("/articles")
-    } catch (error) {
-      console.error(error);
-    } finally {
-      // setLoading(false);
-    }
-  };
+  
   return (
     <>
       <Navbar />
@@ -73,17 +52,6 @@ const isAdmin = JSON.parse(localStorage.getItem("isAdmin"));
         <section className="article_section">
           {article ? (
             <>
-            {isAdmin && (
-              <div className="create-article-container flex flex-col gap-4" style={{ position: "absolute", top: "200px", right: "64px" }}>
-               <Edit_Article articleId={article_id} initialTitle={article.title} initialContent={article.content} initialImage={article.img}/>
-               <Button
-          text={"Delete Article"}
-          type="cta_filled"
-          onClick={handleDelete}
-        />
-              </div>
-            
-            )}
               <div className="article_header">
                 <div className="article_info">
                   <h1>{article.title}</h1>
@@ -92,10 +60,16 @@ const isAdmin = JSON.parse(localStorage.getItem("isAdmin"));
                     <p>Published on: {formatDate(article.created_at)}</p>
                   </div>
                 </div>
-                <div className="article_likes">
+               <div className="flex gap-4 items-center">
+               <div className="article_likes">
                   <Icon name={"heart_fill"} size={24} color={"red"} />
                   <p>{likesCount}</p>
                 </div>
+                {isAdmin && (
+             
+             <ArticleOptions articleId={article_id} initialTitle={article.title} initialContent={article.content} initialImage={article.img}/>
+          )}
+               </div>
               </div>
               <div className="article_image">
                 <img src={article.img ? article.img : article_img} alt="Article" />

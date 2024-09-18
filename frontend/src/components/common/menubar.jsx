@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Icon from "../../assets/icons/icon";
-import Edit_Profile from "./edit_profile";
-import { DialogTrigger, Dialog } from "../../components/shadcn/ui/dialog";
 
+/**
+ * Menubar Component
+ * The Menubar component is responsible for rendering a navigation menu that adapts based on the user's logged-in state. The component conditionally displays different menu items depending on whether the user is logged in or not, and it is also responsive to different screen sizes.
+ */
 function Menubar({ loggedin }) {
   const [activeItem, setActiveItem] = useState(1);
 

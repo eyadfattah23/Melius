@@ -4,11 +4,14 @@ import member1_pic from "../../assets/images/team_members/larini_abdllah.png"
 import member3_pic from "../../assets/images/team_members/eyad_abdelfattah.jpg"
 function About(){
     return <div className="landing_about flex flex-col justify-center items-center gap-8 px-16 " id="about">
-       <h1>About Us</h1>
-       <p> We understand the challenges of recovery and have designed Melius to offer not just tools, but a supportive environment. Our mission is to provide guidance through every step of your journey, from relapse to recovery, from struggle to success.
-       </p>
+       <h1>Why Melius</h1>
+       <div className="gap-8 flex flex-col">
+        <p>The idea behind Melius started from a personal experience with a close friend struggling with porn addiction. Watching this friend battle the addiction and trying different solutions without success motivated the team to create something that addresses the root of the problem in a more effective and compassionate way. We believe that privacy, community support, and easily accessible tools are crucial to overcoming this challenge. With this passion, the Melius team is dedicated to helping others take control of their lives.
+
+Melius has grown into more than just a technical project. It’s a tool built with empathy, a product of deep thought and a desire to make a real difference in people’s lives.</p>
+        
+       </div>
        <div className="team gap-8 flex flex-col">
-        <p>We are a team of passionate individuals committed to helping people overcome porn addiction.</p>
         <div className="members px-16 gap-16 flex flex-col">
         <AboutMember 
             name={"Eyad Abdelfattah"}  
@@ -38,6 +41,7 @@ function About(){
            
         </div>
        </div>
+       
     </div>
 }
 export default About

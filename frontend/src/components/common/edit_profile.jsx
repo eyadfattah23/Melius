@@ -2,7 +2,6 @@ import Avatar from "../avatar";
 import Button from "../common/button";
 import { useState } from "react";
 import { useEffect } from "react";
-import axios from "axios";
 import Leader_card from "./leader_card";
 import "../../assets/styles/common/edit_profile.css";
 import countLevel from "../../functions/count_level";
@@ -14,12 +13,27 @@ import {
 import Field from "../common/field";
 import Icon from "../../assets/icons/icon";
 import { useNavigate } from "react-router-dom";
-import config from "../../config";
 import fetchUser from "../../functions/fetch_user";
+import deleteProfile from "../../functions/delete_profile";
+import handleLogout from "../../functions/loggout";
+import editProfile from "../../functions/edit_profile";
+/**
+ * Edit_Profile Component
+ * 
+ * This component handles user profile editing. It fetches user details, allows the user to update 
+ * their username, email, and password, and provides options to save changes or delete their account.
+ */
 export default function Edit_Profile() {
   const navigate = useNavigate();
   const user_id = JSON.parse(localStorage.getItem("user_id"));
   const token = JSON.parse(localStorage.getItem("token"));
+  
+  // If no user_id or token exists, log the user out
+  if (!user_id || !token){
+    handleLogout(navigate)
+  }
+
+  // State variables to manage user inputs, errors, and loading state
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -28,85 +42,17 @@ export default function Edit_Profile() {
   const [errorPassword, setErrorPassword] = useState("");
   const [maxDays, setMaxDays] = useState(-1)
   const [loading, setLoading] = useState(false);
+  
+  // Handles profile deletion
   const handleDelete = async () => {
-    try {
-      const response = await axios.delete(config.API_URL + `users/${user_id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      localStorage.removeItem("username");
-      localStorage.removeItem("user_id");
-      localStorage.removeItem("token");
-      navigate("/signup");
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
+    await deleteProfile(user_id, token, setLoading, navigate)
   };
+  
+  // Handles form submission to update profile
   const handleSubmit = async (event) => {
-    event.preventDefault();
-    setLoading(true);
-    setErrorEmail("");
-    setErrorUsername("");
-    setErrorPassword("");
-    let hasError = false;
-
-    const emailRegex = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
-    if (!emailRegex.test(email)) {
-      setErrorEmail("Invalid email format");
-      hasError = true;
-    }
-
-    const passwordRegex =
-      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$%@#])[A-Za-z\d$%@#]{8,30}$/;
-    if (password.length != 0 && !passwordRegex.test(password)) {
-      setErrorPassword(
-        "Password should have at least one numeral, one uppercase letter, one lowercase letter, and one symbol"
-      );
-      hasError = true;
-    }
-
-    if (password.length != 0 && password.length < 8) {
-      setErrorPassword("Password should be at least 8 characters long");
-      hasError = true;
-    } else if (password.length > 30) {
-      setErrorPassword("Password should not be greater than 30 characters");
-      hasError = true;
-    }
-
-    if (hasError) {
-      setLoading(false);
-      return;
-    }
-
-    try {
-      const response = await axios.put(
-        config.API_URL + `users/${user_id}`,
-        {
-          email,
-          username,
-          password,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      console.log(response);
-      window.location.reload();
-    } catch (error) {
-      console.error(error);
-      setErrorPassword(
-        error.response?.data?.error || "An error occurred. Please try again."
-      );
-    } finally {
-      setLoading(false);
-    }
+    await editProfile(event, user_id, token, setLoading, setErrorEmail, setErrorUsername, setErrorPassword, email, username, password, navigate)
   };
+  // Fetch user data when the component is mounted
   useEffect(() => {
     fetchUser(user_id, token, setUsername, setMaxDays, navigate, setEmail, null);
   }, []);

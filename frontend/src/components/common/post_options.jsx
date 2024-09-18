@@ -7,24 +7,30 @@ import {
   DropdownMenuItem,
 } from "../shadcn/ui/dropdown-menu";
 import { Dialog, DialogTrigger } from "../shadcn/ui/dialog";
-import axios from "axios";
 import EditPost from "./edit_post";
-import config from "../../config";
+import deletePost from "../../functions/delete_post";
+import handleLogout from "../../functions/loggout";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+/**
+ * `PostOptions` component provides options to edit or delete a post.
+ * It uses a dropdown menu to display these options, and includes a dialog for editing the post.
+ */
+
 const PostOptions = ({ post_id, title, text }) => {
   const token = JSON.parse(localStorage.getItem("token"));
+  const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
+    
+  // Redirects to logout if the token is not available
+  if (!token){
+    handleLogout(navigate)
+  }
+  
+  
+  //Handles the deletion of the post by calling the deletePost function.
   const handleDelete = async () => {
-    try {
-      const response = await axios.delete(config.API_URL + `posts/${post_id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      window.location.reload();
-    } catch (error) {
-      console.error(error);
-    } finally {
-      // setLoading(false);
-    }
+    await deletePost(post_id, token, setLoading, navigate)
   };
   return (
     <DropdownMenu>
