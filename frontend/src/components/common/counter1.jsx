@@ -1,7 +1,14 @@
 import React from 'react';
 import Chart from 'react-apexcharts';
 import "../../assets/styles/common/counter.css"
+
+/**
+ * Counter1 component renders a donut chart showing progress based on the number of days.
+ */
 function Counter1({number_of_days}) {
+  /**
+   * Determines the color based on the number of days.
+   */
   const achievement_color = (days) => {
     if (days < 4) return "#F68A2C";
     if (days < 8) return "#0298F3";
@@ -11,7 +18,9 @@ function Counter1({number_of_days}) {
     if (days < 91) return "#7F45F6";
     return "#FAB90A";
   };
-
+   /**
+   * Calculates the percentage of achievement based on the number of days.
+   */
   const achieved_percent_based_on_level = (days) => {
     const total = (() => {
       if (days < 4) return 3;

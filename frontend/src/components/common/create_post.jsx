@@ -7,62 +7,36 @@ import {
 } from "../shadcn/ui/dialog";
 import Button from "./button";
 import Field from "./field";
-import axios from "axios";
 import "../../assets/styles/create_post.css";
-import config from "../../config";
+import createPost from "../../functions/create_post";
+import { useNavigate } from "react-router-dom";
+import handleLogout from "../../functions/loggout";
+/**
+ * CreatePost - A React component that provides a form to create a new post.
+ *
+ * This component renders a dialog with a form that allows users to create a new post by providing a title and content. 
+ * It handles form submission, including validation and posting the data to an API.
+ */
 function CreatePost() {
   const user_id = JSON.parse(localStorage.getItem("user_id"));
   const token = JSON.parse(localStorage.getItem("token"));
+  const navigate = useNavigate()
+
+  // Redirect to login if token or user_id is not available
+  if (!token || !user_id){
+    handleLogout(navigate)
+  }
+
+  // State variables for form fields and loading state
   const [title, setTitle] = useState("");
   const [ErrorTitle, setErrorTitle] = useState("");
   const [text, setText] = useState("");
   const [ErrorText, setErrorText] = useState("");
   const [loading, setLoading] = useState(false);
+  
+  // Handle form submission
   const handleSubmit = async (event) => {
-    event.preventDefault();
-    setLoading(true);
-    setErrorTitle("");
-    setErrorText("");
-
-    let hasError = false;
-    if (!title) {
-      setErrorTitle("Please fill the title field");
-      hasError = true;
-    }
-    if (!text) {
-      setErrorText("Please fill the content field");
-      hasError = true;
-    }
-    if (hasError) {
-      setLoading(false);
-      return;
-    }
-
-    try {
-      const response = await axios.post(
-        config.API_URL + "posts",
-        {
-          user_id,
-          title,
-          text,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      console.log(response);
-      window.location.reload();
-    } catch (error) {
-      console.error(error);
-      setErrorPassword(
-        error.response?.data?.error || "An error occurred. Please try again."
-      );
-    } finally {
-      setLoading(false);
-    }
+    await createPost(event, user_id, token, setLoading, setErrorTitle, setErrorText, title, text, navigate)
   };
   return (
     <DialogContent className="sm:max-w-[726px] create_post_main">

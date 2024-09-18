@@ -1,6 +1,5 @@
 import Button from "../common/button";
 import { useState } from "react";
-import axios from "axios";
 import "../../assets/styles/common/edit_profile.css";
 import {
   DialogContent,
@@ -9,51 +8,35 @@ import {
   DialogTitle,
 } from "../../components/shadcn/ui/dialog";
 import Field from "../common/field";
-import config from "../../config";
+import handleLogout from "../../functions/loggout";
+import { useNavigate } from "react-router-dom";
+import editPost from "../../functions/edit_post";
+
+/**
+ * `Create_Article` Component
+ * 
+ * This component renders a dialog that allows users to create a new article. It includes fields for the article title,
+ * author name, image URL, and content. The component uses a dialog for the form and a button to trigger the form submission.
+ */
 export default function EditPost({ post_id, title, text }) {
   const token = JSON.parse(localStorage.getItem("token"));
+  const navigate = useNavigate()
+  
+  // Redirect to logout if the token is not present
+  if (!token)[
+    handleLogout(navigate)
+  ]
+
+  // State variables for form fields and submission
   const [postTitle, setTitle] = useState(title);
   const [ErrorTitle, setErrorTitle] = useState("");
   const [postText, setText] = useState(text);
   const [ErrorText, setErrorText] = useState("");
   const [loading, setLoading] = useState(false);
+  
+  //Handle form submission
   const handleSubmit = async (event) => {
-    event.preventDefault();
-    setLoading(true);
-    setErrorTitle("");
-    setErrorText("");
-
-    let hasError = false;
-    if (hasError) {
-      setLoading(false);
-      return;
-    }
-
-    try {
-      const response = await axios.put(
-        config.API_URL + "posts/" + post_id,
-        {
-          title: postTitle,
-          text: postText,
-          
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      console.log(response);
-      window.location.reload();
-    } catch (error) {
-      console.error(error);
-      setErrorText(
-        error.response?.data?.error || "An error occurred. Please try again."
-      );
-    } finally {
-      setLoading(false);
-    }
+    await editPost(event, post_id, token, setLoading, setErrorTitle, setErrorText, postTitle, postText, navigate)
   };
   return (
     <DialogContent className="sm:max-w-[726px] create_post_main">

@@ -9,11 +9,25 @@ import {
 } from "../shadcn/ui/dialog";
 import Button from "./button";
 import Field from "./field";
-import axios from "axios";
 import "../../assets/styles/create_post.css";
-import config from "../../config";
+import createArticle from "../../functions/create_article";
+import { useNavigate } from "react-router-dom";
+import handleLogout from "../../functions/loggout";
+
+/**
+ * `Create_Article` Component
+ * 
+ * This component renders a dialog that allows users to create a new article. It includes fields for the article title,
+ * author name, image URL, and content. The component uses a dialog for the form and a button to trigger the form submission.
+ */
 function Create_Article() {
   const token = JSON.parse(localStorage.getItem("token"));
+  const navigate = useNavigate()
+  // Redirect to logout if the token is not present
+  if (!token){
+    handleLogout(navigate)
+  }
+  // State variables for form fields and submission
   const [title, setTitle] = useState("");
   const [ErrorTitle, setErrorTitle] = useState("");
   const [img, setImg] = useState("")
@@ -21,52 +35,10 @@ function Create_Article() {
   const [ErrorText, setErrorText] = useState("");
   const [loading, setLoading] = useState(false);
   const [author, setAuthor] = useState("")
+  
+  // handles the form submission event, validates the inputs, and calls the `createArticle` function
   const handleSubmit = async (event) => {
-    event.preventDefault();
-    setLoading(true);
-    setErrorTitle("");
-    setErrorText("");
-
-    let hasError = false;
-    if (!title) {
-      setErrorTitle("Please fill the title field");
-      hasError = true;
-    }
-    if (!content) {
-      setErrorText("Please fill the content field");
-      hasError = true;
-    }
-    if (hasError) {
-      setLoading(false);
-      return;
-    }
-
-    try {
-      const response = await axios.post(
-        config.API_URL + "articles",
-        {
-          title,
-          content,
-          author,
-          img
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      console.log(response);
-      window.location.reload();
-    } catch (error) {
-      console.error(error);
-      setErrorText(
-        error.response?.data?.error || "An error occurred. Please try again."
-      );
-    } finally {
-      setLoading(false);
-    }
+    await createArticle(event, token, setLoading, setErrorTitle, setErrorText, title, content, author, img, navigate)
   };
   return (
     <Dialog>

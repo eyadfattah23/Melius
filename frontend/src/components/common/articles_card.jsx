@@ -3,6 +3,9 @@ import article_img from "../../assets/images/article_image.png"
 import { Link } from "react-router-dom";
 import "../../assets/styles/common/article_card.css"
 import formatDate from "../../functions/format_date";
+/**
+ * Articles_Card component renders an article card with a specified layout.
+ */
 function Articles_Card({orientation, title, id, published_date, likes, liked, img}){
     
     if (orientation === "horizontal")

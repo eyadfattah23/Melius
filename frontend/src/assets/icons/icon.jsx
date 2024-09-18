@@ -1,13 +1,37 @@
-import { RiBookLine, RiBookOpenLine, RiChat1Line, RiChat2Line, RiChat3Line, RiCopyrightLine, RiDeleteBinLine, RiFacebookLine, RiGithubLine, RiGroupLine, RiHandHeartLine, RiHeart3Line, RiHeartFill, RiHome8Line, RiHomeLine, RiHonorOfKingsLine, RiLinkedinLine, RiLockFill, RiMailFill, RiMailLine, RiMenLine, RiMenuLine, RiMoreLine, RiPencilLine, RiSendPlane2Line, RiShareLine, RiTwitterLine, RiTwitterXLine, RiUserFill, RiUserLine } from "@remixicon/react";
-import { RiAddLine } from "@remixicon/react";
-import { RiArrowRightSLine } from "@remixicon/react";
-import { RiArrowLeftSLine } from "@remixicon/react";
-import { RiSurveyLine } from "@remixicon/react";
-import { RiLogoutBoxRLine } from "@remixicon/react";
-import { RiCalendarTodoLine } from "@remixicon/react";
-import { RiInformationLine } from "@remixicon/react";
-import { RiQuestionLine } from "@remixicon/react";
-import {RiFlagLine} from "@remixicon/react"
+import { 
+    RiBookLine,
+    RiBookOpenLine, 
+    RiChat3Line, 
+    RiCopyrightLine, 
+    RiDeleteBinLine, 
+    RiFacebookLine, 
+    RiGithubLine, 
+    RiGroupLine, 
+    RiHandHeartLine, 
+    RiHeart3Line, 
+    RiHeartFill, 
+    RiHome8Line, 
+    RiHonorOfKingsLine, 
+    RiLinkedinLine, 
+    RiLockFill, 
+    RiMailFill, 
+    RiMailLine, 
+    RiMenuLine, 
+    RiMoreLine, 
+    RiPencilLine, 
+    RiSendPlane2Line, 
+    RiShareLine, 
+    RiTwitterXLine, 
+    RiUserFill, 
+    RiUserLine,
+    RiAddLine,
+    RiSurveyLine,
+    RiLogoutBoxRLine,
+    RiCalendarTodoLine,
+    RiInformationLine,
+    RiQuestionLine,
+    RiFlagLine
+ } from "@remixicon/react";
 import "../styles/icons.css"
 function Icon({ name, size, color }) {
     switch (name) {

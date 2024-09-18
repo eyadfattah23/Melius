@@ -4,6 +4,9 @@ import countLevel from "../../functions/count_level"
 import writeComment from "../../functions/write_comment"
 import Icon from "../../assets/icons/icon"
 import { useNavigate } from "react-router-dom"
+/**
+ * CommentField component renders an input field for users to write and submit comments.
+ */
 function CommentField({comment, setComment, setCommentField, contentType, id, setComments, setLoading, user_id, setCommentsCount, commentsCount, userMaxTime}){
     const navigate = useNavigate()
     return <div className="post_comment_field">

@@ -1,6 +1,5 @@
 import Button from "../common/button";
 import { useState } from "react";
-import axios from "axios";
 import "../../assets/styles/common/edit_profile.css";
 import {
   DialogContent,
@@ -10,10 +9,24 @@ import {
   Dialog, DialogTrigger
 } from "../../components/shadcn/ui/dialog";
 import Field from "../common/field";
-import config from "../../config";
-
+import handleLogout from "../../functions/loggout";
+import { useNavigate } from "react-router-dom";
+import editArticle from "../../functions/edit_article";
+/**
+ * Edit_Article - A React component that allows the user to edit an existing article.
+ * 
+ * This component renders a form inside a modal dialog to update the article's title, content, and optional image URL.
+ * It leverages the `editArticle` function to send the update request to the backend.
+ */
 export default function Edit_Article({ articleId, initialTitle, initialContent, initialImage }) {
   const token = JSON.parse(localStorage.getItem("token"));
+  const navigate = useNavigate()
+  // Redirect if token is not present
+  if (!token){
+    handleLogout(navigate)
+  }
+
+  // Component state management for form fields and error messages
   const [articleTitle, setArticleTitle] = useState(initialTitle);
   const [articleContent, setArticleContent] = useState(initialContent);
   const [articleImage, setArticleImage] = useState(initialImage || "");
@@ -22,58 +35,9 @@ export default function Edit_Article({ articleId, initialTitle, initialContent, 
   const [errorImage, setErrorImage] = useState("");
   const [loading, setLoading] = useState(false);
 
+  //Validates form fields and triggers the `editArticle` function to update the article.
   const handleSubmit = async (event) => {
-    event.preventDefault();
-    setLoading(true);
-    setErrorTitle("");
-    setErrorContent("");
-    setErrorImage("");
-
-    // Validate the input fields
-    let hasError = false;
-    if (articleTitle.trim() === "") {
-      setErrorTitle("Title is required.");
-      hasError = true;
-    }
-    if (articleContent.trim() === "") {
-      setErrorContent("Content is required.");
-      hasError = true;
-    }
-    if (articleImage.trim() === "") {
-      setErrorImage("Image URL is required.");
-      hasError = true;
-    }
-
-    if (hasError) {
-      setLoading(false);
-      return;
-    }
-
-    try {
-      const response = await axios.put(
-        `${config.API_URL}/articles/${articleId}`,
-        {
-          title: articleTitle,
-          content: articleContent,
-          img: articleImage,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      console.log("Article updated successfully:", response);
-      window.location.reload(); // Reload the page after successful update
-    } catch (error) {
-      console.error("Error updating article:", error);
-      setErrorContent(
-        error.response?.data?.error || "An error occurred. Please try again."
-      );
-    } finally {
-      setLoading(false);
-    }
+    await editArticle(event, articleId, token, setLoading, setErrorTitle, setErrorContent, setErrorImage, articleTitle, articleContent, articleImage, navigate)
   };
 
   return (
