@@ -1,9 +1,8 @@
 import React from 'react';
 import Chart from 'react-apexcharts';
 import "../assets/styles/counter.css"
-function Counter1() {
-  const achieved_days = 30;
-  
+function Counter1({number_of_days}) {
+  console.log(number_of_days)
   const achievement_color = (days) => {
     if (days < 4) return "#F68A2C";
     if (days < 8) return "#0298F3";
@@ -28,11 +27,11 @@ function Counter1() {
     return (days * 100) / total;
   };
 
-  const achieved_percent = achieved_percent_based_on_level(achieved_days);
+  const achieved_percent = achieved_percent_based_on_level(number_of_days);
   
   const options = {
     series: [achieved_percent, 100 - achieved_percent],
-    colors: [achievement_color(achieved_days), '#30373D'],
+    colors: [achievement_color(number_of_days), '#30373D'],
     chart: {
       width: 400,
       type: 'donut',
@@ -70,8 +69,8 @@ function Counter1() {
     <div id="chart">
       <Chart options={options} series={options.series} type="donut" width={options.chart.width} />
       <div id="chart_days">
-    <p>{achieved_days}</p>
-    <p>Days</p>
+    <p>{number_of_days}</p>
+    <p>Day{number_of_days > 1 && "s"}</p>
     </div>
     
   </div>

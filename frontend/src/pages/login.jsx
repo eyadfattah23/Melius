@@ -3,7 +3,62 @@ import Navbar from "../components/navbar"
 import "../assets/styles/login.css"
 import Icon from "../assets/icons/icon"
 import Field from "../components/field"
+<<<<<<< HEAD
 function Login(){
+=======
+import { useState } from "react"
+import { Link } from "react-router-dom"
+import axios from "axios"
+import { useNavigate } from "react-router-dom"
+function Login(){
+    const [email, setEmail] = useState("")
+    const [loading, setLoading] = useState(false);
+    const [password, setPassword] = useState("");
+    const [errorEmail, setErrorEmail] = useState("");
+    const [errorPassword, setErrorPassword] = useState("");
+    const navigate = useNavigate()
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        setLoading(true);
+        setErrorEmail("");
+        setErrorPassword("");
+
+        let hasError = false;
+
+        if (!email) {
+            setErrorEmail("Email is required");
+            hasError = true;
+        } else {
+            const emailRegex = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+            if (!emailRegex.test(email)) {
+                setErrorEmail("Invalid email format");
+                hasError = true;
+            }
+        }
+        if (!password) {
+            setErrorPassword("Password is required");
+            hasError = true;
+        }
+        try {
+            const response = await axios.post("http://127.0.0.1:5050/api/v1/users/authenticate", {
+                email,
+                password,
+            });
+
+            console.log(response);
+            const user = response.data.username
+            const img = response.data.img
+            localStorage.setItem("user", JSON.stringify(user));
+            localStorage.setItem("loggedin", JSON.stringify(true));
+            navigate("/home");
+        } catch (error) {
+            console.error(error);
+            setErrorPassword(error.response?.data?.error || "An error occurred. Please try again.");
+        } finally {
+            setLoading(false);
+        }
+    };
+>>>>>>> bc0557d... handle api connections for challenge and home page
     return<>
     <Navbar/>
     <section className="login_section">

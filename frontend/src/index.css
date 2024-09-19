@@ -24,7 +24,11 @@
     --body_XS: 0.625rem;
     --body_XXS: 0.5rem;
 
+<<<<<<< HEAD
     --primary:#2C3E50;
+=======
+    --primary: #2C3E50;
+>>>>>>> bc0557d... handle api connections for challenge and home page
     --primary_700: #1F2C39;
     --on-primary: #ffffff;
 
