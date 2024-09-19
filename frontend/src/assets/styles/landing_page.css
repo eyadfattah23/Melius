@@ -38,64 +38,70 @@
     font-size: var(--h1);
     font-weight: 700;
 }
-.landing_about>p{
-    color: var(--black);
-    font-size: var(--body_L);
-    font-weight: 700;
+
+
+
+.landing_about .members .team_member{
+    width: fit-content;
+    box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.1);
+    padding: 16px;
     text-align: center;
+    position: relative;
+    border-radius: 16px;
+    
+   
 }
-.landing_about .team>p{
-    color: var(--black);
-    font-size: var(--body_L);
-    font-weight: 700;
-    text-align: center;
+
+.landing_about .members .img{
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    border: 5px solid var(--secondary);
+    background-repeat: no-repeat;
 }
-.landing_about .team .members .team_member{
-    justify-content: space-between;
+
+.landing_about  .members .team_member  .information{
+   padding: 32px 16px;
+    
 }
-.landing_about .team .members .team_member .member_card{
-    display: flex;
-    width: 370px;
-    min-height: 420px;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: flex-start;
-}
-.landing_about .team .members .team_member .member_card .information{
-    display: flex;
-padding: 4px 12px;
-flex-direction: column;
-align-items: flex-start;
-gap: 4px;
-background: #FFE600;
-}
-.landing_about .team .members .team_member .member_card .information .name{
-    font-size: var(--body_L);
+.landing_about  .members .team_member  .information .name{
+    font-size: var(--h2);
     font-weight: 700;
     color: var(--black);   
 }
-.landing_about .team .members .team_member .member_card .information .role{
-font-size: var(--body_S);
-font-weight: 400;
-color: var(--black_medium_emphasis);
-}
-.landing_about .team .members .team_member .description{
-    justify-content: flex-end;
-    align-items: flex-start;
-    width: 60%;
-    
-}
-.landing_about .team .members .team_member .description>p{
-    
-color: var(--black);
-font-size: var(--body_N);
-font-weight: 400;
-}
+.landing_about  .members .team_member .information .role{
+    font-size: var(--body_N);
+    font-weight: 600;
+    color: var(--black_medium_emphasis);
+    }
+ 
+    .landing_about  .members .team_member .information .descrtiption{
+        color: var(--black);
+        font-size: var(--body_N);
+        font-weight: 400;
+        height: 100%;
+       
+        }
 
-.landing_about .team .members .team_member .description .social_media p{
+
+
+
+.landing_about  .members .team_member  .social_media {
     color: var(--black);
     font-size: var(--body_N);
     font-weight: 400;
+    position: absolute;
+bottom: -20px;
+    left: 0;
+    width: 100%;
+}
+.landing_about  .members .team_member  .social_media a{
+    background-color: var(--secondary);
+    color: white;
+    padding: 8px;
+    border-radius: 50%;
 }
 
 
@@ -162,9 +168,6 @@ font-weight: 400;
 }
 
 
-.landing_about .team p{
-    padding-bottom: 0;
-}
 
 .landing_contact{
     padding: 0 64px;
@@ -179,18 +182,7 @@ font-weight: 400;
   @media only screen and (max-width: 797px) {
    
        
-  .landing_about .team .members{
-padding: 0;
-  }
-  
-    .landing_about .team .members .team_member .member_card{
-        display: flex;
-        width: 100%;
-        min-height: 250px;
-    }
-    .landing_about .team .members .team_member .description{
-        width: 100%;  
-    }
+ 
     
     
     
