@@ -1,5 +1,6 @@
 import Avatar from "./avatar"
 import "../assets/styles/sidebar.css"
+import { useNavigate } from "react-router-dom"
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -11,11 +12,17 @@ import {
   } from "./shadcn/ui/dropdown-menu"
   import { DialogTrigger, Dialog } from "@radix-ui/react-dialog"
 import Icon from "../assets/icons/icon"
-import Edit_Profile from "../pages/edit_profile"
+//import Edit_Profile from "../pages/edit_profile"
   function Sidebar() {
+    const navigate = useNavigate();
+    const handleLoggout =() =>{
+      localStorage.removeItem("loggedin")
+      localStorage.removeItem('user')
+      navigate("/login")
+    }
     return (
         <DropdownMenu> <DropdownMenuTrigger asChild>
-            <button className="avatar"><Avatar level={"3"}/></button>
+            <button className="avatar"><Avatar/></button>
     </DropdownMenuTrigger>
     <DropdownMenuContent className="w-56">
       <DropdownMenuLabel className={"dropdown_label"}>
@@ -29,7 +36,7 @@ import Edit_Profile from "../pages/edit_profile"
       <DialogTrigger asChild>
       <span>Edit Account</span>
       </DialogTrigger>
-      <Edit_Profile/>
+      {/* <Edit_Profile/> */}
       </Dialog>
          
         </DropdownMenuItem>
@@ -54,7 +61,7 @@ import Edit_Profile from "../pages/edit_profile"
         </DropdownMenuItem>
       </DropdownMenuGroup>
       <DropdownMenuSeparator />
-      <DropdownMenuItem className={"menu_item"}>
+      <DropdownMenuItem className={"menu_item"} onClick={handleLoggout}>
       <Icon name={"question"} size={16}/>
         <span>Log out</span>
       </DropdownMenuItem>

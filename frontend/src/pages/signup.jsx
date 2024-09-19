@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import Button from "../components/button"
 import Navbar from "../components/navbar"
 import "../assets/styles/signup.css"
@@ -22,6 +23,8 @@ function Singup(){
                        <Icon name={"user_fill"} size={24} /> 
                        <Field placeholder={"Enter your username"} type={"text"} mode={"dark"}/>
 =======
+=======
+>>>>>>> bc0557dfcd15fe73772b646548b7ad930bfec2fc
 import Button from "../components/button";
 import Navbar from "../components/navbar";
 import "../assets/styles/signup.css";
@@ -125,27 +128,72 @@ function Signup() {
                 <div className="left_container">
                     <div className="user">
                         <Icon name={"user"} size={96} />
+<<<<<<< HEAD
 >>>>>>> bc0557d... handle api connections for challenge and home page
+=======
+>>>>>>> bc0557dfcd15fe73772b646548b7ad930bfec2fc
                     </div>
-                    <div className="field">
-                    <Icon name={"lock"} size={24} /> 
-                    <Field placeholder={"Enter your password"} type={"password"} mode={"dark"}/>
+                    <div className="signup">
+                        <div className="form">
+                            <div className="field">
+                                <div className="container">
+                                    <Icon name={"email_fill"} size={24} />
+                                    <Field
+                                        placeholder="Enter your email"
+                                        type="email"
+                                        mode="dark"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        required
+                                    />
+                                </div>
+                                {errorEmail && <p className="error">{errorEmail}</p>}
+                            </div>
+                            <div className="field">
+                                <div className="container">
+                                    <Icon name={"user_fill"} size={24} />
+                                    <Field
+                                        placeholder="Enter your username"
+                                        type="text"
+                                        mode="dark"
+                                        value={username}
+                                        required
+                                        onChange={(e) => setUsername(e.target.value)}
+                                    />
+                                </div>
+                                {errorUsername && <p className="error">{errorUsername}</p>}
+                            </div>
+                            <div className="field">
+                                <div className="container">
+                                    <Icon name={"lock"} size={24} />
+                                    <Field
+                                        placeholder="Enter your password"
+                                        type="password"
+                                        mode="dark"
+                                        value={password}
+                                        required
+                                        onChange={(e) => setPassword(e.target.value)}
+                                    />
+                                </div>
+                                {errorPassword && <p className="error">{errorPassword}</p>}
+                            </div>
+                            <div className="submit">
+                                <Button text={loading ? "Signing Up..." : "SIGN UP"} type="singup_btn" onClick={handleSubmit} />
+                            </div>
+                        </div>
                     </div>
-                    <div className="submit">
-                        <Button text={"SIGNUP"} type={"singup_btn"}/>
+                    <div className="alternative">
+                        <p>Already have an account?</p>
+                        <div>
+                            <Link to={"/login"}>
+                                <Button text={"Login"} type={"signup_btn_link"} />
+                            </Link>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div className="alternative">
-            <p>Already have an account ?</p>
-            <div>
-            <Button text={"signup"} type={"signup_btn_link"}/>
-            </div>
-        </div>
-        </div>
-       
-       
-    </section>
-    </>
+            </section>
+        </>
+    );
 }
-export default Singup
+
+export default Signup;

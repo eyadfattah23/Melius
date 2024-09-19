@@ -4,6 +4,7 @@ import "../assets/styles/login.css"
 import Icon from "../assets/icons/icon"
 import Field from "../components/field"
 <<<<<<< HEAD
+<<<<<<< HEAD
 function Login(){
 =======
 import { useState } from "react"
@@ -11,6 +12,13 @@ import { Link } from "react-router-dom"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
 function Login(){
+=======
+import { useState } from "react"
+import { Link } from "react-router-dom"
+import axios from "axios"
+import { useNavigate } from "react-router-dom"
+function Login(){
+>>>>>>> bc0557dfcd15fe73772b646548b7ad930bfec2fc
     const [email, setEmail] = useState("")
     const [loading, setLoading] = useState(false);
     const [password, setPassword] = useState("");
@@ -58,7 +66,10 @@ function Login(){
             setLoading(false);
         }
     };
+<<<<<<< HEAD
 >>>>>>> bc0557d... handle api connections for challenge and home page
+=======
+>>>>>>> bc0557dfcd15fe73772b646548b7ad930bfec2fc
     return<>
     <Navbar/>
     <section className="login_section">
@@ -69,15 +80,26 @@ function Login(){
             <div className="login">
                 <div className="form">
                     <div className="field">
-                       <Icon name={"user_fill"} size={24} color={"white"}/> 
-                       <Field placeholder={"Username"} type={"text"}/>
+                       <Icon name={"email_fill"} size={24} color={"white"}/> 
+                       <Field 
+                        placeholder="Email"
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                       />
                     </div>
                     <div className="field">
                     <Icon name={"lock"} size={24} color={"white"}/> 
-                    <Field placeholder={"********"} type={"password"}/>
+                    <Field 
+                    placeholder="********"
+                    type="password"
+                    value={password}
+                    required
+                    onChange={(e) => setPassword(e.target.value)}/>
                     </div>
                     <div className="submit">
-                        <Button text={"LOGIN"} type={"login_btn"}/>
+                        <Button text={"LOGIN"} type={"login_btn"} onClick={handleSubmit}/>
                     </div>
                 </div>
                 <p>Forgot your password ?</p>
@@ -85,7 +107,9 @@ function Login(){
             <div className="alternative">
             <p>New here ?</p>
             <div>
-            <Button text={"Create an account"} type={"signup_btn_link"}/>
+                <Link to={"/signup"}>
+                <Button text={"Create an account"} type={"signup_btn_link"}/>
+                </Link>
             </div>
         </div>
         </div>
