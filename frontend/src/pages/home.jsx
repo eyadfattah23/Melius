@@ -11,8 +11,11 @@ import Leader_card from "../components/leader_card"
 import { useEffect } from "react"
 import Articles_Carousel from "../components/articles_carousel"
 <<<<<<< HEAD
+<<<<<<< HEAD
 function Home() {       
 =======
+=======
+>>>>>>> bc0557dfcd15fe73772b646548b7ad930bfec2fc
 function Home() {   
   const user = JSON.parse(localStorage.getItem("user"));
   const navigate = useNavigate()
@@ -67,12 +70,16 @@ function countNumberOfDays(date) {
         setLoading(false);
     }
 };
+<<<<<<< HEAD
 >>>>>>> bc0557d... handle api connections for challenge and home page
+=======
+>>>>>>> bc0557dfcd15fe73772b646548b7ad930bfec2fc
     return (
       <>
-      <Navbar loggedin={true}/>
+      <Navbar loggedin={loggedin}/>
       <section className="counter">
         <div className="container">
+<<<<<<< HEAD
 <<<<<<< HEAD
             <h3>Welcome, random_name</h3>
             <div className="stats">
@@ -85,6 +92,8 @@ function countNumberOfDays(date) {
                 </h4>
             </div>
 =======
+=======
+>>>>>>> bc0557dfcd15fe73772b646548b7ad930bfec2fc
             <h3>Welcome, {user}</h3>
            {
             participated_in_challenge ?  <div className="stats">
@@ -106,7 +115,10 @@ function countNumberOfDays(date) {
           </div>
         </div>
            }
+<<<<<<< HEAD
 >>>>>>> bc0557d... handle api connections for challenge and home page
+=======
+>>>>>>> bc0557dfcd15fe73772b646548b7ad930bfec2fc
         </div>
       </section>
      {

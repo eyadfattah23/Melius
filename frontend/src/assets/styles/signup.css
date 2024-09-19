@@ -1,9 +1,8 @@
 .signup_section{
     display: flex;
-    padding: 0 72px;
+    padding: 32px 72px;
     justify-content: space-between;
     align-items: center;
-    height: calc(100vh - 71px);
     background: conic-gradient(from 180deg at 50% 50%, #96B7D8 72.0000010728836deg, #B8CFE5 144.0000021457672deg, #C6D2E0 216.00000858306885deg, #6696C6 288.0000042915344deg, #6696C6 360deg);
 
 }
@@ -14,6 +13,7 @@
     align-items: center;
     gap: 32px;
     align-self: stretch;
+    width: 30vw;
 }
 .right_container{
     display: flex;
@@ -58,12 +58,24 @@
 }
 .left_container .signup .form .field{
     display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 100%;
+}
+.left_container .signup .form .field .container{
+    display: flex;
     padding: 8px 12px;
     align-items: center;
     gap: 16px;
     border-radius: 6px;
     border: 1px solid black;
     width: 100%;
+}
+.left_container .signup .form .field .error{
+    color: var(--error);
+    font-size: var(--body_S);
+    font-weight: 600;
+    margin-left: 16px;
 }
 .left_container .signup .form .submit{
     height: 44px;
