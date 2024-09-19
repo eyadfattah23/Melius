@@ -98,7 +98,7 @@ bottom: -20px;
     width: 100%;
 }
 .landing_about  .members .team_member  .social_media a{
-    background-color: var(--secondary);
+    background-color: var(--primary);
     color: white;
     padding: 8px;
     border-radius: 50%;

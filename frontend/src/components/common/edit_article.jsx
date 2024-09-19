@@ -44,9 +44,9 @@ export default function Edit_Article({ articleId, initialTitle, initialContent, 
   return (
     <Dialog>
     <DialogTrigger asChild>
-              <div className={"menu_item"}>
+              <div className={"menu_item flex z-999"}>
                 <Icon name={"pencil"} size={16} />
-                <span>Edit Post</span>
+                <span>Edit Article</span>
               </div>
             </DialogTrigger>
     <DialogContent className="sm:max-w-[726px] edit_profile">
