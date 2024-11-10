@@ -14,11 +14,11 @@ function Field({ placeholder, type, mode, value, onChange, required, color }) {
     <input
       type={type}
       placeholder={placeholder}
-      className={mode}
+      className={`px-3 py-2  placeholder-gray-500 paragraph_small  ${mode}`}
       value={value}
       onChange={onChange}
       required={required}
-      style={inputStyle} // Apply the optional color
+      style={inputStyle} 
     />
   );
 }

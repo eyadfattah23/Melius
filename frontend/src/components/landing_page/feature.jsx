@@ -5,42 +5,48 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
 import 'swiper/css';
-import 'swiper/css/effect-cards';
+import 'swiper/css/effect-flip';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 
 import './style.css';
 
 // import required modules
-import { EffectCards } from 'swiper/modules';
+import { EffectFlip, Pagination, Navigation } from 'swiper/modules';
+import { ArrowBigDown, Book } from 'lucide-react';
+import FlipArrow from '../../assets/icons/flip_arrow';
+
 function Feature({icon, title, description, image1, image2, reverse}){
-    return <div  className={`flex flex-col items-center gap-8  lg:px-8 ${reverse ? "lg:flex-row-reverse" : "lg:flex-row"}`} >
-        
-      <Swiper
-        effect={'cards'}
+    return <Swiper
+        effect={'flip'}
+        loop={true}
         grabCursor={true}
-        
-        modules={[EffectCards]}
-        className="mySwiper"
+        modules={[EffectFlip]}
+        className="mySwiper w-[350px] h-[420px]"
       >
-        <SwiperSlide>
-            <img src={image1} alt="" />
+        <SwiperSlide className='content flex flex-col items-start gap-2 bg-white p-8 rounded-[30px] max-w-[350px] min-h-[420px]'>          
+                <img src={icon} alt="Feature Icon" className='feature_icon' />
+               <h3>
+                    {title}
+                </h3>
+                <p className='paragraph'>
+                {description}
+            </p>
+             
+        
+        <div>
+            
+            <FlipArrow className="flip_arrow_face absolute bottom-4 right-4"/>
+          
+        </div>
         </SwiperSlide>
-        <SwiperSlide>
-            <img src={image2} alt="" />
-            </SwiperSlide>
-      
+        <SwiperSlide style={{backgroundImage: `url(${image1})`}} className='card_image rounded-[30px]'>
+          <FlipArrow className="flip_arrow_back absolute bottom-4 right-4"/>
+        </SwiperSlide>
+        
         
       </Swiper>
     
-        <div className={`content flex flex-col justify-between gap-8 lg:p-0 ${reverse && "py-8"}`}>
-                <h4>
-                    {title}
-                </h4>
-            <p>
-                {description}
-            </p>
-        </div>
-       
-    </div>
 }
 export default Feature
 

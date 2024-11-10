@@ -1,0 +1,9 @@
+.landing_cta{
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.40) 0%, rgba(255, 255, 255, 0.40) 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url("../../images/cta_background.jpg") lightgray 0px -188.353px / 100% 236.448% no-repeat;
+}
+.landing_cta h1{
+    color: var(--primary-800);
+}
+.landing_cta p{
+    color: var(--neutral-800);
+}

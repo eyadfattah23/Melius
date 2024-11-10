@@ -1,0 +1,25 @@
+.landing_header_image{
+    position: relative;
+   height: fit-content;
+   width: fit-content;
+}
+.landing_header_image .img{
+    width: 400px;
+    height: 400px;
+    border-radius: 16px;
+    background-color: #D9D9D9;
+    
+    background: url("../images/landing_hero.png") lightgray 50% / cover no-repeat;
+}
+.dots_top-left{
+    position: absolute;
+    top: -25px;
+    left: -25px;
+    z-index: -1;
+}
+.dots_bottom-right{
+    position: absolute;
+    bottom: -25px;
+    right: -25px;
+    z-index: -1;
+}

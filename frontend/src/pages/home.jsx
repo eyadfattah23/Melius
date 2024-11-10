@@ -10,6 +10,7 @@ import RelapsingCheck from "../components/common/relapsing_check";
 import createOrResetTimer from "../functions/create_or_reset_timer";
 import fetchUser from "../functions/fetch_user";
 import { FourSquare } from "react-loading-indicators";
+import Hero from "../components/home/hero";
 /**
  * serves as the main landing page for authenticated users, providing a personalized welcome message, 
  * and options to join or reset a challenge, and view a leaderboard of top performers.
@@ -52,45 +53,9 @@ function Home() {
   return (
     <>
       <Navbar maxDays={maxDays}/>
-      <main className="main_layout">
-        {/* If user data is being fetched, display FourSquare spinner */}
-        {isUserLoading ? (
-          <section className="full_screen_section px-16 py-8" id="hero">
-            <FourSquare color="#040093" size="medium" text="Loading..." textColor="#000" />
-          </section>
-        ) : (
-          <section className="full_screen_section px-16 py-8" id="hero">
-            <h2>Welcome, {username}</h2>
-            {elapsedDays >= 0 ? (
-              <div className="stats flex flex-col justify-center items-center gap-8 py-8">
-                <h4>You're on</h4>
-                <Counter2
-                  achieved_days={elapsedDays}
-                  unit={elapsedDays > 1 ? "Days" : "Day"}
-                />
-                <h4>of your journey to freedom</h4>
-              </div>
-            ) : (
-              <div className="stats flex flex-col justify-center items-center gap-8 py-8">
-                <h4>Ready for a Change?</h4>
-                <p>
-                  Join our challenge today and start your journey towards a better
-                  you!
-                </p>
-                <div>
-                  <Button
-                    text={"Join the Challenge"}
-                    type={"cta_filled"}
-                    onClick={handleJoinChallenge}
-                  />
-                </div>
-              </div>
-            )}
-          </section>
-        )}
-        {
-          maxDays >= 0 && <RelapsingCheck user_id={user_id} token={token}/>
-        }
+      <main>
+        <Hero isUserLoading={isLeadersLoading} elapsedDays={elapsedDays} handleJoinChallenge={handleJoinChallenge} user_id={user_id} token={token}/>
+       
         {/* Display loading spinner if leaders data is still being fetched */}
         {maxDays >= 0 && (isLeadersLoading ? (
           <section className="leaders-board flex flex-col gap-8 justify-center px-16">

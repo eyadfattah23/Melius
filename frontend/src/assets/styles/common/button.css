@@ -1,33 +1,89 @@
 .btn{
     display: flex;
-    padding: 8px 12px;
+    padding: 12px 16px;
     justify-content: center;
     align-items: center;
     gap: 8px;
-    border-radius: 8px;
-    font-size: var(--body_N);
- width: 100%;   
+    border-radius: 40px;
 }
-.cta_filled{
-    background-color: var(--accent);
-    color: var(--white);
+.cta_hero {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
 }
-.cta_filled:hover{
+
+.cta_hero .label{
+    position: absolute;
+    right: -140px;
+    transform: translateX(40px);
+    z-index: 1;
+    color: #2D2C2B;
+   
+}
+.cta_hero svg{
+    z-index: 1;
+    color: white;
+}
+.cta_hero::before{
+    content: "";
+    top: 0;
+    left: 0;
+    width: 80px;
+    height: 80px;
+    background-color: var(--secondary-700);
+    border-radius: 100px;
+    position: absolute;
+    z-index: 1;
+}
+.cta_hero:hover{
+    
+}
+.cta_hero:hover .label{
+    position: static;
+    transform: translateX(0);
+    transition: transform 0.3s ease-out;
+    color: var(--neutral-white);
+
+    
+}
+.cta_hero:hover::before{
+    width: 100%;
+    transition: width 0.3s ease-out; 
+}
+
+
+
+
+
+.cta_home{
+    background-color: var(--primary-500);
+    color: var(--neutral-white);
+    border-radius: 10px;
+    
+}
+.cta_home:hover{
 opacity: 0.8;
 }
 .secondary_filled{
-    background-color: var(--secondary);
+    background-color: var(--secondary-500);
     color: var(--white);
 }
 .secondary_filled:hover{
 opacity: 0.8;
 }
-.cta_outline{
-    color: var(--accent);
-    border: 1px solid var(--accent);
-    background-color: var(--white);
+.cta_nav_outline{
+    color: var(--secondary-700);
+    border: 1px solid var(--secondary-700);
+    background-color: var(--neutral-white);
 }
-.cta_outline:hover{
+.cta_nav_outline:hover{
+    opacity: 0.8;
+}
+.cta_nav_filled{
+    color: var(--neutral-white);
+    background-color: var(--secondary-700);
+}
+.cta_nav_filled:hover{
     opacity: 0.8;
 }
 
@@ -130,6 +186,15 @@ color: white;
         }
       }
 @media only screen and (max-width: 797px) {
+    .cta_hero .label{
+        position: static;
+        transform: translateX(0);
+        color: var(--neutral-white);
+    }
+    .cta_hero::before{
+        width: 100%;   
+    }
+
     .daily_relapsing_check_fail{
         width: 150px; 
     }

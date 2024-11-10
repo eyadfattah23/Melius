@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import createOrResetTimer from "../../functions/create_or_reset_timer";
 import PassedDayDialog from "./passed_day_dialog";
 import "../../assets/styles/common/relapsing_check.css"
+import Emoji from "../../assets/icons/emoji";
 
 /**
  * The RelapsingCheck component allows users to report their daily progress and manage their relapse state.
@@ -12,12 +13,27 @@ import "../../assets/styles/common/relapsing_check.css"
 function RelapsingCheck({user_id, token}){
     const navigate = useNavigate()
     const [loading, setLoading] = useState(false)
-    return <section className="relapsing-check flex flex-col items-center gap-8">
-    <h2>How was your day ?</h2>
-    <div className="check-btns flex justify-center items-center gap-8">
-      <Button type={"daily_relapsing_check_fail"} text={"I couldn't make it"} onClick={() => createOrResetTimer(user_id, token, setLoading, navigate)}/>
-    
-      <PassedDayDialog/>
+    const daily_check = (relapsed) =>{
+      if (relapsed) {
+        return <div className="flex lg:w-[326px] flex-col items-center gap-6" >
+          <Emoji className={"w-24 h-24"}  face={"sad"}/>
+          <p className="button text-[#464646] text-center">I couldn't make it</p>
+        </div>
+      }
+      else {
+        return <div className="flex lg:w-[326px]  flex-col items-center gap-6">
+          <Emoji className={"w-24 h-24"} />
+          <p className="button text-[#464646] text-center">I passed the day successfuly</p>
+        </div>
+      }
+    }
+    return <section className="relapsing-check  flex flex-col py-8 gap-8">
+    <h2 className="text-center">How was your day ?</h2>
+    <div className="check-btns  grid grid-cols-2  items-start  gap-6 lg:gap-16">
+      <PassedDayDialog daily_check={daily_check}/>
+      <button onClick={()=> createOrResetTimer(user_id, token)}>
+      {daily_check(true)}
+      </button>
       
     </div>
 

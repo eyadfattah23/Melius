@@ -1,0 +1,63 @@
+@font-face {
+    font-family: "Lily Script One";
+    src: url("../../fonts/LilyScriptOne-Regular.ttf");
+  }
+.landing_process header h1{
+    color: var(--primary-800);
+}
+.landing_process header p{
+    color: var(--neutral-800);
+}
+
+.landing_process .process_step  .step_icon{
+    color: #FFF;
+text-align: center;
+font-family: "Lily Script One";
+font-size: 3rem;
+font-style: normal;
+font-weight: 400;
+line-height: 3rem; 
+letter-spacing: -0.576px;
+position: relative;
+z-index: 1;
+}
+.landing_process .process_step .step_icon::before{
+    content: "";
+    background: #000;
+    width: 100px;
+    height: 100px;
+    border-radius: 25px 25px 25px 0px;
+    position: absolute;
+    filter: blur(2px);
+    z-index: -1;
+    top: 0;
+    left: 0;
+
+
+}
+.landing_process .process_step h3{
+    color: var(--secondary-500);
+
+}
+.landing_process .process_step p{
+    color: var(--neutral-500);
+}
+.landing_process .steps{
+    position: relative;
+}
+.landing_process .steps::before{
+    content: "";
+    width: 58%;
+    position: absolute;
+    height: 100px;
+    display: flex;
+    justify-self: center;
+    background: url("../../icons/steps_arrows.svg") no-repeat;
+    background-position: center;
+    background-size:contain;
+}
+@media only screen and (max-width: 1024px){
+    .landing_process .steps::before{
+       display: none;
+    }
+}
