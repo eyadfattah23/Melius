@@ -42,55 +42,62 @@ function Create_Article() {
   };
   return (
     <Dialog>
-    <DialogTrigger className="btn cta_filled">
+    <DialogTrigger className="btn secondary_filled">
       <span> Create an article </span>
     </DialogTrigger>
-    <DialogContent className="sm:max-w-[726px] create_post_main">
-      <DialogHeader>
-        <DialogTitle className={"title"}>New Article</DialogTitle>
+     
+    <DialogContent className="lg:min-w-[60vw] lg:max-w-[60vw] max-w-[90vw] min-w-[90vw] create_post_main flex flex-col gap-8 bg-[#f7f7f7] z-[999]">
+      <DialogHeader className={"header text-black"}>
+        <DialogTitle>
+          <h2 className="text-center">New Article</h2>
+        </DialogTitle>
       </DialogHeader>
-      <div className="grid gap-4 py-4">
-        <div className="form">
-          <div className="field">
-            <div className="container title_field">
+        <div className=" flex flex-col gap-4 items-start">
+          <div className=" flex flex-col gap-2 w-full ">
+         
+            <div className="rounded-[6px] border border-black  w-full h-8">
               <Field
                 placeholder="Enter a title"
                 type="text"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 required
+                mode={"bg-transparent  "}
               />
             </div>
             {ErrorTitle && <p className="error">{ErrorTitle}</p>}
           </div>
-          <div className="field">
-            <div className="container title_field">
+          <div className="field flex flex-col gap-2 w-full">
+            <div className="py-0 rounded-[6px] border border-black w-full h-8">
               <Field
                 placeholder="Enter the author's name if not anonymous"
                 type="text"
                 value={author}
                 onChange={(e) => setAuthor(e.target.value)}
+                mode={"bg-transparent"}
                 
               />
             </div>
           </div>
-          <div className="field">
-            <div className="container title_field">
+          <div className="field flex flex-col gap-2 w-full">
+            <div className="py-0 rounded-[6px] border border-black w-full h-8">
               <Field
                 placeholder="Enter the image url if you have one"
                 type="text"
                 value={img}
+                mode={"bg-transparent"}
                 onChange={(e) => setImg(e.target.value)}
                 
               />
             </div>
           </div>
-          <div className="field">
-            <div className="container content_field">
+          <div className=" flex flex-col gap-2 w-full">
+            <div className="py-0 rounded-[6px] border border-black w-full  h-[98px]">
               <Field
                 placeholder="Enter your content"
                 type="text"
                 value={content}
+                mode={"bg-transparent"}
                 required
                 onChange={(e) => setContent(e.target.value)}
               />
@@ -98,11 +105,10 @@ function Create_Article() {
             {ErrorText && <p className="error">{ErrorText}</p>}
           </div>
         </div>
-      </div>
-      <DialogFooter>
+      <DialogFooter className={"self-center "}>
         <Button
           text={loading ? "Loading..." : "Post"}
-          type="cta_filled"
+          type="bg-[#51A2CF] rounded-[10px] p-3 text-white"
           onClick={handleSubmit}
         />
       </DialogFooter>

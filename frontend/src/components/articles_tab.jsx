@@ -27,7 +27,7 @@ function Articles_list({articleOfTheWeek}) {
 
  
   return (
-    <section className="articles_section  px-6  lg:px-20 py-16">
+    <section className="articles_section  px-6  lg:px-20 py-16 bg-[#F2F2F2]">
       {articles ? (
         <div  className="flex flex-col gap-12  justify-center items-center w-full">
           <header className=" flex flex-col gap-4 lg:flex-row lg:items-center justify-between w-full">

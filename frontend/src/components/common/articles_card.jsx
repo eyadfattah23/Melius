@@ -15,7 +15,7 @@ function Articles_Card({orientation, title, id, published_date, likes, liked, im
             background: window.innerWidth > 1024 ? `linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url(${img ? img : article_img}) lightgray 50% / cover no-repeat`: "white"      ,
             boxShadow: "0px 4px 6px 0px rgba(0, 0, 0, 0.09)"}}>
                 <img src={img ? img: article_img} alt="" className="lg:hidden rounded-[6px]  " style={{boxShadow: "0px 4px 6px 0px rgba(0, 0, 0, 0.09)"}} />
-        <div className="lg:w-[25rem] lg:p-6  flex flex-col items-start lg:gap-6 gap-5 lg:absolute left-8 -bottom-8 rounded-[12px] bg-white border border-[#E8E8EA]"
+        <div className="lg:w-[25rem] lg:p-6  flex flex-col items-start lg:gap-6 gap-5 lg:absolute left-8 -bottom-8 rounded-[12px] bg-white lg:border border-[#E8E8EA]"
         style={{boxShadow: window.innerWidth > 1024 ? "0px 12px 24px -6px rgba(24, 26, 42, 0.12)": "none"}}>
             <h2 className="text-center lg:text-left text-[#363636]">{title}</h2>
             <div className="flex self-end items-center gap-3 text-[#97989F]">
