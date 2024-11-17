@@ -9,17 +9,7 @@
     
 }
 
-.tab:hover{
-    background-color: var(--black_disabled);
-    color: white;
-    border-radius: 8px !important; 
-    opacity: 68%;
-}
-.tab_active{
-    background-color: var(--black_disabled);
-    color: white;
-    border-radius: 8px !important;
-}
+
 .create_post_btn .btn{
     width: fit-content;
 }
@@ -124,8 +114,4 @@ background: rgba(255, 255, 255, 0.87);
     background-color: var(--secondary);
     border-radius: 8px ;
     color: white;
-}
-.pagination_disabled, .pagination_disabled:hover {
-    cursor: not-allowed;
-    color: var(--black_disabled) !important;   
 }

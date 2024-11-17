@@ -1,6 +1,5 @@
 import Navbar from "../components/common/navbar";
 import Articles_Card from "../components/common/articles_card";
-import "../assets/styles/articles.css";
 import Articles_list from "../components/articles_tab";
 import { useState, useEffect } from "react";
 import fetchContent from "../functions/fetch_content";
@@ -9,6 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Create_Article from "../components/common/create_article";
 import Button from "../components/common/button";
 import handleLogout from "../functions/loggout";
+import Hero from "../components/articles/hero";
 /**
  * This component renders the Articles page, which includes a Navbar, a list of articles,
  * an "Article of the Week" section, and a footer. Admin users can also access the 
@@ -43,7 +43,7 @@ function Articles() {
     <>
       <Navbar />
       
-      <main className="main_layout">
+      <main>
         {loading ? (
           // Display loading message while content is being fetched
           <p>Loading...</p> 
@@ -52,40 +52,16 @@ function Articles() {
             {articleOfTheWeek ? (
               <>
                 {/* Display "Article of the Week" section */}
-                <section className="main_article_section flex flex-col justify-center gap-8 px-16 py-8">
-                 <div className="flex flex-col sm:flex-row justify-between items-center gap-16">
-                 <h1>Our Latest Article</h1>
-                  {isAdmin && (
-              <div className="create-article-container">
-                <Create_Article />
-              </div>
-            )}
-                 </div>
-                  <Articles_Card
-                    orientation={"horizontal"}
-                    id={articleOfTheWeek.id}
-                    title={articleOfTheWeek.title}
-                    published_date={articleOfTheWeek.created_at}
-                    likes={articleOfTheWeek.likes_count}
-                    liked={articleOfTheWeek.liked}
-                    img = {articleOfTheWeek.img}
-                  />
-                </section>
+               <Hero isAdmin={isAdmin} articleOfTheWeek={articleOfTheWeek}/>
 
                 {/* Display list of articles */}
                 <Articles_list articleOfTheWeek={articleOfTheWeek} />
               </>
             ) : (
               // Message for when no articles are available
-              <div className="empty_response flex flex-col gap-4 justify-center items-center">
-                <h4>We're sorry, but there are currently no articles to display.</h4>
-                <div className="description gap-2 flex flex-col">
-                  <p>Please check back later or explore other sections of our website for more content.</p>
-                  <p>If you have any specific topics you're interested in, feel free to contact us. We would love to hear your suggestions!</p>
-                </div>
-                <Link to={"/contact"}>
-                  <Button text={"Contact us"} type={"cta_filled"} />
-                </Link>
+              <div className="h-screen pt-16 flex flex-col gap-4 lg:px-16 px-6 justify-center items-center">
+                <h4 className="text-center">We're sorry, but there are currently no articles to display.</h4>
+                  <p className="paragraph text-center text-[#363636]">Please check back later or explore other sections of our website for more content.</p>
               </div>
             )}
            

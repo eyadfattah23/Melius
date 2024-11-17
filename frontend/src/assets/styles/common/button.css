@@ -65,7 +65,7 @@
 opacity: 0.8;
 }
 .secondary_filled{
-    background-color: var(--secondary-500);
+    background-color: var(--primary-500);
     color: var(--white);
 }
 .secondary_filled:hover{

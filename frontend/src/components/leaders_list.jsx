@@ -13,20 +13,10 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import createOrResetTimer from "../functions/create_or_reset_timer";
 import config from "../config";
-
 function Leaders_List({ setMaxDays}) {
   const user_id = JSON.parse(localStorage.getItem("user_id"));
   const token = JSON.parse(localStorage.getItem("token"));
   const navigate = useNavigate();
-  const countLevel = (days) => {
-    if (days >= 365) return 6;
-    if (days > 90) return 5;
-    if (days > 60) return 4;
-    if (days > 30) return 3;
-    if (days > 15) return 2;
-    if (days > 7) return 1;
-    if (days > 3) return 0;
-  };
 
   const [leaders, setLeaders] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -37,6 +27,7 @@ function Leaders_List({ setMaxDays}) {
       try {
         const response = await axios.get(config.API_URL + `timer/top10`);
         setLeaders(response.data);
+        console.log(leaders)
       } catch (error) {
         console.error(error);
       } finally {
@@ -52,29 +43,51 @@ function Leaders_List({ setMaxDays}) {
       {loading ? (
         <div>Loading...</div>
       ) : leaders && leaders.length > 0 ? (
-        <Carousel className="w-full">
-          <CarouselContent>
-            {leaders.map((leader, key) => (
-              <CarouselItem className="carousel-content md:basis-1/3" key={key}>
-                <Leader_card
-                  name={leader.username}
-                  badge={
-                    <Avatar level={`${countLevel(Number(leader.max_time))}`} />
-                  }
-                />
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
-        </Carousel>
+        <div className="flex flex-col gap-16 items-center">
+        <div className="first-3 flex flex-col items-center gap-0 lg:w-[65vw]  w-full">
+ 
+  <div className="w-full flex justify-center">
+    <Leader_card
+      key={0}
+      rank={1}
+      name={leaders[0]?.username}
+      days={Number(leaders[0]?.max_time)}
+    />
+  </div>
+
+  {/* Bottom Row */}
+  <div className="w-full flex justify-between relative lg:-top-[250px]  lg:gap-16">
+    {leaders.slice(1, 3).map((leader, key) => (
+      <Leader_card
+        key={key + 1}
+        rank={key + 2}
+        name={leader.username}
+        days={Number(leader.max_time)}
+      />
+    ))}
+  </div>
+</div>
+
+          <div className="rest grid lg:grid-cols-3 lg:gap-20 gap-12 grid-cols-[repeat(auto-fit,minmax(200px,1fr))] relative lg:-top-[250px] w-full">
+          {leaders.slice(3).map((leader, key) => (
+      <Leader_card
+        key={key + 3}
+        rank={key + 4} 
+        name={leader.username}
+        days={Number(leader.max_time)}
+      />
+    ))}
+          </div>
+          
+         
+        </div>
       ) : (
-        <div className="no_leaders flex flex-col justify-content items-center gap-4">
-          <h4>No top achievers yet. Are you ready to take the lead?</h4>
+        <div className="no_leaders flex flex-col justify-center min-h-[50vh] items-center lg:gap-8 gap-4">
+          <h4 className="text-center">No top achievers yet. Are you ready to take the lead?</h4>
           <Link to={"/challenge"}>
             <Button
               text={"Join the Challenge"}
-              type={"cta_filled"}
+              type={"secondary_filled"}
               onClick={() =>
                 createOrResetTimer(
                   user_id,

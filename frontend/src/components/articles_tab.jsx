@@ -27,11 +27,11 @@ function Articles_list({articleOfTheWeek}) {
 
  
   return (
-    <section className="articles_section flex flex-col justify-center items-center  px-16">
+    <section className="articles_section  px-6  lg:px-20 py-16">
       {articles ? (
-        <div  className="flex flex-col gap-4">
-          <div className="header flex flex-col gap-4 lg:flex-row lg:items-center">
-  <h1>Articles</h1>
+        <div  className="flex flex-col gap-12  justify-center items-center w-full">
+          <header className=" flex flex-col gap-4 lg:flex-row lg:items-center justify-between w-full">
+  <h1 className="text-center lg:text-left">{activeTabName=== "oldest" ? "Oldest Articles": activeTabName=== "most_liked" ? "Most Liked Articles": "Latest Articles"}</h1>
   <Tab
     pageNum={pageNum}
     setTotalPages={setTotalPages}
@@ -41,11 +41,10 @@ function Articles_list({articleOfTheWeek}) {
     activeTabName={activeTabName}
     setActiveTabName={setActiveTabName}
   />
-</div>
+</header>
 
 
-          <div value="most_liked" className="content flex flex-col items-center gap-8">
-            <div className="articles_list grid grid-cols-1 sm:grid-cols-2 gap-8">
+            <div className=" grid lg:grid-cols-3 grid-cols-auto gap-8  w-full">
               {articles.map((article, index) => (
                 <Articles_Card
                   key={index}
@@ -56,24 +55,18 @@ function Articles_list({articleOfTheWeek}) {
                   likes={article.likes_count}
                   liked={article.liked}
                   img={article.img}
+                  author={article.author}
                 />
               ))}
             </div>
             <PageNums totalPages={totalPages} pageNum={pageNum} setPageNum={setPageNum}/>
-          </div>
+         
         </div>
       ) : (
-        <div className="no_articles flex flex-col gap-4 items-center">
-          <h4>We're sorry, but there are currently no articles to display.</h4>
-          <div className="description gap-2 flex flex-col ">
-            <p>Please check back later or explore other sections of our website for more content.</p>
-            <p>If you have any specific topics you're interested in, feel free to contact us. We would love to hear your suggestions!</p>
-          </div>
-         
-          <Link to="/contact">
-            <Button text="Contact us" type="cta_filled" />
-          </Link>
-        </div>
+        <div className="h-screen pt-16 flex flex-col gap-4 lg:px-16 px-6 justify-center items-center">
+        <h4 className="text-center">We're sorry, but there are currently no articles to display.</h4>
+          <p className="paragraph text-center text-[#363636]">Please check back later or explore other sections of our website for more content.</p>
+      </div>
       )}
     </section>
   );

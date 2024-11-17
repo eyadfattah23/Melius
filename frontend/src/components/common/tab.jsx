@@ -12,18 +12,18 @@ function Tab({
   setActiveTabName, 
 }) {
   return (
-    <div className="grid grid-cols-3 p-2 gap-2">
+    <div className="grid grid-cols-3  p-1 rounded-[6px] bg-white bg-opacity-87 gap-1">
         <button
         value={activeTabName}
         onClick={() => setActiveTabName("newest")}
-        className={`${activeTabName === "newest" ? "tab_active" : "tab"}`}
+        className={`rounded-[8px] p-3 ${activeTabName === "newest" ? "bg-[#94B1F9]  text-white text-opacity-87" : " hover:bg-[#94B1F9]  hover:bg-opacity-50 text-[#1655F2]"}`}
       >
         <p>Latest</p>
       </button>
       <button
         value={activeTabName}
         onClick={() => setActiveTabName("most_liked")}
-        className={`${activeTabName === "most_liked" ? "tab_active p-2" : "tab p-2"}`}
+        className={`rounded-[8px] p-3 ${activeTabName === "most_liked " ? "bg-[#94B1F9]  text-white text-opacity-87" : " hover:bg-[#94B1F9]  hover:bg-opacity-50 text-[#1655F2]"}`}
       >
         <p>Most Liked</p>
       </button>
@@ -34,7 +34,7 @@ function Tab({
         <button
         value={activeTabName}
           onClick={() => setActiveTabName("by_user")}
-          className={`${activeTabName === "by_user" ? "tab_active" : "tab"}`}
+          className={`rounded-[8px] p-3 ${activeTabName === "by_user" ? "bg-[#94B1F9]  text-white text-opacity-87" : " hover:bg-[#94B1F9]  hover:bg-opacity-50 text-[#1655F2]"}`}
         >
           <p>My Posts</p>
         </button>
@@ -44,7 +44,7 @@ function Tab({
         <button
           value="oldest"
           onClick={() => setActiveTabName("oldest")}
-          className={`${activeTabName === "oldest" ? "tab_active" : "tab"}`}
+          className={`rounded-[8px] p-3 ${activeTabName === "oldest" ? "bg-[#94B1F9]  text-white text-opacity-87" : " hover:bg-[#94B1F9]  hover:bg-opacity-50 text-[#1655F2]"}`}
         >
           <p>Oldest</p>
         </button>

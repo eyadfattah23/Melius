@@ -1,0 +1,22 @@
+
+@media only screen and (max-width:1024px) {
+    .first-3 .leader_main  h3{
+        font-size: var(--h5);
+    line-height: 1.25rem;
+    letter-spacing: -0.005rem;
+    }
+    .rest .leader_main h3{
+        font-size: var(--h4);
+    }
+    .first-3 .leader_main h2{
+        font-size: var(--h3);
+        line-height: 2rem;
+letter-spacing: -0.144px;
+    }
+    .rest .leader_main h4{
+        font-size: var(--body_N);
+        font-weight: 400;
+        line-height: 1.625rem;
+
+    }
+} 

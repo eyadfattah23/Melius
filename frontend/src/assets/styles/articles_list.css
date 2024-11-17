@@ -1,30 +1,11 @@
 
-.articles_section{
-align-self: stretch;
-}
-.articles_section .header{
-    justify-content: space-between;
-    align-self: stretch;
-}
-.articles_section  .header h1{
-    color: var(--primary);
-    font-size: var(--h1);
-    font-weight: 700;
+
+
+.articles_section  header h1{
+    color: var(--primary-700);  
 }
 
 
 
 
 
-
-.no_articles h4{
-    font-size: var(--h4);
-    font-weight: 700;
-    text-align: center;
-}
-.no_articles .description{
-    text-align: center;
-    font-size: var(--body_N);
-    font-weight: 400;
-    color: var(--black_medium_emphasis);
-}

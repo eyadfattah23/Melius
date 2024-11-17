@@ -37,7 +37,7 @@ function PageNums({totalPages, pageNum, setPageNum}){
   
         for (let i = 0; i < totalPages; i++) {
             paginationItems.push(
-                <PaginationItem key={i}    className={i + 1 === currentPage ? "pagination_active" : "pagination_normal"}>
+                <PaginationItem key={i}    className={i + 1 === currentPage ? " rounded-[8px] bg-[#1655F2] text-white" : "rounded-[8px] hover:bg-[#1655F2] text-[#999999] hover:text-black hover:cursor-pointer hover:bg-opacity-40"}>
                     <PaginationLink
                         href="#"
                         onClick={() => setPageNum(i + 1)}
@@ -51,13 +51,13 @@ function PageNums({totalPages, pageNum, setPageNum}){
         return paginationItems; 
     };
   
-    return <Pagination>
-    <PaginationContent>
-        <PaginationItem >
-            <PaginationPrevious href="#" onClick={(e)=> handlePrevious(e)}  className={pageNum <= 1 ? "pagination_disabled": ""}/>
-        </PaginationItem>
+    return <Pagination >
+    <PaginationContent className={"flex justify-between items-center w-full"}>
+            <PaginationPrevious href="#" onClick={(e)=> handlePrevious(e)}  className={pageNum <= 1 ? "cursor-not-allowed text-[#999999] hover:text-[#999999]": ""}/>
+        <div className="flex gap-[2px]">
         {renderPagination(totalPages, setPageNum, pageNum)}
-        <PaginationNext href="#" onClick={(e)=> handleNext(e)} className={pageNum == totalPages ? "pagination_disabled": ""}/>
+        </div>
+        <PaginationNext href="#" onClick={(e)=> handleNext(e)} className={pageNum == totalPages ? "cursor-not-allowed text-[#999999] hover:text-[#999999]": ""}/>
     </PaginationContent>
 </Pagination>
 }
